@@ -57,12 +57,13 @@ $voyages = get('voyages');
                     ?>
                     <?php
                     if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof') {
+                        if ($connectedUser->getType() == 'admin'){
                         echo nav1(
                             '<img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">',
                             'Voyages',
                             'Edit',
                             $voyage->getIdVoyage());
-
+                              }
                         echo nav1(
                             '<img alt="invitation icon" src="Ressource/img/invite.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Code d\'activation">',
                             'Activations',
@@ -127,5 +128,3 @@ $voyages = get('voyages');
     var order = [[ 7, 'desc' ],[ 5, 'asc' ],[ 0, 'asc' ]];
 </script>
 <?= load_script('paginator') ?>
-
-
