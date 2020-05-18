@@ -21,10 +21,6 @@ $voyages = get('voyages');
             <th scope="col">Nom du projet</th>
             <th scope="col">Pays</th>
             <th scope="col">Ville</th>
-            <th scope="col" class='optionalField'>Coût</th>
-            <th scope="col"
-                class='optionalField'>Date limite d'inscription
-            </th>
             <th scope="col" class='optionalField'>Date de départ</th>
             <th scope="col" class='optionalField'>Date de retour</th>
             <th scope="col" class='optionalField'><?= 'Actif'?></th>
@@ -39,9 +35,6 @@ $voyages = get('voyages');
                 <td <?php echo $color ?> > <?= $voyage->getNomProjet() ?></td>
                 <td <?php echo $color ?> > <?= $voyage->getDestination()->getNomPays() ?></td>
                 <td <?php echo $color ?> > <?= $voyage->getVille() ?></td>
-                <td <?php echo $color ?> class='optionalField'> <?= $voyage->getCout() ?> </td>
-                <td <?php echo $color ?> class='optionalField' data-sort="<?=$voyage->getDateLimite()?>">
-                    <?= dateToFrench($voyage->getDateLimite()) ?></td>
                 <td <?php echo $color ?> class='optionalField' data-sort="<?=$voyage->getDateDepart()?>">
                     <?= dateToFrench($voyage->getDateDepart()) ?></td>
                 <td <?php echo $color ?> class='optionalField' data-sort="<?=$voyage->getDateRetour()?>">
