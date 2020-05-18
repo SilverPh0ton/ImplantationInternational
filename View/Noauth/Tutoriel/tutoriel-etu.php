@@ -57,7 +57,7 @@
         <h1>Profil</h1>
         <ul>
             <li>
-                Pour voir votre profil, cliquez sur « Liste des étudiants » dans la barre de navigation. Vous pouvez aussi cliquez sur <img alt="modifier icon" src="Ressource/img/user-bleu.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">en haut à droite.
+                Pour voir votre profil, cliquez sur « Profil » dans la barre de navigation. Vous pouvez aussi cliquez sur <img alt="modifier icon" src="Ressource/img/user-bleu.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">en haut à droite.
                 <ul>
                     <li>Sur cette page, vous pouvez consulter vos informations.</li>
                     <li>

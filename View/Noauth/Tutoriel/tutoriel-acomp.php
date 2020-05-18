@@ -12,10 +12,7 @@
                 <a class="nav-link" href="#section2">Étudiants</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#section3">Question</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#section4">Profil</a>
+                <a class="nav-link" href="#section3">Profil</a>
             </li>
 
 
@@ -27,6 +24,7 @@
                 <h1>Propositions de voyage</h1>
                 <ul>
                     <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de voyage.</li>
+                    <li>Il est à noter que si la proposition est en <span style="color: red;">rouge</span>, cette proposition à été <span style="font-weight: bold">refusée</span>. S'il est, comme indiqué dans la colonne <span style="font-weight: bold">État</span> du tableau</li>
                     <br>
                     <li>
                         Pour voir la liste de vos propositions, cliquez sur « Propositions de voyage » de la barre de navigation.
@@ -88,7 +86,7 @@
                     <ul>
                         <li><b>À noter: Si le voyage a déjà été approuvé, vous ne pouvez pas faire de modification</b></li>
                         <li>Dans cet onglet, vous pouvez modifier les informations sur le voyage.</li>
-                        <li>Vous pouvez activer ou désactiver un voyage via cette page</li>
+                        <li>Vous pouvez voir la liste des étudiants associée au voyage en cliquant sur « Liste des étudiants »</li>
                         <li>Une fois terminé, cliquez sur « Enregistrer » au bas de la page </li>
                     </ul>
                 </li>
@@ -167,79 +165,11 @@
             </ul>
         </div>
 
-
         <div id="section3" class="section">
-            <h1>Banque de questions</h1>
-
-            <ul>
-                <li>Sur cette page, vous trouverez toutes les questions qui ont été créées pour les étudiants, les accompagnateurs et pour les propositions de voyages.</li>
-                <br>
-                <li>
-                    Pour voir la liste des questions par catégories, cliquez sur l’un des onglets (pour étudiant, pour enseignant, pour enseignant et étudiant, pour les propositions de voyage).
-                    <ul>
-                        <li>Pour afficher plus de questions par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
-                        <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau.</li>
-                        <li>Pour rechercher une question spécifique, entrez soit la catégorie, la question, son type d’affichage, si elle est active ou bien les informations supplémentaires sous « Recherche » en haut à droite du tableau.</li>
-                    </ul>
-                </li>
-                <br>
-                <li>
-                    Pour voir les détails d’une question, cliquez sur l’onglet <img alt="modifier icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top">
-                    <ul>
-                        <li>Pour revenir à la liste, cliquez sur « Revenir à la banque de question » </li>
-                    </ul>
-                </li>
-                <br>
-                <li>
-                    Pour ajouter une question, cliquez sur « Ajouter une question » au bas de la page.
-                    <ul>
-                        <li>Sur cette page, vous pouvez modifier la catégorie, la question, le mode d’affichage et le regroupement d’utilisateurs qui verront la question.</li>
-                        <li>Pour sélectionner un type d’affichage, cliquez dans le <img alt="modifier icon" src="Ressource/img/rb.png" class="images" data-toggle="tooltip" data-placement = "top">de la catégorie désirée</li>
-                        <li>Mode d’affichage : Choisir la façon que l’utilisateur aura à répondre :
-                            <ul>
-                                <li>Mention : Aucune réponse n’est requise.</li>
-                                <li>Document à télécharger : L’utilisateur pourra télécharger un fichier. Pour rendre un fichier téléchargeable, allez dans la section « Options d’affichage » plus bas, cliquez sur « Choisir un fichier ». Choisissez un fichier et cliquez sur « Ouvrir »</li>
-                                <li>Case à cocher : il s’agit d’une case que l’utilisateur devra cocher.</li>
-                                <li>Nombre : L’utilisateur devra entrer un nombre. Dans la section « Options d’affichage » plus bas, entrez la valeur minimum autorisée, la valeur maximum autorisée et l’intervalle entre deux valeurs.</li>
-                                <li>Date : l’utilisateur devra entrer une date.</li>
-                                <li>Liste déroulante : L’utilisateur devra choisir une option dans une liste déroulante. Pour entrer les options, allez dans la section « Options d’affichage » plus bas, entrez les options séparées de point-virgule (Ex. : Option 1; Option 2; Option 3)</li>
-                                <li>Déposer un document numérique : l’utilisateur pourra déposer un document numérique de son choix (Ex. : .doc, .jpg, .zip, etc…)</li>
-                                <li>Curseur de défilement : L’utilisateur devra entrer un nombre grâce à un curseur de défilement. Dans la section « Options d’affichage » plus bas, entrez la valeur minimum autorisée, la valeur maximum autorisée et l’intervalle entre deux valeurs.</li>
-                                <li>Zone de texte : L’utilisateur pourra inscrire un texte.</li>
-                            </ul>
-                        </li>
-                        <li>Pour activer ou désactiver la question, cochez ou décochez la case sous « Actif?»</li>
-                        <li>Vous pouvez ajouter plus d’informations dans la section « Informations supplémentaires » au bas de la page.</li>
-                    </ul>
-                    <br>
-                <li>Une fois terminé, cliquez sur « Enregistrer »</li>
-                <li>Pour revenir à l’éditeur de formulaire, cliquez sur « Retour »</li>
-            </ul>
-            </li>
-
-            <li>Pour modifier une question, cliquez sur l’onglet <img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top">
-                <ul>
-                    <li>Dans cet onglet, vous pouvez modifier la question.
-                        <ul>
-                            <li>
-                                Sur cette page, vous pouvez modifier la catégorie, la question, le mode d’affichage et le regroupement d’utilisateurs qui verront la question.
-                            </li>
-                        </ul>
-                    </li>
-                    <br>
-                    <li>Une fois terminé, cliquez sur « Enregistrer »</li>
-                    <li>Pour revenir à la liste, cliquez sur « Retour » </li>
-                </ul>
-
-            </li>
-            </ul>
-        </div>
-
-        <div id="section4" class="section">
             <h1>Profil</h1>
             <ul>
                 <li>
-                    Pour voir votre profil, cliquez sur « Liste des étudiants » dans la barre de navigation. Vous pouvez aussi cliquez sur <img alt="modifier icon" src="Ressource/img/user-bleu.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier"> en haut à droite.
+                    Pour voir votre profil, cliquez sur « Profil » dans la barre de navigation. Vous pouvez aussi cliquez sur <img alt="modifier icon" src="Ressource/img/user-bleu.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier"> en haut à droite.
                     <ul>
                         <li>Sur cette page, vous pouvez consulter vos informations.</li>
                         <li>
