@@ -187,7 +187,7 @@ $ctr = 1;
 
         </fieldset>
 
-        <div style="text-align: center">Ajout des activités</div>
+        <div style="text-align: center">Calendrier des activités prévues</div>
         <br>
 
         <table class="activityTable" style="white-space: nowrap;">
@@ -438,6 +438,3 @@ $ctr = 1;
         <br>
     </form>
 </div>
-
-
-

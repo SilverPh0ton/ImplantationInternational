@@ -26,6 +26,7 @@ require_once 'Entity/Proposition.php';
 require_once 'Entity/Activite.php';
 require_once 'DBObjects/QuestionsDB.php';
 require_once 'DBObjects/VoyagesDB.php';
+require_once 'DBObjects/ComptesDB.php';
 
 //require_once 'DBObjects/ActivationsDB.php';
 require_once 'Controller/AppController.php';
@@ -185,8 +186,9 @@ class PropositionsController extends AppController
                     $date_retour
                 );
 
-
-                if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
+                
+                // retirer la verification pour permettre des acrtivités au dela des dâtes de du projet
+               /* if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('Les date des activités doivent être dans le future');
@@ -210,7 +212,7 @@ class PropositionsController extends AppController
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
-                }
+                }*/
 
 
                 if($success)
@@ -584,6 +586,10 @@ class PropositionsController extends AppController
 
         $activites = $this->activiteDB->getAllActivitesFromIdProposition($id_proposition);
 
+        $compteDB = new \ComptesDB();
+        $compteDemande = $compteDB->getCompteFromId($proposition->getIdCompte());
+
+        $this->set('compteDemande',$compteDemande);
         $this->set('proposition', $proposition);
         $this->set('proposition_reponses', $proposition_reponses);
         $this->set('categories', $categories);
