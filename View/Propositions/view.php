@@ -43,14 +43,6 @@ $activites = get('activites');
             <td><?= $proposition->getNote() ?></td>
         </tr>
         <tr>
-            <th scope="row">Coût</th>
-            <td><?= dollar($proposition->getCout()) ?></td>
-        </tr>
-        <tr>
-            <th scope="row">Date limite d'inscription</th>
-            <td><?= dateToFrench($proposition->getDateLimite()) ?></td>
-        </tr>
-        <tr>
             <th scope="row">Date de départ</th>
             <td><?= dateToFrench($proposition->getDateDepart()) ?></td>
         </tr>

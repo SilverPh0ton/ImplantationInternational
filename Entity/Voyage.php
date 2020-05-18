@@ -6,9 +6,7 @@ class Voyage
    private $id_voyage;
    private $id_proposition;
    private $ville;
-   private $cout;
    private $date_depart;
-   private $date_limite;
    private $date_retour;
    private $actif;
    private $approuvee;
@@ -21,9 +19,7 @@ class Voyage
      * @param $id_voyage
      * @param $id_proposition
      * @param $ville
-     * @param $cout
      * @param $date_depart
-     * @param $date_limite
      * @param $date_retour
      * @param $actif
      * @param $approuvee
@@ -31,14 +27,12 @@ class Voyage
      * @param $nom_projet
      * @param $note
      */
-    public function __construct($id_voyage,$id_proposition, $ville, $cout, $date_depart, $date_limite, $date_retour, $actif, $approuvee, $destination, $nom_projet, $note)
+    public function __construct($id_voyage,$id_proposition, $ville,  $date_depart,  $date_retour, $actif, $approuvee, $destination, $nom_projet, $note)
     {
         $this->id_voyage = $id_voyage;
         $this->id_proposition = $id_proposition;
         $this->ville = $ville;
-        $this->cout = $cout;
         $this->date_depart = $date_depart;
-        $this->date_limite = $date_limite;
         $this->date_retour = $date_retour;
         $this->actif = $actif;
         $this->approuvee = $approuvee;
@@ -95,21 +89,7 @@ class Voyage
         $this->ville = $ville;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCout()
-    {
-        return $this->cout;
-    }
 
-    /**
-     * @param mixed $cout
-     */
-    public function setCout($cout)
-    {
-        $this->cout = $cout;
-    }
 
     /**
      * @return mixed
@@ -127,21 +107,7 @@ class Voyage
         $this->date_depart = $date_depart;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDateLimite()
-    {
-        return $this->date_limite;
-    }
 
-    /**
-     * @param mixed $date_limite
-     */
-    public function setDateLimite($date_limite)
-    {
-        $this->date_limite = $date_limite;
-    }
 
     /**
      * @return mixed
@@ -251,20 +217,12 @@ class Voyage
             return false;
         }
 
-        if($this->cout == null || !is_double($this->cout))
-        {
-            return false;
-        }
 
         if($this->date_depart == null)
         {
             return false;
         }
 
-        if($this->date_limite == null)
-        {
-            return false;
-        }
 
         if($this->date_retour == null)
         {

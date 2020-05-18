@@ -93,11 +93,10 @@ class PropositionsController extends AppController
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
 
-            $date_limite_str = $_POST['date_limite']['year'] . "-" . $_POST['date_limite']['month'] . "-" . $_POST['date_limite']['day'];
             $date_depart_str = $_POST['date_depart']['year'] . "-" . $_POST['date_depart']['month'] . "-" . $_POST['date_depart']['day'];
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
-            $options = array('date_limite','date_depart','date_retour');
+            $options = array('date_depart','date_retour');
 
 
             $pas31 = array(4,6,9,11);
@@ -123,22 +122,20 @@ class PropositionsController extends AppController
 
 
 
-            $date_limite = date("Y-m-d", strtotime($date_limite_str));
+
             $date_depart = date("Y-m-d", strtotime($date_depart_str));
             $date_retour = date("Y-m-d", strtotime($date_retour_str));
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
+            if ($date_retour < $date_now || $date_depart < $date_now /*|| $date_limite < $date_now*/) {
                 $this->flashBad('Les date doivent être dans le future');
             }
 
             if ($date_retour < $date_depart) {
                 $this->flashBad('La date de retour doit être après la date de départ');
             }
-            if ($date_depart < $date_limite) {
-                $this->flashBad('La date de départ doit être après la date limite d\'inscription');
-            }
+
 
             $projet_depart = $date_depart;
             $projet_retour = $date_retour;
@@ -152,9 +149,7 @@ class PropositionsController extends AppController
                 $_POST['nom_projet'],
                 $_POST['ville'],
                 null, //NUll à cause que les activités sont sauvegardées dans une autre table
-                $_POST['cout'],
                 $date_depart,
-                $date_limite,
                 $date_retour,
                 1,
                 0,
@@ -186,9 +181,8 @@ class PropositionsController extends AppController
                     $date_retour
                 );
 
-                
                 // retirer la verification pour permettre des acrtivités au dela des dâtes de du projet
-               /* if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
+                if ($date_retour < $date_now || $date_depart < $date_now) {
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('Les date des activités doivent être dans le future');
@@ -197,11 +191,6 @@ class PropositionsController extends AppController
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('La date de retour d\'une activité doit être après la date de départ');
-                }
-                else if ($date_depart < $date_limite) {
-                    $whileSuccess = false;
-                    $success = false;
-                    $this->flashBad('La date de départ d\'une activité  doit être après la date limite d\'inscription');
                 }
                 else if($date_depart < $projet_depart || $date_depart > $projet_retour ){
                     $whileSuccess = false;
@@ -213,7 +202,6 @@ class PropositionsController extends AppController
                     $success = false;
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }*/
-
 
                 if($success)
                 {
@@ -241,11 +229,16 @@ class PropositionsController extends AppController
                 if (!empty($_FILES[$question->getIdQuestion()]) && $question->getAffichage() === 'Fichier') {
                     //Liste des types autorisé
                     $allowed = array(
-                        "jpg" => "image/jpg", "jpeg" => "image/jpeg",
-                        "png" => "image/png", "pdf" => "application/pdf",
-                        "txt" => "text/plain", "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                        "zip" => "application/x-7z-compressed", "rar" => "application/x-rar-compressed",
-                        "xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+                        "jpg" => "image/jpg",
+                        "jpeg" => "image/jpeg",
+                        "png" => "image/png",
+                        "pdf" => "application/pdf",
+                        "txt" => "text/plain",
+                        "docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        "zip" => "application/x-7z-compressed",
+                        "rar" => "application/x-rar-compressed",
+                        "xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "pptx" => "application/vnd.openxmlformats-officedocument.presentationml.presentation"
                     );
 
                     //Récupère les informations du fichier
@@ -256,6 +249,8 @@ class PropositionsController extends AppController
                     $ext = pathinfo($fileName, PATHINFO_EXTENSION);
                     $maxsize = 5 * 1024 * 1024;
 
+
+                    if ($fileName != '') {
                     //Vérification du ficher téléversé
                     if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
                         $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
@@ -271,7 +266,7 @@ class PropositionsController extends AppController
                         return $this->redirect("Propositions", "Add");
                     }
 
-                    if ($fileName != '') {
+
 
                         //Supprime tous fichiers avec le même préfixe
                         $files = glob($uploadPath . $id_proposition . '-' . $question->getIdQuestion() . '-*/*');
@@ -363,13 +358,11 @@ class PropositionsController extends AppController
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
 
-
-            $date_limite_str = $_POST['date_limite']['year'] . "-" . $_POST['date_limite']['month'] . "-" . $_POST['date_limite']['day'];
             $date_depart_str = $_POST['date_depart']['year'] . "-" . $_POST['date_depart']['month'] . "-" . $_POST['date_depart']['day'];
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
 
-            $options = array('date_limite','date_depart','date_retour');
+            $options = array('date_depart','date_retour');
 
 
             $pas31 = array(4,6,9,11);
@@ -393,7 +386,6 @@ class PropositionsController extends AppController
 
             }
 
-            $date_limite = date("Y-m-d", strtotime($date_limite_str));
             $date_depart = date("Y-m-d", strtotime($date_depart_str));
             $date_retour = date("Y-m-d", strtotime($date_retour_str));
 
@@ -402,17 +394,13 @@ class PropositionsController extends AppController
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
+            if ($date_retour < $date_now || $date_depart < $date_now ) {
                 $this->flashBad('Les date doivent être dans le future');
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
 
             if ($date_retour < $date_depart) {
                 $this->flashBad('La date de retour doit être après la date de départ');
-                return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
-            }
-            if ($date_depart < $date_limite) {
-                $this->flashBad('La date de départ doit être après la date limite d\'inscription');
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
 
@@ -424,9 +412,7 @@ class PropositionsController extends AppController
                 $_POST['nom_projet'],
                 $_POST['ville'],
                 null, //NUll à cause que les activités sont sauvegardées dans une autre table
-                $_POST['cout'],
                 $date_depart,
-                $date_limite,
                 $date_retour,
                 1,
                 0,
@@ -463,21 +449,20 @@ class PropositionsController extends AppController
                     $date_retour
                 );
 
-                if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
+                if ($date_retour < $date_now || $date_depart < $date_now/* || $date_limite < $date_now*/) {
                     $this->flashBad('Les date des activités doivent être dans le future');
                 }
                 if ($date_retour < $date_depart) {
                     $this->flashBad('La date de retour d\'une activité doit être après la date de départ');
                 }
-                if ($date_depart < $date_limite) {
-                    $this->flashBad('La date de départ d\'une activité  doit être après la date limite d\'inscription');
-                }
+
                 if($date_depart < $projet_depart || $date_depart > $projet_retour ){
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }
                 if($date_retour < $projet_depart || $date_retour > $projet_retour ){
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }
+
 
                 if(!$this->activiteDB->addActivite($activite))
                 {
@@ -508,6 +493,7 @@ class PropositionsController extends AppController
                     $ext = pathinfo($fileName, PATHINFO_EXTENSION);
                     $maxsize = 5 * 1024 * 1024;
 
+                    if ($fileName != '') {
                     //Vérification du ficher téléversé
                     if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
                         $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
@@ -523,7 +509,7 @@ class PropositionsController extends AppController
                     foreach ($files as $file) {
                         unlink($file);
                     }
-                    if ($fileName != '') {
+
 
 
                         //Téléverse le ficher
