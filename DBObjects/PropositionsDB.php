@@ -58,10 +58,10 @@ class PropositionsDB extends ConfigDB
                                 $row['id_compte'],
                                 $row['nom_projet'],
                                 $row['ville'],
-                                $activites,
-                                $row['cout'],
-                                $row['date_depart'],
-                                $row['date_limite'],
+                                $activites,/*
+                                $row['cout'],*/
+                                $row['date_depart'],/*
+                                $row['date_limite'],*/
                                 $row['date_retour'],
                                 $row['actif'],
                                 $row['approuve'],
@@ -114,10 +114,10 @@ class PropositionsDB extends ConfigDB
                 $row['id_compte'],
                 $row['nom_projet'],
                 $row['ville'],
-                $activites,
-                $row['cout'],
-                $row['date_depart'],
-                $row['date_limite'],
+                $activites,/*
+                $row['cout'],*/
+                $row['date_depart'],/*
+                $row['date_limite'],*/
                 $row['date_retour'],
                 $row['actif'],
                 $row['approuve'],
@@ -151,10 +151,10 @@ class PropositionsDB extends ConfigDB
                 $row['id_compte'],
                 $row['nom_projet'],
                 $row['ville'],
-                $activites,
-                $row['cout'],
-                $row['date_depart'],
-                $row['date_limite'],
+                $activites,/*
+                $row['cout'],*/
+                $row['date_depart'],/*
+                $row['date_limite'],*/
                 $row['date_retour'],
                 $row['actif'],
                 $row['approuve'],

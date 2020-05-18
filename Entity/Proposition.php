@@ -35,16 +35,16 @@ class Proposition
      * @param $destination
      * @param $note
      */
-    public function __construct($id_proposition, $id_compte, $nom_projet, $ville, $activites, $cout, $date_depart, $date_limite, $date_retour, $actif, $approuvee,$msg_refus, $destination, $note)
+    public function __construct($id_proposition, $id_compte, $nom_projet, $ville, $activites, /*$cout,*/ $date_depart, /*$date_limite,*/ $date_retour, $actif, $approuvee,$msg_refus, $destination, $note)
     {
         $this->id_proposition = $id_proposition;
         $this->id_compte = $id_compte;
         $this->nom_projet = $nom_projet;
         $this->ville = $ville;
-        $this->activites = $activites;
-        $this->cout = $cout;
-        $this->date_depart = $date_depart;
-        $this->date_limite = $date_limite;
+        $this->activites = $activites;/*
+        $this->cout = $cout;*/
+        $this->date_depart = $date_depart;/*
+        $this->date_limite = $date_limite;*/
         $this->date_retour = $date_retour;
         $this->actif = $actif;
         $this->approuvee = $approuvee;
