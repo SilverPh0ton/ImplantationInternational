@@ -463,6 +463,7 @@ class PropositionsController extends AppController
                 }
 
 
+
                 if(!$this->activiteDB->addActivite($activite))
                 {
                     $this->flashBad("Une erreur est survenu lors de la modification  d'une activité");
