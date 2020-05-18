@@ -203,6 +203,22 @@ class QuestionsController extends AppController
             } else {
                 $actif = 0;
             }
+            if (isset($_POST['regroupement'])) {
+                switch ($_POST['regroupement']) {
+                    case 'etudiant':
+                        $regroupement = 0;
+                        break;
+                    case 'prof':
+                        $regroupement = 1;
+                        break;
+                    case 'prof_etu':
+                        $regroupement = 2;
+                        break;
+                    case 'proposition':
+                        $regroupement = 9;
+                        break;
+                }
+            }
 
             $question = new Question(
                 $id,
@@ -212,7 +228,7 @@ class QuestionsController extends AppController
                 $_POST['affichage'],
                 $actif,
                 $_POST['info_sup'],
-                $_POST['regroupement']
+                $regroupement
             );
 
             if ($question->getAffichage() === 'Telechargement' && !empty($_FILES['file'])) {
