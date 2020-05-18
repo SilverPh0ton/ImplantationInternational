@@ -29,7 +29,7 @@ $question = get('question');
             <legend>Modifier la question</legend>
             <div class="input required">
                 <label for="id_categorie">Catégorie</label>
-                <select disabled>
+                <select>
                     <?php
                     foreach ($categories as $categorie):
                         ?>
