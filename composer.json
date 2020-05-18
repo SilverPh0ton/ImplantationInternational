@@ -1,0 +1,21 @@
+{
+  "name": "cegeptr/projetinter",
+  "description": "Application web pour faciliter le processus de deploiement des voyages étudiants.",
+  "authors": [
+    {
+      "name": "Michaël Leblanc"
+    },
+    {
+      "name": "Michel-Antoine Lemire"
+    },
+    {
+      "name": "David Drapeau"
+    },
+    {
+      "name": "Gabriel Robinson"
+    }
+  ],
+  "require": {
+    "phpmailer/phpmailer": "^6.1"
+  }
+}

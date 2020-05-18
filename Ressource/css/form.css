@@ -1,0 +1,46 @@
+.caret {
+    cursor: pointer;
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none;
+    font-size: 25px;
+}
+
+.nested {
+    display: none;
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.active {
+    display: block;
+    -webkit-animation: fadeEffect 0.5s;
+    animation: fadeEffect 0.5s;
+}
+
+td,th{
+    width: 31%;
+}
+
+.row5{
+     width: 5%;
+ }
+
+.row45{
+    width: 45%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+

@@ -1,0 +1,85 @@
+body {
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100%;
+    font-family: 'Franklin Gothic Book', serif;
+    background: #fff;
+    color: white;
+}
+
+h1 {
+    color: white;
+}
+
+button {
+    color: #ffffff;
+    border-radius: 3px;
+    background: linear-gradient(160deg, #17479A 4%, #002042);
+    border: none;
+}
+
+button:hover {
+        color: #002042;
+        background:#EBEBEB;
+}
+
+.contain {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5vh;
+    width: 30vw;
+    min-width: 250px;
+    align-content: center;
+    border: solid #000000;
+    background-image: linear-gradient(110deg, #17479A 60%, #002042);
+    -webkit-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.55);
+    -moz-box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.55);
+    box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.55);
+}
+
+div {
+    text-align: center;
+}
+
+#image {
+    padding: 20px;
+    height: 25vh;
+    width: 25vh;
+}
+
+label {
+    color: white;
+}
+
+.row-space {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5vh;
+    width: 40vw;
+    min-width: 250px;
+}
+
+.hide {
+    display: hidden;
+}
+
+/* Bouton Proposé un voyage */
+
+.btnprop{
+    color: #EBEBEB;
+    background: transparent;
+    padding:0;
+}
+
+.btnprop:hover{
+    color: #EBEBEB;
+    background: transparent;
+    text-decoration: underline;
+}
+
+.btnprop:enabled{
+    color: #EBEBEB;
+    background: transparent;
+
+}

@@ -1,0 +1,35 @@
+ul.nav-pills {
+    top: 84px;
+    left: 0;
+    position: fixed;
+}
+
+#myScrollspy {
+    background-color: transparent;
+}
+
+.section {
+    width: 100%;
+    padding-top: 70px;
+    margin-left: 24px;
+    border-bottom: #d3d3d3 2px solid;
+}
+#tutoContent{
+    display: inline-block;
+    padding: 2rem;
+    padding-top: 0;
+}
+
+body{
+    margin-top: 0;
+}
+
+@media screen and (max-width: 768px) {
+    #myScrollspy {
+        display: none;
+    }
+    .section {
+        margin-left: 0;
+    }
+}
+

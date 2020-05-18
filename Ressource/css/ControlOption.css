@@ -1,0 +1,72 @@
+.ControlOption{
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    font-size: 15px;
+    text-align: center;
+    margin: 5px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 100%;
+    background-image: linear-gradient(110deg, #17479A 60%, #002042);
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+@media (min-width: 1024px) {
+    .grid-container {
+        grid-template-columns: 33% 33% 33%;
+        grid-template-rows: 33% 33% 33%;
+    }
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 75%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+#optionBorder {
+    border: 1px solid rgb(0, 0, 0);
+    padding: 8px;
+    background-color: #e2e2e2;
+    margin-bottom: 8px;
+}
+
+#options {
+    color: #ffffff;
+    border-radius: 3px;
+    background: linear-gradient(160deg, #17479A 4%, #002042);
+    border: none;
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+}
+
+
