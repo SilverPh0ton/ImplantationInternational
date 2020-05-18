@@ -491,6 +491,7 @@ class PropositionsController extends AppController
                     $ext = pathinfo($fileName, PATHINFO_EXTENSION);
                     $maxsize = 5 * 1024 * 1024;
 
+                    if ($fileName != '') {
                     //Vérification du ficher téléversé
                     if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
                         $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
@@ -506,7 +507,7 @@ class PropositionsController extends AppController
                     foreach ($files as $file) {
                         unlink($file);
                     }
-                    if ($fileName != '') {
+
 
 
                         //Téléverse le ficher
