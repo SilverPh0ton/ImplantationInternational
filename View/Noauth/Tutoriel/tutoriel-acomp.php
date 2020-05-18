@@ -6,7 +6,7 @@
                 <a class="nav-link" href="#section5">Propositions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#section1">Voyages</a>
+                <a class="nav-link active" href="#section1">Les séjours</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#section2">Étudiants</a>
@@ -21,13 +21,13 @@
     <div>
         <div>
             <div id="section5" class="section">
-                <h1>Propositions de voyage</h1>
+                <h1>Propositions de séjour</h1>
                 <ul>
                     <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de voyage.</li>
                     <li>Il est à noter que si la proposition est en <span style="color: red;">rouge</span>, cette proposition à été <span style="font-weight: bold">refusée</span>. S'il est, comme indiqué dans la colonne <span style="font-weight: bold">État</span> du tableau</li>
                     <br>
                     <li>
-                        Pour voir la liste de vos propositions, cliquez sur « Propositions de voyage » de la barre de navigation.
+                        Pour voir la liste de vos propositions, cliquez sur « Propositions de séjour » de la barre de navigation.
                         <ul>
                             <li>Pour afficher plus d’utilisateurs par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
                             <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau</li>
@@ -60,10 +60,10 @@
 
 
         <div id="section1" class="section">
-            <h1>Voyages</h1>
+            <h1>Séjours de mobilité</h1>
             <ul>
                 <li>
-                    Pour voir la liste des voyages, cliquez sur « Voyages » de la barre de navigation.
+                    Pour voir la liste des voyages, cliquez sur « Séjours de mobilité » de la barre de navigation.
                     <ul>
                         <li>Si le voyage est en gris, c’est qu’il est désactivé.
                             <ul>
@@ -111,7 +111,7 @@
                         <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau.</li>
                         <li>Pour rechercher un utilisateur précis, entrez son nom d’utilisateur, son, prénom, son nom ou son type sous « Recherche » en haut à droite du tableau.</li>
                         <li>
-                            Toujours sur cette page, pour voir les formulaires pour chacun des utilisateurs, cliquez sur l’onglet <img alt="modifier icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top">
+                            Sur cette page, vous pouvez aussi voir les formulaires pour chacun des utilisateurs en cliquant sur l’onglet <img alt="modifier icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top">
                             <ul>
                                 <li>Les formulaires (remplit ou non) sont regroupés par catégorie. Pour les consulter, cliquez sur la catégorie.</li>
                             </ul>

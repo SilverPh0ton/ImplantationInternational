@@ -6,7 +6,7 @@
                 <a class="nav-link" href="#section5">Propositions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#section1">Voyages</a>
+                <a class="nav-link active" href="#section1">Les séjours</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#section2">Utilisateurs</a>
@@ -26,7 +26,7 @@
     </nav>
     <div>
         <div id="section5" class="section">
-            <h1>Propositions de voyage</h1>
+            <h1>Propositions de séjour</h1>
             <ul>
                 <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de voyage. </li>
 
@@ -34,7 +34,7 @@
                 <li>Pour refuser une proposition, cliquez sur <img data-toggle="modal" data-target="#myModal_refuse" alt="refuser icon" src="Ressource/img/ban-solid.png" class="images" data-placement = "top" title = "Refuser"></li>
                 <br>
                 <li>
-                    Pour voir la liste des propositions, cliquez sur « Propositions de voyage » de la barre de navigation.
+                    Pour voir la liste des propositions, cliquez sur « Propositions de séjour » de la barre de navigation.
                     <ul>
                         <li>Pour afficher plus d’utilisateurs par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
                         <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau</li>
@@ -65,10 +65,10 @@
         </div>
 
         <div id="section1" class="section">
-            <h1>Voyages</h1>
+            <h1>Séjours de mobilité</h1>
             <ul>
                 <li>
-                    Pour voir la liste des voyages, cliquez sur « Voyages » de la barre de navigation.
+                    Pour voir la liste des voyages, cliquez sur « Séjours de mobilité » de la barre de navigation.
                     <ul>
                         <li>Si le voyage est en gris, c’est qu’il est désactivé.
                             <ul>
@@ -102,6 +102,11 @@
                         <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau</li>
                         <li>Pour rechercher un code spécifique, entrez le code sous « Recherche » en haut à droite du tableau</li>
                         <li>Pour générer des codes d’activation pour le voyage, cliquez sur « Générer des codes » en bas, à gauche du tableau. Dans cette page, entrez le nombre de codes nécessaire et cliquez sur « Générer »</li>
+                        <ul>
+                            <li><b>À noter:</b> Si un code est en noir, c'est qu'il n'a pas encore été utilisé par un étudiant ou un accompagnateur. Il sera donc inscrit  <b>Oui</b>  dans la colonne « Actif » du tableau. </li>
+                            <li><b>À noter:</b> Si un code est en gris, c'est qu'il a été utilisé par un étudiant ou un accompagnateur. Il sera donc inscrit  <b>Non</b>  dans la colonne « Actif » du tableau. </li>
+                        </ul>
+
                         <li>Pour revenir à la liste de codes existants, cliquez sur « Retour à la liste des codes existants »</li>
                         <li>Pour revenir aux voyages, cliquez sur « Revenir à la liste des voyages »</li>
                     </ul>
@@ -114,7 +119,7 @@
                         <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau.</li>
                         <li>Pour rechercher un utilisateur précis, entrez son nom d’utilisateur, son, prénom, son nom ou son type sous « Recherche » en haut à droite du tableau.</li>
                         <li>
-                            Toujours sur cette page, pour voir les formulaires pour chacun des utilisateurs, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
+                            Sur cette page, vous pouvez aussi voir les formulaires pour chacun des utilisateurs en cliquant sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
                             <ul>
                                 <li>Les formulaires (remplit ou non) sont regroupés par catégorie. Pour les consulter, cliquez sur la catégorie.</li>
                             </ul>
@@ -174,7 +179,7 @@
                 <li>
                     Pour ajouter un utilisateur, cliquez sur le bouton « Ajouter un utilisateur » au page de la page
                     <ul>
-                        <li>Dans cette page, entrez le nom d’utilisateur, le mot de passe (que vous devez confirmer en le répétant dans la case à cet effet), choisissez le type de compte (étudiants, accompagnateurs, administrateur), le courriel, le nom, prénom, la date de naissance ainsi que le programme d’étude. Le numéro de téléphone est facultatif, mais recommandé</li>
+                        <li>Dans cette page, entrez le nom d’utilisateur, le mot de passe (que vous devez confirmer en le répétant dans la case à cet effet), choisissez le type de compte (étudiants, accompagnateurs, administrateur), le courriel, le nom, prénom, la date de naissance ainsi que le programme d’étude. Le numéro de téléphone est facultatif, mais recommandé.</li>
                         <ul>
                             <li> <b>À noter:</b>  s’il s’agit d’un membre du personnel administratif, choisir le programme « Personnel administratif ».</li>
                         </ul>
