@@ -8,9 +8,7 @@ class Proposition
     private $nom_projet;
     private $ville;
     private $activites; //ARRAY OF ACTIVITIES
-    private $cout;
     private $date_depart;
-    private $date_limite;
     private $date_retour;
     private $actif;
     private $approuvee;
@@ -26,25 +24,21 @@ class Proposition
      * @param $nom_projet
      * @param $ville
      * @param $activites
-     * @param $cout
      * @param $date_depart
-     * @param $date_limite
      * @param $date_retour
      * @param $actif
      * @param $approuvee
      * @param $destination
      * @param $note
      */
-    public function __construct($id_proposition, $id_compte, $nom_projet, $ville, $activites, /*$cout,*/ $date_depart, /*$date_limite,*/ $date_retour, $actif, $approuvee,$msg_refus, $destination, $note)
+    public function __construct($id_proposition, $id_compte, $nom_projet, $ville, $activites,$date_depart,$date_retour, $actif, $approuvee,$msg_refus, $destination, $note)
     {
         $this->id_proposition = $id_proposition;
         $this->id_compte = $id_compte;
         $this->nom_projet = $nom_projet;
         $this->ville = $ville;
-        $this->activites = $activites;/*
-        $this->cout = $cout;*/
-        $this->date_depart = $date_depart;/*
-        $this->date_limite = $date_limite;*/
+        $this->activites = $activites;
+        $this->date_depart = $date_depart;
         $this->date_retour = $date_retour;
         $this->actif = $actif;
         $this->approuvee = $approuvee;
@@ -133,21 +127,6 @@ class Proposition
         $this->activites = $activites;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getCout()
-    {
-        return $this->cout;
-    }
-
-    /**
-     * @param mixed $cout
-     */
-    public function setCout($cout)
-    {
-        $this->cout = $cout;
-    }
 
     /**
      * @return mixed
@@ -165,21 +144,6 @@ class Proposition
         $this->date_depart = $date_depart;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDateLimite()
-    {
-        return $this->date_limite;
-    }
-
-    /**
-     * @param mixed $date_limite
-     */
-    public function setDateLimite($date_limite)
-    {
-        $this->date_limite = $date_limite;
-    }
 
     /**
      * @return mixed

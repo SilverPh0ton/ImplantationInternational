@@ -92,7 +92,6 @@ class PropositionsController extends AppController
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
 
-/*            $date_limite_str = $_POST['date_limite']['year'] . "-" . $_POST['date_limite']['month'] . "-" . $_POST['date_limite']['day'];*/
             $date_depart_str = $_POST['date_depart']['year'] . "-" . $_POST['date_depart']['month'] . "-" . $_POST['date_depart']['day'];
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
@@ -135,9 +134,7 @@ class PropositionsController extends AppController
             if ($date_retour < $date_depart) {
                 $this->flashBad('La date de retour doit être après la date de départ');
             }
-           /* if ($date_depart < $date_limite) {
-                $this->flashBad('La date de départ doit être après la date limite d\'inscription');
-            }*/
+
 
             $projet_depart = $date_depart;
             $projet_retour = $date_retour;
@@ -151,9 +148,7 @@ class PropositionsController extends AppController
                 $_POST['nom_projet'],
                 $_POST['ville'],
                 null, //NUll à cause que les activités sont sauvegardées dans une autre table
-               /* $_POST['cout'],*/
                 $date_depart,
-                /*$date_limite,*/
                 $date_retour,
                 1,
                 0,
@@ -196,11 +191,6 @@ class PropositionsController extends AppController
                     $success = false;
                     $this->flashBad('La date de retour d\'une activité doit être après la date de départ');
                 }
-              /*  else if ($date_depart < $date_limite) {
-                    $whileSuccess = false;
-                    $success = false;
-                    $this->flashBad('La date de départ d\'une activité  doit être après la date limite d\'inscription');
-                }*/
                 else if($date_depart < $projet_depart || $date_depart > $projet_retour ){
                     $whileSuccess = false;
                     $success = false;
@@ -211,7 +201,6 @@ class PropositionsController extends AppController
                     $success = false;
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }
-
 
                 if($success)
                 {
@@ -366,8 +355,6 @@ class PropositionsController extends AppController
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
 
-
-/*            $date_limite_str = $_POST['date_limite']['year'] . "-" . $_POST['date_limite']['month'] . "-" . $_POST['date_limite']['day'];*/
             $date_depart_str = $_POST['date_depart']['year'] . "-" . $_POST['date_depart']['month'] . "-" . $_POST['date_depart']['day'];
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
@@ -396,7 +383,6 @@ class PropositionsController extends AppController
 
             }
 
-/*            $date_limite = date("Y-m-d", strtotime($date_limite_str));*/
             $date_depart = date("Y-m-d", strtotime($date_depart_str));
             $date_retour = date("Y-m-d", strtotime($date_retour_str));
 
@@ -414,10 +400,6 @@ class PropositionsController extends AppController
                 $this->flashBad('La date de retour doit être après la date de départ');
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
-         /*   if ($date_depart < $date_limite) {
-                $this->flashBad('La date de départ doit être après la date limite d\'inscription');
-                return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
-            }*/
 
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
 
@@ -427,9 +409,7 @@ class PropositionsController extends AppController
                 $_POST['nom_projet'],
                 $_POST['ville'],
                 null, //NUll à cause que les activités sont sauvegardées dans une autre table
-               /* $_POST['cout'],*/
-                $date_depart,/*
-                $date_limite,*/
+                $date_depart,
                 $date_retour,
                 1,
                 0,
@@ -472,9 +452,7 @@ class PropositionsController extends AppController
                 if ($date_retour < $date_depart) {
                     $this->flashBad('La date de retour d\'une activité doit être après la date de départ');
                 }
-          /*      if ($date_depart < $date_limite) {
-                    $this->flashBad('La date de départ d\'une activité  doit être après la date limite d\'inscription');
-                }*/
+
                 if($date_depart < $projet_depart || $date_depart > $projet_retour ){
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }
