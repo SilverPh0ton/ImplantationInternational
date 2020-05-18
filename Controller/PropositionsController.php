@@ -462,6 +462,7 @@ class PropositionsController extends AppController
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }
 
+
                 if(!$this->activiteDB->addActivite($activite))
                 {
                     $this->flashBad("Une erreur est survenu lors de la modification  d'une activité");
