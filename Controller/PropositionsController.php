@@ -95,7 +95,7 @@ class PropositionsController extends AppController
             $date_depart_str = $_POST['date_depart']['year'] . "-" . $_POST['date_depart']['month'] . "-" . $_POST['date_depart']['day'];
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
-            $options = array(/*'date_limite',*/'date_depart','date_retour');
+            $options = array('date_depart','date_retour');
 
 
             $pas31 = array(4,6,9,11);
@@ -121,7 +121,7 @@ class PropositionsController extends AppController
 
 
 
-            /*$date_limite = date("Y-m-d", strtotime($date_limite_str));*/
+
             $date_depart = date("Y-m-d", strtotime($date_depart_str));
             $date_retour = date("Y-m-d", strtotime($date_retour_str));
 
@@ -181,7 +181,7 @@ class PropositionsController extends AppController
                 );
 
 
-                if ($date_retour < $date_now || $date_depart < $date_now /*|| $date_limite < $date_now*/) {
+                if ($date_retour < $date_now || $date_depart < $date_now) {
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('Les date des activités doivent être dans le future');
@@ -361,7 +361,7 @@ class PropositionsController extends AppController
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
 
-            $options = array(/*'date_limite',*/'date_depart','date_retour');
+            $options = array('date_depart','date_retour');
 
 
             $pas31 = array(4,6,9,11);
@@ -393,7 +393,7 @@ class PropositionsController extends AppController
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now /*|| $date_limite < $date_now*/) {
+            if ($date_retour < $date_now || $date_depart < $date_now ) {
                 $this->flashBad('Les date doivent être dans le future');
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
