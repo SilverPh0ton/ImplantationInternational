@@ -74,11 +74,11 @@ use App\Controller\ComptesController; ?>
             <?php if (isset($compteType)): ?>
 
                 <?php if(isOfType([ADMIN,PROF]))
-                echo nav('<li class="navbutton">Propositions de séjour</li>', 'propositions', 'index')
+                echo nav('<li class="navbutton">Propositions de voyage</li>', 'propositions', 'index')
                 ?>
 
                 <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
-                    echo nav('<li class="navbutton">Séjours de mobilité</li>', 'voyages', 'index')
+                    echo nav('<li class="navbutton">Voyages</li>', 'voyages', 'index')
                 ?>
 
 
@@ -87,7 +87,7 @@ use App\Controller\ComptesController; ?>
                 ?>
 
                 <?php if(isOfType([PROF]))
-                    echo nav('<li class="navbutton">Liste des participants</li>', 'comptes', 'index')
+                    echo nav('<li class="navbutton">Liste des étudiants</li>', 'comptes', 'index')
                 ?>
 
                 <?php if(isOfType([ADMIN]))
