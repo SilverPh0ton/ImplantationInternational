@@ -18,7 +18,7 @@ protected  $conn;
         $this->DB_SERVER = '206.167.140.56';
         $this->DB_USERNAME = '1750944';
         $this->DB_PASSWORD = '1750944';
-        $this->DB_NAME = '420626ri_equipe-2'; 
+        $this->DB_NAME = '420626ri_equipe-2';
 
         try{
 
