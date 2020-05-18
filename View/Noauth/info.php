@@ -8,14 +8,12 @@
 
     <p>Bienvenue sur la plateforme de mobilité internationale du Cégep de Trois-Rivières.</p>
 
-
-
-
-    <p>Doter le cégep d’une vision du développement et de la coopération à l’international.<p>
+    <p>Cette plateforme est gérée par le Bureau international.<p>
 
     <p>Pour toute question en lien avec l’utilisation de la plateforme, veuillez en premier lieu vous référez à l’onglet “Tutoriel”.</p>
+
     <p>Pour toute question ou demande d’informations supplémentaire en lien avec une demande de projet de mobilité (mobilité du personnel et mobilité étudiante), veuillez contacter le Bureau international par courriel : mobilite.etudiante@cegeptr.qc.ca</p>
-   
+
     <h3>Créateurs de l’application</h3>
     <p>
         Application réalisée par <b>Michel-Antoine Lemire</b>, <b>Gabriel Robinson</b>, <b>Michael Leblanc</b> et <b>David Drapeau</b> de la
