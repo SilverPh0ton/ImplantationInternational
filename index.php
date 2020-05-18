@@ -74,7 +74,7 @@ use App\Controller\ComptesController; ?>
             <?php if (isset($compteType)): ?>
 
                 <?php if(isOfType([ADMIN,PROF]))
-                echo nav('<li class="navbutton">Propositions de voyage</li>', 'propositions', 'index')
+                echo nav('<li class="navbutton">Propositions de séjour</li>', 'propositions', 'index')
                 ?>
 
                 <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
