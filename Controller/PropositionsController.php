@@ -358,6 +358,8 @@ class PropositionsController extends AppController
 
 
 
+
+
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
 
