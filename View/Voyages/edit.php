@@ -148,7 +148,7 @@ $destinations = get('destinations');
 
                 <!--Button de navigation -->
                 <?php if (isOfType([PROF]))
-                    echo nav('<li class="navbutton">Liste des étudiants</li>', 'comptes', 'index')
+                    echo nav('<button type="button">Liste des étudiants</button>', 'comptes', 'index')
                 ?>
                 <?= nav('<button type="button">Revenir à la liste des voyages</button>', 'Voyages', 'index'); ?>
             </fieldset>
