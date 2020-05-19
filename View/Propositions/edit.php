@@ -16,7 +16,6 @@ $categories = get('categories');
 $destinations = get('destinations');
 $activites = get('activites');
 
-$yearLimite = date("Y", strtotime($proposition->getDateLimite()));
 $yearDepart = date("Y", strtotime($proposition->getDateDepart()));
 $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
 ?>
@@ -65,50 +64,6 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
             <div class="input text">
                 <label for="note">Note</label>
                 <textarea name="note" maxlength="500" rows="4"><?= $proposition->getNote() ?></textarea>
-            </div>
-
-            <div class="input required">
-                <label for="cout">Coût</label>
-                <input type="number" name="cout" min="0" max="99999999" step="0.01" value="<?= $proposition->getCout() ?>" required>
-            </div>
-
-            <div class="input date required">
-                <label for="date_limite">Date limite d'inscription</label>
-                <select name="date_limite[year]" required="required">
-                    <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
-                        <option
-                                value=<?= $i ?>
-                                <?= ($i == substr($proposition->getDateLimite(), 0, 4)) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
-
-                <select name="date_limite[month]" required="required">
-                    <?php
-                    $i = 0;
-                    foreach (return_months() as $month):
-                        ?>
-                        <option
-                                value=<?= ++$i ?>
-                                <?= ($i == substr($proposition->getDateLimite(), 5, 7)) ? ' selected="selected"' : '' ?>>
-                            <?= $month ?>
-                        </option>
-                    <?php
-                    endforeach;
-                    ?>
-                </select>
-
-                <select name="date_limite[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
-                        <option
-                                value=<?= $i ?>
-                                <?= ($i == substr($proposition->getDateLimite(), 8, 10)) ? ' selected="selected"' : '' ?>
-                        >
-                            <?= $i ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
             </div>
 
             <div class="input date required">
