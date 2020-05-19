@@ -11,6 +11,7 @@ use ComptesDB;
 use ComptesVoyagesDB;
 use ProgrammesDB;
 use VoyagesDB;
+use DateTime;
 
 require_once 'DBObjects/ComptesDB.php';
 require_once 'DBObjects/ComptesVoyagesDB.php';
@@ -184,8 +185,8 @@ class ComptesController extends AppController
                     return $this->redirectParam1('Comptes', 'Edit', $id);
                 }
 
-
                 $date_naissance = date("Y-m-d", strtotime($date_naissance_str));
+
                 $compte->setDateNaissance($date_naissance);
                 $compte->setTelephone($_POST['telephone']);
                 $compte->setType($_POST['type']);
@@ -299,8 +300,17 @@ class ComptesController extends AppController
                 return $this->redirect('Comptes', 'Add');
             }
 
-
             $date_naissance = date("Y-m-d", strtotime($date_naissance_str));
+            $age = date_diff(date_create($date_naissance), new DateTime());
+
+            if ($age->y < 15) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne doit être agée d\'au moins 15 ans.');
+                return $this->redirect('Comptes', 'Add');
+            }
+            elseif ($age->y >= 90) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne ne peut être agée de plus de 90 ans.');
+                return $this->redirect('Comptes', 'Add');
+            }
 
             $programme = $this->programmeDB->getProgrammeFromId($_POST['id_programme']);
 
