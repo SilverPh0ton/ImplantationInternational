@@ -14,6 +14,7 @@ if (isset($_GET['param2'])) {
 
 $propositionController->view($id_proposition, $source);
 
+$compteDemande = get('compteDemande');
 $proposition = get('proposition');
 $proposition_reponses = get('proposition_reponses');
 $categories = get('categories');
@@ -24,6 +25,10 @@ $activites = get('activites');
 <div class="voyages view columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
     <h3>Proposition de projet: <?= $proposition->getNomProjet() ?></h3>
     <table class="vertical-table">
+        <tr>
+            <th scope="row">Proposition par:</th>
+            <td><?= $compteDemande->getNom().', '.$compteDemande->getPrenom() ?></td>
+        </tr>
         <tr>
             <th scope="row">Pays</th>
             <td><?= $proposition->getDestination()->getNomPays() ?></td>
@@ -36,14 +41,6 @@ $activites = get('activites');
         <tr>
             <th scope="row">Note</th>
             <td><?= $proposition->getNote() ?></td>
-        </tr>
-        <tr>
-            <th scope="row">Coût</th>
-            <td><?= dollar($proposition->getCout()) ?></td>
-        </tr>
-        <tr>
-            <th scope="row">Date limite d'inscription</th>
-            <td><?= dateToFrench($proposition->getDateLimite()) ?></td>
         </tr>
         <tr>
             <th scope="row">Date de départ</th>
@@ -79,6 +76,7 @@ $activites = get('activites');
         <table class="activityTable">
             <thead>
             <tr>
+                <th>Proposition par:</th>
                 <th>Endroit</th>
                 <th>Description</th>
                 <th>Date de départ</th>
@@ -89,6 +87,7 @@ $activites = get('activites');
             <tbody>
             <?php foreach ($activites as $activite): ?>
                 <tr>
+                    <td><?= $compteDemande->getNom().', '.$compteDemande->getPrenom() ?></td>
                     <td><?php echo $activite->getEndroit(); ?></td>
 
                     <td><?php echo $activite->getDescription(); ?></td>

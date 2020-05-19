@@ -79,7 +79,7 @@ class ActivitesDB extends ConfigDB
     public function getAllActivitesFromIdProposition($id_proposition)
     {
         $activites  = array();
-        $sql = "SELECT * from activites WHERE id_proposition = :id_proposition";
+        $sql = "SELECT * from activites WHERE id_proposition = :id_proposition order by date_depart desc,date_retour desc";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":id_proposition", $id_proposition , PDO::PARAM_INT);
         $stmt->execute();
@@ -104,7 +104,7 @@ class ActivitesDB extends ConfigDB
     {
         if (isset($activite))
         {
-            $sql = "INSERT INTO activites (id_proposition, endroit, description, date_depart, date_retour) 
+            $sql = "INSERT INTO activites (id_proposition, endroit, description, date_depart, date_retour)
 VALUES(:id_proposition, :endroit, :description, :date_depart, :date_retour)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute(array(

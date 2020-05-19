@@ -27,14 +27,6 @@ $userCount = get('userCount');
             <td><?= $voyage->getNote() ?></td>
         </tr>
         <tr>
-            <th scope="row">Coût</th>
-            <td><?= $voyage->getCout() ?></td>
-        </tr>
-        <tr>
-            <th scope="row">Date limite d'inscription</th>
-            <td><?=  dateToFrench($voyage->getDateLimite() )?></td>
-        </tr>
-        <tr>
             <th scope="row">Date de départ</th>
             <td><?= dateToFrench($voyage->getDateDepart()) ?></td>
         </tr>

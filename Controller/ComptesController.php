@@ -105,10 +105,8 @@ class ComptesController extends AppController
         //Vérification des permissions
         $this->isAuthorized(['admin', 'prof', 'etudiant']);
 
-        if ($compteType === 'prof') {
-            $students = $this->comptesVoyageDB->getEtuIdsFromProfId($connectedUser->getIdCompte());
-
-            if ($id !== $connectedUser->getIdCompte() && !in_array($id, $students)) {
+        if ($compteType !== 'admin') {
+            if ($id !== $connectedUser->getIdCompte()) {
                 return $this->redirect('Noauth', 'AccessDenied');
             }
         }
