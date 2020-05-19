@@ -10,6 +10,7 @@ $categoriesProposition = get('categoriesProposition');
 $questionsProposition = get('questionProposition');
 
 $ctr = 1;
+$abc ="";
 
 ?>
 <?= load_css('tab') ?>
@@ -34,7 +35,7 @@ $ctr = 1;
             <legend>Ajouter une proposition</legend>
             <div class="input required">
                 <label id="nom_projet" for="nom_projet">Nom du projet</label>
-                <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide" required>
+                <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide" required value="<?= $abc ?>">
             </div>
 
             <div class="input required">
@@ -61,52 +62,6 @@ $ctr = 1;
                 <label for="note">Note</label>
                 <textarea name="note" maxlength="500" rows="4"></textarea>
             </div>
-
-       <!--
-            <div class="input required">
-                <label for="cout">Coût</label>
-                <input type="number" name="cout" min="0" max="99999999"  step="0.01" required>
-
-            </div>
-
-            <div class="input date required">
-                <label for="date_limite">Date limite d'inscription</label>
-                <select name="date_limite[year]" required="required">
-                    <?php /*for ($i = date('Y'); $i <= (date('Y') + 50); $i++): */?>
-                        <option
-                                value=<?/*= $i */?>
-                            <?/*= ($i == date('Y')) ? ' selected="selected"' : '' */?>>
-                            <?/*= $i */?>
-                        </option>
-                    <?php /*endfor; */?>
-                </select>
-
-                <select name="date_limite[month]" required="required">
-                    <?php
-/*                    $i = 0;
-                    foreach (return_months() as $month):
-                        */?>
-                        <option
-                                value=<?/*= ++$i */?>
-                            <?/*= ($i == date('m')) ? ' selected="selected"' : '' */?>>
-                            <?/*= $month */?>
-                        </option>
-                    <?php
-/*                    endforeach;
-                    */?>
-                </select>
-
-                <select name="date_limite[day]" required="required">
-                    <?php /*for ($i = 1; $i <= 31; $i++): */?>
-                        <option
-                                value=<?/*= $i */?>
-                                <?/*= ($i == date('d')) ? ' selected="selected"' : '' */?>
-                        >
-                            <?/*= $i */?>
-                        </option>
-                    <?php /*endfor; */?>
-                </select>
-            </div>-->
 
             <div class="input date required">
                 <label for="date_depart">Date de départ</label>
@@ -434,7 +389,10 @@ $ctr = 1;
             </div>
             <br>
             <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>
-            <button type="submit" form="base_form">Ajouter</button>
+            <button type="submit" form="base_form" name="brouillon">Ajouter</button>
+            <div style="float: right">
+                <input type="submit" name="brouillon"  value="Sauvegarder le brouillon">
+            </div>
         </fieldset>
         <br>
     </form>

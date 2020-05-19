@@ -143,6 +143,10 @@ class PropositionsController extends AppController
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
 
 
+            $code =0;
+            if (isset($_POST['brouillon'])) {
+                $code = 3;
+            }
             $proposition = new Proposition(
                 null,
                 $connectedUserId,
@@ -152,7 +156,7 @@ class PropositionsController extends AppController
                 $date_depart,
                 $date_retour,
                 1,
-                0,
+                $code,
                 null,
                 $destination,
                 $_POST['note']

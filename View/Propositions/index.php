@@ -15,6 +15,8 @@ $propositions = get('propositions');
 
     <h3>Propositions</h3>
 
+
+
     <table class="table_to_paginate">
         <thead>
         <tr>
@@ -29,8 +31,8 @@ $propositions = get('propositions');
         </thead>
         <tbody>
         <?php foreach ($propositions as $proposition):?>
+            <?php    if (!(isOfType([ADMIN]) and ($proposition->getApprouvee() == '3'))): ?>
         <tr>
-
             <?php
             if ($proposition->getApprouvee() == 0) {
                 $color = 'style="color: #000000"';
@@ -38,6 +40,8 @@ $propositions = get('propositions');
                 $color = 'style="color: #aaaaaa"';
             } else if ($proposition->getApprouvee() == 1) {
                 $color = 'style="color: #D91515"';
+            } else if ($proposition->getApprouvee() == 3) {
+                $color = 'style="color: #dea41d"';
             }
             ?>
 
@@ -58,6 +62,9 @@ $propositions = get('propositions');
                 }
                 else if($proposition->getApprouvee() === '1'){
                     echo "Refusé";
+                }
+                else if($proposition->getApprouvee() === '3'){
+                    echo "Brouillon";
                 }
                 ?>
             </td>
@@ -154,6 +161,7 @@ $propositions = get('propositions');
                 </div>
 
         </tr>
+            <?php endif ?>
         <?php endforeach; ?>
         </tbody>
     </table>
@@ -166,8 +174,9 @@ $propositions = get('propositions');
 endif; ?>
 
 <script>
-    var order = [[ 6, 'asc' ],[ 4, 'asc' ]];
+    var order = [[ 4, 'asc' ]];
 </script>
 <?= load_script('paginator') ?>
+
 
 
