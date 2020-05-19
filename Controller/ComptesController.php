@@ -225,6 +225,7 @@ class ComptesController extends AppController
 
     public function login()
     {
+        if (isset($_SESSION["connectedUser"])) {$this->redirect("Voyages", "Index");}
         //Gère la réponse de la vue
         if (!empty($_POST)) {
 
