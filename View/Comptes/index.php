@@ -14,6 +14,10 @@ $compteType = $connectedUser->getType();
 
     <h3>Comptes</h3>
 
+    <?php if ($compteType === 'admin'):
+        echo nav('<button class="add-btn">Ajouter un utilisateur </button>','comptes','add');
+    endif; ?>
+
     <table class="table_to_paginate">
         <thead>
         <tr>
@@ -62,11 +66,6 @@ $compteType = $connectedUser->getType();
     </table>
 
 </div>
-
-<!--Button de navigation -->
-<?php if ($compteType === 'admin'):
-    echo nav('<button>Ajouter un utilisateur </button>','comptes','add');
-endif; ?>
 
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];

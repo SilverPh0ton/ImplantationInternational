@@ -1,6 +1,6 @@
 /* Section de la barre bleue du header */
 header {
-    height: 70px;
+    height: 7vh;
     line-height: 0;
     position: fixed;
     top: 0;
@@ -142,7 +142,7 @@ nav {
         position: absolute;
         right: 0;
         height: auto;
-        top: 70px;
+        top: 7vh;
         display: flex;
         background-color: rgba(235, 235, 235, 0.8);
         flex-direction: column;

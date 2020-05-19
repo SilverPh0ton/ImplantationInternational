@@ -13,7 +13,7 @@ $voyages = get('voyages');
 
 <div class="voyages index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left">
 
-    <h3>Voyages</h3>
+    <h3>Séjours de mobilité</h3>
 
     <table class="table_to_paginate">
         <thead>

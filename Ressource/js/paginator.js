@@ -1,6 +1,16 @@
 var dataTable;
+
+if (typeof(order) == "undefined"){
+    order = [[ 0, 'asc' ]];
+}
+
+if (typeof(scrollY_val) == "undefined"){
+    scrollY_val = '50vh';
+}
+
 $(document).ready( function () {
     dataTable = $('.table_to_paginate').DataTable({
+        scrollY: scrollY_val,
         language: {
             "sEmptyTable":     "Aucune donnée disponible dans le tableau",
             "sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
