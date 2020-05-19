@@ -232,7 +232,7 @@ $question = get('question');
                 <input name="input_option" type="hidden" id="input_option" value="<?= $question->getInputOption() ?>">
             </div>
             <button type="submit">Enregistrer</button>
-            <?= nav('<button type="button">Retour</button>', 'questions', 'index'); ?>
+            <?= nav('<button type="button">Retourner à la liste de questions</button>', 'questions', 'index'); ?>
         </fieldset>
 
 

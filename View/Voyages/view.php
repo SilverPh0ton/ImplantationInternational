@@ -12,7 +12,7 @@ $userCount = get('userCount');
 ?>
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content" >
-    <h3>Projet: <?= $voyage->getNomProjet() ?></h3>
+    <h3>Nom du projet: <?= $voyage->getNomProjet() ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row">Pays</th>
@@ -39,11 +39,11 @@ $userCount = get('userCount');
             <td><?= $voyage->getActif() ? 'Oui' : 'Non'; ?></td>
         </tr>
         <tr>
-            <th scope="row">Participants</th>
+            <th scope="row">Participant(s)</th>
             <td><?= $userCount ?> participant(s)</td>
         </tr>
         <tr>
-            <th scope="row">Propositions d'origine</th>
+            <th scope="row">Proposition d'origine</th>
             <td>
                 <?= nav2(
                     '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
@@ -56,5 +56,5 @@ $userCount = get('userCount');
         </tr>
     </table>
 
-    <?= nav('<button>Revenir à la liste des voyages</button>', 'Voyages', 'index') ?>
+    <?= nav('<button>Revenir à la liste des séjours</button>', 'Voyages', 'index') ?>
 </div>
