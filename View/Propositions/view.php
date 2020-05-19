@@ -140,20 +140,29 @@ $activites = get('activites');
                                     <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                         <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
 
-                                            <span><?= $question->getQuestion() ?></span>
+                                          <span><?= $question->getQuestion() ?></span>
 
-                                            <?php $vraiValeurs = $proposition_reponse->getReponse(); ?>
-                                            <label for="affichage">
-                                                <!--Loop pour questions-->
-                                                <span><?php if ($question->getAffichage() === 'Case'): ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif; ?> <!-- Default Value-->
+                                          <?php $vraiValeurs = $proposition_reponse->getReponse();
+                                          ?>
+                                          <!--Loop pour questions-->
+                                          <span>
+                                              <?php if ($question->getAffichage() === 'Case'): ?>
+                                                <br> <br>
+                                                <?php
+                                                $listeReponse = explode(";", $vraiValeurs);
 
-                                                        <input type="checkbox"
-                                                               name="<?= $question->getIdQuestion() ?>"
-                                        <?php if ('on' === $vraiValeurs): {
-                                            echo ' checked';
-                                        } endif ?>
-                                    >
+                                                $options = explode(";", $question->getInputOption());
+                                                 $idCase = 0; ?>
+
+                                                        <?php foreach ($options as $option): $idCase++; ?>
+
+                                                        <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                            checked="checked"
+                                                          <?php endif; ?>  id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                                <?= $option ?>
+                                                            </input>
+                                                        <?php endforeach ?>
+                                                        <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
                                                     <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
@@ -279,4 +288,3 @@ $activites = get('activites');
     }
     ?>
 </div>
-

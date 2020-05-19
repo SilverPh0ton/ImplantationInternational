@@ -39,8 +39,11 @@ $question = get('question');
 
                             <?php echo download('empty.txt' ,'Télécharger');  ?>
                         <?php elseif ($question->getAffichage() === 'Case'): ?>
-                            Case à cocher
-                            <input type="checkbox">
+                          <?php $options = explode(";", $question->getInputOption()); ?>
+
+                          <?php foreach ($options as $option): ?>
+                              <input type="checkbox"><?= $option ?></input>
+                          <?php endforeach ?>
 
                         <?php elseif ($question->getAffichage() === 'Chiffre'):
                             $extrmum = explode(";", $question->getInputOption());

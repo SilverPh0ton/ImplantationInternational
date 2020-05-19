@@ -76,7 +76,7 @@ class PropositionsController extends AppController
         if(empty($questionsProposition)){
             $questionsProposition = array();
         }
-        
+
         $categoriesProposition = array();
         foreach ($questionsProposition as $questionProposition) {
             if (!in_array($questionProposition->getCategorie(), $categoriesProposition)) {
@@ -186,7 +186,7 @@ class PropositionsController extends AppController
                     $date_retour
                 );
 
-                
+
                 // retirer la verification pour permettre des acrtivités au dela des dâtes de du projet
                /* if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
                     $whileSuccess = false;
@@ -310,6 +310,7 @@ class PropositionsController extends AppController
                         return $this->redirect("Propositions", "Add");
                     }
                 }
+              
             }
 
             if(!$whileSuccess)

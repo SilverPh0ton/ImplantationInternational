@@ -155,7 +155,7 @@ $question = get('question');
                             $max = $extrmum[1];
                             $step = $extrmum[2];
                         }
-                    } else if ($question->getAffichage() === 'Liste') {
+                    } else if ($question->getAffichage() === 'Liste' || $question->getAffichage() === 'Case') {
                         $list = $question->getInputOption();
                     } else if ($question->getAffichage() === 'Telechargement') {
                         $file = $question->getInputOption();
@@ -242,4 +242,3 @@ $question = get('question');
 </div>
 
 <?= load_script('optionsDisplayer') ?>
-
