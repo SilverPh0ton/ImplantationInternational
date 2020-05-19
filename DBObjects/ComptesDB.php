@@ -296,9 +296,9 @@ class ComptesDB extends ConfigDB
     function updateCompte(Compte $newCompte)
     {
         if (isset($newCompte)) {
-                $sql = "UPDATE comptes SET 
+                $sql = "UPDATE comptes SET
                 pseudo = :pseudo,
-                type = :type, 
+                type = :type,
                 actif = :actif,
                 courriel = :courriel,
                 nom = :nom,
@@ -334,7 +334,7 @@ class ComptesDB extends ConfigDB
             $compteCtr = $stmtExist->fetchColumn();
 
             if ($compteCtr == 1) {
-                $sql = "UPDATE comptes SET 
+                $sql = "UPDATE comptes SET
                 mot_de_passe = :mot_de_passe
                 WHERE id_compte = :idCompte ";
                 $stmt = $this->conn->prepare($sql);
@@ -487,5 +487,12 @@ class ComptesDB extends ConfigDB
         }
     }
 
-
+    public function getAllUsers()
+    {
+        $sql = "SELECT count(*) FROM comptes WHERE type = 'etudiant' OR type = 'prof' ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetch();
+        return $stats;
+    }
 }
