@@ -162,7 +162,7 @@ $propositions = get('propositions');
 
 <!--Button de navigation -->
 <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
-    echo nav('<button>Ajouter une propositions </button>', 'Propositions', 'add');
+    echo nav('<button>Ajouter une proposition </button>', 'Propositions', 'add');
 endif; ?>
 
 <script>

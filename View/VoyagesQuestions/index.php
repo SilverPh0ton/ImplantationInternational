@@ -313,7 +313,7 @@ $ctr = 1;
         <button type="submit" id="submitBtn">Enregistrer</button>
     </form>
     <!--Button de navigation -->
-    <?= nav('<button>Retour aux voyages </button>', 'Voyages', 'index'); ?>
+    <?= nav('<button>Retour aux séjours </button>', 'Voyages', 'index'); ?>
     <?= nav1('<button>Ajouter une question </button>', 'Questions', 'add', $id_voyage); ?>
 
 </div>

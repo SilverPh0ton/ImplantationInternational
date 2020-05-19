@@ -23,7 +23,7 @@ $activites = get('activites');
 ?>
 
 <div class="voyages view columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
-    <h3>Proposition de projet: <?= $proposition->getNomProjet() ?></h3>
+    <h3>Proposition de séjour: <?= $proposition->getNomProjet() ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row">Proposition par:</th>

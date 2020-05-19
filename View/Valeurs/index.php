@@ -59,7 +59,7 @@ $comptes = get('comptes');
             </table>
 
             <?=
-            nav('<button type="button"> Retour aux voyages</button>', 'voyages', 'index');
+            nav('<button type="button"> Retour aux séjours</button>', 'voyages', 'index');
 
             ?>
             <?php
