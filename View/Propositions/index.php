@@ -20,10 +20,7 @@ $propositions = get('propositions');
         <tr>
             <th scope="col">Nom du projet</th>
             <th scope="col">Pays</th>
-            <th scope="col" class='optionalField'>Coût</th>
-            <th scope="col"
-                class='optionalField'>Date limite d'inscription
-            </th>
+
             <th scope="col" class='optionalField'>Date de départ</th>
             <th scope="col" class='optionalField'>Date de retour</th>
             <th scope="col">État</th>
@@ -46,9 +43,6 @@ $propositions = get('propositions');
 
             <td <?php echo $color ?> > <?= $proposition->getNomProjet() ?></td>
             <td <?php echo $color ?> > <?= $proposition->getDestination()->getNomPays() ?></td>
-            <td <?php echo $color ?> class='optionalField'> <?= $proposition->getCout() ?> </td>
-            <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateLimite()?>">
-                <?= dateToFrench($proposition->getDateLimite()) ?></td>
             <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateDepart()?>">
                 <?= dateToFrench($proposition->getDateDepart()) ?></td>
             <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateRetour()?>>">

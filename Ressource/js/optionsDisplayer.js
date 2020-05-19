@@ -15,6 +15,14 @@ $(document).ready(function(){
         }
     });
 
+    $("#categorie").change(function () {
+    $("#id_categorie").val($("#categorie").val());
+    })
+
+    $("#regroupementChange").change(function () {
+        $("#regroupementHidden").val($("#regroupementChange").val());
+    })
+
     let chechedOption = $("input[name=affichage]:checked").val();
     if(chechedOption === 'Curseur' || chechedOption === 'Chiffre'){
         selectNumber();

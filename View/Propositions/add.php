@@ -62,6 +62,7 @@ $ctr = 1;
                 <textarea name="note" maxlength="500" rows="4"></textarea>
             </div>
 
+       <!--
             <div class="input required">
                 <label for="cout">Coût</label>
                 <input type="number" name="cout" min="0" max="99999999"  step="0.01" required>
@@ -71,41 +72,41 @@ $ctr = 1;
             <div class="input date required">
                 <label for="date_limite">Date limite d'inscription</label>
                 <select name="date_limite[year]" required="required">
-                    <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
+                    <?php /*for ($i = date('Y'); $i <= (date('Y') + 50); $i++): */?>
                         <option
-                                value=<?= $i ?>
-                            <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
+                                value=<?/*= $i */?>
+                            <?/*= ($i == date('Y')) ? ' selected="selected"' : '' */?>>
+                            <?/*= $i */?>
                         </option>
-                    <?php endfor; ?>
+                    <?php /*endfor; */?>
                 </select>
 
                 <select name="date_limite[month]" required="required">
                     <?php
-                    $i = 0;
+/*                    $i = 0;
                     foreach (return_months() as $month):
-                        ?>
+                        */?>
                         <option
-                                value=<?= ++$i ?>
-                            <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
-                            <?= $month ?>
+                                value=<?/*= ++$i */?>
+                            <?/*= ($i == date('m')) ? ' selected="selected"' : '' */?>>
+                            <?/*= $month */?>
                         </option>
                     <?php
-                    endforeach;
-                    ?>
+/*                    endforeach;
+                    */?>
                 </select>
 
                 <select name="date_limite[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
+                    <?php /*for ($i = 1; $i <= 31; $i++): */?>
                         <option
-                                value=<?= $i ?>
-                                <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
+                                value=<?/*= $i */?>
+                                <?/*= ($i == date('d')) ? ' selected="selected"' : '' */?>
                         >
-                            <?= $i ?>
+                            <?/*= $i */?>
                         </option>
-                    <?php endfor; ?>
+                    <?php /*endfor; */?>
                 </select>
-            </div>
+            </div>-->
 
             <div class="input date required">
                 <label for="date_depart">Date de départ</label>
@@ -187,7 +188,7 @@ $ctr = 1;
 
         </fieldset>
 
-        <div style="text-align: center">Ajout des activités</div>
+        <div style="text-align: center">Calendrier des activités prévues</div>
         <br>
 
         <table class="activityTable" style="white-space: nowrap;">
@@ -438,6 +439,3 @@ $ctr = 1;
         <br>
     </form>
 </div>
-
-
-

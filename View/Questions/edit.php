@@ -29,7 +29,7 @@ $question = get('question');
             <legend>Modifier la question</legend>
             <div class="input required">
                 <label for="id_categorie">Catégorie</label>
-                <select disabled>
+                <select id="categorie">
                     <?php
                     foreach ($categories as $categorie):
                         ?>
@@ -42,7 +42,7 @@ $question = get('question');
                     endforeach
                     ?>
                 </select>
-                <input type="hidden" name="id_categorie" value="<?= $categorie->getIdCategorie()?>">
+                <input type="hidden" id="id_categorie" name="id_categorie" value="<?= $categorie->getIdCategorie()?>">
             </div>
 
             <div>
@@ -197,7 +197,7 @@ $question = get('question');
 
             <div>
                 <label for="regroupement">Regroupement</label>
-                <select disabled>
+                <select id="regroupementChange">
                     <option value="etudiant" <?php if (0 == $question->getRegroupement()): {
                         echo ' selected';
                     } endif ?>>Étudiant
@@ -215,7 +215,7 @@ $question = get('question');
                     } endif ?>>Proposition
                     </option>
                 </select>
-                <input type="hidden" name="regroupement" value="<?= $question->getRegroupement()?>">
+                <input type="hidden" id="regroupementHidden" name="regroupement" value="<?= $question->getRegroupement()?>">
             </div>
 
             <div>
