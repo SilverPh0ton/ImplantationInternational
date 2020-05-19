@@ -18,11 +18,11 @@ $compteType = $connectedUser->getType();
     <?php if(isOfType([PROF]))
         echo '<h3>Participants</h3>'
     ?>
-
     <?php if ($compteType === 'admin'):
         echo nav('<button class="add-btn">Ajouter un participants </button>','comptes','add');
     endif; ?>
 
+    <br>
     <table class="table_to_paginate">
         <thead>
         <tr>
@@ -35,7 +35,9 @@ $compteType = $connectedUser->getType();
             <th scope="col" class="actions"></th>
         </tr>
         </thead>
+
         <tbody>
+
         <?php foreach ($comptes as $compte):
             $color = $compte->getActif() ? '' : 'style="color: #aaaaaa"'
             ?>
@@ -59,7 +61,7 @@ $compteType = $connectedUser->getType();
                 <td class="actions">
 
                     <?php
-                    echo nav1('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','View',$compte->getIdCompte());
+                    echo nav1('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Voir">','Comptes','View',$compte->getIdCompte());
                     if ($connectedUser->getType() === 'admin') {
                       echo nav1('<img alt="afficher icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','Edit',$compte->getIdCompte());
                     }

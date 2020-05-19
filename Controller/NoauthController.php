@@ -88,7 +88,7 @@ class NoauthController extends AppController
             }
 
             if (($_POST['date_naissance']['month'] == 2) && (in_array($_POST['date_naissance']['day'], $days))) {
-                $this->flashBad('La compte n\'a pas pu être créé. Mauvaise saisie de date.');
+                $this->flashBad('Le compte n\'a pas pu être créé. Mauvaise saisie de date.');
                 return $this->redirect('Noauth', 'CreateAccount');
             }
 
@@ -129,7 +129,7 @@ class NoauthController extends AppController
                     return $this->redirect('comptes', 'login');
                 }
             }
-            $this->flashBad('Votre compte n\'a pas pu être créé. Réessayez plus tard.\'');
+            $this->flashBad('Votre compte n\'a pas pu être créé. Réessayez plus tard.');
             return $this->redirect('comptes', 'login');
         }
     }
@@ -158,7 +158,7 @@ class NoauthController extends AppController
                         $this->redirect('Comptes', 'Login');
                     }
                 } else {
-                    $this->flashBad('Aucun compte existe à cette combinaison');
+                    $this->flashBad('Aucun compte n\'existe avec cette combinaison');
                     return $this->redirect('Noauth', 'PasswordRecover');
                 }
 
@@ -197,7 +197,7 @@ class NoauthController extends AppController
              die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
          } */
 
-        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");
+        mail($courriel,"Une demande de modification de mot de passe a été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");
     }
 
 

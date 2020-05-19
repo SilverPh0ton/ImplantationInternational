@@ -90,7 +90,7 @@ class QuestionsController extends AppController
                 }
 
             } else {
-                $this->flashBad('Une erreur est survenu avec l\'ajout');
+                $this->flashBad('Une erreur est survenu avec l\'ajout.');
                 return $this->redirect('Questions', 'Add');
             }
 

@@ -122,13 +122,13 @@ class ComptesController extends AppController
         if (isset($_POST['promote'])) {
             if ($_POST['promote'] == "true") {
                 if ($this->comptesDB->promoteUserToProf($id)) {
-                    $this->flashGood("L'utilisateur sélecionné a été promu accompagnateur avec succès!");
+                    $this->flashGood("L'utilisateur sélectionné a été promu accompagnateur avec succès!");
                     return $this->redirectParam1('Comptes', 'index', $id);
                 }
-                $this->flashBad("Une erreur est survenu lors de la promotion");
+                $this->flashBad("Une erreur est survenus lors de la promotion");
                 return $this->redirectParam1('Comptes', 'index', $id);
             }
-            $this->flashBad("Une erreur est survenu lors de la promotion");
+            $this->flashBad("Une erreur est survenus lors de la promotion");
             return $this->redirectParam1('Comptes', 'index', $id);
         }
 
@@ -148,7 +148,7 @@ class ComptesController extends AppController
                     //Redirige à la page approprié
                     return $this->redirectParam1('Comptes', 'view', $id);
                 }
-                $this->flashBad('Les modifications de mot de passe n\'ont pas pu être enregistrées. Veuillez réessayer');
+                $this->flashBad('Les modifications de mot de passe n\'ont pas pu être enregistrées. Veuillez réessayer.');
                 return $this->redirectParam1("Comptes", "Edit", $id);
 
             }
@@ -189,11 +189,11 @@ class ComptesController extends AppController
                 $age = date_diff(date_create($date_naissance), new DateTime());
 
                 if ($age->y < 15) {
-                    $this->flashBad('La compte n\'a pas pu être modifié. La personne doit être agée d\'au moins 15 ans.');
+                    $this->flashBad('Le compte n\'a pas pu être modifié. La personne doit être âgée d\'au moins 15 ans.');
                     return $this->redirectParam1('Comptes', 'Edit', $id);
                 }
                 elseif ($age->y >= 90) {
-                    $this->flashBad('La compte n\'a pas pu être modifié. La personne ne peut être agée de plus de 90 ans.');
+                    $this->flashBad('Le compte n\'a pas pu être modifié. La personne ne peut être âgée de plus de 90 ans.');
                     return $this->redirectParam1('Comptes', 'Edit', $id);
                 }
 
@@ -228,7 +228,7 @@ class ComptesController extends AppController
                     return $this->redirectParam1("Comptes", "Edit", $id);
                 }
 
-                $this->flashBad('Les modifications du compte n\'ont pas pu être enregistrées. Veuillez réessayer');
+                $this->flashBad('Les modifications du compte n\'ont pas pu être enregistrées. Veuillez réessayer.');
                 return $this->redirectParam1("Comptes", "Edit", $id);
             }
         }
@@ -248,7 +248,7 @@ class ComptesController extends AppController
                     $this->redirect('voyages', 'index');
 
                 } else {
-                    $this->flashBad('Votre compte est desactivé');
+                    $this->flashBad('Votre compte est désactivé.');
                     $this->redirect('Comptes', 'Login');
                 }
             } else {
@@ -315,11 +315,11 @@ class ComptesController extends AppController
             $age = date_diff(date_create($date_naissance), new DateTime());
 
             if ($age->y < 15) {
-                $this->flashBad('La compte n\'a pas pu être ajouté. La personne doit être agée d\'au moins 15 ans.');
+                $this->flashBad('Le compte n\'a pas pu être ajouté. La personne doit être âgée d\'au moins 15 ans.');
                 return $this->redirect('Comptes', 'Add');
             }
             elseif ($age->y >= 90) {
-                $this->flashBad('La compte n\'a pas pu être ajouté. La personne ne peut être agée de plus de 90 ans.');
+                $this->flashBad('Le compte n\'a pas pu être ajouté. La personne ne peut être âgée de plus de 90 ans.');
                 return $this->redirect('Comptes', 'Add');
             }
 
