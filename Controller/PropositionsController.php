@@ -88,7 +88,10 @@ class PropositionsController extends AppController
 
         $this->set('destinations', $destinations);
 
+
         if (!empty($_POST)||!empty($_FILES)) {
+
+
 
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
@@ -128,12 +131,19 @@ class PropositionsController extends AppController
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now /*|| $date_limite < $date_now*/) {
+            $verif_date = true;
+            if ($date_retour < $date_now || $date_depart < $date_now ) {
                 $this->flashBad('Les date doivent être dans le future');
+                $verif_date = false;
             }
 
             if ($date_retour < $date_depart) {
                 $this->flashBad('La date de retour doit être après la date de départ');
+                $verif_date = false;
+            }
+
+            if(!$verif_date){
+                return $this->redirect("Propositions", "Add");
             }
 
 
@@ -143,10 +153,12 @@ class PropositionsController extends AppController
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
 
 
+
             $code =0;
             if (isset($_POST['brouillon'])) {
                 $code = 3;
             }
+
             $proposition = new Proposition(
                 null,
                 $connectedUserId,
@@ -357,8 +369,6 @@ class PropositionsController extends AppController
 
         if (!empty($_POST)||!(empty($_FILES))) {
 
-
-
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
 
@@ -408,6 +418,11 @@ class PropositionsController extends AppController
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
 
+            $code =0;
+            if (isset($_POST['brouillon'])) {
+                $code = 3;
+            }
+
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
 
             $proposition = new Proposition(
@@ -419,7 +434,7 @@ class PropositionsController extends AppController
                 $date_depart,
                 $date_retour,
                 1,
-                0,
+                $code,
                 null,
                 $destination,
                 $_POST['note']

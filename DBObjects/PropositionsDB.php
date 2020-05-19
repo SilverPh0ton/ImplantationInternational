@@ -296,7 +296,7 @@ class PropositionsDB extends ConfigDB
                     date_depart = :date_depart, 
                     date_retour = :date_retour,
                     actif = :actif,
-                    approuve = 0,
+                    approuve = :code,
                     id_destination = :id_destination,
                     note = :note WHERE id_proposition = :id_proposition";
             $idProposition = $proposition->getIdProposition();
@@ -307,6 +307,7 @@ class PropositionsDB extends ConfigDB
             $actif = $proposition->getActif();
             $id_destination = $proposition->getDestination()->getIdDestination();
             $note = $proposition->getNote();
+            $code = $proposition->getApprouvee();
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id_proposition', $idProposition);
             $stmt->bindParam(':nom_projet', $nomProjet);
@@ -316,6 +317,7 @@ class PropositionsDB extends ConfigDB
             $stmt->bindParam(':actif', $actif);
             $stmt->bindParam(':id_destination', $id_destination);
             $stmt->bindParam(':note', $note);
+            $stmt->bindParam(':code', $code);
 
             if ($stmt->execute()) {
                 return true;

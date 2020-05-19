@@ -455,6 +455,8 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                 </div>
             <?php endif; ?>
             <br>
+            <input type="checkbox" id="brouillon" name="brouillon" value="oui" <?php echo ($proposition->getApprouvee() == 3) ? 'checked' : ''; ?>>
+            <label for="brouillon">Il s'agit d'un brouillon</label><br>
             <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>
             <button type="submit" form="base_form">Enregistrer</button>
         </fieldset>

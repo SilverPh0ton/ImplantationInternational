@@ -10,7 +10,7 @@ $categoriesProposition = get('categoriesProposition');
 $questionsProposition = get('questionProposition');
 
 $ctr = 1;
-$abc ="";
+
 
 ?>
 <?= load_css('tab') ?>
@@ -25,17 +25,18 @@ $abc ="";
         });
     });
 </script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
 
-    <form method="post" id="base_form" enctype="multipart/form-data">
+    <form method="post" id="base_form45" enctype="multipart/form-data" action="index.php?controller=Propositions&action=Add">
 
         <fieldset>
             <legend>Ajouter une proposition</legend>
             <div class="input required">
                 <label id="nom_projet" for="nom_projet">Nom du projet</label>
-                <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide" required value="<?= $abc ?>">
+                <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide" required>
             </div>
 
             <div class="input required">
@@ -380,19 +381,21 @@ $abc ="";
                                         <br>
                                         <hr>
                                     <?php endif; ?>
-                                <?php endforeach; ?>
+                                <?php endforeach;  ?>
                             </div>
                         </div>
                     </div>
 
                 <?php endforeach; ?>
+
+                <br><br>
+                <input type="checkbox" id="brouillon" name="brouillon" value="oui">
+                <label for="brouillon">Il s'agit d'un brouillon</label><br>
             </div>
             <br>
             <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>
-            <button type="submit" form="base_form" name="brouillon">Ajouter</button>
-            <div style="float: right">
-                <input type="submit" name="brouillon"  value="Sauvegarder le brouillon">
-            </div>
+            <button type="submit" form="base_form45" name="btn_submit" id="test" value="ajouter">Ajouter</button>
+
         </fieldset>
         <br>
     </form>
