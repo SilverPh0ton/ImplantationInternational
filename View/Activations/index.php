@@ -26,7 +26,7 @@ $activations = get('acti_array');
 
     <h3>Codes d'activation pour: <?= $nom_projet ?></h3>
 
-
+    <?=  nav1('<button class="add-btn">Générer des codes </button>','Activations','add',$id_voyage); ?>
 
     <?php if (is_array($activations) && sizeof($activations) != 0) : ?>
 
@@ -56,8 +56,7 @@ $activations = get('acti_array');
     <?php endif ?>
 
     <!--Button de navigation -->
-    <?=  nav1('<button>Générer des codes </button>','Activations','add',$id_voyage); ?>
-    <?=  nav('<button>Revenir à la liste des séjours</button>','Voyages','index'); ?>
+    <?=  nav('<button>Revenir à la liste des voyages</button>','Voyages','index'); ?>
 
 </div>
 
