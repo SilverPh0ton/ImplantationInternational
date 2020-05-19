@@ -9,7 +9,7 @@
                 <a class="nav-link active" href="#section1">Les séjours</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#section2">Étudiants</a>
+                <a class="nav-link" href="#section2">Participants</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#section3">Profil</a>
@@ -38,6 +38,11 @@
                                 <ul>
                                     <li>Sur cette page, inscrivez les informations nécessaires, telles que le nom du projet, la destination, la date de départ, celle de retour ainsi que le coût. </li>
                                     <li>Dans la section « Ajout des activités », vous pourrez ajouter différentes activités prévues pour ce voyage. Inscrivez l’endroit de l’activité, une courte description, la date de départ et la date de fin. Une fois terminé, cliquez sur <img alt="modifier icon" src="Ressource/img/btPlus.png" class="images" data-toggle="tooltip" data-placement = "top"></li>
+                                    <ul>
+                                        <li>
+                                            <b>À noter:</b>La section <b>Endroit</b> de l'activité doit contenir au moins 4 caractères afin que l'activité puisse être ajoutée
+                                        </li>
+                                    </ul>
                                     <li>Pour supprimer une activité, cliquez sur <img alt="modifier icon" src="Ressource/img/btPoubelle.png" class="images" data-toggle="tooltip" data-placement = "top"></li>
                                     <li>Dans la section « Renseignement supplémentaire », vous trouverez des questions à répondre selon la catégorie. Pour voir les questions, cliquez sur les catégories.</li>
                                     <li>Une fois terminé, cliquez sur « Ajouter »</li>
@@ -49,6 +54,13 @@
                                 Pour modifier une proposition de voyage, cliquez sur <img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top">
                                 <ul>
                                     <li>Sur cette page, vous pouvez modifier les informations de cette proposition. </li>
+                                    <ul>
+                                        <li><b>À noter: </b>Vous pouvez modifier la proposition de séjour tant et aussi longtemps qu'elle n'a PAS été acceptée par un administrateur.</li>
+                                        Si la proposition de séjour a été acceptée, seul un administrateur pourra modifier les activités.
+                                        <br>
+
+
+                                    </ul>
                                     <li>Une terminé, cliquez sur « Enregistrer »</li>
                                     <li>Pour revenir à la liste de proposition, cliquez sur « Retour aux propositions »</li>
                                 </ul>
@@ -98,6 +110,11 @@
                         <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau</li>
                         <li>Pour rechercher un code spécifique, entrez le code sous « Recherche » en haut à droite du tableau</li>
                         <li>Pour générer des codes d’activation pour le voyage, cliquez sur « Générer des codes » en bas, à gauche du tableau. Dans cette page, entrez le nombre de codes nécessaire et cliquez sur « Générer »</li>
+
+                        <ul>
+                            <li><b>À noter:</b> Si un code est en noir, c'est qu'il n'a pas encore été utilisé par un étudiant ou un accompagnateur. Il sera donc inscrit  <b>Oui</b>  dans la colonne « Actif » du tableau. </li>
+                            <li><b>À noter:</b> Si un code est en gris, c'est qu'il a été utilisé par un étudiant ou un accompagnateur. Il sera donc inscrit  <b>Non</b>  dans la colonne « Actif » du tableau. </li>
+                        </ul>
                         <li>Pour revenir à la liste de codes existants, cliquez sur « Retour à la liste des codes existants »</li>
                         <li>Pour revenir aux voyages, cliquez sur « Revenir à la liste des voyages »</li>
                     </ul>
@@ -135,7 +152,7 @@
 
 
         <div id="section2" class="section">
-            <h1>Liste des étudiants</h1>
+            <h1>Participants</h1>
 
             <ul>
                 <li>
