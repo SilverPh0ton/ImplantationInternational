@@ -27,7 +27,7 @@ $comptesController->login();
     </form>
 
     <div>
-        <?= nav('Première utilisation? Créez un compte','noauth','createAccount'); ?>
+        <?= nav('Première utilisation? Créer un compte','noauth','createAccount'); ?>
     </div>
 
     <div>
@@ -37,4 +37,3 @@ $comptesController->login();
 </div>
 
 <?= load_css('login') ?>
-

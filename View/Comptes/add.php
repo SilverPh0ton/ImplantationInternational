@@ -46,10 +46,10 @@ $programmes = get('array_prog');
                 <input name="courriel" type="email" id="courriel" pattern=".+[/@].+[/.].+"
                        title="Ceci n'est pas un courriel valide" maxlength="50" required>
 
-                <label for="nom">Nom</label>
-                <input name="nom" id="nom" pattern=".*\S.*" title="Le champ de peut pas être vide" type="text" maxlength="30" required>
                 <label for="prenom">Prénom</label>
                 <input name="prenom" id="prenom" pattern=".*\S.*" title="Le champ de peut pas être vide" type="text" maxlength="30" required>
+                <label for="nom">Nom</label>
+                <input name="nom" id="nom" pattern=".*\S.*" title="Le champ de peut pas être vide" type="text" maxlength="30" required>
 
                 <div class="input date required">
                     <label>Date de naissance</label>
