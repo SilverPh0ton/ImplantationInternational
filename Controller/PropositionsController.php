@@ -201,7 +201,7 @@ class PropositionsController extends AppController
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
-                }*/
+                }
 
                 if($success)
                 {
