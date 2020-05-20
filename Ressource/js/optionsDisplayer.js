@@ -6,11 +6,11 @@ $(document).ready(function() {
 
     if ($(this).val() === 'Curseur' || $(this).val() === 'Chiffre') {
       selectNumber();
-    } else if ($(this).val() === 'Liste' || $(this).val() === 'Case') {
+    } else if ($(this).val() === 'Liste' || $(this).val() === 'Case' || $(this).val() === 'Radio'){
       selectList();
     } else if ($(this).val() === 'Telechargement') {
       selectDownload();
-    });
+    }});
 
     $("#categorie").change(function () {
         $("#id_categorie").val($("#categorie").val());
@@ -19,15 +19,13 @@ $(document).ready(function() {
     $("#regroupementChange").change(function () {
         $("#regroupementHidden").val($("#regroupementChange").val());
     })
-  
-  });
 
   let chechedOption = $("input[name=affichage]:checked").val();
   if (chechedOption === 'Curseur' || chechedOption === 'Chiffre') {
     selectNumber();
   } else if (chechedOption === 'Telechargement') {
     selectDownload();
-  } else if (chechedOption === 'Liste' || chechedOption === 'Case') {
+  } else if (chechedOption === 'Liste' || chechedOption === 'Case'|| chechedOption === 'Radio') {
     selectList();
   }
 

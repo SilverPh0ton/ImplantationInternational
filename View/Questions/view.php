@@ -44,6 +44,13 @@ $question = get('question');
                           <?php foreach ($options as $option): ?>
                               <input type="checkbox"><?= $option ?></input>
                           <?php endforeach ?>
+                           
+                          <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                    <?php endforeach ?>
 
                         <?php elseif ($question->getAffichage() === 'Chiffre'):
                             $extrmum = explode(";", $question->getInputOption());
@@ -100,6 +107,8 @@ $question = get('question');
                             <textarea></textarea>
 
                         <?php endif; ?>
+
+                        
                     </label>
                 </div>
             </td>

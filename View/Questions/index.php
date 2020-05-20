@@ -64,6 +64,15 @@ $questionsPourProposition = get('questionsPourProposition');
                                         <input type="checkbox"><?= $option ?></input>
                                     <?php endforeach ?>
 
+                                    
+                                    <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                    <?php endforeach ?>
+
+
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
                                     <?php ;
@@ -185,6 +194,15 @@ $questionsPourProposition = get('questionsPourProposition');
                                   <?php foreach ($options as $option): ?>
                                       <input type="checkbox"><?= $option ?></input>
                                   <?php endforeach ?>
+
+
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                    <?php endforeach ?>
+
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
@@ -312,6 +330,13 @@ $questionsPourProposition = get('questionsPourProposition');
                                       <input type="checkbox"><?= $option ?></input>
                                   <?php endforeach ?>
 
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                    <?php endforeach ?>
+
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
                                     <?php
@@ -436,6 +461,13 @@ $questionsPourProposition = get('questionsPourProposition');
                                   <?php foreach ($options as $option): ?>
                                       <input type="checkbox"><?= $option ?></input>
                                   <?php endforeach ?>
+
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                    <?php endforeach ?>
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>

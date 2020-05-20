@@ -193,6 +193,14 @@ $ctr =1;
                                                                           <input type="checkbox"><?= $option ?></input>
                                                                       <?php endforeach ?>
 
+                                                                              
+                                                                            <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                                            <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                                            <?php foreach ($options as $option): ?>
+                                                                                <input type="radio" name="radio">  <?= $option ?></input>
+                                                                            <?php endforeach ?>
+
                                                                     <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                         $extrmum = explode(";", $question->getInputOption());
                                                                         if (sizeof($extrmum) >= 3) {

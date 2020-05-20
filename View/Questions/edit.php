@@ -78,6 +78,15 @@ $question = get('question');
                         <label for="affichage">Case à cocher</label> <br>
                         <input type="checkbox">
 
+                        <?php elseif ("Radio" == $question->getAffichage()): ?>
+                        <input hidden type="radio" name="affichage" value="Radio"
+                               class="displayOption" <?php if ("Radio" == $question->getAffichage()): {
+                            echo 'checked="checked"';
+                        } endif ?> >
+                        <label for="affichage">Radio</label> <br>
+                        <input type="radio">
+
+
                     <?php elseif ("Chiffre" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Chiffre"
                                class="displayOption" <?php if ("Chiffre" == $question->getAffichage()): {
@@ -155,7 +164,7 @@ $question = get('question');
                             $max = $extrmum[1];
                             $step = $extrmum[2];
                         }
-                    } else if ($question->getAffichage() === 'Liste' || $question->getAffichage() === 'Case') {
+                    } else if ($question->getAffichage() === 'Liste' || $question->getAffichage() === 'Case' || $question->getAffichage() === 'Radio') {
                         $list = $question->getInputOption();
                     } else if ($question->getAffichage() === 'Telechargement') {
                         $file = $question->getInputOption();

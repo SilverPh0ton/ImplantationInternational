@@ -347,6 +347,17 @@ $idCase = 0;
                                                             <?php endforeach ?>
                                                             <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
+                                                            <?php elseif ($question->getAffichage() === 'Radio'):                                            
+                                                              $options = explode(";", $question->getInputOption());
+                                                             ?>
+
+                                                            <?php foreach ($options as $option):  ?>
+
+                                                            <input name="radio<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
+                                                                    <?= $option ?>
+                                                                </input>
+                                                            <?php endforeach ?>
+                                                            <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">           
 
                                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 

@@ -344,6 +344,25 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                                                               <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
 
+                                                              <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                <br> <br>
+                                                <?php
+                                                $listeReponse = explode(";", $vraiValeurs);
+
+                                                $options = explode(";", $question->getInputOption());
+                                                 $idCase = 0; ?>
+
+                                                        <?php foreach ($options as $option): $idCase++; ?>
+
+                                                        <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                            checked="checked"
+                                                          <?php endif; ?>
+                                                        name="radio<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
+                                                                <?= $option ?>
+                                                            </input>
+                                                        <?php endforeach ?>
+                                                        <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
+
                                                     <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
                                                         <?php
