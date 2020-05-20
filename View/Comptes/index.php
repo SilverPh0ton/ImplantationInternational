@@ -9,6 +9,14 @@ $comptesController->index();
 $comptes = get('comptes');
 $compteType = $connectedUser->getType();
 ?>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js" crossorigin="anonymous"></script>
 
 <div class="comptes index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left">
 
@@ -23,7 +31,7 @@ $compteType = $connectedUser->getType();
         echo nav('<button class="add-btn">Ajouter un participants </button>','comptes','add');
     endif; ?>
 
-    <table class="table_to_paginate">
+    <table class="table_to_paginate_part">
         <thead>
         <tr>
             <th scope="col"><?= 'Nom d\'utilisateur'?></th>
@@ -33,6 +41,9 @@ $compteType = $connectedUser->getType();
             <th scope="col" class='optionalField'><?= 'Programme'?></th>
             <th scope="col" class='optionalField'><?= 'Actif'?></th>
             <th scope="col" class="actions"></th>
+            <th scope="col"><?= 'Courriel'?></th>
+            <th scope="col"><?= 'Téléphone'?></th>
+            <th scope="col"><?= 'Date de naissance'?></th>
         </tr>
         </thead>
         <tbody>
@@ -65,6 +76,9 @@ $compteType = $connectedUser->getType();
                     }
                     ?>
                 </td>
+                <td><?= $compte->getCourriel() ?></td>
+                <td><?= $compte->getTelephone() ?></td>
+                <td><?= $compte->getDateNaissance() ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
@@ -74,4 +88,4 @@ $compteType = $connectedUser->getType();
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];
 </script>
-<?= load_script('paginator') ?>
+<?= load_script('paginatorParticipants') ?>

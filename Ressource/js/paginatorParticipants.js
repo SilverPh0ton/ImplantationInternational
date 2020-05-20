@@ -1,4 +1,4 @@
-var dataTable;
+var dataTablePart;
 
 if (typeof(order) == "undefined"){
     order = [[ 0, 'asc' ]];
@@ -9,8 +9,28 @@ if (typeof(scrollY_val) == "undefined"){
 }
 
 $(document).ready( function () {
-    dataTable = $('.table_to_paginate').DataTable({
+    dataTablePart = $('.table_to_paginate_part').DataTable({
         scrollY: scrollY_val,
+        dom: 'liftBp',
+        buttons: [
+              {
+                  extend: 'pdfHtml5',
+                  text: 'Générer un PDF',
+                  className: 'btnPDF',
+                  filename: 'Dossiers_Participants',
+                  title: 'Dossiers des participants au voyage',
+                  orientation: 'portrait',
+                  exportOptions:{
+                      columns: [0,1,2,3,4,7,8,9]
+                  }
+            }
+          ],
+          columnDefs: [
+            {
+                "targets": [ 7,8,9 ],
+                "visible": false,
+                "searchable": false
+            }],
         language: {
             "sEmptyTable":     "Aucune donnée disponible dans le tableau",
             "sInfo":           "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
@@ -42,5 +62,5 @@ $(document).ready( function () {
             }
         }
     });
-    dataTable.order(order).draw();
+    dataTablePart.order(order).draw();
 } );
