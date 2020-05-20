@@ -11,8 +11,6 @@ $comptesController->add();
 
 $programmes = get('array_prog');
 
-
-
 ?>
 
 <div class="comptes form columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
@@ -23,7 +21,7 @@ $programmes = get('array_prog');
             <legend>Créer un compte</legend>
 
             <div class="input text required"><label for="pseudo">Nom d'utilisateur</label>
-                <input name="pseudo" id="pseudo" title="Le champ de peut pas être vide" pattern=".*\S.*" type="text" maxlength="30" required>
+                <input name="pseudo" id="pseudo" title="Le champ de peut pas être vide" pattern=".*\S.*" type="text" maxlength="30" value="<?php echo $infos["pseudo"] ?? ''; ?>" required>
 
                 <label for="mot_de_passe">Mot de passe</label>
                 <input name="mot_de_passe" type="password" pattern=".*\S.*" title="Le champ de peut pas être vide"
@@ -113,9 +111,11 @@ $programmes = get('array_prog');
                 </div>
 
         </fieldset>
-        <button type="submit">Créer</button>
+        <button type="submit" onclick="savedata()">Créer</button>
     </form>
 
     <?php echo nav('<button>Revenir à la liste des utilisateurs</button>', 'Comptes', 'index'); ?>
 
 </div>
+
+<?= load_script('onLoadStorage/addCompte') ?>
