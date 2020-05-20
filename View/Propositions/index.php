@@ -13,7 +13,11 @@ $propositions = get('propositions');
 ?>
 <div class="voyages index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left columns content">
 
-    <h3>Propositions</h3>
+    <h3>Propositions de séjour</h3>
+  
+    <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
+        echo nav('<button class="add-btn">Ajouter une proposition </button>', 'Propositions', 'add');
+    endif; ?>
 
     <table class="table_to_paginate">
         <thead>
@@ -159,11 +163,6 @@ $propositions = get('propositions');
     </table>
 
 </div>
-
-<!--Button de navigation -->
-<?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
-    echo nav('<button>Ajouter une propositions </button>', 'Propositions', 'add');
-endif; ?>
 
 <script>
     var order = [[ 6, 'asc' ],[ 4, 'asc' ]];

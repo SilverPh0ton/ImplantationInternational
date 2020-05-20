@@ -12,7 +12,9 @@ $userCount = get('userCount');
 ?>
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content" >
-    <h3 id="titre">Projet: <?= $voyage->getNomProjet() ?></h3>
+
+    <h3 id="titre">Nom du projet: <?= $voyage->getNomProjet() ?></h3>
+
     <table class="vertical-table">
         <tr>
             <th scope="row">Pays</th>
@@ -39,11 +41,11 @@ $userCount = get('userCount');
             <td id="actif"><?= $voyage->getActif() ? 'Oui' : 'Non'; ?></td>
         </tr>
         <tr>
-            <th scope="row">Participants</th>
+            <th scope="row">Participant(s)</th>
             <td id="nbrpart"><?= $userCount ?> participant(s)</td>
         </tr>
         <tr>
-            <th scope="row">Propositions d'origine</th>
+            <th scope="row">Proposition d'origine</th>
             <td>
                 <?= nav2(
                     '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
@@ -56,7 +58,8 @@ $userCount = get('userCount');
         </tr>
     </table>
 
-    <?= nav('<button>Revenir à la liste des voyages</button>', 'Voyages', 'index') ?>
+
+    <?= nav('<button>Revenir à la liste des séjours</button>', 'Voyages', 'index') ?>
     <script type="text/javascript">
     $( document ).ready(function() {
 
@@ -70,7 +73,6 @@ $('#generate').click(function(){
        dateR   = $('#dateR').text();
        actif   = $('#actif').text();
        nbrpart = $('#nbrpart').text();
-
 
         if (ville == ""){
         ville = "Non précisé";}
@@ -99,20 +101,10 @@ $('#generate').click(function(){
                   }
               });
 
-
-
-
-
-
         });
   });
     </script>
     <button id="generate">Générer un PDF</button>
-
-
-
-
-
 
 
 </div>

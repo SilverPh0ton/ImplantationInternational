@@ -77,10 +77,10 @@ $listVoyage = get('listVoyage');
     <!--Button de navigation -->
     <?php
     if(isOfType([ADMIN,PROF])){
-        echo nav('<button> Retour à la liste des comptes </button>', 'Comptes', 'index');
+        echo nav('<button> Retour à la liste des participants </button>', 'Comptes', 'index');
     }
     else{
-        echo nav('<button type="button">Revenir à la liste des voyages</button>', 'Voyages', 'index');
+        echo nav('<button type="button">Revenir à la liste des séjours</button>', 'Voyages', 'index');
     }
     ?>
 

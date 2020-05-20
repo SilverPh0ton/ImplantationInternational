@@ -152,7 +152,8 @@ table td{
 }
 
 body{
-    margin-top: 70px;
+    margin-top: 7vh;
+    height: 93vh;
     background-image: linear-gradient(to right,
     rgb(230,230,230),
     rgb(240,240,240),
@@ -173,5 +174,20 @@ fieldset legend{
         padding-right: 0;
         padding-left: 0;
     }
+
+    body{
+        margin-top: 10vh;
+        height: 90vh;
+    }
+}
+
+h3{
+    display: inline-block;
+}
+
+button.add-btn{
+    display: inline-block;
+    float: right;
+    margin: 0;
 }
 

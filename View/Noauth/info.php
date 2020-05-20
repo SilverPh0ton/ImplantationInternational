@@ -20,10 +20,7 @@
         cohorte 2017-2020 des Techniques de l'informatique du Cégep de Trois-Rivières.
     </p>
 
-    <?= nav('<button>Revenir à la liste des voyages </button>', 'Voyages', 'index'); ?>
+
 </div>
-
-
-
 </html>
 

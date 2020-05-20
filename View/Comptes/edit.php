@@ -199,7 +199,7 @@ $programmes = get('array_prog');
         $connectedUser = $_SESSION["connectedUser"];
         $compteType = $connectedUser->getType();
         if ($compteType == 'admin' || $compteType == 'prof') {
-            nav('<button> Retour à la liste des comptes </button>', 'Comptes', 'index');
+            nav('<button> Retour à la liste des participants </button>', 'Comptes', 'index');
         }
 
     }
