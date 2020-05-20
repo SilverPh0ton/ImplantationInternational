@@ -10,7 +10,16 @@ $(document).ready(function() {
       selectList();
     } else if ($(this).val() === 'Telechargement') {
       selectDownload();
-    }
+    });
+
+    $("#categorie").change(function () {
+        $("#id_categorie").val($("#categorie").val());
+    })
+
+    $("#regroupementChange").change(function () {
+        $("#regroupementHidden").val($("#regroupementChange").val());
+    })
+  
   });
 
   let chechedOption = $("input[name=affichage]:checked").val();

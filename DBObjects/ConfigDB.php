@@ -15,7 +15,8 @@ protected  $conn;
      */
     public function __construct()
     {
-        $this->DB_SERVER = 'localhost';
+
+        $this->DB_SERVER = 'localhost:3308';
         $this->DB_USERNAME = 'root';
         $this->DB_PASSWORD = '';
         $this->DB_NAME = 'implantation';
@@ -23,7 +24,7 @@ protected  $conn;
         try{
 
             /* Attempt to connect to MySQL database */
-            $this->conn = new PDO("mysql:host=$this->DB_SERVER;dbname=$this->DB_NAME",$this->DB_USERNAME,$this->DB_PASSWORD);
+            $this->conn = new PDO("mysql:host=$this->DB_SERVER;dbname=$this->DB_NAME;charset=utf8",$this->DB_USERNAME,$this->DB_PASSWORD);
             // Set the PDO error mode to exception
 
                        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

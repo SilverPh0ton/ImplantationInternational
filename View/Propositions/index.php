@@ -13,17 +13,18 @@ $propositions = get('propositions');
 ?>
 <div class="voyages index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left columns content">
 
-    <h3>Propositions</h3>
+    <h3>Propositions de séjour</h3>
+  
+    <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
+        echo nav('<button class="add-btn">Ajouter une proposition </button>', 'Propositions', 'add');
+    endif; ?>
 
     <table class="table_to_paginate">
         <thead>
         <tr>
             <th scope="col">Nom du projet</th>
             <th scope="col">Pays</th>
-            <th scope="col" class='optionalField'>Coût</th>
-            <th scope="col"
-                class='optionalField'>Date limite d'inscription
-            </th>
+
             <th scope="col" class='optionalField'>Date de départ</th>
             <th scope="col" class='optionalField'>Date de retour</th>
             <th scope="col">État</th>
@@ -46,9 +47,6 @@ $propositions = get('propositions');
 
             <td <?php echo $color ?> > <?= $proposition->getNomProjet() ?></td>
             <td <?php echo $color ?> > <?= $proposition->getDestination()->getNomPays() ?></td>
-            <td <?php echo $color ?> class='optionalField'> <?= $proposition->getCout() ?> </td>
-            <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateLimite()?>">
-                <?= dateToFrench($proposition->getDateLimite()) ?></td>
             <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateDepart()?>">
                 <?= dateToFrench($proposition->getDateDepart()) ?></td>
             <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateRetour()?>>">
@@ -165,11 +163,6 @@ $propositions = get('propositions');
     </table>
 
 </div>
-
-<!--Button de navigation -->
-<?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
-    echo nav('<button>Ajouter une propositions </button>', 'Propositions', 'add');
-endif; ?>
 
 <script>
     var order = [[ 6, 'asc' ],[ 4, 'asc' ]];

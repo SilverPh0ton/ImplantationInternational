@@ -12,7 +12,16 @@ $compteType = $connectedUser->getType();
 
 <div class="comptes index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left">
 
-    <h3>Comptes</h3>
+    <?php if(isOfType([ADMIN]))
+        echo '<h3>Utilisateurs</h3>'
+    ?>
+    <?php if(isOfType([PROF]))
+        echo '<h3>Participants</h3>'
+    ?>
+
+    <?php if ($compteType === 'admin'):
+        echo nav('<button class="add-btn">Ajouter un participants </button>','comptes','add');
+    endif; ?>
 
     <table class="table_to_paginate">
         <thead>
@@ -60,13 +69,7 @@ $compteType = $connectedUser->getType();
         <?php endforeach; ?>
         </tbody>
     </table>
-
 </div>
-
-<!--Button de navigation -->
-<?php if ($compteType === 'admin'):
-    echo nav('<button>Ajouter un utilisateur </button>','comptes','add');
-endif; ?>
 
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];
