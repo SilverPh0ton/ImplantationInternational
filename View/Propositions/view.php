@@ -62,6 +62,8 @@ $activites = get('activites');
                 }
                 else if($proposition->getApprouvee() === '1'){
                     echo "Refusé";
+                }else if($proposition->getApprouvee() === '3'){
+                    echo "Brouillon";
                 }
                 ?>
             </td>

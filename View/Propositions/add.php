@@ -26,6 +26,21 @@ $ctr = 1;
     });
 </script>
 
+<style>
+    .double {
+        zoom: 1.2;
+        transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        -o-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+    }
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
@@ -34,6 +49,12 @@ $ctr = 1;
 
         <fieldset>
             <legend>Ajouter une proposition</legend>
+            <div class="double">
+
+            <input type="checkbox" id="brouillon" name="brouillon" value="oui">
+            <label for="brouillon">Il s'agit d'un brouillon</label><br>
+            </div>
+            <br>
             <div class="input required">
                 <label id="nom_projet" for="nom_projet">Nom du projet</label>
                 <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide" required>
@@ -387,10 +408,6 @@ $ctr = 1;
                     </div>
 
                 <?php endforeach; ?>
-
-                <br><br>
-                <input type="checkbox" id="brouillon" name="brouillon" value="oui">
-                <label for="brouillon">Il s'agit d'un brouillon</label><br>
             </div>
             <br>
             <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>
