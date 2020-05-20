@@ -4,19 +4,25 @@
  */
 
 $propositionController->add();
+$propositionDB = new PropositionsDB();
+$propositionReponseDB = new PropositionReponsesDB();
 
 $destinations = get('destinations');
 $categoriesProposition = get('categoriesProposition');
 $questionsProposition = get('questionProposition');
+if(isset($_GET['param1'])){
+    $proposition = $propositionDB->getPropositionFromId($_GET['param1']);
+}
 
 $ctr = 1;
-
+$idCase = 0;
 
 ?>
 <?= load_css('tab') ?>
 <?= load_css('form') ?>
 <?= load_css('ControlOption') ?>
 <?= load_script('dynamicTable') ?>
+<?= load_script('fonctionCase') ?>
 <script>
     $(document).ready(function () {
         $('[data-toggle="popover"]').popover({
@@ -57,7 +63,7 @@ $ctr = 1;
             <br>
             <div class="input required">
                 <label id="nom_projet" for="nom_projet">Nom du projet</label>
-                <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide" required>
+                <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide" value="<?php if(isset($proposition)){echo $proposition->getNomProjet();}else echo ''; ?>" required>
             </div>
 
             <div class="input required">
@@ -66,7 +72,7 @@ $ctr = 1;
                     <?php
                     foreach ($destinations as $destination):
                         ?>
-                        <option value=<?= $destination->getIdDestination() ?>>
+                        <option value=<?= $destination->getIdDestination() ?> <?php if(isset($proposition)){if($proposition->getDestination()->getIdDestination() == $destination->getIdDestination()){echo 'selected';}} ?>>
                             <?= $destination->getNomPays() ?></option>
                     <?php
                     endforeach
@@ -76,13 +82,13 @@ $ctr = 1;
 
             <div class="input text">
                 <label for="ville">Ville</label>
-                <input type="text" name="ville" pattern=".*\S.*" maxlength="50" title="Le champ ne peut pas être vide">
+                <input type="text" name="ville" pattern=".*\S.*" value="<?php if(isset($proposition)){echo $proposition->getVille();}else echo ''; ?>" maxlength="50" title="Le champ ne peut pas être vide">
             </div>
 
 
             <div class="input text">
                 <label for="note">Note</label>
-                <textarea name="note" maxlength="500" rows="4"></textarea>
+                <textarea name="note" maxlength="500" rows="4"><?php if(isset($proposition)){echo $proposition->getNote();}else echo ''; ?></textarea>
             </div>
 
             <div class="input date required">
@@ -291,21 +297,33 @@ $ctr = 1;
                              aria-labelledby="heading<?php echo $ctr ?>" data-parent="#accordionEx23">
                             <div class="card-body">
 
-                                <?php foreach ($questionsProposition as $question): ?>
+                                <?php foreach ($questionsProposition as $question):
+                                    if(isset($_GET['param1'])){
+                                    $propoquestion = $propositionReponseDB->getPropositionReponseFromPropositionIdAndQuestionId($_GET['param1'],$question->getIdQuestion());
+                                    if(isset($propoquestion)){
+                                    $reponse = $propoquestion->getReponse();}
+                                }?>
 
                                     <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                         <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
 
-                                            <span><?= $question->getQuestion() ?></span>
+                                            <span><?= $question->getQuestion() . "<br />" . "<br />" ?></span>
 
                                             <!--Loop pour questions-->
                                             <span>
                                                 <?php if ($question->getAffichage() === 'Case'): ?>
-                                                    <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif; ?> <!-- Default Value-->
+                                                    <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif;
+                                                    $options = explode(";", $question->getInputOption());
+                                                      ?>
 
-                                                    <input type="checkbox"
-                                                           name="<?= $question->getIdQuestion() ?>"
-                                                    >
+                                                            <?php foreach ($options as $option): $idCase++; ?>
+
+                                                            <input id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                                    <?= $option ?>
+                                                                </input>
+                                                            <?php endforeach ?>
+                                                            <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">
+
 
                                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
@@ -328,7 +346,7 @@ $ctr = 1;
 
                                                     <input type="number"
                                                            name="<?= $question->getIdQuestion() ?>"
-                                                           value="<?= $min ?>" min="<?= $min ?>"
+                                                           value="<?php if(isset($reponse))echo $reponse; else echo $min?>" min="<?= $min ?>"
                                                            max="<?= $max ?>" step="<?= $step ?>">
 
                                                 <?php elseif ($question->getAffichage() === 'Date'): ?>
@@ -336,15 +354,15 @@ $ctr = 1;
 
                                                     <input type="date"
                                                            name="<?= $question->getIdQuestion() ?>"
-                                                           value="">
+                                                           value="<?php if(isset($reponse))echo $reponse; else echo ""?>">
 
                                                 <?php elseif ($question->getAffichage() === 'Liste'):
-                                                    $options = explode(";", $question->getInputOption()); ?>
+                                                    $options = explode(";", $question->getInputOption());?>
                                                     <?php if (!isset($vraiValeurs)) : $vraiValeurs = $options[0]; endif; ?> <!-- Default Value-->
 
                                                     <select name=<?= $question->getIdQuestion() ?>>
                                                             <?php foreach ($options as $option): ?>
-                                                                <option value=<?= $option ?>>
+                                                                <option value=<?= $option ?> <?php if(isset($reponse)){if($reponse==$option) echo "selected";} ?>>
                                                                     <?= $option ?>
                                                                 </option>
                                                             <?php endforeach ?>
@@ -376,15 +394,15 @@ $ctr = 1;
 
                                                     <input type="range" class="slider"
                                                            name="<?= $question->getIdQuestion() ?>"
-                                                           value="<?= $min ?>"
+                                                           value="<?php if(isset($reponse))echo $reponse; else echo $min?>"
                                                            onchange="$('#rangeValue<?= $question->getIdQuestion() ?>').text(this.value);"
                                                            min="<?= $min ?>" max="<?= $max ?>">
                                                     <span
-                                                            id="rangeValue<?= $question->getIdQuestion() ?>"><?= $min ?></span>
+                                                            id="rangeValue<?= $question->getIdQuestion() ?>"><?php if(isset($reponse))echo $reponse; else echo $min ?></span>
                                                     <br><br>
 
                                                 <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
-                                                    <textarea name="<?= $question->getIdQuestion() ?>"></textarea>
+                                                    <textarea name="<?= $question->getIdQuestion() ?>"><?php if(isset($reponse)){echo $reponse;} else{echo "";}?></textarea>
 
                                                 <?php endif; ?>
                                             </span>
