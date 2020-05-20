@@ -46,7 +46,9 @@ $connectedUser = $_SESSION["connectedUser"];
             <?php else: ?>
 
                 <div class="accordion md-accordion accordion-1" id="accordionEx23" role="tablist">
+
                     <?php foreach ($categories as $categorie): ?>
+
                         <div class="card">
                             <div class="card-header blue lighten-3 z-depth-1" role="tab" id="heading<?php $ctr++;
                             echo $ctr ?>">

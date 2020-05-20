@@ -34,7 +34,8 @@ class CategoriesController extends AppController
             $category = new Categorie(
                 null,
                 1,
-                $_POST['categorie']
+                $_POST['categorie'],
+                0
             );
 
             //Enregistre l’entité
@@ -69,11 +70,17 @@ class CategoriesController extends AppController
                 } else {
                     $actif = 0;
                 }
+                if (isset($_POST['question_default'])) {
+                    $default = 0;
+                } else {
+                    $default = 1;
+                }
 
                 $category = new Categorie(
                     $id,
                     $actif,
-                    $_POST['categorie']
+                    $_POST['categorie'],
+                    $default
                 );
 
                 //Enregistre l’entité
