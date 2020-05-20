@@ -155,7 +155,7 @@ $question = get('question');
                             $max = $extrmum[1];
                             $step = $extrmum[2];
                         }
-                    } else if ($question->getAffichage() === 'Liste') {
+                    } else if ($question->getAffichage() === 'Liste' || $question->getAffichage() === 'Case') {
                         $list = $question->getInputOption();
                     } else if ($question->getAffichage() === 'Telechargement') {
                         $file = $question->getInputOption();
@@ -232,7 +232,7 @@ $question = get('question');
                 <input name="input_option" type="hidden" id="input_option" value="<?= $question->getInputOption() ?>">
             </div>
             <button type="submit">Enregistrer</button>
-            <?= nav('<button type="button">Retour</button>', 'questions', 'index'); ?>
+            <?= nav('<button type="button">Retourner à la liste de questions</button>', 'questions', 'index'); ?>
         </fieldset>
 
 
@@ -242,4 +242,3 @@ $question = get('question');
 </div>
 
 <?= load_script('optionsDisplayer') ?>
-

@@ -1,3 +1,4 @@
+
 <?php
 /**
  * @var \App\Controller\QuestionsController $questionsController
@@ -41,7 +42,7 @@ $categories = get('categories');
             </div>
 
             <div class="input required">
-                <label for="affichage">Mode d'affichage (Comment l'étudiant doit répondre)</label>
+                <label for="affichage">Mode d'affichage (Comment l'utilisateur doit répondre)</label>
 
                 <div class="grid-container">
                     <div class="ControlOption">
@@ -159,7 +160,7 @@ $categories = get('categories');
                 <input type="hidden" id="input_option" value="none" maxlength="100">
             </div>
             <button type="submit">Ajouter</button>
-            <?= nav('<button type="button">Retour</button>', 'questions', 'index'); ?>
+            <?= nav('<button type="button">Retourner à la liste de questions</button>', 'questions', 'index'); ?>
         </fieldset>
 
     </form>

@@ -23,7 +23,7 @@ $activites = get('activites');
 ?>
 
 <div class="voyages view columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
-    <h3>Proposition de projet: <?= $proposition->getNomProjet() ?></h3>
+    <h3>Proposition de séjour: <?= $proposition->getNomProjet() ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row">Proposition par:</th>
@@ -62,6 +62,8 @@ $activites = get('activites');
                 }
                 else if($proposition->getApprouvee() === '1'){
                     echo "Refusé";
+                }else if($proposition->getApprouvee() === '3'){
+                    echo "Brouillon";
                 }
                 ?>
             </td>
@@ -132,20 +134,29 @@ $activites = get('activites');
                                     <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                         <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
 
-                                            <span><?= $question->getQuestion() ?></span>
+                                          <span><?= $question->getQuestion() ?></span>
 
-                                            <?php $vraiValeurs = $proposition_reponse->getReponse(); ?>
-                                            <label for="affichage">
-                                                <!--Loop pour questions-->
-                                                <span><?php if ($question->getAffichage() === 'Case'): ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif; ?> <!-- Default Value-->
+                                          <?php $vraiValeurs = $proposition_reponse->getReponse();
+                                          ?>
+                                          <!--Loop pour questions-->
+                                          <span>
+                                              <?php if ($question->getAffichage() === 'Case'): ?>
+                                                <br> <br>
+                                                <?php
+                                                $listeReponse = explode(";", $vraiValeurs);
 
-                                                        <input type="checkbox"
-                                                               name="<?= $question->getIdQuestion() ?>"
-                                        <?php if ('on' === $vraiValeurs): {
-                                            echo ' checked';
-                                        } endif ?>
-                                    >
+                                                $options = explode(";", $question->getInputOption());
+                                                 $idCase = 0; ?>
+
+                                                        <?php foreach ($options as $option): $idCase++; ?>
+
+                                                        <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                            checked="checked"
+                                                          <?php endif; ?>  id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                                <?= $option ?>
+                                                            </input>
+                                                        <?php endforeach ?>
+                                                        <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
                                                     <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
@@ -271,4 +282,3 @@ $activites = get('activites');
     }
     ?>
 </div>
-

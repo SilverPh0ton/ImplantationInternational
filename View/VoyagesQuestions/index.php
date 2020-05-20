@@ -72,7 +72,12 @@ $ctr = 1;
                                                     <div class="ControlOption">
                                                         <label for="affichage"><?php echo($question->getQuestion()); ?>
                                                             <?php if ($question->getAffichage() === 'Case'): ?>
-                                                                <input type="checkbox">
+                                                              <br><br>
+                                                              <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                              <?php foreach ($options as $option): ?>
+                                                                  <input type="checkbox"><?= $option ?></input>
+                                                              <?php endforeach ?>
 
                                                             <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                 $extrmum = explode(";", $question->getInputOption());
@@ -211,7 +216,12 @@ $ctr = 1;
                                                     <div class="ControlOption">
                                                         <label for="affichage"><?php echo($question->getQuestion()) ?>
                                                             <?php if ($question->getAffichage() === 'Case'): ?>
-                                                                <input type="checkbox">
+                                                              <br><br>
+                                                              <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                              <?php foreach ($options as $option): ?>
+                                                                  <input type="checkbox"><?= $option ?></input>
+                                                              <?php endforeach ?>
 
                                                             <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                 $extrmum = explode(";", $question->getInputOption());
@@ -313,7 +323,7 @@ $ctr = 1;
         <button type="submit" id="submitBtn">Enregistrer</button>
     </form>
     <!--Button de navigation -->
-    <?= nav('<button>Retour aux voyages </button>', 'Voyages', 'index'); ?>
+    <?= nav('<button>Retour aux séjours </button>', 'Voyages', 'index'); ?>
     <?= nav1('<button>Ajouter une question </button>', 'Questions', 'add', $id_voyage); ?>
 
 </div>
