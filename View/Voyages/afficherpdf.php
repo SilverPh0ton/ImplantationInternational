@@ -48,6 +48,9 @@ $dompdf->loadHtml("
   table{
     width:100%;
   }
+  body{
+    font-size:20px;
+  }
   </style>
 
   <h1>$titre</h1>
