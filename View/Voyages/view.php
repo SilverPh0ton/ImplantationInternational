@@ -12,35 +12,37 @@ $userCount = get('userCount');
 ?>
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content" >
-    <h3>Nom du projet: <?= $voyage->getNomProjet() ?></h3>
+
+    <h3 id="titre">Nom du projet: <?= $voyage->getNomProjet() ?></h3>
+
     <table class="vertical-table">
         <tr>
             <th scope="row">Pays</th>
-            <td><?= $voyage->getDestination()->getNomPays() ?></td>
+            <td id="pays"><?= $voyage->getDestination()->getNomPays() ?></td>
         </tr>
         <tr>
             <th scope="row">Ville</th>
-            <td><?= $voyage->getVille() ?></td>
+            <td id="ville"><?= $voyage->getVille() ?></td>
         </tr>
         <tr>
             <th scope="row">Note</th>
-            <td><?= $voyage->getNote() ?></td>
+            <td id="note"><?= $voyage->getNote() ?></td>
         </tr>
         <tr>
             <th scope="row">Date de départ</th>
-            <td><?= dateToFrench($voyage->getDateDepart()) ?></td>
+            <td id="dateD"><?= dateToFrench($voyage->getDateDepart()) ?></td>
         </tr>
         <tr>
             <th scope="row">Date de retour</th>
-            <td><?= dateToFrench($voyage->getDateRetour()) ?></td>
+            <td id="dateR"><?= dateToFrench($voyage->getDateRetour()) ?></td>
         </tr>
         <tr>
             <th scope="row">Actif</th>
-            <td><?= $voyage->getActif() ? 'Oui' : 'Non'; ?></td>
+            <td id="actif"><?= $voyage->getActif() ? 'Oui' : 'Non'; ?></td>
         </tr>
         <tr>
             <th scope="row">Participant(s)</th>
-            <td><?= $userCount ?> participant(s)</td>
+            <td id="nbrpart"><?= $userCount ?> participant(s)</td>
         </tr>
         <tr>
             <th scope="row">Proposition d'origine</th>
@@ -56,5 +58,53 @@ $userCount = get('userCount');
         </tr>
     </table>
 
+
     <?= nav('<button>Revenir à la liste des séjours</button>', 'Voyages', 'index') ?>
+    <script type="text/javascript">
+    $( document ).ready(function() {
+
+$('#generate').click(function(){
+
+       titre   = $('#titre').text();
+       pays    = $('#pays').text();
+       ville   = $('#ville').text();
+       note    = $('#note').text();
+       dateD   = $('#dateD').text();
+       dateR   = $('#dateR').text();
+       actif   = $('#actif').text();
+       nbrpart = $('#nbrpart').text();
+
+        if (ville == ""){
+        ville = "Non précisé";}
+        if (note == ""){
+        note = "Aucune note";}
+        //alert(titre+""+pays+""+ville+""+note+""+dateD+""+dateR+""+actif+""+nbrpart);
+          $.ajax({
+                  url: "./View/Voyages/generatepdf.php",
+                  type: 'POST',
+                    data:{
+                      titre:titre,
+                      pays:pays,
+                      ville:ville,
+                      note:note,
+                      dateD:dateD,
+                      dateR:dateR,
+                      actif:actif,
+                      nbrpart:nbrpart
+
+                    },
+                  success: function(res) {
+                    window.open("View/Voyages/afficherpdf.php",'_blank');
+                  },
+                  error:function(res){
+                    alert('error');
+                  }
+              });
+
+        });
+  });
+    </script>
+    <button id="generate">Générer un PDF</button>
+
+
 </div>
