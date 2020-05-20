@@ -57,7 +57,7 @@ $categories = get('categories');
 
                     <div class="ControlOption">
                         <input type="radio" name="affichage" value="Case" class="displayOption">
-                        <label for="affichage">Case à cocher</label> <br>
+                        <label for="affichage">Choix multiple</label> <br>
                         <input type="checkbox">
                     </div>
 

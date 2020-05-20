@@ -39,7 +39,7 @@ $question = get('question');
 
                             <?php echo download('empty.txt' ,'Télécharger');  ?>
                         <?php elseif ($question->getAffichage() === 'Case'): ?>
-                            Case à cocher
+                            Choix multiple
                             <input type="checkbox">
 
                         <?php elseif ($question->getAffichage() === 'Chiffre'):

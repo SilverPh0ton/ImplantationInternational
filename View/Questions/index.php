@@ -58,7 +58,7 @@ $questionsPourProposition = get('questionsPourProposition');
                                     Mention (aucune réponse requise)
 
                                 <?php elseif ($question->getAffichage() === 'Case'): ?>
-                                    Case à cocher
+                                    Choix multiple
                                     <input type="checkbox">
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
@@ -177,7 +177,7 @@ $questionsPourProposition = get('questionsPourProposition');
                                     Mention (aucune réponse requise)
 
                                 <?php elseif ($question->getAffichage() === 'Case'): ?>
-                                    Case à cocher
+                                    Choix multiple
                                     <input type="checkbox">
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
@@ -300,7 +300,7 @@ $questionsPourProposition = get('questionsPourProposition');
                                     Mention (aucune réponse requise)
 
                                 <?php elseif ($question->getAffichage() === 'Case'): ?>
-                                    Case à cocher
+                                    Choix multiple
                                     <input type="checkbox">
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
@@ -422,7 +422,7 @@ $questionsPourProposition = get('questionsPourProposition');
                                     Mention (aucune réponse requise)
 
                                 <?php elseif ($question->getAffichage() === 'Case'): ?>
-                                    Case à cocher
+                                    Choix multiple
                                     <input type="checkbox">
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>

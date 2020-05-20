@@ -75,7 +75,7 @@ $question = get('question');
                                class="displayOption" <?php if ("Case" == $question->getAffichage()): {
                             echo 'checked="checked"';
                         } endif ?> >
-                        <label for="affichage">Case à cocher</label> <br>
+                        <label for="affichage">Choix multiple</label> <br>
                         <input type="checkbox">
 
                     <?php elseif ("Chiffre" == $question->getAffichage()): ?>
