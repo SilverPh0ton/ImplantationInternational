@@ -170,7 +170,7 @@ $activites = get('activites');
                                                         <input <?php if($listeReponse[$idCase-1] === "true") : ?>
                                                             checked="checked"
                                                           <?php endif; ?>
-                                                        name="radio<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
+                                                        name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
                                                                 <?= $option ?>
                                                             </input>
                                                         <?php endforeach ?>

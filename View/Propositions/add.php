@@ -324,7 +324,9 @@ $idCase = 0;
                                     if(isset($_GET['param1'])){
                                     $propoquestion = $propositionReponseDB->getPropositionReponseFromPropositionIdAndQuestionId($_GET['param1'],$question->getIdQuestion());
                                     if(isset($propoquestion)){
-                                    $reponse = $propoquestion->getReponse();}
+                                    $reponse = $propoquestion->getReponse(); 
+                                    }
+                                  
                                 }?>
 
                                     <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
@@ -350,13 +352,21 @@ $idCase = 0;
                                                             <?php endforeach ?>
                                                             <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
-                                                            <?php elseif ($question->getAffichage() === 'Radio'):                                            
+
+
+                                                    <?php elseif ($question->getAffichage() === 'Radio'):                                            
                                                               $options = explode(";", $question->getInputOption());
+                                                              if(isset($reponse)){
+                                                                $caseacocher = explode(";",$reponse);
+                                                            }
+                                         
                                                              ?>
-
-                                                            <?php foreach ($options as $option):  ?>
-
-                                                            <input name="radio<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
+                                                     
+                                                            <?php foreach ($options as $option): $idCase++;
+                                                          
+                                                            ?>
+                                                      
+                                                            <input name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase -1] == 'true'){echo 'checked';}}?>  type="radio">
                                                                     <?= $option ?>
                                                                 </input>
                                                             <?php endforeach ?>

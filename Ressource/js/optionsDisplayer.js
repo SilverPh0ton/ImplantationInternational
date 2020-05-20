@@ -10,12 +10,7 @@ $(document).ready(function() {
       selectList();
     } else if ($(this).val() === 'Telechargement') {
       selectDownload();
-<<<<<<< HEAD
     }});
-=======
-    }
-  });
->>>>>>> 7a037ac6d2ebde2f99bba68e7e4d0e84fa07ebb3
 
     $("#categorie").change(function () {
         $("#id_categorie").val($("#categorie").val());
@@ -24,11 +19,6 @@ $(document).ready(function() {
     $("#regroupementChange").change(function () {
         $("#regroupementHidden").val($("#regroupementChange").val());
     })
-<<<<<<< HEAD
-=======
-  
-
->>>>>>> 7a037ac6d2ebde2f99bba68e7e4d0e84fa07ebb3
 
   let chechedOption = $("input[name=affichage]:checked").val();
 
