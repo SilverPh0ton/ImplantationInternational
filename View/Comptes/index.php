@@ -20,7 +20,7 @@ $compteType = $connectedUser->getType();
     ?>
 
     <?php if ($compteType === 'admin'):
-        echo nav('<button class="add-btn">Ajouter un participant </button>','comptes','add');
+        echo nav('<button class="add-btn">Ajouter un utilisateur </button>','comptes','add');
     endif; ?>
 
     <table class="table_to_paginate">
