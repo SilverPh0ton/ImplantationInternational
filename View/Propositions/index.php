@@ -16,7 +16,7 @@ $propositions = get('propositions');
     <h3>Propositions de séjour</h3>
   
     <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
-        echo nav('<button class="add-btn">>Ajouter une proposition </button>', 'Propositions', 'add');
+        echo nav('<button class="add-btn">Ajouter une proposition </button>', 'Propositions', 'add');
     endif; ?>
 
     <table class="table_to_paginate">
