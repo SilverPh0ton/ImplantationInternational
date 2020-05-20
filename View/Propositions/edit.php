@@ -5,7 +5,7 @@
  * @var \App\Model\Entity\Activite[] $activites
  * @var string $compteType
  */
-
+$idCase = 0;
 $id_proposition = $_GET['param1'];
 $propositionController->edit($id_proposition);
 
@@ -21,6 +21,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
 ?>
 
 <?= load_script('dynamicTableEdit') ?>
+<?= load_script('fonctionCase') ?>
 <script>
     $(document).ready(function () {
         $('[data-toggle="popover"]').popover({
@@ -320,18 +321,28 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
 
                                                 <span><?= $question->getQuestion() ?></span>
 
-                                                <?php $vraiValeurs = $proposition_reponse->getReponse(); ?>
+
+                                                <?php $vraiValeurs = $proposition_reponse->getReponse();
+                                               ?>
                                                 <!--Loop pour questions-->
                                                 <span>
                                                     <?php if ($question->getAffichage() === 'Case'): ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif; ?> <!-- Default Value-->
+                                                        <br> <br>
+                                                      <?php   $listeReponse = explode(";", $vraiValeurs);
 
-                                                        <input type="checkbox"
-                                                               name="<?= $question->getIdQuestion() ?>"
-                                                            <?php if ('on' === $vraiValeurs): {
-                                                                echo ' checked';
-                                                            } endif ?>
-                                                        >
+                                                      $options = explode(";", $question->getInputOption());
+                                                       ?>
+
+                                                              <?php foreach ($options as $option): $idCase++; ?>
+
+                                                              <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                                  checked="checked"
+                                                                <?php endif; ?>  id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                                      <?= $option ?>
+                                                                  </input>
+                                                              <?php endforeach ?>
+                                                              <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
+
 
                                                     <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
@@ -462,10 +473,3 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
     </form>
 
 </div>
-
-
-
-
-
-
-
