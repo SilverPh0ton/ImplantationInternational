@@ -10,7 +10,8 @@ $(document).ready(function() {
       selectList();
     } else if ($(this).val() === 'Telechargement') {
       selectDownload();
-    });
+    }
+  });
 
     $("#categorie").change(function () {
         $("#id_categorie").val($("#categorie").val());
@@ -20,9 +21,10 @@ $(document).ready(function() {
         $("#regroupementHidden").val($("#regroupementChange").val());
     })
   
-  });
+
 
   let chechedOption = $("input[name=affichage]:checked").val();
+
   if (chechedOption === 'Curseur' || chechedOption === 'Chiffre') {
     selectNumber();
   } else if (chechedOption === 'Telechargement') {
@@ -30,6 +32,7 @@ $(document).ready(function() {
   } else if (chechedOption === 'Liste' || chechedOption === 'Case') {
     selectList();
   }
+
 
 });
 

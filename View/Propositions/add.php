@@ -337,11 +337,14 @@ $idCase = 0;
                                                 <?php if ($question->getAffichage() === 'Case'): ?>
                                                     <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif;
                                                     $options = explode(";", $question->getInputOption());
+                                                    if(isset($reponse)){
+                                                        $caseacocher = explode(";",$reponse);
+                                                    }
                                                       ?>
 
                                                             <?php foreach ($options as $option): $idCase++; ?>
 
-                                                            <input id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                            <input id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase-2] == 'true'){echo 'checked';}}?>  type="checkbox">
                                                                     <?= $option ?>
                                                                 </input>
                                                             <?php endforeach ?>
