@@ -185,9 +185,13 @@ $ctr =1;
                                                         </td>
                                                         <td class="row45">
                                                             <div class="ControlOption">
-                                                                <label for="affichage"><?php echo($question->getQuestion()); ?>
+                                                                <label for="affichage"><?php echo($question->getQuestion()); ?> <br> <br>
                                                                     <?php if ($question->getAffichage() === 'Case'): ?>
-                                                                        <input type="checkbox">
+                                                                      <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                                      <?php foreach ($options as $option): ?>
+                                                                          <input type="checkbox"><?= $option ?></input>
+                                                                      <?php endforeach ?>
 
                                                                     <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                         $extrmum = explode(";", $question->getInputOption());

@@ -10,12 +10,13 @@ $categoriesProposition = get('categoriesProposition');
 $questionsProposition = get('questionProposition');
 
 $ctr = 1;
-
+$idCase = 0;
 ?>
 <?= load_css('tab') ?>
 <?= load_css('form') ?>
 <?= load_css('ControlOption') ?>
 <?= load_script('dynamicTable') ?>
+<?= load_script('fonctionCase') ?>
 <script>
     $(document).ready(function () {
         $('[data-toggle="popover"]').popover({
@@ -319,16 +320,23 @@ $ctr = 1;
                                     <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                         <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
 
-                                            <span><?= $question->getQuestion() ?></span>
+                                            <span><?= $question->getQuestion() . "<br />" . "<br />" ?></span>
 
                                             <!--Loop pour questions-->
                                             <span>
                                                 <?php if ($question->getAffichage() === 'Case'): ?>
-                                                    <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif; ?> <!-- Default Value-->
+                                                    <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif;
+                                                    $options = explode(";", $question->getInputOption());
+                                                      ?>
 
-                                                    <input type="checkbox"
-                                                           name="<?= $question->getIdQuestion() ?>"
-                                                    >
+                                                            <?php foreach ($options as $option): $idCase++; ?>
+
+                                                            <input id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                                    <?= $option ?>
+                                                                </input>
+                                                            <?php endforeach ?>
+                                                            <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">
+
 
                                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
