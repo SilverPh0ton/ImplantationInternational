@@ -164,7 +164,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
             </div>
         </fieldset>
 
-        <div style="text-align: center">Ajout des activités</div>
+        <div style="text-align: center">Ajout d'activité(s)</div>
         <br>
 
         <table class="activityTable" style="white-space: nowrap;">

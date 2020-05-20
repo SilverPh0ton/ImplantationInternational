@@ -289,7 +289,8 @@ $ctr =1;
 </div>
 
 <script>
-    var order = [[ 1, 'desc' ],[ 0, 'asc' ]];
+    let order = [[ 1, 'desc' ],[ 0, 'asc' ]];
+    let scrollY_val = '40vh';
 </script>
 <?= load_script('paginator') ?>
 <?= load_script('treeView') ?>

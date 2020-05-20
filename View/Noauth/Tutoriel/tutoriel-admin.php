@@ -9,7 +9,7 @@
                 <a class="nav-link active" href="#section1">Les séjours</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#section2">Utilisateurs</a>
+                <a class="nav-link" href="#section2">Participants</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#section3">Questions</a>
@@ -45,6 +45,11 @@
                             <ul>
                                 <li>Sur cette page, inscrivez les informations nécessaires, telles que le nom du projet, la destination, la date de départ, celle de retour ainsi que le coût. </li>
                                 <li>Dans la section « Ajout des activités », vous pourrez ajouter différentes activités prévues pour ce voyage. Inscrivez l’endroit de l’activité, une courte description, la date de départ et la date de fin. Une fois terminé, cliquez sur <img alt="afficher icon" src="Ressource/img/btPlus.png" class="images" data-toggle="tooltip" data-placement = "top"></li>
+                                <ul>
+                                    <li>
+                                        <b>À noter:</b>La section <b>Endroit</b> de l'activité doit contenir au moins 4 caractères afin que l'activité puisse être ajoutée
+                                    </li>
+                                </ul>
                                 <li>Pour supprimer une activité, cliquez sur <img alt="afficher icon" src="Ressource/img/btPoubelle.png" class="images" data-toggle="tooltip" data-placement = "top"></li>
                                 <li>Dans la section « Renseignement supplémentaire », vous trouverez des questions à répondre selon la catégorie. Pour voir les questions, cliquez sur les catégories.</li>
                                 <li>Une fois terminé, cliquez sur « Ajouter »</li>
@@ -55,6 +60,8 @@
                             Pour modifier une proposition de voyage, cliquez sur <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
                             <ul>
                                 <li>Sur cette page, vous pouvez modifier les informations de cette proposition. </li>
+                                <li><b>À noter: </b>Seul un admnistrateur peut modifier une proposition de séjour en tout temps.</li>
+
                                 <li>Une terminé, cliquez sur « Enregistrer »</li>
                                 <li>Pour revenir à la liste de proposition, cliquez sur « Retour aux propositions »</li>
                             </ul>
@@ -157,7 +164,7 @@
         </div>
 
         <div id="section2" class="section">
-            <h1>Utilisateurs</h1>
+            <h1>Participants</h1>
 
             <ul>
                 <li>
@@ -246,10 +253,18 @@
                         <li>Pour activer ou désactiver la question, cochez ou décochez la case sous « Actif?»</li>
                         <li>Vous pouvez ajouter plus d’informations dans la section « Informations supplémentaires » au bas de la page.</li>
                     </ul>
+                    <ul>
+                        <li>
+                            <b>À noter:</b> Seules les catégories contenant au moins une question valide pour ce type de formulaire seront visibles. (Ex.: Les questions pour les étudiants ne seront pas visibles dans les questions pour accompagnateurs et vice-versa).<br>
+                            Si aucune question n'est valide pour une certaine catégorie, alors cette catégorie ne sera pas visible dans la liste des catégories
+
+                        </li>
+                    </ul>
                     <br>
                     <li>Une fois terminé, cliquez sur « Enregistrer »</li>
                     <li>Pour revenir à l’éditeur de formulaire, cliquez sur « Retour »</li>
                     </ul>
+
                 </li>
 
             <li>Pour modifier une question, cliquez sur l’onglet <img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">
