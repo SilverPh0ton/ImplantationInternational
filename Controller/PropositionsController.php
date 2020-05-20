@@ -76,7 +76,7 @@ class PropositionsController extends AppController
         if(empty($questionsProposition)){
             $questionsProposition = array();
         }
-        
+
         $categoriesProposition = array();
         foreach ($questionsProposition as $questionProposition) {
             if (!in_array($questionProposition->getCategorie(), $categoriesProposition)) {
@@ -305,6 +305,7 @@ class PropositionsController extends AppController
                         return $this->redirect("Propositions", "Add");
                     }
                 }
+              
             }
 
             if(!$whileSuccess)
