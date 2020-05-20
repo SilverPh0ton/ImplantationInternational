@@ -131,20 +131,17 @@ class PropositionsController extends AppController
 
             $date_now = date("Y-m-d");
 
-            $verif_date = true;
             if ($date_retour < $date_now || $date_depart < $date_now ) {
                 $this->flashBad('Les date doivent être dans le future');
-                $verif_date = false;
+                return $this->redirect("Propositions", "Add");
             }
 
             if ($date_retour < $date_depart) {
                 $this->flashBad('La date de retour doit être après la date de départ');
-                $verif_date = false;
-            }
-
-            if(!$verif_date){
                 return $this->redirect("Propositions", "Add");
             }
+
+
 
 
             $projet_depart = $date_depart;
