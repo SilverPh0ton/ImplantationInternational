@@ -19,7 +19,11 @@ protected  $conn;
         $this->DB_SERVER = 'localhost';
         $this->DB_USERNAME = 'root';
         $this->DB_PASSWORD = '';
+<<<<<<< HEAD
         $this->DB_NAME = 'projetinternational';
+=======
+        $this->DB_NAME = '420626ri_equipe-2';
+>>>>>>> 7a037ac6d2ebde2f99bba68e7e4d0e84fa07ebb3
 
         try{
 
