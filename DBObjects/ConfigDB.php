@@ -15,11 +15,10 @@ protected  $conn;
      */
     public function __construct()
     {
-
         $this->DB_SERVER = 'localhost';
         $this->DB_USERNAME = 'root';
         $this->DB_PASSWORD = '';
-        $this->DB_NAME = '420626ri_equipe-2';
+        $this->DB_NAME = 'implantation';
 
         try{
 
