@@ -30,6 +30,21 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
         });
     });
 </script>
+<style>
+    .double {
+        zoom: 1.2;
+        transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        -o-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+    }
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
@@ -38,6 +53,10 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
     <form method="post" id="base_form" enctype="multipart/form-data">
         <fieldset>
             <legend>Modifier une proposition</legend>
+            <div class="double">
+                <input type="checkbox" id="brouillon" name="brouillon" value="oui" <?php echo ($proposition->getApprouvee() == 3) ?  'checked' :  ''; ?>>
+                <label for="brouillon">Il s'agit d'un brouillon</label><br>
+            </div>
             <label for="nom_projet">Nom du projet</label>
             <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide"
                    value="<?= $proposition->getNomProjet() ?>">
@@ -465,7 +484,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-            <br>
+
             <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>
             <button type="submit" form="base_form">Enregistrer</button>
         </fieldset>

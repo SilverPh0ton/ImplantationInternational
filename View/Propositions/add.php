@@ -16,6 +16,7 @@ if(isset($_GET['param1'])){
 
 $ctr = 1;
 $idCase = 0;
+
 ?>
 <?= load_css('tab') ?>
 <?= load_css('form') ?>
@@ -30,14 +31,36 @@ $idCase = 0;
         });
     });
 </script>
+
+<style>
+    .double {
+        zoom: 1.2;
+        transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        -o-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+    }
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
 
-    <form method="post" id="base_form" enctype="multipart/form-data">
+    <form method="post" id="base_form45" enctype="multipart/form-data" action="index.php?controller=Propositions&action=Add">
 
         <fieldset>
             <legend>Ajouter une proposition</legend>
+            <div class="double">
+
+            <input type="checkbox" id="brouillon" name="brouillon" value="oui">
+            <label for="brouillon">Il s'agit d'un brouillon</label><br>
+            </div>
+            <br>
             <div class="input required">
                 <label id="nom_projet" for="nom_projet">Nom du projet</label>
                 <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide" value="<?php if(isset($proposition)){echo $proposition->getNomProjet();}else echo ''; ?>" required>
@@ -67,52 +90,6 @@ $idCase = 0;
                 <label for="note">Note</label>
                 <textarea name="note" maxlength="500" rows="4"><?php if(isset($proposition)){echo $proposition->getNote();}else echo ''; ?></textarea>
             </div>
-
-       <!--
-            <div class="input required">
-                <label for="cout">Coût</label>
-                <input type="number" name="cout" min="0" max="99999999"  step="0.01" required>
-
-            </div>
-
-            <div class="input date required">
-                <label for="date_limite">Date limite d'inscription</label>
-                <select name="date_limite[year]" required="required">
-                    <?php /*for ($i = date('Y'); $i <= (date('Y') + 50); $i++): */?>
-                        <option
-                                value=<?/*= $i */?>
-                            <?/*= ($i == date('Y')) ? ' selected="selected"' : '' */?>>
-                            <?/*= $i */?>
-                        </option>
-                    <?php /*endfor; */?>
-                </select>
-
-                <select name="date_limite[month]" required="required">
-                    <?php
-/*                    $i = 0;
-                    foreach (return_months() as $month):
-                        */?>
-                        <option
-                                value=<?/*= ++$i */?>
-                            <?/*= ($i == date('m')) ? ' selected="selected"' : '' */?>>
-                            <?/*= $month */?>
-                        </option>
-                    <?php
-/*                    endforeach;
-                    */?>
-                </select>
-
-                <select name="date_limite[day]" required="required">
-                    <?php /*for ($i = 1; $i <= 31; $i++): */?>
-                        <option
-                                value=<?/*= $i */?>
-                                <?/*= ($i == date('d')) ? ' selected="selected"' : '' */?>
-                        >
-                            <?/*= $i */?>
-                        </option>
-                    <?php /*endfor; */?>
-                </select>
-            </div>-->
 
             <div class="input date required">
                 <label for="date_depart">Date de départ</label>
@@ -443,7 +420,7 @@ $idCase = 0;
                                         <br>
                                         <hr>
                                     <?php endif; ?>
-                                <?php endforeach; ?>
+                                <?php endforeach;  ?>
                             </div>
                         </div>
                     </div>
@@ -452,7 +429,8 @@ $idCase = 0;
             </div>
             <br>
             <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>
-            <button type="submit" form="base_form">Ajouter</button>
+            <button type="submit" form="base_form45" name="btn_submit" id="test" value="ajouter">Ajouter</button>
+
         </fieldset>
         <br>
     </form>
