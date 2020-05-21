@@ -299,7 +299,7 @@ $activites = get('activites');
         echo nav('<button>Retour aux propositions </button>', 'Propositions', 'index');
     }
     else{
-        echo nav1('<button>Retour aux voyage </button>', 'Voyages', 'view', $source);
+        echo nav1('<button>Retour aux propositions </button>', 'Voyages', 'view', $source);
     }
     ?>
 </div>

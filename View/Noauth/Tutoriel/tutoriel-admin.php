@@ -6,7 +6,7 @@
                 <a class="nav-link" href="#section5">Propositions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#section1">Les séjours</a>
+                <a class="nav-link active" href="#section1">Les projets</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#section2">Participants</a>
@@ -72,7 +72,7 @@
         </div>
 
         <div id="section1" class="section">
-            <h1>Séjours de mobilité</h1>
+            <h1>Les projets de mobilité</h1>
             <ul>
                 <li>
                     Pour voir la liste des voyages, cliquez sur « Séjours de mobilité » de la barre de navigation.
@@ -87,8 +87,15 @@
                 </li>
                 <br>
                 <li>
-                    Pour voir les détails d’un voyage, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
+                    Pour voir les détails d’un projet, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
                     <ul>
+                        <li>Vous pouvez générer un fichier PDF des détails du projet, cliquez sur le bouton  « Générer un PDF »</li>
+                        <li>Pour voir les participants du projet, cliquez sur l'onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher"> de la ligne <b>Participant(s)</b></li>
+                        <ul>
+                            <li>Une fois sur cette page, vous pouvez aussi générer un fichier PDF incluant les détails de tous les participants de ce projet.</li>
+                            <li>Pour revenir à la liste, cliquez sur « Revenir aux détails du projet »</li>
+                        </ul>
+                        <li>Dans la page de détail, pour voir la proposition d'origine du projet, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">de la ligne <b>Proposition d'origine</b></li>
                         <li>Pour revenir à la liste, cliquez sur « Revenir à la liste des voyages »</li>
                     </ul>
                 </li>
