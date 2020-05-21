@@ -46,6 +46,8 @@ $propositions = get('propositions');
                 $color = 'style="color: #D91515"';
             } else if ($proposition->getApprouvee() == 3) {
                 $color = 'style="color: #dea41d"';
+            } else if ($proposition->getApprouvee() == 4) {
+                $color = 'style="color: #4287f5"';
             }
             ?>
 
@@ -69,6 +71,9 @@ $propositions = get('propositions');
                 }
                 else if($proposition->getApprouvee() === '3'){
                     echo "Brouillon";
+                }
+                else if($proposition->getApprouvee() === '4'){
+                    echo "Nouveauté";
                 }
                 ?>
             </td>

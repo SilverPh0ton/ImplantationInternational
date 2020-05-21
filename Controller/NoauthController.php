@@ -181,7 +181,7 @@ class NoauthController extends AppController
              $mail->Password = '57468b537bbb17';                               // SMTP password
              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
              $mail->Port = 2525;                                    // TCP port to connect to
-
+             $mail->CharSet = 'UTF-8';
              //Recipients
              $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
              $mail->addAddress($courriel, $pseudo);     // Add a recipient
