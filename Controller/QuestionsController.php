@@ -90,7 +90,7 @@ class QuestionsController extends AppController
                 }
 
             } else {
-                $this->flashBad('Une erreur est survenu avec l\'ajout');
+                $this->flashBad('Une erreur est survenue avec l\'ajout.');
                 return $this->redirect('Questions', 'Add');
             }
 
@@ -161,22 +161,22 @@ class QuestionsController extends AppController
                                 return $this->redirect('Questions', 'index');
                             }
                             $this->questionDB->deleteQuestion($question);
-                            $this->flashBad($question->getInputOption() . ' n\'a pas pu être déposé. Veuillez réessayer');
+                            $this->flashBad($question->getInputOption() . ' n\'a pas pu être déposé. Veuillez réessayer.');
                             return $this->redirect('Questions', 'Add');
                         }
                         $this->questionDB->deleteQuestion($question);
-                        $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer');
+                        $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer.');
                         return $this->redirect('Questions', 'Add');
 
                     }
                     $this->questionDB->deleteQuestion($question);
-                    $this->flashBad('Problème lors de le téléversement du fichier');
+                    $this->flashBad('Problème lors du téléversement du fichier.');
                     return $this->redirect('Questions', 'Add');
 
                 }
 
             }
-            $this->flashBad('La question n\'a pas pu être enregistrée. Veuillez réessayer');
+            $this->flashBad('La question n\'a pas pu être enregistrée. Veuillez réessayer.');
             return $this->redirect('Questions', 'index');
         }
     }
@@ -252,11 +252,11 @@ class QuestionsController extends AppController
 
                 //Vérification du ficher téléversé
                 if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
-                    $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
+                    $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé.');
                     return $this->redirect('Questions', 'Edit', $question->getIdQuestion());
                 }
                 if ($fileSize > $maxsize) {
-                    $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 mb');
+                    $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 MB.');
                     return $this->redirect('Questions', 'Edit', $question->getIdQuestion());
                 }
                 $uploadFile = $uploadPath . $question->getIdQuestion() . '-' . $fileName;
@@ -271,7 +271,7 @@ class QuestionsController extends AppController
                     $question->setInputOption($question->getIdQuestion() . '-' . $fileName);
                     //Téléverse le ficher
                     if (!move_uploaded_file($_FILES['file']['tmp_name'], $uploadFile)) {
-                        $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer');
+                        $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer.');
                         return $this->redirect('Questions', 'Edit', $question->getIdQuestion());
                     }
                 }
@@ -288,7 +288,7 @@ class QuestionsController extends AppController
                     return $this->redirect('Questions', 'index');
                 }
             }
-            $this->flashBad('La question n\'a pas pu être enregistrée. Veuillez réessayer');
+            $this->flashBad('La question n\'a pas pu être enregistrée. Veuillez réessayer.');
             return $this->redirect('Questions', 'Edit', $question->getIdQuestion());
         }
     }

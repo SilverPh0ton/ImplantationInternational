@@ -15,7 +15,6 @@ if(isset($_GET['param1'])){
 }
 
 $ctr = 1;
-$idCase = 0;
 
 ?>
 <?= load_css('tab') ?>
@@ -301,7 +300,9 @@ $idCase = 0;
                                     if(isset($_GET['param1'])){
                                     $propoquestion = $propositionReponseDB->getPropositionReponseFromPropositionIdAndQuestionId($_GET['param1'],$question->getIdQuestion());
                                     if(isset($propoquestion)){
-                                    $reponse = $propoquestion->getReponse();}
+                                    $reponse = $propoquestion->getReponse(); 
+                                    }
+                                  
                                 }?>
 
                                     <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
@@ -314,16 +315,40 @@ $idCase = 0;
                                                 <?php if ($question->getAffichage() === 'Case'): ?>
                                                     <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif;
                                                     $options = explode(";", $question->getInputOption());
-                                                      ?>
+                                                    if(isset($reponse)){
+                                                        $caseacocher = explode(";",$reponse);
+                                                    }
+                                            
+                                                            $idCase  = 0;  ?>
 
                                                             <?php foreach ($options as $option): $idCase++; ?>
 
-                                                            <input id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                            <input id="<?= $id?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase-1] == 'true'){echo 'checked';}}?>  type="checkbox">
                                                                     <?= $option ?>
                                                                 </input>
                                                             <?php endforeach ?>
                                                             <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
+
+
+                                                    <?php elseif ($question->getAffichage() === 'Radio'):                                            
+                                                              $options = explode(";", $question->getInputOption());
+                                                              if(isset($reponse)){
+                                                                $caseacocher = explode(";",$reponse);
+                                                            }
+                                                   
+                                                             ?>
+                                                     
+                                                            <?php 
+                                                          $idCase  = 0;
+                                                           foreach ($options as $option): $idCase++;
+                                                          ?>
+                                                      
+                                                            <input name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase-1] == 'true'){echo 'checked';}}?>  type="radio">
+                                                                    <?= $option ?>
+                                                                </input>
+                                                            <?php endforeach ?>
+                                                            <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">           
 
                                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 

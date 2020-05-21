@@ -7,7 +7,7 @@
  * @var \App\Model\Entity\Valeur[] $valeurs
  */
 $ctr = 1;
-$idCase = 0;
+$id = 0;
 $id_voyage = $_GET['param1'];
 $id_compte = $_GET['param2'];
 $valeursController->edit($id_voyage, $id_compte);
@@ -48,7 +48,9 @@ $connectedUser = $_SESSION["connectedUser"];
             <?php else: ?>
 
                 <div class="accordion md-accordion accordion-1" id="accordionEx23" role="tablist">
+
                     <?php foreach ($categories as $categorie): ?>
+
                         <div class="card">
                             <div class="card-header blue lighten-3 z-depth-1" role="tab" id="heading<?php $ctr++;
                             echo $ctr ?>">
@@ -86,6 +88,34 @@ $connectedUser = $_SESSION["connectedUser"];
                                                           <br> <br>
                                                         <?php   $listeReponse = explode(";", $vraiValeurs);
 
+                                                        $idCase = 0;
+                                                        $options = explode(";", $question->getInputOption());
+                                                        if($vraiValeurs === NULL){
+                                                          foreach ($options as $option):
+                                                        array_push($listeReponse,"false");
+                                                      endforeach;
+                                                    }
+                                                 
+
+                                                         ?>
+
+                                                                <?php foreach ($options as $option): $idCase++; $id++;?>
+                                                                   
+                                                                <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                                    checked="checked"
+                                                                  <?php endif; ?>  id="<?= $id?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" type="checkbox">
+                                                                        <?= $option ?>
+                                                                    </input>
+                                                                    <br>
+                                                                <?php endforeach ?>
+                                                                <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
+
+
+
+                                                <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                          <br> <br>
+                                                        <?php   $listeReponse = explode(";", $vraiValeurs);
+                                                        $idRadio = 0;
 
                                                         $options = explode(";", $question->getInputOption());
                                                         if($vraiValeurs === NULL){
@@ -93,16 +123,16 @@ $connectedUser = $_SESSION["connectedUser"];
                                                         array_push($listeReponse,"false");
                                                       endforeach;
                                                     }
+                                                         ?>                                                       
+                                                                <?php foreach ($options as $option): $idRadio++;
+                                                               ?>
 
-                                                         ?>
-
-                                                                <?php foreach ($options as $option): $idCase++; ?>
-
-                                                                <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                                <input <?php if($listeReponse[$idRadio - 1] === "true") : ?>
                                                                     checked="checked"
-                                                                  <?php endif; ?>  id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                                  <?php endif; ?>  name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
                                                                         <?= $option ?>
                                                                     </input>
+                                                                    <br>
                                                                 <?php endforeach ?>
                                                                 <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 

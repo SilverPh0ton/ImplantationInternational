@@ -160,7 +160,7 @@ $destinations = get('destinations');
     <H1>Ce voyage a été approuvé et ne peut plus être modifié.</H1>
 
     <!--Button de navigation -->
-    <?= nav('<button>Revenir à la liste des séjours</button>', 'Voyages', 'index'); ?>
+    <?= nav('<button>Revenir à la liste des projets</button>', 'Voyages', 'index'); ?>
 <?php endif; ?>
 
 </form>

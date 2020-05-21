@@ -16,6 +16,10 @@ $categoriesController->add();
         <label for="categorie">Catégorie</label>
         <input id="categorie" name="categorie" pattern=".*\S.*" title="Le champ de peut pas être vide" type="text" maxlength="50" required>
         </div>
+        <div class=" input text required">
+            <label for="question_default">Par défaut</label>
+            <input type="checkbox" name="question_default" id="question_default" >
+        </div>
         <button type="submit">Ajouter</button>
         <!--Button de navigation -->
         <?= nav('<button type="button">Retour aux configurations </button>','Configuration','index'); ?>

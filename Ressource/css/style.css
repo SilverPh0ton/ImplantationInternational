@@ -519,3 +519,9 @@ table td {
     vertical-align: top;
     word-break: break-all;
 }
+.btnPDF{
+  color: #ffffff !important;
+  border-radius: 3px !important;
+  background: linear-gradient(160deg, #17479A 4%, #002042) !important;
+  border: none !important;
+}

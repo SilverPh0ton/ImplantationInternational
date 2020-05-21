@@ -25,7 +25,7 @@ $ctr =1;
 <?= load_css('ControlOption') ?>
 
 <div class="large-12 medium-12 small-12 content large-centered medium-centered small-centered large-text-left medium-text-left small-text-left">
-    <h3>Configuration</h3>
+    <h3>Configurations</h3>
 
     <div class="tab" style="border: none;">
         <button type="button" id="categories" class="tablinks active" onclick="openTab(event, 'categoriesTab')">Catégories</button>
@@ -41,6 +41,7 @@ $ctr =1;
                 <tr>
                     <th scope="col">Catégories</th>
                     <th scope="col">Actif</th>
+                    <th scope="col">Par défaut</th>
                     <th scope="col" class="actions"></th>
                 </tr>
                 </thead>
@@ -51,6 +52,7 @@ $ctr =1;
                     <tr>
                         <td <?php echo $color ?> ><?= $categorie->getCategorie() ?></td>
                         <td <?php echo $color ?> ><?= ($categorie->getActif() ? 'Oui' : 'Non') ?></td>
+                        <td <?php echo $color ?> ><?= ($categorie->getDefault() ? 'Oui' : 'Non') ?></td>
                         <td class="actions" style="text-align: right">
                             <?= nav1(
                                 '<img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">',
@@ -192,6 +194,14 @@ $ctr =1;
                                                                       <?php foreach ($options as $option): ?>
                                                                           <input type="checkbox"><?= $option ?></input>
                                                                       <?php endforeach ?>
+
+
+                                                                            <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                                            <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                                            <?php foreach ($options as $option): ?>
+                                                                                <input type="radio" name="radio">  <?= $option ?></input>
+                                                                            <?php endforeach ?>
 
                                                                     <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                         $extrmum = explode(";", $question->getInputOption());
