@@ -18,6 +18,7 @@ use PropositionReponsesDB;
 use PropositionsDB;
 use QuestionsDB;
 use VoyagesDB;
+use ComptesDB;
 
 require_once 'DBObjects/DestinationsDB.php';
 require_once 'DBObjects/PropositionsDB.php';
@@ -39,6 +40,7 @@ class PropositionsController extends AppController
 {
     private $questionDB;
     private $propositionDB;
+    private $compteBD;
     private $activiteDB;
     private $formulaireDB;
     private $destinationDB;
@@ -49,6 +51,7 @@ class PropositionsController extends AppController
     {
         $this->questionDB = new QuestionsDB();
         $this->propositionDB = new PropositionsDB();
+        $this->compteBD = new ComptesDB();
         $this->activiteDB = new ActivitesDB();
         $this->formulaireDB = new FormulairesDB();
         $this->destinationDB = new DestinationsDB();
@@ -609,12 +612,16 @@ class PropositionsController extends AppController
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+
+
             if (!empty($_POST["idProp_transform"])) {
 
                 $proposition = $this->propositionDB->getPropositionFromId($_POST["idProp_transform"]);
+                $compteDemande = $this->compteBD->getCompteFromId($proposition->getIdCompte());
 
                 if ($this->propositionDB->acceptProposition($proposition)) {
                     $this->flashGood('La proposition à bien été acceptée.');
+                    $this->send_emailResponse("Propositions","View",$proposition->getIdProposition(),$compteDemande->getCourriel());
                     return $this->redirect("Propositions", 'Index');
                 } else {
                     $this->flashBad('Une erreur est survenu lors du traitement');
@@ -624,8 +631,12 @@ class PropositionsController extends AppController
             }
 
             if ((isset($_POST["idProp"]) && !empty($_POST["idProp"])) && (isset($_POST["idProp"]) && !empty($_POST["declineReason"]))) {
+                $proposition = $this->propositionDB->getPropositionFromId($_POST["idProp"]);
+                $compteDemande = $this->compteBD->getCompteFromId($proposition->getIdCompte());
+
                 if ($this->propositionDB->refuseProposition($_POST["idProp"], $_POST["declineReason"])) {
                     $this->flashGood('La proposition à été refusée.');
+                    $this->send_emailResponse("Propositions","View",$proposition->getIdProposition(),$compteDemande->getCourriel());
                     return $this->redirect("Propositions", 'Index');
                 } else {
                     $this->flashBad('Une erreur est survenu lors du traitement');
@@ -640,8 +651,7 @@ class PropositionsController extends AppController
     }
 
 
-    public
-    function send_email($controller, $action, $param1)
+    public function send_email($controller, $action, $param1)
     {
         $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
@@ -666,6 +676,43 @@ class PropositionsController extends AppController
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'Une nouvelle proposition est disponible ';
+            $mail->Body = 'Veuillez la consulter :  <b>' . $url . '</b>';
+
+            $mail->send();
+
+        } catch (Exception $e) {
+            die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        }
+
+        /*        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");*/
+
+    }
+
+    public function send_emailResponse($controller, $action,$id,$to)
+    {
+        $mail = new PHPMailer(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Encoding = 'base64';
+
+        try {
+            $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action. '&param1='. $id;
+            //Server settings
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host = 'smtp.mailtrap.io';                    // Set the SMTP server to send through
+            $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+            $mail->Username = '0c6889d4c7b7a1';                     // SMTP username
+            $mail->Password = '57468b537bbb17';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+            $mail->Port = 2525;                                    // TCP port to connect to
+
+
+            //Recipients
+            $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
+            $mail->addAddress($to, 'PLACEHOLDER');     // Add a recipient
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Réponse à la proposition de séjours ';
             $mail->Body = 'Veuillez la consulter :  <b>' . $url . '</b>';
 
             $mail->send();
