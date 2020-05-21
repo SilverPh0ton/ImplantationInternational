@@ -15,7 +15,8 @@ if(isset($_GET['param1'])){
 }
 
 $ctr = 1;
-$idCase = 0;
+
+
 ?>
 <?= load_css('tab') ?>
 <?= load_css('form') ?>
@@ -342,11 +343,12 @@ $idCase = 0;
                                                     if(isset($reponse)){
                                                         $caseacocher = explode(";",$reponse);
                                                     }
-                                                      ?>
+                                            
+                                                            $idCase  = 0;  ?>
 
                                                             <?php foreach ($options as $option): $idCase++; ?>
 
-                                                            <input id="<?= $idCase?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase-2] == 'true'){echo 'checked';}}?>  type="checkbox">
+                                                            <input id="<?= $id?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase-1] == 'true'){echo 'checked';}}?>  type="checkbox">
                                                                     <?= $option ?>
                                                                 </input>
                                                             <?php endforeach ?>
@@ -359,14 +361,15 @@ $idCase = 0;
                                                               if(isset($reponse)){
                                                                 $caseacocher = explode(";",$reponse);
                                                             }
-                                         
+                                                   
                                                              ?>
                                                      
-                                                            <?php foreach ($options as $option): $idCase++;
-                                                          
-                                                            ?>
+                                                            <?php 
+                                                          $idCase  = 0;
+                                                           foreach ($options as $option): $idCase++;
+                                                          ?>
                                                       
-                                                            <input name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase -1] == 'true'){echo 'checked';}}?>  type="radio">
+                                                            <input name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase-1] == 'true'){echo 'checked';}}?>  type="radio">
                                                                     <?= $option ?>
                                                                 </input>
                                                             <?php endforeach ?>

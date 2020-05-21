@@ -43,6 +43,7 @@ $question = get('question');
 
                           <?php foreach ($options as $option): ?>
                               <input type="checkbox"><?= $option ?></input>
+                              <br>
                           <?php endforeach ?>
                            
                           <?php elseif ($question->getAffichage() === 'Radio'): ?>
@@ -50,6 +51,7 @@ $question = get('question');
 
                                     <?php foreach ($options as $option): ?>
                                         <input type="radio" name="radio">  <?= $option ?></input>
+                                        <br>
                                     <?php endforeach ?>
 
                         <?php elseif ($question->getAffichage() === 'Chiffre'):

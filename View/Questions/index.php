@@ -62,6 +62,7 @@ $questionsPourProposition = get('questionsPourProposition');
 
                                     <?php foreach ($options as $option): ?>
                                         <input type="checkbox"><?= $option ?></input>
+                                        <br>
                                     <?php endforeach ?>
 
                                     
@@ -70,6 +71,7 @@ $questionsPourProposition = get('questionsPourProposition');
 
                                     <?php foreach ($options as $option): ?>
                                         <input type="radio" name="radio">  <?= $option ?></input>
+                                        <br>
                                     <?php endforeach ?>
 
 
@@ -193,12 +195,13 @@ $questionsPourProposition = get('questionsPourProposition');
 
                                   <?php foreach ($options as $option): ?>
                                       <input type="checkbox"><?= $option ?></input>
+                                      <br>
                                   <?php endforeach ?>
 
 
                                   <?php elseif ($question->getAffichage() === 'Radio'): ?>
                                     <?php $options = explode(";", $question->getInputOption()); ?>
-
+                                    <br>
                                     <?php foreach ($options as $option): ?>
                                         <input type="radio" name="radio">  <?= $option ?></input>
                                     <?php endforeach ?>
@@ -328,6 +331,7 @@ $questionsPourProposition = get('questionsPourProposition');
 
                                   <?php foreach ($options as $option): ?>
                                       <input type="checkbox"><?= $option ?></input>
+                                      <br>
                                   <?php endforeach ?>
 
                                   <?php elseif ($question->getAffichage() === 'Radio'): ?>
@@ -335,6 +339,7 @@ $questionsPourProposition = get('questionsPourProposition');
 
                                     <?php foreach ($options as $option): ?>
                                         <input type="radio" name="radio">  <?= $option ?></input>
+                                        <br>
                                     <?php endforeach ?>
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
@@ -460,6 +465,7 @@ $questionsPourProposition = get('questionsPourProposition');
 
                                   <?php foreach ($options as $option): ?>
                                       <input type="checkbox"><?= $option ?></input>
+                                      <br>
                                   <?php endforeach ?>
 
                                   <?php elseif ($question->getAffichage() === 'Radio'): ?>
@@ -467,6 +473,7 @@ $questionsPourProposition = get('questionsPourProposition');
 
                                     <?php foreach ($options as $option): ?>
                                         <input type="radio" name="radio">  <?= $option ?></input>
+                                        <br>
                                     <?php endforeach ?>
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>

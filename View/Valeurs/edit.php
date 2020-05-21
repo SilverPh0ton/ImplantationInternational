@@ -104,6 +104,7 @@ $connectedUser = $_SESSION["connectedUser"];
                                                                   <?php endif; ?>  id="<?= $id?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" type="checkbox">
                                                                         <?= $option ?>
                                                                     </input>
+                                                                    <br>
                                                                 <?php endforeach ?>
                                                                 <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
@@ -129,6 +130,7 @@ $connectedUser = $_SESSION["connectedUser"];
                                                                   <?php endif; ?>  name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
                                                                         <?= $option ?>
                                                                     </input>
+                                                                    <br>
                                                                 <?php endforeach ?>
                                                                 <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 

@@ -206,25 +206,30 @@ $question = get('question');
 
             <div>
                 <label for="regroupement">Regroupement</label>
+                <?php $typeRegroupement = ""; ?>
                 <select id="regroupementChange">
                     <option value="etudiant" <?php if (0 == $question->getRegroupement()): {
+                    $typeRegroupement = "etudiant";
                         echo ' selected';
                     } endif ?>>Étudiant
                     </option>
                     <option value="prof" <?php if (1 == $question->getRegroupement()): {
+                        $typeRegroupement = "prof";
                         echo ' selected';
                     } endif ?> >Accompagnateur
                     </option>
                     <option value="prof_etu" <?php if (2 == $question->getRegroupement()): {
+                        $typeRegroupement = "prof_etu";
                         echo ' selected';
                     } endif ?>>Accompagnateur et étudiant
                     </option>
                     <option value="proposition" <?php if (9 == $question->getRegroupement()): {
+                        $typeRegroupement = "proposition";
                         echo ' selected';
                     } endif ?>>Proposition
                     </option>
                 </select>
-                <input type="hidden" id="regroupementHidden" name="regroupement" value="<?= $question->getRegroupement()?>">
+                <input type="hidden" id="regroupementHidden" name="regroupement" value="<?=  $typeRegroupement?>">
             </div>
 
             <div>
