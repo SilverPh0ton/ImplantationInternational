@@ -11,6 +11,9 @@ use App\Model\Entity\Proposition;
 use App\Model\Entity\PropositionReponse;
 use DestinationsDB;
 use FormulairesDB;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 use PropositionReponsesDB;
 use PropositionsDB;
 use QuestionsDB;
@@ -30,7 +33,7 @@ require_once 'DBObjects/ComptesDB.php';
 
 //require_once 'DBObjects/ActivationsDB.php';
 require_once 'Controller/AppController.php';
-
+require 'vendor/autoload.php';
 class PropositionsController extends AppController
 {
     private $questionDB;
@@ -154,6 +157,9 @@ class PropositionsController extends AppController
             $code =0;
             if (isset($_POST['brouillon'])) {
                 $code = 3;
+            }else{
+                $id = $this->propositionDB->getHighestid();
+                $this->send_email('Propositions','View',$id);
             }
 
             $proposition = new Proposition(
@@ -636,6 +642,48 @@ class PropositionsController extends AppController
             return $this->redirect("Propositions", 'Index');
 
         }
+    }
+
+
+
+    function send_email($controller,$action,$param1)
+    {
+        $mail = new PHPMailer(true);
+        $mail->CharSet = 'UTF-8';
+        $mail->Encoding = 'base64';
+
+        try {
+            $url= 'http://internaltionalmich/index.php?controller='.$controller.'&action='.$action.'&param1='.$param1;
+            //Server settings
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host = 'smtp.mailtrap.io';                    // Set the SMTP server to send through
+            $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+            $mail->Username = '0c6889d4c7b7a1';                     // SMTP username
+            $mail->Password = '57468b537bbb17';                               // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+            $mail->Port = 2525;                                    // TCP port to connect to
+
+
+            //Recipients
+            $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
+            $mail->addAddress('mobilite.etudiante@cegeptr.qc.ca', 'PLACEHOLDER');     // Add a recipient
+
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Une nouvelle proposition est disponible ';
+            $mail->Body = 'Veuillez la consulter :  <b>' . $url . '</b>';
+
+            $mail->send();
+
+        } catch (Exception $e) {
+            die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        }
+
+        /*        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");*/
+
+
+
+
     }
 
 

@@ -47,15 +47,18 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
 
     <form method="post" id="base_form" enctype="multipart/form-data">
         <fieldset>
             <legend>Modifier une proposition</legend>
             <div class="double">
+
+                <?php if(!isOfType([ADMIN])):?>
                 <input type="checkbox" id="brouillon" name="brouillon" value="oui" <?php echo ($proposition->getApprouvee() == 3) ?  'checked' :  ''; ?>>
                 <label for="brouillon">Il s'agit d'un brouillon</label><br>
+                <?php endif; ?>
+
             </div>
             <label for="nom_projet">Nom du projet</label>
             <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide"

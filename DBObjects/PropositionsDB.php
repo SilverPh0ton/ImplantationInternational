@@ -327,5 +327,18 @@ class PropositionsDB extends ConfigDB
         return false;
     }
 
+    public function getHighestid(){
+        $sql = "SELECT MAX(id_proposition) as id FROM propositions";
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt->execute()) {
+            if ($row = $stmt->fetch()) {
+                return $row['id'];
+            }
+        }
+        return false;
+
+    }
+
 
 }
