@@ -78,7 +78,9 @@ $compteType = $connectedUser->getType();
     </table>
 
 </div>
+
 <?= nav1('<button>Revenir aux détails du projet</button>', 'Voyages', 'view',$voyage->getIdVoyage()) ?>
+
 
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];

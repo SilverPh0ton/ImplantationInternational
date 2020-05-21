@@ -25,7 +25,7 @@ $ctr =1;
 <?= load_css('ControlOption') ?>
 
 <div class="large-12 medium-12 small-12 content large-centered medium-centered small-centered large-text-left medium-text-left small-text-left">
-    <h3>Configuration</h3>
+    <h3>Configurations</h3>
 
     <div class="tab" style="border: none;">
         <button type="button" id="categories" class="tablinks active" onclick="openTab(event, 'categoriesTab')">Catégories</button>
@@ -194,6 +194,14 @@ $ctr =1;
                                                                       <?php foreach ($options as $option): ?>
                                                                           <input type="checkbox"><?= $option ?></input>
                                                                       <?php endforeach ?>
+
+
+                                                                            <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                                            <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                                            <?php foreach ($options as $option): ?>
+                                                                                <input type="radio" name="radio">  <?= $option ?></input>
+                                                                            <?php endforeach ?>
 
                                                                     <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                         $extrmum = explode(";", $question->getInputOption());

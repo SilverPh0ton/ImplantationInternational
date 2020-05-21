@@ -75,8 +75,17 @@ $question = get('question');
                                class="displayOption" <?php if ("Case" == $question->getAffichage()): {
                             echo 'checked="checked"';
                         } endif ?> >
-                        <label for="affichage">Case à cocher</label> <br>
+                        <label for="affichage">Choix multiple</label> <br>
                         <input type="checkbox">
+
+                        <?php elseif ("Radio" == $question->getAffichage()): ?>
+                        <input hidden type="radio" name="affichage" value="Radio"
+                               class="displayOption" <?php if ("Radio" == $question->getAffichage()): {
+                            echo 'checked="checked"';
+                        } endif ?> >
+                        <label for="affichage">Radio</label> <br>
+                        <input type="radio">
+
 
                     <?php elseif ("Chiffre" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Chiffre"
@@ -155,7 +164,7 @@ $question = get('question');
                             $max = $extrmum[1];
                             $step = $extrmum[2];
                         }
-                    } else if ($question->getAffichage() === 'Liste' || $question->getAffichage() === 'Case') {
+                    } else if ($question->getAffichage() === 'Liste' || $question->getAffichage() === 'Case' || $question->getAffichage() === 'Radio') {
                         $list = $question->getInputOption();
                     } else if ($question->getAffichage() === 'Telechargement') {
                         $file = $question->getInputOption();
@@ -197,25 +206,30 @@ $question = get('question');
 
             <div>
                 <label for="regroupement">Regroupement</label>
+                <?php $typeRegroupement = ""; ?>
                 <select id="regroupementChange">
                     <option value="etudiant" <?php if (0 == $question->getRegroupement()): {
+                    $typeRegroupement = "etudiant";
                         echo ' selected';
                     } endif ?>>Étudiant
                     </option>
                     <option value="prof" <?php if (1 == $question->getRegroupement()): {
+                        $typeRegroupement = "prof";
                         echo ' selected';
                     } endif ?> >Accompagnateur
                     </option>
                     <option value="prof_etu" <?php if (2 == $question->getRegroupement()): {
+                        $typeRegroupement = "prof_etu";
                         echo ' selected';
                     } endif ?>>Accompagnateur et étudiant
                     </option>
                     <option value="proposition" <?php if (9 == $question->getRegroupement()): {
+                        $typeRegroupement = "proposition";
                         echo ' selected';
                     } endif ?>>Proposition
                     </option>
                 </select>
-                <input type="hidden" id="regroupementHidden" name="regroupement" value="<?= $question->getRegroupement()?>">
+                <input type="hidden" id="regroupementHidden" name="regroupement" value="<?=  $typeRegroupement?>">
             </div>
 
             <div>
