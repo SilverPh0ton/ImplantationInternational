@@ -88,7 +88,7 @@ class NoauthController extends AppController
             }
 
             if (($_POST['date_naissance']['month'] == 2) && (in_array($_POST['date_naissance']['day'], $days))) {
-                $this->flashBad('La compte n\'a pas pu être créé. Mauvaise saisie de date.');
+                $this->flashBad('Le compte n\'a pas pu être créé. Mauvaise saisie de date.');
                 return $this->redirect('Noauth', 'CreateAccount');
             }
 
@@ -129,7 +129,7 @@ class NoauthController extends AppController
                     return $this->redirect('comptes', 'login');
                 }
             }
-            $this->flashBad('Votre compte n\'a pas pu être créé. Réessayez plus tard.\'');
+            $this->flashBad('Votre compte n\'a pas pu être créé. Réessayez plus tard.');
             return $this->redirect('comptes', 'login');
         }
     }
@@ -158,7 +158,7 @@ class NoauthController extends AppController
                         $this->redirect('Comptes', 'Login');
                     }
                 } else {
-                    $this->flashBad('Aucun compte existe à cette combinaison');
+                    $this->flashBad('Aucun compte n\'existe avec cette combinaison');
                     return $this->redirect('Noauth', 'PasswordRecover');
                 }
 
@@ -170,20 +170,20 @@ class NoauthController extends AppController
 
     function send_email($courriel, $pseudo, $newpass)
     {
-        /* $mail = new PHPMailer(true);
+        $mail = new PHPMailer(true);
 
          try {
              //Server settings
              $mail->isSMTP();                                            // Send using SMTP
-             $mail->Host = 'localhost';                    // Set the SMTP server to send through
-            // $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-           //  $mail->Username = 'bdf428b30ff002';                     // SMTP username
-           //  $mail->Password = '1b5e75d40dd7e5';                               // SMTP password
+             $mail->Host = 'smtp.mailtrap.io';                    // Set the SMTP server to send through
+             $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+             $mail->Username = '0c6889d4c7b7a1';                     // SMTP username
+             $mail->Password = '57468b537bbb17';                               // SMTP password
              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
              $mail->Port = 2525;                                    // TCP port to connect to
 
              //Recipients
-             $mail->setFrom('agectr@edu.cegeptr.qc.ca', 'Ressources Humaines');
+             $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
              $mail->addAddress($courriel, $pseudo);     // Add a recipient
 
              // Content
@@ -195,9 +195,9 @@ class NoauthController extends AppController
 
          } catch (Exception $e) {
              die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-         } */
+         }
 
-        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");
+        mail($courriel,"Une demande de modification de mot de passe a été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");
     }
 
 

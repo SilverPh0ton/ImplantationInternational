@@ -41,11 +41,12 @@ $ctr = 1;
                     <?php $cat_order_ctr++ ?>
 
                     <li class="card-header" id="heading<?= ++$ctr ?>">
-                        <input type="checkbox" class="parentCheckbox" id="categorie_<?= $categorie->getIdCategorie() ?>"
-                               value="1">
+                        <input type="checkbox" class="parentCheckbox" id="categorie_<?= $categorie->getIdCategorie() ?>" value="1"<?php if ($categorie->getDefault()==1) echo 'checked' ?>>
                         <span class="caret" style="display:inline-block; width: 95%;">
                             <?= $categorie->getCategorie() ?>
+
                         </span>
+
                         <ul class="nested sortableQu">
                             <table>
                                 <tr>
@@ -62,11 +63,12 @@ $ctr = 1;
                                         <table>
                                             <tr>
                                                 <td class="row5">
+
                                                     <input type="checkbox" class="childCheckbox"
                                                            name="check_<?= $question->getIdQuestion() ?>_1"
                                                            id="question_<?= $question->getIdQuestion() ?>"
                                                            value="1"
-                                                        <?= (in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>
+                                                        <?= ($categorie->getDefault()==1 || in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>
                                                 </td>
                                                 <td class="row45">
                                                     <div class="ControlOption">
@@ -200,8 +202,7 @@ $ctr = 1;
                     <?php $cat_order_ctr++ ?>
 
                     <li class="card-header" id="heading<?= ++$ctr ?>">
-                        <input type="checkbox" class="parentCheckbox"
-                               id="categorie_<?= $categorie->getIdCategorie() ?>" value="1">
+                        <input type="checkbox" class="parentCheckbox" id="categorie_<?= $categorie->getIdCategorie() ?>" value="1"<?php if ($categorie->getDefault()==1) echo 'checked' ?>>
                         <span class="caret" style="display:inline-block; width: 95%;">
                                     <?= $categorie->getCategorie() ?>
                                 </span>
@@ -217,14 +218,15 @@ $ctr = 1;
                             <?php $order_ctr = 0; ?>
                             <?php foreach ($listQuestionEtu as $question): ?>
                                 <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
+
                                     <li>
                                         <table>
                                             <tr>
                                                 <td class="row5"><input type="checkbox" class="childCheckbox"
-                                                                        name="check_<?= $question->getIdQuestion() ?>_0"
+                                                                        name="check_<?= $question->getIdQuestion() ?>_1"
                                                                         id="question_<?= $question->getIdQuestion() ?>"
                                                                         value="1"
-                                                        <?= (in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>
+                                                        <?= ($categorie->getDefault()==1 || in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>
                                                 </td>
                                                 <td class="row45">
                                                     <div class="ControlOption">

@@ -2,13 +2,17 @@
 /**
  * @var \App\Model\Entity\Compte[] $comptes
  * @var \App\Model\Entity\Compte $connectedUser
- * @var App\Controller\ComptesController $compteController ;
+ * @var \App\Controller\VoyagesController $voyagesController ;
  */
-$comptesController->index();
+$id_voyage = $_GET['param1'];
+$voyagesController->Viewparticipants($id_voyage);
 
+$voyage = get('voyage');
 $comptes = get('comptes');
 $compteType = $connectedUser->getType();
 ?>
+
+
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js" crossorigin="anonymous"></script>
@@ -20,17 +24,8 @@ $compteType = $connectedUser->getType();
 
 <div class="comptes index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left">
 
-    <?php if(isOfType([ADMIN]))
-        echo '<h3>Utilisateurs</h3>'
-    ?>
-    <?php if(isOfType([PROF]))
-        echo '<h3>Participants</h3>'
-    ?>
-    <?php if ($compteType === 'admin'):
-        echo nav('<button class="add-btn">Ajouter un utilisateur </button>','comptes','add');
-    endif; ?>
+    <h3 id="titre">Nom du projet: <?= $voyage->getNomProjet() ?></h3>
 
-    <br>
     <table class="table_to_paginate_part">
         <thead>
         <tr>
@@ -42,13 +37,11 @@ $compteType = $connectedUser->getType();
             <th scope="col" class='optionalField'><?= 'Actif'?></th>
             <th scope="col" class="actions"></th>
             <th scope="col"><?= 'Courriel'?></th>
-            <th scope="col"><?= 'Téléphone'?></th>
-            <th scope="col"><?= 'Date de naissance'?></th>
+           <th scope="col"><?= 'Téléphone'?></th>
+           <th scope="col"><?= 'Date de naissance'?></th>
         </tr>
         </thead>
-
         <tbody>
-
         <?php foreach ($comptes as $compte):
             $color = $compte->getActif() ? '' : 'style="color: #aaaaaa"'
             ?>
@@ -60,8 +53,6 @@ $compteType = $connectedUser->getType();
                         echo 'Étudiant';
                     } elseif ($compte->getType() === 'prof') {
                         echo 'Accompagnateur';
-                    } elseif ($compte->getType() === 'admin') {
-                        echo 'Administrateur';
                     }
                     ?>
                 </td>
@@ -72,20 +63,22 @@ $compteType = $connectedUser->getType();
                 <td class="actions">
 
                     <?php
-                    echo nav1('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Voir">','Comptes','View',$compte->getIdCompte());
+                    echo nav1('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','View',$compte->getIdCompte());
                     if ($connectedUser->getType() === 'admin') {
                       echo nav1('<img alt="afficher icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','Edit',$compte->getIdCompte());
                     }
                     ?>
                 </td>
                 <td><?= $compte->getCourriel() ?></td>
-                <td><?= $compte->getTelephone() ?></td>
-                <td><?= $compte->getDateNaissance() ?></td>
+               <td><?= $compte->getTelephone() ?></td>
+               <td><?= $compte->getDateNaissance() ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
+
 </div>
+<?= nav1('<button>revenir sur les informations du projet</button>', 'Voyages', 'view',$voyage->getIdVoyage()) ?>
 
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];

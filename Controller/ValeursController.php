@@ -192,11 +192,11 @@ class ValeursController extends AppController
 
                         //Vérification du ficher téléversé
                         if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
-                            $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
+                            $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé.');
                             return $this->redirectParam2($id_voyage, $id_compte);
                         }
                         if ($fileSize > $maxsize) {
-                            $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 mb');
+                            $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 MB.');
                             return $this->redirectParam2($id_voyage, $id_compte);
                         }
                         $uploadFile = $uploadPath . $id_voyage . '-' . $question->getIdQuestion() . '-' . $id_compte . '-' . $fileName;
@@ -244,7 +244,7 @@ class ValeursController extends AppController
                     //Redirige à la page approprié
                     return $this->redirectParam1('voyages', 'index', $id_voyage);
                 }
-                $this->flashBad('Le formulaire n\'a pas pu être enregistré. Veuillez réessayer');
+                $this->flashBad('Le formulaire n\'a pas pu être enregistré. Veuillez réessayer.');
                 return $this->redirectParam2($id_voyage, $id_compte);
 
             }

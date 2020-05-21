@@ -88,7 +88,10 @@ class PropositionsController extends AppController
 
         $this->set('destinations', $destinations);
 
+
         if (!empty($_POST)||!empty($_FILES)) {
+
+
 
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
@@ -128,12 +131,14 @@ class PropositionsController extends AppController
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now /*|| $date_limite < $date_now*/) {
-                $this->flashBad('Les date doivent être dans le future');
+            if ($date_retour < $date_now || $date_depart < $date_now) {
+                $this->flashBad('Les dates doivent être dans le futur.');
+                return $this->redirect("Propositions", "Add");
             }
 
             if ($date_retour < $date_depart) {
-                $this->flashBad('La date de retour doit être après la date de départ');
+                $this->flashBad('La date de retour doit être après la date de départ.');
+                return $this->redirect("Propositions", "Add");
             }
 
 
@@ -142,6 +147,12 @@ class PropositionsController extends AppController
 
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
 
+
+
+            $code =0;
+            if (isset($_POST['brouillon'])) {
+                $code = 3;
+            }
 
             $proposition = new Proposition(
                 null,
@@ -152,7 +163,7 @@ class PropositionsController extends AppController
                 $date_depart,
                 $date_retour,
                 1,
-                0,
+                $code,
                 null,
                 $destination,
                 $_POST['note']
@@ -161,7 +172,7 @@ class PropositionsController extends AppController
             $id_proposition = $this->propositionDB->addProposition($proposition);
             if($id_proposition == null)
             {
-                $this->flashBad("Une erreur est survenu lors de l'ajout de la proposition");
+                $this->flashBad("Une erreur est survenue lors de l'ajout de la proposition.");
                 return $this->redirect("Propositions", "Add");
             }
 
@@ -185,29 +196,29 @@ class PropositionsController extends AppController
                 if ($date_retour < $date_now || $date_depart < $date_now) {
                     $whileSuccess = false;
                     $success = false;
-                    $this->flashBad('Les date des activités doivent être dans le future');
+                    $this->flashBad('Les dates des activités doivent être dans le futur.');
                 }
                 else if ($date_retour < $date_depart) {
                     $whileSuccess = false;
                     $success = false;
-                    $this->flashBad('La date de retour d\'une activité doit être après la date de départ');
+                    $this->flashBad('La date de retour d\'une activité doit être après la date de départ.');
                 }
                 else if($date_depart < $projet_depart || $date_depart > $projet_retour ){
                     $whileSuccess = false;
                     $success = false;
-                    $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
+                    $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité.');
                 }
                 else if($date_retour < $projet_depart || $date_retour > $projet_retour ){
                     $whileSuccess = false;
                     $success = false;
-                    $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
+                    $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité.');
                 }
 
                 if($success)
                 {
                     if(!$this->activiteDB->addActivite($activite))
                     {
-                        $this->flashBad("Une erreur est survenu lors de l'ajout d'une activité");
+                        $this->flashBad("Une erreur est survenue lors de l'ajout d'une activité.");
                         return $this->redirect("Propositions", "Add");
                     }
                 }
@@ -257,7 +268,7 @@ class PropositionsController extends AppController
                         return $this->redirect("Propositions", "Add");
                     }
                     if ($fileSize > $maxsize) {
-                        $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 mb');
+                        $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 MB');
                         return $this->redirect("Propositions", "Add");
                     }
                     $uploadFile = $uploadPath . $id_proposition . '-' . $question->getIdQuestion(). '-' . $fileName;
@@ -276,14 +287,14 @@ class PropositionsController extends AppController
 
                         //Téléverse le ficher
                         if (!move_uploaded_file($_FILES[$question->getIdQuestion()]['tmp_name'], $uploadFile)) {
-                            $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer');
+                            $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer.');
                             return $this->redirect("Propositions", "Add");
                         } else {
                             $proposition_reponse->setReponse( $id_proposition . '-' . $question->getIdQuestion().'-'.$fileName);
 
                             //Enregistre l’entité
                             if (!$this->propositionReponseDB->addPropositionReponse($proposition_reponse)) {
-                                $this->flashBad("Une erreur est survenu lors de l'ajout des réponses aux renseignement supplémentaires");
+                                $this->flashBad("Une erreur est survenue lors de l'ajout des réponses aux renseignements supplémentaires.");
                                 return $this->redirect("Propositions", "Add");
                             }
                         }
@@ -293,7 +304,7 @@ class PropositionsController extends AppController
 
                     //Enregistre l’entité
                     if (!$this->propositionReponseDB->addPropositionReponse($proposition_reponse)) {
-                        $this->flashBad("Une erreur est survenu lors de l'ajout des réponses aux renseignement supplémentaires");
+                        $this->flashBad("Une erreur est survenue lors de l'ajout des réponses aux renseignements supplémentaires.");
                         return $this->redirect("Propositions", "Add");
                     }
                 } else {
@@ -301,7 +312,7 @@ class PropositionsController extends AppController
 
                     //Enregistre l’entité
                     if (!$this->propositionReponseDB->addPropositionReponse($proposition_reponse)) {
-                        $this->flashBad("Une erreur est survenu lors de l'ajout des réponses aux renseignement supplémentaires");
+                        $this->flashBad("Une erreur est survenue lors de l'ajout des réponses aux renseignements supplémentaires.");
                         return $this->redirect("Propositions", "Add");
                     }
                 }
@@ -314,7 +325,7 @@ class PropositionsController extends AppController
             }
             else
             {
-                $this->flashGood("La proposition a été enregistrée avec succès!");
+                $this->flashGood("La proposition à été enregistrée avec succès!");
                 return $this->redirect("Propositions", 'Index');
             }
 
@@ -353,8 +364,6 @@ class PropositionsController extends AppController
         $this->set('categories', $categories);
 
         if (!empty($_POST)||!(empty($_FILES))) {
-
-
 
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
@@ -396,13 +405,18 @@ class PropositionsController extends AppController
             $date_now = date("Y-m-d");
 
             if ($date_retour < $date_now || $date_depart < $date_now ) {
-                $this->flashBad('Les date doivent être dans le future');
+                $this->flashBad('Les s doivent être dans le futur.');
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
 
             if ($date_retour < $date_depart) {
-                $this->flashBad('La date de retour doit être après la date de départ');
+                $this->flashBad('La date de retour doit être après la date de départ.');
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
+            }
+
+            $code =0;
+            if (isset($_POST['brouillon'])) {
+                $code = 3;
             }
 
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
@@ -416,7 +430,7 @@ class PropositionsController extends AppController
                 $date_depart,
                 $date_retour,
                 1,
-                0,
+                $code,
                 null,
                 $destination,
                 $_POST['note']
@@ -424,14 +438,14 @@ class PropositionsController extends AppController
 
             if(!$this->propositionDB->updateProposition($proposition))
             {
-                $this->flashBad("Une erreur est survenu lors de la modification de la proposition");
+                $this->flashBad("Une erreur est survenue lors de la modification de la proposition.");
                 return $this->redirectParam1("Propositions", "Edit", $id_proposition);
             }
             $ctr = 0;
 
             if(!$this->activiteDB->deleteActiviteWhereIdProposition($id_proposition))
             {
-                $this->flashBad("Une erreur est survenu lors de la modification de la proposition");
+                $this->flashBad("Une erreur est survenue lors de la modification de la proposition.");
                 return $this->redirectParam1("Propositions", "Edit", $id_proposition);
             }
 
@@ -451,23 +465,24 @@ class PropositionsController extends AppController
                 );
 
                 if ($date_retour < $date_now || $date_depart < $date_now/* || $date_limite < $date_now*/) {
-                    $this->flashBad('Les date des activités doivent être dans le future');
+                    $this->flashBad('Les dates des activités doivent être dans le futur.');
                 }
                 if ($date_retour < $date_depart) {
-                    $this->flashBad('La date de retour d\'une activité doit être après la date de départ');
+                    $this->flashBad('Les dates des activités doivent être dans le futur.');
                 }
 
                 if($date_depart < $projet_depart || $date_depart > $projet_retour ){
-                    $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
+                    $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité.');
                 }
                 if($date_retour < $projet_depart || $date_retour > $projet_retour ){
-                    $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
+                    $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité.');
                 }
+
 
 
                 if(!$this->activiteDB->addActivite($activite))
                 {
-                    $this->flashBad("Une erreur est survenu lors de la modification  d'une activité");
+                    $this->flashBad("Une erreur est survenue lors de la modification  d'une activité");
                     return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                 }
                 $ctr++;
@@ -497,11 +512,11 @@ class PropositionsController extends AppController
                     if ($fileName != '') {
                     //Vérification du ficher téléversé
                     if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
-                        $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
+                        $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé.');
                         return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                     }
                     if ($fileSize > $maxsize) {
-                        $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 mb');
+                        $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 MB.');
                         return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                     }
                     $uploadFile = $uploadPath . $id_proposition . '-' . $question->getIdQuestion() . '-'. $fileName;
@@ -515,14 +530,14 @@ class PropositionsController extends AppController
 
                         //Téléverse le ficher
                         if (!move_uploaded_file($_FILES[$question->getIdQuestion()]['tmp_name'], $uploadFile)) {
-                            $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer');
+                            $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer.');
                             return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                         } else {
                             $proposition_reponse->setReponse($id_proposition . '-' . $question->getIdQuestion() . '-'.$fileName);
 
                             //Enregistre l’entité
                             if (!$this->propositionReponseDB->updatePropositionReponse($proposition_reponse)) {
-                                $this->flashBad("Une erreur est survenu lors de la modification  des réponses aux renseignement supplémentaires");
+                                $this->flashBad("Une erreur est survenue lors de la modification  des réponses aux renseignement supplémentaires.");
                                 return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                             }
                         }
@@ -532,7 +547,7 @@ class PropositionsController extends AppController
 
                     //Enregistre l’entité
                     if (!$this->propositionReponseDB->updatePropositionReponse($proposition_reponse)) {
-                        $this->flashBad("Une erreur est survenu lors de la modification  des réponses aux renseignement supplémentaires");
+                        $this->flashBad("Une erreur est survenue lors de la modification  des réponses aux renseignement supplémentaires.");
                         return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                     }
                 } else {
@@ -540,13 +555,13 @@ class PropositionsController extends AppController
 
                     //Enregistre l’entité
                     if (!$this->propositionReponseDB->updatePropositionReponse($proposition_reponse)) {
-                        $this->flashBad("Une erreur est survenu lors de la modification  des réponses aux renseignement supplémentaires");
+                        $this->flashBad("Une erreur est survenue lors de la modification  des réponses aux renseignement supplémentaires");
                         return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                     }
                 }
             }
 
-            $this->flashGood("La proposition a été modifiée avec succès!");
+            $this->flashGood("La proposition à été modifiée avec succès!");
             return $this->redirect("Propositions", 'Index');
 
         }
@@ -597,7 +612,7 @@ class PropositionsController extends AppController
                 }
                 else
                 {
-                    $this->flashBad('Une erreur est survenu lors du traitement');
+                    $this->flashBad('Une erreur est survenue lors du traitement.');
                     return $this->redirect("Propositions", 'Index');
                 }
 
@@ -610,12 +625,12 @@ class PropositionsController extends AppController
                 }
                 else
                 {
-                    $this->flashBad('Une erreur est survenu lors du traitement');
+                    $this->flashBad('Une erreur est survenue lors du traitement.');
                     return $this->redirect("Propositions", 'Index');
                 }
 
             }
-            $this->flashBad('Une valeur étais manquante');
+            $this->flashBad('Une valeur était manquante.');
             return $this->redirect("Propositions", 'Index');
 
         }
