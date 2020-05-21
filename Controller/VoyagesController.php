@@ -7,10 +7,12 @@ use App\Model\Entity\ComptesVoyage;
 use App\Model\Entity\Destination;
 use App\Model\Entity\Voyage;
 use ComptesVoyagesDB;
+use ComptesDB;
 use DestinationsDB;
 use VoyagesDB;
 require_once 'DBObjects/VoyagesDB.php';
 require_once 'DBObjects/ComptesVoyagesDB.php';
+require_once 'DBObjects/ComptesDB.php';
 require_once 'DBObjects/ActivationsDB.php';
 require_once 'DBObjects/DestinationsDB.php';
 require_once 'Controller/AppController.php';
@@ -119,17 +121,15 @@ class VoyagesController extends AppController
 
         if(!empty($_POST)) {
 
-            $date_limite_str = $_POST['date_limite']['year'] . "-" . $_POST['date_limite']['month'] . "-" . $_POST['date_limite']['day'];
             $date_depart_str = $_POST['date_depart']['year'] . "-" . $_POST['date_depart']['month'] . "-" . $_POST['date_depart']['day'];
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
-            $date_limite = date("Y-m-d",strtotime($date_limite_str));
             $date_depart = date("Y-m-d",strtotime($date_depart_str));
             $date_retour = date("Y-m-d",strtotime($date_retour_str));
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
+            if ($date_retour < $date_now || $date_depart < $date_now ) {
                 $this->flashBad('Les dates doivent être dans le futur.');
                 return $this->redirect('Voyages', 'Add');
             }
@@ -138,10 +138,7 @@ class VoyagesController extends AppController
                 $this->flashBad('La date de retour doit être après la date de départ.');
                 return $this->redirect('Voyages', 'Add');
             }
-            if ($date_depart < $date_limite) {
-                $this->flashBad('La date de départ doit être après la date limite d\'inscription.');
-                return $this->redirect('Voyages', 'Add');
-            }
+
             $voyageDB = new VoyagesDB();
             $compteVoyageDB = new ComptesVoyagesDB();
 
@@ -151,9 +148,7 @@ class VoyagesController extends AppController
                 null,
                 null,
                 $_POST['ville'],
-                $_POST['cout'],
                 $date_depart,
-                $date_limite,
                 $date_retour,
                 1,
                 0,
@@ -200,11 +195,10 @@ class VoyagesController extends AppController
         if(!empty($_POST)) {
 
 
-            $date_limite_str = $_POST['date_limite']['year'] . "-" . $_POST['date_limite']['month'] . "-" . $_POST['date_limite']['day'];
             $date_depart_str = $_POST['date_depart']['year'] . "-" . $_POST['date_depart']['month'] . "-" . $_POST['date_depart']['day'];
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
-            $options = array('date_limite','date_depart','date_retour');
+            $options = array('date_depart','date_retour');
 
 
             $pas31 = array(4,6,9,11);
@@ -228,16 +222,14 @@ class VoyagesController extends AppController
 
             }
 
-
-            $date_limite = date("Y-m-d", strtotime($date_limite_str));
             $date_depart = date("Y-m-d", strtotime($date_depart_str));
             $date_retour = date("Y-m-d", strtotime($date_retour_str));
 
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now || $date_limite < $date_now) {
-                $this->flashBad('Les dates doivent être dans le futur.');
+            if ($date_retour < $date_now || $date_depart < $date_now ) {
+                 $this->flashBad('Les dates doivent être dans le futur.');
                 return $this->redirectParam1('Voyages', 'Edit', $id);
             }
 
@@ -245,17 +237,11 @@ class VoyagesController extends AppController
                 $this->flashBad('La date de retour doit être après la date de départ.');
                 return $this->redirectParam1('Voyages', 'Edit', $id);
             }
-            if ($date_depart < $date_limite) {
-                $this->flashBad('La date de départ doit être après la date limite d\'inscription.');
-                return $this->redirectParam1('Voyages', 'Edit', $id);
-            }
 
             $destination = $destinationDB->getDestinationFromId($_POST['id_destination']);
 
             $voyage->setVille($_POST['ville']);
-            $voyage->setCout($_POST['cout']);
             $voyage->setDateDepart($date_depart);
-            $voyage->setDateLimite($date_limite);
             $voyage->setDateRetour($date_retour);
             $voyage->setDestination($destination);
             $voyage->setNomProjet($_POST['nom_projet']);
@@ -273,6 +259,51 @@ class VoyagesController extends AppController
             }
 
         }
+
+
+    }
+
+    public function Viewparticipants($id = null)
+    {
+
+        $comptesVoyagesDB = new ComptesVoyagesDB();
+        $comptesDB = new ComptesDB();
+
+        $voyageDB = new VoyagesDB();
+        $voyage = $voyageDB->getVoyageFromId($id);
+
+        if (isset($_SESSION["connectedUser"])) {
+            $connectedUser = $_SESSION["connectedUser"];
+            $compteType = $connectedUser->getType();
+        }
+
+        //Vérification des permissions
+        $this->isAuthorized(['admin', 'prof']);
+
+        $array_comptes_participants = array();
+        //Requêtes au serveur SQL
+        if ($compteType === 'admin') {
+
+            $usersId = $comptesVoyagesDB->getIdComptesFromIdVoyage($id);
+            foreach ($usersId as $userId) {
+                $compteParticipants = $comptesDB->getCompteFromId($userId);
+                array_push($array_comptes_participants, $compteParticipants);
+            }
+
+        } else if ($compteType === 'prof') {
+            $usersId = $comptesVoyagesDB->getIdComptesFromIdVoyage($id);
+            $students = $comptesVoyagesDB->getEtuIdsFromProfId($connectedUser->getIdCompte());
+            foreach ($usersId as $userId) {
+                if(in_array($userId,$students) || $userId === $connectedUser->getIdCompte()) {
+                $compteParticipants = $comptesDB->getCompteFromId($userId);
+                array_push($array_comptes_participants, $compteParticipants);
+                }
+            }
+        }
+
+        //Passe les variables à la vue
+        $this->set('comptes', $array_comptes_participants);
+        $this->set('voyage',$voyage);
 
 
     }

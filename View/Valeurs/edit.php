@@ -7,6 +7,7 @@
  * @var \App\Model\Entity\Valeur[] $valeurs
  */
 $ctr = 1;
+$idCase = 0;
 $id_voyage = $_GET['param1'];
 $id_compte = $_GET['param2'];
 $valeursController->edit($id_voyage, $id_compte);
@@ -23,6 +24,7 @@ $connectedUser = $_SESSION["connectedUser"];
 
 <?= load_css('form') ?>
 <?= load_css('ControlOption') ?>
+<?= load_Script('fonctionCase') ?>
 
 <script>
     $(document).ready(function () {
@@ -83,12 +85,28 @@ $connectedUser = $_SESSION["connectedUser"];
                                                     <!--Loop pour questions-->
                                                     <span>
                                                         <?php if ($question->getAffichage() === 'Case'): ?>
-                                                            <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif; ?> <!-- Default Value-->
+                                                          <br> <br>
+                                                        <?php   $listeReponse = explode(";", $vraiValeurs);
 
-                                                            <input type="checkbox"
-                                                                   name="<?= $question->getIdQuestion() ?>"
-                                                            <?= ('on' === $vraiValeurs) ? ' checked' : '' ?>
-                                                            >
+
+                                                        $options = explode(";", $question->getInputOption());
+                                                        if($vraiValeurs === NULL){
+                                                          foreach ($options as $option):
+                                                        array_push($listeReponse,"false");
+                                                      endforeach;
+                                                    }
+
+                                                         ?>
+
+                                                                <?php foreach ($options as $option): $idCase++; ?>
+
+                                                                <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                                    checked="checked"
+                                                                  <?php endif; ?>  id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                                                        <?= $option ?>
+                                                                    </input>
+                                                                <?php endforeach ?>
+                                                                <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
                                                         <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 

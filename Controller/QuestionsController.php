@@ -98,7 +98,7 @@ class QuestionsController extends AppController
                 null,
                 $this->categoriesDB->getCategorieFromId($_POST['id_categorie']),
                 $_POST['question'],
-                null,
+                $_POST['list_option'],
                 $_POST['affichage'],
                 1,
                 $_POST['info_sup'],

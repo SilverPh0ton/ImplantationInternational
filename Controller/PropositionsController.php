@@ -76,7 +76,7 @@ class PropositionsController extends AppController
         if(empty($questionsProposition)){
             $questionsProposition = array();
         }
-        
+
         $categoriesProposition = array();
         foreach ($questionsProposition as $questionProposition) {
             if (!in_array($questionProposition->getCategorie(), $categoriesProposition)) {
@@ -88,7 +88,10 @@ class PropositionsController extends AppController
 
         $this->set('destinations', $destinations);
 
+
         if (!empty($_POST)||!empty($_FILES)) {
+
+
 
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
@@ -128,12 +131,14 @@ class PropositionsController extends AppController
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now /*|| $date_limite < $date_now*/) {
+            if ($date_retour < $date_now || $date_depart < $date_now) {
                 $this->flashBad('Les dates doivent être dans le futur.');
+                return $this->redirect("Propositions", "Add");
             }
 
             if ($date_retour < $date_depart) {
                 $this->flashBad('La date de retour doit être après la date de départ.');
+                return $this->redirect("Propositions", "Add");
             }
 
 
@@ -142,6 +147,12 @@ class PropositionsController extends AppController
 
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
 
+
+
+            $code =0;
+            if (isset($_POST['brouillon'])) {
+                $code = 3;
+            }
 
             $proposition = new Proposition(
                 null,
@@ -152,7 +163,7 @@ class PropositionsController extends AppController
                 $date_depart,
                 $date_retour,
                 1,
-                0,
+                $code,
                 null,
                 $destination,
                 $_POST['note']
@@ -305,6 +316,7 @@ class PropositionsController extends AppController
                         return $this->redirect("Propositions", "Add");
                     }
                 }
+              
             }
 
             if(!$whileSuccess)
@@ -352,8 +364,6 @@ class PropositionsController extends AppController
         $this->set('categories', $categories);
 
         if (!empty($_POST)||!(empty($_FILES))) {
-
-
 
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
@@ -404,6 +414,11 @@ class PropositionsController extends AppController
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
 
+            $code =0;
+            if (isset($_POST['brouillon'])) {
+                $code = 3;
+            }
+
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
 
             $proposition = new Proposition(
@@ -415,7 +430,7 @@ class PropositionsController extends AppController
                 $date_depart,
                 $date_retour,
                 1,
-                0,
+                $code,
                 null,
                 $destination,
                 $_POST['note']
@@ -462,6 +477,7 @@ class PropositionsController extends AppController
                 if($date_retour < $projet_depart || $date_retour > $projet_retour ){
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité.');
                 }
+
 
 
                 if(!$this->activiteDB->addActivite($activite))
