@@ -268,6 +268,9 @@ class VoyagesController extends AppController
         $comptesVoyagesDB = new ComptesVoyagesDB();
         $comptesDB = new ComptesDB();
 
+        $voyageDB = new VoyagesDB();
+        $voyage = $voyageDB->getVoyageFromId($id);
+
         if (isset($_SESSION["connectedUser"])) {
             $connectedUser = $_SESSION["connectedUser"];
             $compteType = $connectedUser->getType();
@@ -299,6 +302,7 @@ class VoyagesController extends AppController
 
         //Passe les variables à la vue
         $this->set('comptes', $array_comptes_participants);
+        $this->set('voyage',$voyage);
 
 
     }
