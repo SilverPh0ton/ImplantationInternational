@@ -76,7 +76,6 @@ $propositions = get('propositions');
                     echo "Nouveauté";
                 }
                 ?>
-                <?= $proposition->getApprouvee(); ?>
             </td>
             <td class="actions" <?php echo $color ?> >
 
