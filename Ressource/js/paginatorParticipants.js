@@ -19,7 +19,7 @@ $(document).ready( function () {
                   className: 'btnPDF',
                   filename: 'Dossiers_Participants',
                   title: 'Dossiers des participants au voyage',
-                  orientation: 'portrait',
+                  orientation: 'landscape',
                   exportOptions:{
                       columns: [0,1,2,3,4,7,8,9]
                   }
