@@ -13,7 +13,7 @@ if (isset($_GET['param2'])) {
 }
 
 $propositionController->view($id_proposition, $source);
-
+$idCase = 0;
 $compteDemande = get('compteDemande');
 $proposition = get('proposition');
 $proposition_reponses = get('proposition_reponses');
