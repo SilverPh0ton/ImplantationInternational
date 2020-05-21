@@ -34,6 +34,7 @@ require_once 'DBObjects/ComptesDB.php';
 //require_once 'DBObjects/ActivationsDB.php';
 require_once 'Controller/AppController.php';
 require 'vendor/autoload.php';
+
 class PropositionsController extends AppController
 {
     private $questionDB;
@@ -76,7 +77,7 @@ class PropositionsController extends AppController
         $destinations = $this->destinationDB->getAllActifDestinations();
 
         $questionsProposition = $this->formulaireDB->getQuestionsFromLatestFormulaire();
-        if(empty($questionsProposition)){
+        if (empty($questionsProposition)) {
             $questionsProposition = array();
         }
 
@@ -92,8 +93,7 @@ class PropositionsController extends AppController
         $this->set('destinations', $destinations);
 
 
-        if (!empty($_POST)||!empty($_FILES)) {
-
+        if (!empty($_POST) || !empty($_FILES)) {
 
 
             $connectedUser = $_SESSION["connectedUser"];
@@ -102,24 +102,24 @@ class PropositionsController extends AppController
             $date_depart_str = $_POST['date_depart']['year'] . "-" . $_POST['date_depart']['month'] . "-" . $_POST['date_depart']['day'];
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
-            $options = array('date_depart','date_retour');
+            $options = array('date_depart', 'date_retour');
 
 
-            $pas31 = array(4,6,9,11);
+            $pas31 = array(4, 6, 9, 11);
 
-            foreach ($options as $option){
-                $days = array(30,31);
+            foreach ($options as $option) {
+                $days = array(30, 31);
 
-                if(in_array($_POST[$option]['month'],$pas31) && ($_POST[$option]['day'] == 31)){
+                if (in_array($_POST[$option]['month'], $pas31) && ($_POST[$option]['day'] == 31)) {
                     $this->flashBad('La proposition n\'a pas pu être ajoutée. Mauvaise saisie de date.');
                     return $this->redirect('Propositions', 'Add');
                 }
 
-                if(!$this->isLeap($_POST[$option]['year'])){
-                    array_push($days,29);
+                if (!$this->isLeap($_POST[$option]['year'])) {
+                    array_push($days, 29);
                 }
 
-                if(($_POST[$option]['month'] == 2) && (in_array($_POST[$option]['day'],$days))){
+                if (($_POST[$option]['month'] == 2) && (in_array($_POST[$option]['day'], $days))) {
                     $this->flashBad('La proposition n\'a pas pu être ajoutée. Mauvaise saisie de date.');
                     return $this->redirect('Propositions', 'Add');
                 }
@@ -127,14 +127,12 @@ class PropositionsController extends AppController
             }
 
 
-
-
             $date_depart = date("Y-m-d", strtotime($date_depart_str));
             $date_retour = date("Y-m-d", strtotime($date_retour_str));
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now ) {
+            if ($date_retour < $date_now || $date_depart < $date_now) {
                 $this->flashBad('Les date doivent être dans le future');
                 return $this->redirect("Propositions", "Add");
             }
@@ -145,21 +143,18 @@ class PropositionsController extends AppController
             }
 
 
-
-
             $projet_depart = $date_depart;
             $projet_retour = $date_retour;
 
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
 
 
-
-            $code =0;
+            $code = 4;
             if (isset($_POST['brouillon'])) {
                 $code = 3;
-            }else{
+            } else {
                 $id = $this->propositionDB->getHighestid();
-                $this->send_email('Propositions','View',$id);
+                $this->send_email('Propositions', 'View', $id);
             }
 
             $proposition = new Proposition(
@@ -178,8 +173,7 @@ class PropositionsController extends AppController
             );
 
             $id_proposition = $this->propositionDB->addProposition($proposition);
-            if($id_proposition == null)
-            {
+            if ($id_proposition == null) {
                 $this->flashBad("Une erreur est survenu lors de l'ajout de la proposition");
                 return $this->redirect("Propositions", "Add");
             }
@@ -205,35 +199,29 @@ class PropositionsController extends AppController
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('Les date des activités doivent être dans le future');
-                }
-                else if ($date_retour < $date_depart) {
+                } else if ($date_retour < $date_depart) {
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('La date de retour d\'une activité doit être après la date de départ');
-                }
-                else if($date_depart < $projet_depart || $date_depart > $projet_retour ){
+                } else if ($date_depart < $projet_depart || $date_depart > $projet_retour) {
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
-                }
-                else if($date_retour < $projet_depart || $date_retour > $projet_retour ){
+                } else if ($date_retour < $projet_depart || $date_retour > $projet_retour) {
                     $whileSuccess = false;
                     $success = false;
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }
 
-                if($success)
-                {
-                    if(!$this->activiteDB->addActivite($activite))
-                    {
+                if ($success) {
+                    if (!$this->activiteDB->addActivite($activite)) {
                         $this->flashBad("Une erreur est survenu lors de l'ajout d'une activité");
                         return $this->redirect("Propositions", "Add");
                     }
                 }
                 $ctr++;
             }
-            if(!$whileSuccess)
-            {
+            if (!$whileSuccess) {
                 return $this->redirect("Propositions", "Add");
             }
 
@@ -270,21 +258,20 @@ class PropositionsController extends AppController
 
 
                     if ($fileName != '') {
-                    //Vérification du ficher téléversé
-                    if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
-                        $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
-                        return $this->redirect("Propositions", "Add");
-                    }
-                    if ($fileSize > $maxsize) {
-                        $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 mb');
-                        return $this->redirect("Propositions", "Add");
-                    }
-                    $uploadFile = $uploadPath . $id_proposition . '-' . $question->getIdQuestion(). '-' . $fileName;
-                    if ((file_exists($uploadFile))) {
-                        $this->flashBad($fileName . ' existe déjà');
-                        return $this->redirect("Propositions", "Add");
-                    }
-
+                        //Vérification du ficher téléversé
+                        if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
+                            $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
+                            return $this->redirect("Propositions", "Add");
+                        }
+                        if ($fileSize > $maxsize) {
+                            $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 mb');
+                            return $this->redirect("Propositions", "Add");
+                        }
+                        $uploadFile = $uploadPath . $id_proposition . '-' . $question->getIdQuestion() . '-' . $fileName;
+                        if ((file_exists($uploadFile))) {
+                            $this->flashBad($fileName . ' existe déjà');
+                            return $this->redirect("Propositions", "Add");
+                        }
 
 
                         //Supprime tous fichiers avec le même préfixe
@@ -298,7 +285,7 @@ class PropositionsController extends AppController
                             $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer');
                             return $this->redirect("Propositions", "Add");
                         } else {
-                            $proposition_reponse->setReponse( $id_proposition . '-' . $question->getIdQuestion().'-'.$fileName);
+                            $proposition_reponse->setReponse($id_proposition . '-' . $question->getIdQuestion() . '-' . $fileName);
 
                             //Enregistre l’entité
                             if (!$this->propositionReponseDB->addPropositionReponse($proposition_reponse)) {
@@ -324,15 +311,12 @@ class PropositionsController extends AppController
                         return $this->redirect("Propositions", "Add");
                     }
                 }
-              
+
             }
 
-            if(!$whileSuccess)
-            {
+            if (!$whileSuccess) {
                 return $this->redirect("Propositions", "Add");
-            }
-            else
-            {
+            } else {
                 $this->flashGood("La proposition a été enregistrée avec succès!");
                 return $this->redirect("Propositions", 'Index');
             }
@@ -342,6 +326,7 @@ class PropositionsController extends AppController
 
     public function edit($id_proposition = null)
     {
+
         $destinationDB = new DestinationsDB();
         $destinations = $destinationDB->getAllActifDestinations();
 
@@ -352,12 +337,16 @@ class PropositionsController extends AppController
 
         $proposition_reponses = $this->propositionReponseDB->getAllPropositionQuestionsFromIdProposition($id_proposition);
 
+        if ($this->checkifValidOrNot($proposition)) {
+            $this->propositionDB->setPropostionAPto0($id_proposition);
+        }
+
+
         //Invert la liste pour l'avoir dans le bon sens
-        if(empty($proposition_reponses))
-        {
+        if (empty($proposition_reponses)) {
             $proposition_reponses = array();
         }
-         $proposition_reponses = array_reverse($proposition_reponses);
+        $proposition_reponses = array_reverse($proposition_reponses);
 
         $categories = array();
         foreach ($proposition_reponses as $proposition_reponse) {
@@ -366,12 +355,13 @@ class PropositionsController extends AppController
             }
         }
 
+
         $this->set('activites', $activites);
         $this->set('proposition', $proposition);
         $this->set('proposition_reponses', $proposition_reponses);
         $this->set('categories', $categories);
 
-        if (!empty($_POST)||!(empty($_FILES))) {
+        if (!empty($_POST) || !(empty($_FILES))) {
 
             $connectedUser = $_SESSION["connectedUser"];
             $connectedUserId = $connectedUser->getIdCompte();
@@ -380,26 +370,26 @@ class PropositionsController extends AppController
             $date_retour_str = $_POST['date_retour']['year'] . "-" . $_POST['date_retour']['month'] . "-" . $_POST['date_retour']['day'];
 
 
-            $options = array('date_depart','date_retour');
+            $options = array('date_depart', 'date_retour');
 
 
-            $pas31 = array(4,6,9,11);
+            $pas31 = array(4, 6, 9, 11);
 
-            foreach ($options as $option){
-                $days = array(30,31);
+            foreach ($options as $option) {
+                $days = array(30, 31);
 
-                if(in_array($_POST[$option]['month'],$pas31) && ($_POST[$option]['day'] == 31)){
+                if (in_array($_POST[$option]['month'], $pas31) && ($_POST[$option]['day'] == 31)) {
                     $this->flashBad('La proposition n\'a pas pu être modifiée. Mauvaise saisie de date.');
-                    return $this->redirectParam1('Propositions', 'Edit',$id_proposition);
+                    return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
                 }
 
-                if(!$this->isLeap($_POST[$option]['year'])){
-                    array_push($days,29);
+                if (!$this->isLeap($_POST[$option]['year'])) {
+                    array_push($days, 29);
                 }
 
-                if(($_POST[$option]['month'] == 2) && (in_array($_POST[$option]['day'],$days))){
+                if (($_POST[$option]['month'] == 2) && (in_array($_POST[$option]['day'], $days))) {
                     $this->flashBad('La proposition n\'a pas pu être modifiée. Mauvaise saisie de date.');
-                    return $this->redirectParam1('Propositions', 'Edit',$id_proposition);
+                    return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
                 }
 
             }
@@ -412,7 +402,7 @@ class PropositionsController extends AppController
 
             $date_now = date("Y-m-d");
 
-            if ($date_retour < $date_now || $date_depart < $date_now ) {
+            if ($date_retour < $date_now || $date_depart < $date_now) {
                 $this->flashBad('Les date doivent être dans le future');
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
@@ -421,10 +411,17 @@ class PropositionsController extends AppController
                 $this->flashBad('La date de retour doit être après la date de départ');
                 return $this->redirectParam1('Propositions', 'Edit', $id_proposition);
             }
-
-            $code =0;
-            if (isset($_POST['brouillon'])) {
-                $code = 3;
+            if (($proposition->getApprouvee() != 1) && ($proposition->getApprouvee() != 2)) {
+                $code = 4;
+                if (isset($_POST['brouillon'])) {
+                    $code = 3;
+                } else {
+                    if ($proposition->getApprouvee() == 3) {
+                        $this->send_email('Propositions', 'View', $id_proposition);
+                    }
+                }
+            } else {
+                $code = $proposition->getApprouvee();
             }
 
             $destination = $this->destinationDB->getDestinationFromId($_POST['id_destination']);
@@ -444,15 +441,13 @@ class PropositionsController extends AppController
                 $_POST['note']
             );
 
-            if(!$this->propositionDB->updateProposition($proposition))
-            {
+            if (!$this->propositionDB->updateProposition($proposition)) {
                 $this->flashBad("Une erreur est survenu lors de la modification de la proposition");
                 return $this->redirectParam1("Propositions", "Edit", $id_proposition);
             }
             $ctr = 0;
 
-            if(!$this->activiteDB->deleteActiviteWhereIdProposition($id_proposition))
-            {
+            if (!$this->activiteDB->deleteActiviteWhereIdProposition($id_proposition)) {
                 $this->flashBad("Une erreur est survenu lors de la modification de la proposition");
                 return $this->redirectParam1("Propositions", "Edit", $id_proposition);
             }
@@ -467,7 +462,7 @@ class PropositionsController extends AppController
                     null,
                     $id_proposition,
                     $_POST['endroit' . $ctr],
-                    $_POST['description'.$ctr],
+                    $_POST['description' . $ctr],
                     $date_depart,
                     $date_retour
                 );
@@ -479,17 +474,15 @@ class PropositionsController extends AppController
                     $this->flashBad('La date de retour d\'une activité doit être après la date de départ');
                 }
 
-                if($date_depart < $projet_depart || $date_depart > $projet_retour ){
+                if ($date_depart < $projet_depart || $date_depart > $projet_retour) {
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }
-                if($date_retour < $projet_depart || $date_retour > $projet_retour ){
+                if ($date_retour < $projet_depart || $date_retour > $projet_retour) {
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité');
                 }
 
 
-
-                if(!$this->activiteDB->addActivite($activite))
-                {
+                if (!$this->activiteDB->addActivite($activite)) {
                     $this->flashBad("Une erreur est survenu lors de la modification  d'une activité");
                     return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                 }
@@ -518,22 +511,21 @@ class PropositionsController extends AppController
                     $maxsize = 5 * 1024 * 1024;
 
                     if ($fileName != '') {
-                    //Vérification du ficher téléversé
-                    if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
-                        $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
-                        return $this->redirectParam1("Propositions", "Edit", $id_proposition);
-                    }
-                    if ($fileSize > $maxsize) {
-                        $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 mb');
-                        return $this->redirectParam1("Propositions", "Edit", $id_proposition);
-                    }
-                    $uploadFile = $uploadPath . $id_proposition . '-' . $question->getIdQuestion() . '-'. $fileName;
+                        //Vérification du ficher téléversé
+                        if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
+                            $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
+                            return $this->redirectParam1("Propositions", "Edit", $id_proposition);
+                        }
+                        if ($fileSize > $maxsize) {
+                            $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 mb');
+                            return $this->redirectParam1("Propositions", "Edit", $id_proposition);
+                        }
+                        $uploadFile = $uploadPath . $id_proposition . '-' . $question->getIdQuestion() . '-' . $fileName;
 
-                    $files = glob($uploadPath . $id_proposition . '-' . $question->getIdQuestion() . '-*/*');
-                    foreach ($files as $file) {
-                        unlink($file);
-                    }
-
+                        $files = glob($uploadPath . $id_proposition . '-' . $question->getIdQuestion() . '-*/*');
+                        foreach ($files as $file) {
+                            unlink($file);
+                        }
 
 
                         //Téléverse le ficher
@@ -541,7 +533,7 @@ class PropositionsController extends AppController
                             $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer');
                             return $this->redirectParam1("Propositions", "Edit", $id_proposition);
                         } else {
-                            $proposition_reponse->setReponse($id_proposition . '-' . $question->getIdQuestion() . '-'.$fileName);
+                            $proposition_reponse->setReponse($id_proposition . '-' . $question->getIdQuestion() . '-' . $fileName);
 
                             //Enregistre l’entité
                             if (!$this->propositionReponseDB->updatePropositionReponse($proposition_reponse)) {
@@ -577,11 +569,18 @@ class PropositionsController extends AppController
 
     public function view($id_proposition = null)
     {
+
+
         $proposition = $this->propositionDB->getPropositionFromId($id_proposition);
         $proposition_reponses = $this->propositionReponseDB->getAllPropositionQuestionsFromIdProposition($id_proposition);
 
-        if(empty($proposition_reponses))
-        {
+
+        if ($this->checkifValidOrNot($proposition)) {
+            $this->propositionDB->setPropostionAPto0($id_proposition);
+        }
+
+
+        if (empty($proposition_reponses)) {
             $proposition_reponses = array();
         }
         //Invert la liste pour l'avoir dans le bon sens
@@ -599,7 +598,7 @@ class PropositionsController extends AppController
         $compteDB = new \ComptesDB();
         $compteDemande = $compteDB->getCompteFromId($proposition->getIdCompte());
 
-        $this->set('compteDemande',$compteDemande);
+        $this->set('compteDemande', $compteDemande);
         $this->set('proposition', $proposition);
         $this->set('proposition_reponses', $proposition_reponses);
         $this->set('categories', $categories);
@@ -617,22 +616,18 @@ class PropositionsController extends AppController
                 if ($this->propositionDB->acceptProposition($proposition)) {
                     $this->flashGood('La proposition à bien été acceptée.');
                     return $this->redirect("Propositions", 'Index');
-                }
-                else
-                {
+                } else {
                     $this->flashBad('Une erreur est survenu lors du traitement');
                     return $this->redirect("Propositions", 'Index');
                 }
 
             }
 
-            if ( (isset($_POST["idProp"]) &&!empty($_POST["idProp"])) && (isset($_POST["idProp"]) &&!empty($_POST["declineReason"]))) {
+            if ((isset($_POST["idProp"]) && !empty($_POST["idProp"])) && (isset($_POST["idProp"]) && !empty($_POST["declineReason"]))) {
                 if ($this->propositionDB->refuseProposition($_POST["idProp"], $_POST["declineReason"])) {
                     $this->flashGood('La proposition à été refusée.');
                     return $this->redirect("Propositions", 'Index');
-                }
-                else
-                {
+                } else {
                     $this->flashBad('Une erreur est survenu lors du traitement');
                     return $this->redirect("Propositions", 'Index');
                 }
@@ -645,15 +640,15 @@ class PropositionsController extends AppController
     }
 
 
-
-    function send_email($controller,$action,$param1)
+    public
+    function send_email($controller, $action, $param1)
     {
         $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
 
         try {
-            $url= 'http://internaltionalmich/index.php?controller='.$controller.'&action='.$action.'&param1='.$param1;
+            $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action . '&param1=' . $param1;
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host = 'smtp.mailtrap.io';                    // Set the SMTP server to send through
@@ -681,9 +676,14 @@ class PropositionsController extends AppController
 
         /*        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");*/
 
+    }
 
-
-
+    public function checkifValidOrNot(Proposition $proposition)
+    {
+        if (($proposition->getApprouvee() != 1) && ($proposition->getApprouvee() != 2) && isOfType([ADMIN])) {
+            return true;
+        }
+        return false;
     }
 
 

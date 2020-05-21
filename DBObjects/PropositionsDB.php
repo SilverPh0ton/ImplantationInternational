@@ -340,5 +340,15 @@ class PropositionsDB extends ConfigDB
 
     }
 
+    public function setPropostionAPto0($id){
+        $sql = "UPDATE propositions SET approuve = 0 WHERE id_proposition = :id_proposition";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_proposition', $id);
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
 
 }
