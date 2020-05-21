@@ -274,6 +274,7 @@ class QuestionsDB extends ConfigDB
 
     public function updateQuestion($question)
     {
+   
         if (isset($question)) {
             $sql = "UPDATE questions SET id_categorie = :id_categorie,
                 question = :question,

@@ -73,13 +73,27 @@ $ctr = 1;
                                                 <td class="row45">
                                                     <div class="ControlOption">
                                                         <label for="affichage"><?php echo($question->getQuestion()); ?>
-                                                            <?php if ($question->getAffichage() === 'Case'): ?>
-                                                              <br><br>
-                                                              <?php $options = explode(";", $question->getInputOption()); ?>
 
-                                                              <?php foreach ($options as $option): ?>
-                                                                  <input type="checkbox"><?= $option ?></input>
-                                                              <?php endforeach ?>
+                                                        <?php if ($question->getAffichage() === 'Case'): ?>
+                                                        <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                        <?php foreach ($options as $option): ?>
+                                                    
+                                                            <input type="checkbox"><?= $option ?></input>
+                                                            <br>
+                                                        <?php endforeach ?>
+
+                                                        
+                                                        <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                            <br><br>
+                                                        <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                        <?php foreach ($options as $option): ?>
+                                                   
+                                                            <input type="radio" name="radio">  <?= $option ?></input>
+                                                            <br>
+                                                        <?php endforeach ?>
+
 
                                                             <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                 $extrmum = explode(";", $question->getInputOption());
@@ -223,7 +237,18 @@ $ctr = 1;
 
                                                               <?php foreach ($options as $option): ?>
                                                                   <input type="checkbox"><?= $option ?></input>
+                                                                  <br>
                                                               <?php endforeach ?>
+ 
+                                                        <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                            <br><br>
+                                                        <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                        <?php foreach ($options as $option): ?>
+                                                   
+                                                            <input type="radio" name="radio">  <?= $option ?></input>
+                                                            <br>
+                                                        <?php endforeach ?>
 
                                                             <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                 $extrmum = explode(";", $question->getInputOption());
