@@ -21,16 +21,13 @@ $categorie = get('categorie');
                        type="text" maxlength="50" value="<?= $categorie->getCategorie() ?>" required>
             </div>
             <div class=" input text required">
-                <label for="default">Par défaut</label>
-                <input type="checkbox" name="default" id="default" <?= ($categorie->getDefault() ? 'checked' : '') ?>>
-            </div>
-
-            <div class=" input text required">
                 <label for="actif">Actif</label>
                 <input type="checkbox" name="actif" id="actif" <?= ($categorie->getActif() ? 'checked' : '') ?>>
             </div>
-
-
+            <div class=" input text required">
+                <label for="default">Par défaut</label>
+                <input type="checkbox" name="question_default" id="default" <?= ($categorie->getDefault() ? 'checked' : '') ?>>
+            </div>
 
         </fieldset>
 

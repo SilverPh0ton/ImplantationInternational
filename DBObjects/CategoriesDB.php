@@ -139,11 +139,11 @@ class CategoriesDB extends ConfigDB
             $categorieCtr = $stmtExist->fetchColumn();
 
             if ($categorieCtr == 0) {
-                $sql = "INSERT INTO categories (categorie,actif,question_default) VALUES(:categorie, :actif, :q_default )";
+                $sql = "INSERT INTO categories (categorie,actif,question_default) VALUES(:categorie, :actif, :question_default )";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute(array(':categorie' => $categorie->getCategorie(),
                     ':actif' => $categorie->getActif(),
-                    ':q_default' => $categorie->getDefault()
+                    ':question_default' => $categorie->getDefault()
                 ));
 
                 return true;
