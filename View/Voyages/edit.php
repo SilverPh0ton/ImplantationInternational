@@ -148,9 +148,9 @@ $destinations = get('destinations');
 
                 <!--Button de navigation -->
                 <?php if (isOfType([PROF]))
-                    echo nav('<li class="navbutton">Liste des étudiants</li>', 'comptes', 'index')
+                    echo nav('<button type="button">Liste des étudiants</button>', 'comptes', 'index')
                 ?>
-                <?= nav('<button type="button">Revenir à la liste des voyages</button>', 'Voyages', 'index'); ?>
+                <?= nav('<button type="button">Revenir à la liste des séjours</button>', 'Voyages', 'index'); ?>
             </fieldset>
         </form>
     </div>
@@ -160,7 +160,7 @@ $destinations = get('destinations');
     <H1>Ce voyage a été approuvé et ne peut plus être modifié.</H1>
 
     <!--Button de navigation -->
-    <?= nav('<button>Revenir à la liste des voyages</button>', 'Voyages', 'index'); ?>
+    <?= nav('<button>Revenir à la liste des séjours</button>', 'Voyages', 'index'); ?>
 <?php endif; ?>
 
 </form>
