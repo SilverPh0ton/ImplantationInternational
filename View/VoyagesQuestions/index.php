@@ -209,7 +209,7 @@ $ctr = 1;
                                         <table>
                                             <tr>
                                                 <td class="row5"><input type="checkbox" class="childCheckbox"
-                                                                        name="check_<?= $question->getIdQuestion() ?>_1"
+                                                                        name="check_<?= $question->getIdQuestion() ?>_0"
                                                                         id="question_<?= $question->getIdQuestion() ?>"
                                                                         value="1"
                                                         <?= ($categorie->getDefault()==1 || in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>

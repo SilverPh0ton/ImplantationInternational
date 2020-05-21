@@ -6,7 +6,7 @@
                 <a class="nav-link" href="#section5">Propositions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#section1">Les séjours</a>
+                <a class="nav-link active" href="#section1">Les projets</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#section2">Participants</a>
@@ -72,7 +72,7 @@
         </div>
 
         <div id="section1" class="section">
-            <h1>Séjours de mobilité</h1>
+            <h1>Les projets de mobilité</h1>
             <ul>
                 <li>
                     Pour voir la liste des voyages, cliquez sur « Séjours de mobilité » de la barre de navigation.
@@ -89,6 +89,7 @@
                 <li>
                     Pour voir les détails d’un voyage, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
                     <ul>
+                        <li>Dans cette page, pour voir la liste des participants à un projet, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher"></li>
                         <li>Pour revenir à la liste, cliquez sur « Revenir à la liste des voyages »</li>
                     </ul>
                 </li>
