@@ -611,9 +611,6 @@ class PropositionsController extends AppController
     public function voyageFromProposition()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-
-
             if (!empty($_POST["idProp_transform"])) {
 
                 $proposition = $this->propositionDB->getPropositionFromId($_POST["idProp_transform"]);
