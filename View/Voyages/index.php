@@ -102,14 +102,14 @@ $voyages = get('voyages');
 
         <form method="post">
             <fieldset>
-                <legend> Joindre un autre séjour</legend>
+                <legend> Joindre un autre projet</legend>
                 <div class="input text required">
                     <label for="code_activation">Code d'activation</label>
                     <input id="code_activation" type="text" name="code_activation" pattern="[A-Z0-9]{5}-){4}[A-Z0-9]{5}"
                            title="Le champ ne peut pas être vide" maxlength="14">
                 </div>
             </fieldset>
-            <button type="submit">Se joindre au séjour</button>
+            <button type="submit">Se joindre au projet</button>
         </form>
 
     </div>
