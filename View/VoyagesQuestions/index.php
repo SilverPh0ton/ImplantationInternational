@@ -331,8 +331,3 @@ $ctr = 1;
 </div>
 <?= load_script('treeView') ?>
 
-<script>
-    <?php foreach ($voyagesQuestions as $voyagesQuestion): ?>
-    checkOption(<?= $voyagesQuestion->getQuestion()->getIdQuestion() ?>);
-    <?php endforeach; ?>
-</script>
