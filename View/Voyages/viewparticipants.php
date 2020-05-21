@@ -7,6 +7,7 @@
 $id_voyage = $_GET['param1'];
 $voyagesController->Viewparticipants($id_voyage);
 
+$voyage = get('voyage');
 $comptes = get('comptes');
 $compteType = $connectedUser->getType();
 ?>
@@ -23,7 +24,7 @@ $compteType = $connectedUser->getType();
 
 <div class="comptes index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left">
 
-    <h3>Paticipants au voyage</h3>
+    <h3 id="titre">Nom du projet: <?= $voyage->getNomProjet() ?></h3>
 
     <table class="table_to_paginate_part">
         <thead>
@@ -77,11 +78,7 @@ $compteType = $connectedUser->getType();
     </table>
 
 </div>
-
-<!--Button de navigation -->
-<?php if ($compteType === 'admin'):
-    echo nav('<button>Ajouter un utilisateur </button>','comptes','add');
-endif; ?>
+<?= nav1('<button>revenir sur les informations du projet</button>', 'Voyages', 'view',$voyage->getIdVoyage()) ?>
 
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];
