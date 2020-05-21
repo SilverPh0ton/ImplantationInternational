@@ -285,6 +285,8 @@ $_SESSION["flashList"] = new ArrayObject();
                 include('View/Voyages/add.php');
             } else if ($switch_action === 'Edit') {
                 include('View/Voyages/edit.php');
+            } else if ($switch_action === 'Viewparticipants') {
+                include('View/Voyages/viewparticipants.php');
             }
             break;
 

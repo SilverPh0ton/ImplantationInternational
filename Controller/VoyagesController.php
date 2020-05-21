@@ -7,10 +7,12 @@ use App\Model\Entity\ComptesVoyage;
 use App\Model\Entity\Destination;
 use App\Model\Entity\Voyage;
 use ComptesVoyagesDB;
+use ComptesDB;
 use DestinationsDB;
 use VoyagesDB;
 require_once 'DBObjects/VoyagesDB.php';
 require_once 'DBObjects/ComptesVoyagesDB.php';
+require_once 'DBObjects/ComptesDB.php';
 require_once 'DBObjects/ActivationsDB.php';
 require_once 'DBObjects/DestinationsDB.php';
 require_once 'Controller/AppController.php';
@@ -273,6 +275,47 @@ class VoyagesController extends AppController
             }
 
         }
+
+
+    }
+
+    public function Viewparticipants($id = null)
+    {
+
+        $comptesVoyagesDB = new ComptesVoyagesDB();
+        $comptesDB = new ComptesDB();
+
+        if (isset($_SESSION["connectedUser"])) {
+            $connectedUser = $_SESSION["connectedUser"];
+            $compteType = $connectedUser->getType();
+        }
+
+        //Vérification des permissions
+        $this->isAuthorized(['admin', 'prof']);
+
+        $array_comptes_participants = array();
+        //Requêtes au serveur SQL
+        if ($compteType === 'admin') {
+
+            $usersId = $comptesVoyagesDB->getIdComptesFromIdVoyage($id);
+            foreach ($usersId as $userId) {
+                $compteParticipants = $comptesDB->getCompteFromId($userId);
+                array_push($array_comptes_participants, $compteParticipants);
+            }
+
+        } else if ($compteType === 'prof') {
+            $usersId = $comptesVoyagesDB->getIdComptesFromIdVoyage($id);
+            $students = $comptesVoyagesDB->getEtuIdsFromProfId($connectedUser->getIdCompte());
+            foreach ($usersId as $userId) {
+                if(in_array($userId,$students) || $userId === $connectedUser->getIdCompte()) {
+                $compteParticipants = $comptesDB->getCompteFromId($userId);
+                array_push($array_comptes_participants, $compteParticipants);
+                }
+            }
+        }
+
+        //Passe les variables à la vue
+        $this->set('comptes', $array_comptes_participants);
 
 
     }

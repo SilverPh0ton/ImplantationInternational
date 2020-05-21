@@ -40,7 +40,12 @@ $userCount = get('userCount');
         </tr>
         <tr>
             <th scope="row">Participants</th>
-            <td><?= $userCount ?> participant(s)</td>
+            <td> <?= nav1(
+                    '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
+                    'Voyages',
+                    'viewparticipants',
+                    $id_voyage);
+                ?> <?= $userCount ?> participant(s)</td>
         </tr>
         <tr>
             <th scope="row">Propositions d'origine</th>
