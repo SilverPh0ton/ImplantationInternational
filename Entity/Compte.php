@@ -15,6 +15,7 @@ class Compte
     private $date_naissance;
     private $telephone;
     private $programme;
+    private $anonyme;
 
     /**
      * Compte constructor.
@@ -29,8 +30,9 @@ class Compte
      * @param $date_naissance
      * @param $telephone
      * @param $programme
+     * @param $anonyme
      */
-    public function __construct($id_compte, $pseudo, $mot_de_passe, $type, $actif, $courriel, $nom, $prenom, $date_naissance, $telephone, Programme $programme)
+    public function __construct($id_compte, $pseudo, $mot_de_passe, $type, $actif, $courriel, $nom, $prenom, $date_naissance, $telephone, Programme $programme, $anonyme)
     {
         $this->id_compte = $id_compte;
         $this->pseudo = $pseudo;
@@ -43,6 +45,7 @@ class Compte
         $this->date_naissance = $date_naissance;
         $this->telephone = $telephone;
         $this->programme = $programme;
+        $this->anonyme = $anonyme;
     }
 
 
@@ -218,6 +221,22 @@ class Compte
     public function setProgramme(Programme $programme)
     {
         $this->programme = $programme;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnonyme()
+    {
+        return $this->anonyme;
+    }
+
+    /**
+     * @param mixed $anonyme
+     */
+    public function setAnonyme($anonyme)
+    {
+        $this->anonyme = $anonyme;
     }
 
     public function validate()
