@@ -41,6 +41,7 @@ $ctr =1;
                 <tr>
                     <th scope="col">Catégories</th>
                     <th scope="col">Actif</th>
+                    <th scope="col">Par défaut</th>
                     <th scope="col" class="actions"></th>
                 </tr>
                 </thead>
@@ -51,6 +52,7 @@ $ctr =1;
                     <tr>
                         <td <?php echo $color ?> ><?= $categorie->getCategorie() ?></td>
                         <td <?php echo $color ?> ><?= ($categorie->getActif() ? 'Oui' : 'Non') ?></td>
+                        <td <?php echo $color ?> ><?= ($categorie->getDefault() ? 'Oui' : 'Non') ?></td>
                         <td class="actions" style="text-align: right">
                             <?= nav1(
                                 '<img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">',

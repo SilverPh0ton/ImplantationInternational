@@ -68,22 +68,22 @@ class VoyagesController extends AppController
                             $this->flashGood('Le voyage a été ajouté.');
                             return $this->redirect('voyages', 'index');
                         } else {
-                            $this->flashBad('Erreur d\'association');
+                            $this->flashBad('Erreur d\'association.');
                             return $this->redirect('voyages', 'index');;
                         }
                     } else {
-                        $this->flashBad('Vous faites déjà parti de ce voyage');
+                        $this->flashBad('Vous faites déjà partie de ce voyage.');
                         return $this->redirect('voyages', 'index');;
                     }
                 }
                 else{
-                    $this->flashBad("Le code d'activation est invalide");
+                    $this->flashBad("Le code d'activation est invalide.");
                     return $this->redirect('voyages', 'index');;
                 }
             }
             else
             {
-                $this->flashBad('Le code d\'activation est invalide');
+                $this->flashBad('Le code d\'activation est invalide.');
                 return $this->redirect('voyages','index');;
             }
 
@@ -130,12 +130,12 @@ class VoyagesController extends AppController
             $date_now = date("Y-m-d");
 
             if ($date_retour < $date_now || $date_depart < $date_now ) {
-                $this->flashBad('Les date doivent être dans le future');
+                $this->flashBad('Les dates doivent être dans le futur.');
                 return $this->redirect('Voyages', 'Add');
             }
 
             if ($date_retour < $date_depart) {
-                $this->flashBad('La date de retour doit être après la date de départ');
+                $this->flashBad('La date de retour doit être après la date de départ.');
                 return $this->redirect('Voyages', 'Add');
             }
 
@@ -166,11 +166,11 @@ class VoyagesController extends AppController
                     $this->flashGood('Le voyage été enregistrée.');
                     return $this->redirect('voyages', 'index');
                 } else {
-                    $this->flashBad('Le voyage n\'a pas pu être enregistrée . Veuillez réessayer');
+                    $this->flashBad('Le voyage n\'a pas pu être enregistré. Veuillez réessayer.');
                     return $this->redirect('Voyages', 'Add');
                 }
             } else {
-                $this->flashBad('Le voyage n\'a pas pu être enregistrée . Veuillez réessayer');
+                $this->flashBad('Le voyage n\'a pas pu être enregistré. Veuillez réessayer.');
                 return $this->redirect('Voyages', 'Add');
             }
         }
@@ -229,14 +229,15 @@ class VoyagesController extends AppController
             $date_now = date("Y-m-d");
 
             if ($date_retour < $date_now || $date_depart < $date_now ) {
-                $this->flashBad('Les date doivent être dans le future');
+                 $this->flashBad('Les dates doivent être dans le futur.');
                 return $this->redirectParam1('Voyages', 'Edit', $id);
             }
 
             if ($date_retour < $date_depart) {
-                $this->flashBad('La date de retour doit être après la date de départ');
+                $this->flashBad('La date de retour doit être après la date de départ.');
                 return $this->redirectParam1('Voyages', 'Edit', $id);
             }
+
             $destination = $destinationDB->getDestinationFromId($_POST['id_destination']);
 
             $voyage->setVille($_POST['ville']);
@@ -253,7 +254,7 @@ class VoyagesController extends AppController
                     $this->flashGood('Le voyage été modifié.');
                     return $this->redirect('voyages', 'index');
             } else {
-                $this->flashBad('Le voyage n\'a pas pu être modifié . Veuillez réessayer');
+                $this->flashBad('Le voyage n\'a pas pu être modifié . Veuillez réessayer.');
                 return $this->redirectParam1('Voyages', 'Edit', $id);
             }
 

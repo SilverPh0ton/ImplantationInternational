@@ -7,6 +7,7 @@ class Categorie
 {
     private $id_categorie;
     private $actif;
+    private $default;
     private $categorie;
 
     /**
@@ -14,12 +15,14 @@ class Categorie
      * @param $id_categorie
      * @param $actif
      * @param $categorie
+     * @param $default
      */
-    public function __construct($id_categorie, $actif, $categorie)
+    public function __construct($id_categorie, $actif, $categorie, $default)
     {
         $this->id_categorie = $id_categorie;
         $this->actif = $actif;
         $this->categorie = $categorie;
+        $this->default = $default;
     }
 
     /**
@@ -69,6 +72,22 @@ class Categorie
     {
         $this->actif = $actif;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+    /**
+     * @param mixed $default
+     */
+    public function setDefault($default)
+    {
+        $this->default = $default;
+    }
+
 
     public function validate()
     {

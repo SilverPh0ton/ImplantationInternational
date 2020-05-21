@@ -83,6 +83,8 @@ class QuestionsDB extends ConfigDB
         return $stmt->fetchColumn();
     }
 
+
+
     public function getAllQuestions()
     {
         $questions = array();

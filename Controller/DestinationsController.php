@@ -28,7 +28,7 @@ class DestinationsController extends AppController
 
             if($nomPaysExiste)
             {
-                $this->flashBad('Cette destination existe déjà');
+                $this->flashBad('Cette destination existe déjà.');
                 return $this->redirect("Destinations", 'Add');
             }
 
