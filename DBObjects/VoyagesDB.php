@@ -205,4 +205,68 @@ VALUES(:id_proposition,:ville,  :date_depart,  :date_retour, :actif, :approuvee,
         return $nameList;
     }
 
+    public function getAllTrips()
+    {
+        $sql = "SELECT COUNT(*) AS NB, EXTRACT(year FROM v.date_retour) AS ANNEE
+                FROM voyages v
+                WHERE v.date_retour <= sysdate() AND v.actif = 1
+                GROUP BY ANNEE
+                ORDER BY ANNEE DESC
+                LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getAllCountry()
+    {
+        $sql = "SELECT COUNT( DISTINCT d.nom_pays ) AS NBR_PAYS,  EXTRACT(year FROM v.date_retour) AS ANNEE
+                FROM destinations d
+                INNER JOIN voyages v ON v.id_destination = d.id_destination
+                INNER JOIN propositions p ON p.id_destination = d.id_destination
+                WHERE v.date_retour <= sysdate()
+                GROUP BY ANNEE
+                ORDER BY ANNEE DESC
+                LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getDestinationStats()
+    {
+      $destinationStats = array();
+      $sql = "SELECT DISTINCT(v.nom_projet), v.ville, EXTRACT(YEAR FROM v.date_retour) AS ANNEE, d.nom_pays AS nom_pays, count(*) as NB
+              FROM voyages v
+              INNER JOIN destinations d ON d.id_destination = v.id_destination
+              WHERE v.date_retour <= sysdate()
+              GROUP BY ANNEE
+              ORDER BY ANNEE DESC
+              LIMIT 5";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->execute();
+      $destinationStats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+      return $destinationStats;
+    }
+
+    public function getFuturProjetsStats()
+    {
+      $futurProjetStats = array();
+      $sql = "SELECT DISTINCT(v.nom_projet), v.ville, EXTRACT(YEAR FROM v.date_retour) AS ANNEE, d.nom_pays AS nom_pays, count(*) as NB
+              FROM voyages v
+              INNER JOIN destinations d ON d.id_destination = v.id_destination
+              WHERE v.date_retour >= sysdate()
+              GROUP BY ANNEE, v.nom_projet
+              ORDER BY ANNEE DESC";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->execute();
+      $futurProjetStats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+      return $futurProjetStats;
+    }
 }

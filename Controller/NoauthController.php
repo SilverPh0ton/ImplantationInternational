@@ -71,6 +71,7 @@ class NoauthController extends AppController
 
             $activation = $this->activationsDB->getActivationFromCode($_POST['code_activation']);
 
+
             $date_naissance_str = $_POST['date_naissance']['year'] . "-" . $_POST['date_naissance']['month'] . "-" . $_POST['date_naissance']['day'];
 
 
@@ -108,7 +109,8 @@ class NoauthController extends AppController
                 $_POST['prenom'],
                 $date_naissance,
                 $_POST['telephone'],
-                $programme
+                $programme,
+                true
             );
 
             //Enregistre l’entité
@@ -155,6 +157,7 @@ class NoauthController extends AppController
                 if (!empty($result)) {
                     if (!empty($pass = $this->compteDB->changePassFromID($result))) {
                         $this->send_email($courriel, $pseudo, $pass);
+                        $this->flashGood('Un courriel contenant votre nouveau mot de passe vous a été envoyé ');
                         $this->redirect('Comptes', 'Login');
                     }
                 } else {
@@ -181,7 +184,7 @@ class NoauthController extends AppController
              $mail->Password = '57468b537bbb17';                               // SMTP password
              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
              $mail->Port = 2525;                                    // TCP port to connect to
-
+             $mail->CharSet = 'UTF-8';
              //Recipients
              $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
              $mail->addAddress($courriel, $pseudo);     // Add a recipient

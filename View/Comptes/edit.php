@@ -114,6 +114,17 @@ $programmes = get('array_prog');
                 </select>
             </div>
 
+            <?php if (isOfType([ADMIN,PROF])): ?>
+                <div class="input">
+                <label for="anonyme">Voulez-vous que les autres accompagnateurs voient votre profil?</label>
+
+                <input type="radio" name="anonyme" value="1" <?= ($compte->getAnonyme() ? 'checked' : '') ?>> Oui
+                <input type="radio" name="anonyme" value="0" <?= (!$compte->getAnonyme() ? 'checked' : '')?>> Non
+            </div>
+            <?php
+             else: ?>
+          <input type="radio" name="anonyme" value="1" hidden>
+             <?php endif; ?>
             <?php if (isOfType([ADMIN])): ?>
                 <div class="input">
                     <label for="type">Type de compte</label>
@@ -129,11 +140,10 @@ $programmes = get('array_prog');
                         </option>
                     </select>
                 </div>
-            <?php elseif (isOfType([PROF])): ?>
                 <input type="hidden" name="type" value="<?= $compte->getType() ?>">
                 <button type="button" data-toggle="modal" data-target="#myModal_promote"> Promouvoir en accompagnateur
                 </button>
-            <?php elseif (isOfType([ETUDIANT])): ?>
+            <?php elseif (isOfType([PROF,ETUDIANT])): ?>
                 <input type="hidden" name="type" value="<?= $compte->getType() ?>">
             <?php endif; ?>
 
@@ -145,6 +155,7 @@ $programmes = get('array_prog');
             <?php elseif (isOfType([PROF,ETUDIANT])): ?>
                 <input hidden type="checkbox" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
             <?php endif; ?>
+
             <div>
                 <button type="submit">Enregistrer</button>
                 <!--Button de navigation -->
