@@ -9,6 +9,7 @@ $voyagesController->view($id_voyage);
 
 $voyage = get('voyage');
 $userCount = get('userCount');
+$compteConnecter=$_SESSION["connectedUser"]
 ?>
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content" >
@@ -42,12 +43,15 @@ $userCount = get('userCount');
         </tr>
         <tr>
             <th scope="row">Participant(s)</th>
-            <td id="nbrpart"> <?= nav1(
-                    '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
-                    'Voyages',
-                    'viewparticipants',
-                    $id_voyage);
-                ?> <?= $userCount ?> participant(s)</td>
+            <td id="nbrpart"> <?php
+                if($compteConnecter->getType()!='etudiant') {
+
+                    echo nav1(
+                        '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
+                        'Voyages',
+                        'viewparticipants',
+                        $id_voyage);
+                }?> <?= $userCount ?> participant(s)</td>
         </tr>
         <tr>
             <th scope="row">Proposition d'origine</th>

@@ -201,7 +201,12 @@ class ComptesController extends AppController
                 $compte->setTelephone($_POST['telephone']);
                 $compte->setType($_POST['type']);
                 $compte->setActif(isset($_POST['actif']) ? 1 : 0);
+                if(isset($_POST['anonyme'])){
                 $compte->setAnonyme($_POST['anonyme']);
+                }
+                else{
+                    $compte->setAnonyme(true);
+                }
 
 
                 $programme = $this->programmeDB->getProgrammeFromNom($_POST['id_programme']);

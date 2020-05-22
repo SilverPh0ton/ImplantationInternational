@@ -284,7 +284,6 @@ class ComptesVoyagesDB extends ConfigDB
 
                 // Bind variables to the prepared statement as parameters
                 $stmt->bindParam(":profId", $compteId , PDO::PARAM_INT);
-                $stmt->bindParam(":type", $type , PDO::PARAM_STR);
 
                 // Attempt to execute the prepared statement
                 if ($stmt->execute()) {

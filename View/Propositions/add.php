@@ -15,6 +15,7 @@ if(isset($_GET['param1'])){
 }
 
 $ctr = 1;
+$id = 0;
 
 ?>
 <?= load_css('tab') ?>
