@@ -1,8 +1,5 @@
 $(document).ready(function () {
 
-    console.log('holaptate: 1');
-
-
     $(".activityTable").on('click',".addRow", (function() {
         console.log('holaptate: CLICK');
         var name = $("#endroit_field").val();
