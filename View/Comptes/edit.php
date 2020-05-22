@@ -145,6 +145,15 @@ $programmes = get('array_prog');
             <?php elseif (isOfType([PROF,ETUDIANT])): ?>
                 <input hidden type="checkbox" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
             <?php endif; ?>
+
+            <?php if (isOfType([ADMIN,PROF])): ?>
+                <label for="anonyme">Voulez-vous que les autres accompagnateurs voient votre profil?</label>
+
+                <input type="radio" name="anonyme" value="1" <?= ($compte->getAnonyme() ? 'checked' : '') ?>> Oui
+                <input type="radio" name="anonyme" value="0" <?= (!$compte->getAnonyme() ? 'checked' : '')?>> Non
+            </div>
+            <?php endif; ?>
+
             <div>
                 <button type="submit">Enregistrer</button>
                 <!--Button de navigation -->
@@ -199,7 +208,7 @@ $programmes = get('array_prog');
         $connectedUser = $_SESSION["connectedUser"];
         $compteType = $connectedUser->getType();
         if ($compteType == 'admin' || $compteType == 'prof') {
-            nav('<button> Retour à la liste des comptes </button>', 'Comptes', 'index');
+            nav('<button> Retour à la liste des participants </button>', 'Comptes', 'index');
         }
 
     }
@@ -221,7 +230,7 @@ $programmes = get('array_prog');
                 <input name="mot_de_passe_confirme" id="mot_de_passe_confirme" value="" type="password" minlength="9"
                        maxlength="30" required>
             </div>
-            <button type="submit">Enregistrer</button>
+            <button type="submit">Enregistrer le mot de passe</button>
         </fieldset>
 
     </form>

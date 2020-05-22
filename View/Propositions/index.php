@@ -13,17 +13,20 @@ $propositions = get('propositions');
 ?>
 <div class="voyages index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left columns content">
 
-    <h3>Propositions</h3>
+    <h3>Propositions de projet</h3>
+
+    <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
+        echo nav('<button class="add-btn">Ajouter une proposition </button>', 'Propositions', 'add');
+    endif; ?>
+
+
 
     <table class="table_to_paginate">
         <thead>
         <tr>
             <th scope="col">Nom du projet</th>
             <th scope="col">Pays</th>
-            <th scope="col" class='optionalField'>Coût</th>
-            <th scope="col"
-                class='optionalField'>Date limite d'inscription
-            </th>
+
             <th scope="col" class='optionalField'>Date de départ</th>
             <th scope="col" class='optionalField'>Date de retour</th>
             <th scope="col">État</th>
@@ -32,8 +35,8 @@ $propositions = get('propositions');
         </thead>
         <tbody>
         <?php foreach ($propositions as $proposition):?>
+            <?php    if (!(isOfType([ADMIN]) and ($proposition->getApprouvee() == '3'))): ?>
         <tr>
-
             <?php
             if ($proposition->getApprouvee() == 0) {
                 $color = 'style="color: #000000"';
@@ -41,14 +44,15 @@ $propositions = get('propositions');
                 $color = 'style="color: #aaaaaa"';
             } else if ($proposition->getApprouvee() == 1) {
                 $color = 'style="color: #D91515"';
+            } else if ($proposition->getApprouvee() == 3) {
+                $color = 'style="color: #dea41d"';
+            } else if ($proposition->getApprouvee() == 4) {
+                $color = 'style="color: #4287f5"';
             }
             ?>
 
             <td <?php echo $color ?> > <?= $proposition->getNomProjet() ?></td>
             <td <?php echo $color ?> > <?= $proposition->getDestination()->getNomPays() ?></td>
-            <td <?php echo $color ?> class='optionalField'> <?= $proposition->getCout() ?> </td>
-            <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateLimite()?>">
-                <?= dateToFrench($proposition->getDateLimite()) ?></td>
             <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateDepart()?>">
                 <?= dateToFrench($proposition->getDateDepart()) ?></td>
             <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateRetour()?>>">
@@ -64,6 +68,12 @@ $propositions = get('propositions');
                 }
                 else if($proposition->getApprouvee() === '1'){
                     echo "Refusé";
+                }
+                else if($proposition->getApprouvee() === '3'){
+                    echo "Brouillon";
+                }
+                else if($proposition->getApprouvee() === '4'){
+                    echo "Nouveauté";
                 }
                 ?>
             </td>
@@ -90,6 +100,12 @@ $propositions = get('propositions');
                         echo('<img data-toggle="modal" data-target="#myModal_refuse_'.$proposition->getIdProposition().'" alt="refuser icon" src="Ressource/img/ban-solid.png" class="images" data-placement = "top" title = "Refuser">');
                     }
                 }
+                if($proposition->getApprouvee() === '2'){
+
+                echo nav1('<img alt="Recycler le projet icon" src="Ressource/img/btRecycle.png" class="images" data-placement = "top" title = "Réutilisation du projet">',
+                'Propositions',
+                 'Add',
+                    $proposition->getIdProposition());}
                 ?>
                 <div class="modal" id="<?= 'myModal_accept_'.$proposition->getIdProposition() ?>">
                     <div class="modal-dialog">
@@ -160,20 +176,14 @@ $propositions = get('propositions');
                 </div>
 
         </tr>
+            <?php endif ?>
         <?php endforeach; ?>
         </tbody>
     </table>
 
 </div>
 
-<!--Button de navigation -->
-<?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
-    echo nav('<button>Ajouter une propositions </button>', 'Propositions', 'add');
-endif; ?>
-
 <script>
-    var order = [[ 6, 'asc' ],[ 4, 'asc' ]];
+    var order = [[ 4, 'asc' ]];
 </script>
 <?= load_script('paginator') ?>
-
-

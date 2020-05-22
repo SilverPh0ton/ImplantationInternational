@@ -276,8 +276,6 @@ class ComptesVoyagesDB extends ConfigDB
                     (SELECT id_voyage FROM comptes_voyages cv
                     INNER JOIN comptes c on cv.id_compte = c.id_compte
                     WHERE c.id_compte = :profId)
-                    AND `id_compte` IN
-                    (SELECT id_compte FROM comptes WHERE type = :type)
                     GROUP BY id_compte";
 
             if ($stmt = $this->conn->prepare($sql)) {

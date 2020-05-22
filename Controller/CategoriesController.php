@@ -29,12 +29,17 @@ class CategoriesController extends AppController
                 $this->flashBad('Cette catégorie existe déjà');
                 return $this->redirect("Categories", 'Add');
             }
-
+            if (isset($_POST['question_default'])) {
+                $default = 1;
+            } else {
+                $default = 0;
+            }
 
             $category = new Categorie(
                 null,
                 1,
-                $_POST['categorie']
+                $_POST['categorie'],
+                $default
             );
 
             //Enregistre l’entité
@@ -64,16 +69,24 @@ class CategoriesController extends AppController
         if (!empty($_POST)) {
 
 
+
                 if (isset($_POST['actif'])) {
                     $actif = 1;
                 } else {
                     $actif = 0;
                 }
+                if (isset($_POST['question_default'])) {
+                    $default = 1;
+                } else {
+                    $default = 0;
+                }
+        
 
                 $category = new Categorie(
                     $id,
                     $actif,
-                    $_POST['categorie']
+                    $_POST['categorie'],
+                    $default
                 );
 
                 //Enregistre l’entité

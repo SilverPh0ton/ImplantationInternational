@@ -47,9 +47,7 @@ class VoyagesDB extends ConfigDB
                                 $row['id_voyage'],
                                 $row['id_proposition'],
                                 $row['ville'],
-                                $row['cout'],
                                 $row['date_depart'],
-                                $row['date_limite'],
                                 $row['date_retour'],
                                 $row['actif'],
                                 $row['approuvee'],
@@ -110,9 +108,7 @@ class VoyagesDB extends ConfigDB
                 $voyageInfo['id_voyage'],
                 $voyageInfo['id_proposition'],
                 $voyageInfo['ville'],
-                $voyageInfo['cout'],
                 $voyageInfo['date_depart'],
-                $voyageInfo['date_limite'],
                 $voyageInfo['date_retour'],
                 $voyageInfo['actif'],
                 $voyageInfo['approuvee'],
@@ -130,15 +126,13 @@ class VoyagesDB extends ConfigDB
     {
         if (isset($voyage))
         {
-            $sql = "INSERT INTO voyages (id_proposition,ville,cout,date_depart, date_limite, date_retour, actif, approuvee, id_destination, nom_projet, note)
-VALUES(:id_proposition,:ville, :cout, :date_depart, :date_limite, :date_retour, :actif, :approuvee, :id_destination, :nom_projet, :note)";
+            $sql = "INSERT INTO voyages (id_proposition,ville,date_depart,  date_retour, actif, approuvee, id_destination, nom_projet, note) 
+VALUES(:id_proposition,:ville,  :date_depart,  :date_retour, :actif, :approuvee, :id_destination, :nom_projet, :note)";
             $stmt = $this->conn->prepare($sql);
            if($stmt->execute(array(
                 ':id_proposition' => $voyage->getIdProposition(),
                 ':ville' => $voyage->getVille(),
-                ':cout' => $voyage->getCout(),
                 ':date_depart' =>$voyage->getDateDepart(),
-                ':date_limite'=>$voyage->getDateLimite(),
                 ':date_retour'=>$voyage->getDateRetour(),
                 ':actif'=>$voyage->getActif(),
                 ':approuvee'=>$voyage->getApprouvee(),
@@ -165,14 +159,12 @@ VALUES(:id_proposition,:ville, :cout, :date_depart, :date_limite, :date_retour, 
     {
         if (isset($voyage))
         {
-            $sql = "UPDATE voyages SET ville = :ville, cout = :cout, date_depart = :date_depart, date_limite = :date_limite, date_retour = :date_retour, actif = :actif, approuvee = :approuvee, id_destination = :id_destination, nom_projet = :nom_projet, note = :note
+            $sql = "UPDATE voyages SET ville = :ville,  date_depart = :date_depart,  date_retour = :date_retour, actif = :actif, approuvee = :approuvee, id_destination = :id_destination, nom_projet = :nom_projet, note = :note
                         WHERE id_voyage = :id_voyage";
             $stmt = $this->conn->prepare($sql);
             if($stmt->execute(array(
                 ':ville' => $voyage->getVille(),
-                ':cout' => $voyage->getCout(),
                 ':date_depart' =>$voyage->getDateDepart(),
-                ':date_limite'=>$voyage->getDateLimite(),
                 ':date_retour'=>$voyage->getDateRetour(),
                 ':actif'=>$voyage->getActif(),
                 ':approuvee'=>$voyage->getApprouvee(),

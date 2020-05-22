@@ -42,7 +42,8 @@ class CategoriesDB extends ConfigDB
                             $categorie = new Categorie(
                                 $row['id_categorie'],
                                 $row['actif'],
-                                $row['categorie']
+                                $row['categorie'],
+                                $row['question_default']
                             );
 
                             return $categorie;
@@ -93,7 +94,9 @@ class CategoriesDB extends ConfigDB
             $categorie = new Categorie(
                 $categorieInfo['id_categorie'],
                 $categorieInfo['actif'],
-                $categorieInfo['categorie']
+                $categorieInfo['categorie'],
+                $categorieInfo['question_default']
+
             );
 
 
@@ -116,7 +119,8 @@ class CategoriesDB extends ConfigDB
             $categorie = new Categorie(
                 $categorieInfo['id_categorie'],
                 $categorieInfo['actif'],
-                $categorieInfo['categorie']
+                $categorieInfo['categorie'],
+                $categorieInfo['question_default']
             );
 
 
@@ -135,15 +139,16 @@ class CategoriesDB extends ConfigDB
             $categorieCtr = $stmtExist->fetchColumn();
 
             if ($categorieCtr == 0) {
-                $sql = "INSERT INTO categories (categorie,actif) VALUES(:categorie, :actif)";
+                $sql = "INSERT INTO categories (categorie,actif,question_default) VALUES(:categorie, :actif, :question_default )";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute(array(':categorie' => $categorie->getCategorie(),
-                    ':actif' => $categorie->getActif()
+                    ':actif' => $categorie->getActif(),
+                    ':question_default' => $categorie->getDefault()
                 ));
 
                 return true;
             } else {
-                $sql = "UPDATE categories SET actif = 1 WHERE categorie = :categorie";
+                $sql = "UPDATE categories SET actif = 1, question_default = 0 WHERE categorie = :categorie";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute(array(':categorie' => $categorie->getCategorie()));
                 return true;
@@ -164,12 +169,14 @@ class CategoriesDB extends ConfigDB
             if ($compteCtr == 1) {
                 $sql = "UPDATE categories SET 
                 categorie = :categorie,
-                actif = :actif
+                actif = :actif,
+                question_default =:question_default
                 WHERE id_categorie = :id_categorie ";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute(array(
                     ':categorie' => $category->getCategorie(),
                     ':actif' => $category->getActif(),
+                    ':question_default' => $category->getDefault(),
                     ':id_categorie'=> $category->getIdCategorie()));
 
                 return true;
@@ -212,6 +219,49 @@ class CategoriesDB extends ConfigDB
 
             if ($categorieCtr == 1) {
                 $sql = "UPDATE categories SET actif = 0 WHERE categorie = :categorie";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute(array(':categorie' => $categorie->getCategorie()));
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    /*pour activer la catégorie par défaut*/
+    public function setCategorieDefaultOn(Categorie $categorie)
+    {
+        if (isset($categorie)&&$categorie->validate())
+        {
+            $stmtExist = $this->conn->prepare("SELECT count(*) from categories where categorie = :categorie");
+            $stmtExist->execute(array(':categorie' => $categorie->getCategorie()));
+            $categorieCtr = $stmtExist->fetchColumn();
+
+            if ($categorieCtr == 1) {
+                $sql = "UPDATE categories SET question_default = 1 WHERE categorie = :categorie";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute(array(':categorie' => $categorie->getCategorie()));
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    /*pour désactiver la catégorie par défaut*/
+    public function setCategorieDefaultOff(Categorie $categorie)
+    {
+        if (isset($categorie)&&$categorie->validate())
+        {
+            $stmtExist = $this->conn->prepare("SELECT count(*) from categories where categorie = :categorie");
+            $stmtExist->execute(array(':categorie' => $categorie->getCategorie()));
+            $categorieCtr = $stmtExist->fetchColumn();
+
+            if ($categorieCtr == 1) {
+                $sql = "UPDATE categories SET question_default = 0 WHERE categorie = :categorie";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute(array(':categorie' => $categorie->getCategorie()));
                 return true;

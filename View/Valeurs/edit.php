@@ -7,6 +7,7 @@
  * @var \App\Model\Entity\Valeur[] $valeurs
  */
 $ctr = 1;
+$id = 0;
 $id_voyage = $_GET['param1'];
 $id_compte = $_GET['param2'];
 $valeursController->edit($id_voyage, $id_compte);
@@ -23,6 +24,7 @@ $connectedUser = $_SESSION["connectedUser"];
 
 <?= load_css('form') ?>
 <?= load_css('ControlOption') ?>
+<?= load_Script('fonctionCase') ?>
 
 <script>
     $(document).ready(function () {
@@ -46,7 +48,9 @@ $connectedUser = $_SESSION["connectedUser"];
             <?php else: ?>
 
                 <div class="accordion md-accordion accordion-1" id="accordionEx23" role="tablist">
+
                     <?php foreach ($categories as $categorie): ?>
+
                         <div class="card">
                             <div class="card-header blue lighten-3 z-depth-1" role="tab" id="heading<?php $ctr++;
                             echo $ctr ?>">
@@ -81,12 +85,56 @@ $connectedUser = $_SESSION["connectedUser"];
                                                     <!--Loop pour questions-->
                                                     <span>
                                                         <?php if ($question->getAffichage() === 'Case'): ?>
-                                                            <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif; ?> <!-- Default Value-->
+                                                          <br> <br>
+                                                        <?php   $listeReponse = explode(";", $vraiValeurs);
 
-                                                            <input type="checkbox"
-                                                                   name="<?= $question->getIdQuestion() ?>"
-                                                            <?= ('on' === $vraiValeurs) ? ' checked' : '' ?>
-                                                            >
+                                                        $idCase = 0;
+                                                        $options = explode(";", $question->getInputOption());
+                                                        if($vraiValeurs === NULL){
+                                                          foreach ($options as $option):
+                                                        array_push($listeReponse,"false");
+                                                      endforeach;
+                                                    }
+                                                 
+
+                                                         ?>
+
+                                                                <?php foreach ($options as $option): $idCase++; $id++;?>
+                                                                   
+                                                                <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                                    checked="checked"
+                                                                  <?php endif; ?>  id="<?= $id?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" type="checkbox">
+                                                                        <?= $option ?>
+                                                                    </input>
+                                                                    <br>
+                                                                <?php endforeach ?>
+                                                                <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
+
+
+
+                                                <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                          <br> <br>
+                                                        <?php   $listeReponse = explode(";", $vraiValeurs);
+                                                        $idRadio = 0;
+
+                                                        $options = explode(";", $question->getInputOption());
+                                                        if($vraiValeurs === NULL){
+                                                          foreach ($options as $option):
+                                                        array_push($listeReponse,"false");
+                                                      endforeach;
+                                                    }
+                                                         ?>                                                       
+                                                                <?php foreach ($options as $option): $idRadio++;
+                                                               ?>
+
+                                                                <input <?php if($listeReponse[$idRadio - 1] === "true") : ?>
+                                                                    checked="checked"
+                                                                  <?php endif; ?>  name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
+                                                                        <?= $option ?>
+                                                                    </input>
+                                                                    <br>
+                                                                <?php endforeach ?>
+                                                                <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
                                                         <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 

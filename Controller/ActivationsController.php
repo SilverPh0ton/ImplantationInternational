@@ -65,7 +65,7 @@ class ActivationsController extends AppController
                 $this->flashGood('Les codes ont été générés');
                 return $this->redirectParam1('activations', 'index', $id_voyage);
             }
-            $this->flashBad('Les codes n\'ont pas pu être générés. Veuillez réessayer');
+            $this->flashBad('Les codes n\'ont pas pu être générés. Veuillez réessayer.');
 
 
         }
