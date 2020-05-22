@@ -27,10 +27,11 @@ class StatistiqueController extends AppController
 
     public function index()
     {
-      $this->isAuthorized(['admin','prof','etudiant']);
+      $this->isAuthorized(['admin']);
 
       $voyagesDB = new VoyagesDB();
       $comptesVoyagesDB = new ComptesVoyagesDB();
+      $compteDB = new ComptesDB();
 
       $connectedUser = $_SESSION["connectedUser"];
       $connectedUserType = $connectedUser->getType();
@@ -39,7 +40,6 @@ class StatistiqueController extends AppController
       $this->set('voyages',$voyages);
 
       //Number of people trips
-      $compteDB = new ComptesDB();
       $compteStats = $compteDB->getAllUsers();
       $this->set('compteStats',$compteStats);
 
