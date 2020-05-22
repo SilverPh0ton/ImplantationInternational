@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $(".addRow").click(function () {
+    $(".activityTable").on('click',".addRow", (function() {
 
         var name = $("#endroit_field").val();
         var description = $("#description_field").val();
@@ -27,23 +27,22 @@ $(document).ready(function () {
         $("#startMonth").val($("#endMonth").val());
         $("#startDay").val($("#endDay").val());
         $('.addRow').attr('disabled', true);
-    });
+    }));
 
     $('.addRow').attr('disabled', true);
 
-    $('#endroit_field').keyup(function () {
+    $(".activityTable").on('keyup',".endroit_type", (function() {
         if ($(this).val().length > 3) {
             $('.addRow').attr('disabled', false);
         } else {
             $('.addRow').attr('disabled', true);
         }
-    });
+    }));
 
     $(".activityTable").on("click", ".deleteRow", function () {
         $(this).parents("tr").remove();
         adjust_id();
     });
-
 
 
 function adjust_id() {
@@ -69,3 +68,4 @@ $(function() {
    adjust_id();
 });
 });
+
