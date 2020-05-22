@@ -71,6 +71,7 @@ class NoauthController extends AppController
 
             $activation = $this->activationsDB->getActivationFromCode($_POST['code_activation']);
 
+
             $date_naissance_str = $_POST['date_naissance']['year'] . "-" . $_POST['date_naissance']['month'] . "-" . $_POST['date_naissance']['day'];
 
 
@@ -156,6 +157,7 @@ class NoauthController extends AppController
                 if (!empty($result)) {
                     if (!empty($pass = $this->compteDB->changePassFromID($result))) {
                         $this->send_email($courriel, $pseudo, $pass);
+                        $this->flashGood('Un courriel contenant votre nouveau mot de passe vous a été envoyé ');
                         $this->redirect('Comptes', 'Login');
                     }
                 } else {

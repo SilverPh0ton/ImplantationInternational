@@ -100,12 +100,12 @@ $propositions = get('propositions');
                         echo('<img data-toggle="modal" data-target="#myModal_refuse_'.$proposition->getIdProposition().'" alt="refuser icon" src="Ressource/img/ban-solid.png" class="images" data-placement = "top" title = "Refuser">');
                     }
                 }
-                if($proposition->getApprouvee() === '2'){
+
 
                 echo nav1('<img alt="Recycler le projet icon" src="Ressource/img/btRecycle.png" class="images" data-placement = "top" title = "Réutilisation du projet">',
                 'Propositions',
                  'Add',
-                    $proposition->getIdProposition());}
+                    $proposition->getIdProposition());
                 ?>
                 <div class="modal" id="<?= 'myModal_accept_'.$proposition->getIdProposition() ?>">
                     <div class="modal-dialog">
