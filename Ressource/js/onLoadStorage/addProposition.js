@@ -40,6 +40,11 @@ function savedata() {
        activity_json = JSON.stringify(activity_arr);
     }
     sessionStorage.setItem("activity_json", activity_json);
+
+    $('div .card').each(function(i, obj) {
+
+        console.log(obj);
+    });
 }
 
 window.onload = function() {
@@ -109,7 +114,7 @@ window.onload = function() {
         var activity_object = JSON.parse(activity_json);
 
         for (var i = 0; i < activity_object.length;i++){
-            
+
         }
 
     }

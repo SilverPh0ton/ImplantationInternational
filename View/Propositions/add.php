@@ -441,4 +441,13 @@ $idCase = 0;
         <br>
     </form>
 </div>
+<script type="text/javascript">
+$('div .card-body').each(function(i, obj) {
+
+    $(this).children().each(function(i, obj){
+
+        console.log($(this));
+    });
+});
+</script>
 <?= load_script('onLoadStorage/addProposition') ?>
