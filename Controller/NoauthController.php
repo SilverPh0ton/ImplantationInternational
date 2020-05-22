@@ -71,6 +71,7 @@ class NoauthController extends AppController
 
             $activation = $this->activationsDB->getActivationFromCode($_POST['code_activation']);
 
+
             $date_naissance_str = $_POST['date_naissance']['year'] . "-" . $_POST['date_naissance']['month'] . "-" . $_POST['date_naissance']['day'];
 
 
@@ -88,7 +89,7 @@ class NoauthController extends AppController
             }
 
             if (($_POST['date_naissance']['month'] == 2) && (in_array($_POST['date_naissance']['day'], $days))) {
-                $this->flashBad('La compte n\'a pas pu être créé. Mauvaise saisie de date.');
+                $this->flashBad('Le compte n\'a pas pu être créé. Mauvaise saisie de date.');
                 return $this->redirect('Noauth', 'CreateAccount');
             }
 
@@ -118,7 +119,8 @@ class NoauthController extends AppController
                 $_POST['prenom'],
                 $date_naissance,
                 $_POST['telephone'],
-                $programme
+                $programme,
+                true
             );
 
             //Enregistre l’entité
@@ -139,7 +141,7 @@ class NoauthController extends AppController
                     return $this->redirect('comptes', 'login');
                 }
             }
-            $this->flashBad('Votre compte n\'a pas pu être créé. Réessayez plus tard.\'');
+            $this->flashBad('Votre compte n\'a pas pu être créé. Réessayez plus tard.');
             return $this->redirect('comptes', 'login');
         }
     }
@@ -165,10 +167,11 @@ class NoauthController extends AppController
                 if (!empty($result)) {
                     if (!empty($pass = $this->compteDB->changePassFromID($result))) {
                         $this->send_email($courriel, $pseudo, $pass);
+                        $this->flashGood('Un courriel contenant votre nouveau mot de passe vous a été envoyé ');
                         $this->redirect('Comptes', 'Login');
                     }
                 } else {
-                    $this->flashBad('Aucun compte existe à cette combinaison');
+                    $this->flashBad('Aucun compte n\'existe avec cette combinaison');
                     return $this->redirect('Noauth', 'PasswordRecover');
                 }
 
@@ -191,7 +194,7 @@ class NoauthController extends AppController
              $mail->Password = '57468b537bbb17';                               // SMTP password
              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
              $mail->Port = 2525;                                    // TCP port to connect to
-
+             $mail->CharSet = 'UTF-8';
              //Recipients
              $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
              $mail->addAddress($courriel, $pseudo);     // Add a recipient
@@ -207,11 +210,7 @@ class NoauthController extends AppController
              die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
          }
 
-/*        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");*/
-
-
-
-
+        mail($courriel,"Une demande de modification de mot de passe a été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");
     }
 
 

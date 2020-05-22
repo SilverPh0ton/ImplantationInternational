@@ -7,10 +7,12 @@ use App\Model\Entity\ComptesVoyage;
 use App\Model\Entity\Destination;
 use App\Model\Entity\Voyage;
 use ComptesVoyagesDB;
+use ComptesDB;
 use DestinationsDB;
 use VoyagesDB;
 require_once 'DBObjects/VoyagesDB.php';
 require_once 'DBObjects/ComptesVoyagesDB.php';
+require_once 'DBObjects/ComptesDB.php';
 require_once 'DBObjects/ActivationsDB.php';
 require_once 'DBObjects/DestinationsDB.php';
 require_once 'Controller/AppController.php';
@@ -66,22 +68,22 @@ class VoyagesController extends AppController
                             $this->flashGood('Le voyage a été ajouté.');
                             return $this->redirect('voyages', 'index');
                         } else {
-                            $this->flashBad('Erreur d\'association');
+                            $this->flashBad('Erreur d\'association.');
                             return $this->redirect('voyages', 'index');;
                         }
                     } else {
-                        $this->flashBad('Vous faites déjà parti de ce voyage');
+                        $this->flashBad('Vous faites déjà partie de ce voyage.');
                         return $this->redirect('voyages', 'index');;
                     }
                 }
                 else{
-                    $this->flashBad("Le code d'activation est invalide");
+                    $this->flashBad("Le code d'activation est invalide.");
                     return $this->redirect('voyages', 'index');;
                 }
             }
             else
             {
-                $this->flashBad('Le code d\'activation est invalide');
+                $this->flashBad('Le code d\'activation est invalide.');
                 return $this->redirect('voyages','index');;
             }
 
@@ -128,12 +130,12 @@ class VoyagesController extends AppController
             $date_now = date("Y-m-d");
 
             if ($date_retour < $date_now || $date_depart < $date_now ) {
-                $this->flashBad('Les date doivent être dans le future');
+                $this->flashBad('Les dates doivent être dans le futur.');
                 return $this->redirect('Voyages', 'Add');
             }
 
             if ($date_retour < $date_depart) {
-                $this->flashBad('La date de retour doit être après la date de départ');
+                $this->flashBad('La date de retour doit être après la date de départ.');
                 return $this->redirect('Voyages', 'Add');
             }
 
@@ -164,11 +166,11 @@ class VoyagesController extends AppController
                     $this->flashGood('Le voyage été enregistrée.');
                     return $this->redirect('voyages', 'index');
                 } else {
-                    $this->flashBad('Le voyage n\'a pas pu être enregistrée . Veuillez réessayer');
+                    $this->flashBad('Le voyage n\'a pas pu être enregistré. Veuillez réessayer.');
                     return $this->redirect('Voyages', 'Add');
                 }
             } else {
-                $this->flashBad('Le voyage n\'a pas pu être enregistrée . Veuillez réessayer');
+                $this->flashBad('Le voyage n\'a pas pu être enregistré. Veuillez réessayer.');
                 return $this->redirect('Voyages', 'Add');
             }
         }
@@ -227,14 +229,15 @@ class VoyagesController extends AppController
             $date_now = date("Y-m-d");
 
             if ($date_retour < $date_now || $date_depart < $date_now ) {
-                $this->flashBad('Les date doivent être dans le future');
+                 $this->flashBad('Les dates doivent être dans le futur.');
                 return $this->redirectParam1('Voyages', 'Edit', $id);
             }
 
             if ($date_retour < $date_depart) {
-                $this->flashBad('La date de retour doit être après la date de départ');
+                $this->flashBad('La date de retour doit être après la date de départ.');
                 return $this->redirectParam1('Voyages', 'Edit', $id);
             }
+
             $destination = $destinationDB->getDestinationFromId($_POST['id_destination']);
 
             $voyage->setVille($_POST['ville']);
@@ -251,11 +254,56 @@ class VoyagesController extends AppController
                     $this->flashGood('Le voyage été modifié.');
                     return $this->redirect('voyages', 'index');
             } else {
-                $this->flashBad('Le voyage n\'a pas pu être modifié . Veuillez réessayer');
+                $this->flashBad('Le voyage n\'a pas pu être modifié . Veuillez réessayer.');
                 return $this->redirectParam1('Voyages', 'Edit', $id);
             }
 
         }
+
+
+    }
+
+    public function Viewparticipants($id = null)
+    {
+
+        $comptesVoyagesDB = new ComptesVoyagesDB();
+        $comptesDB = new ComptesDB();
+
+        $voyageDB = new VoyagesDB();
+        $voyage = $voyageDB->getVoyageFromId($id);
+
+        if (isset($_SESSION["connectedUser"])) {
+            $connectedUser = $_SESSION["connectedUser"];
+            $compteType = $connectedUser->getType();
+        }
+
+        //Vérification des permissions
+        $this->isAuthorized(['admin', 'prof']);
+
+        $array_comptes_participants = array();
+        //Requêtes au serveur SQL
+        if ($compteType === 'admin') {
+
+            $usersId = $comptesVoyagesDB->getIdComptesFromIdVoyage($id);
+            foreach ($usersId as $userId) {
+                $compteParticipants = $comptesDB->getCompteFromId($userId);
+                array_push($array_comptes_participants, $compteParticipants);
+            }
+
+        } else if ($compteType === 'prof') {
+            $usersId = $comptesVoyagesDB->getIdComptesFromIdVoyage($id);
+            $students = $comptesVoyagesDB->getEtuIdsFromProfId($connectedUser->getIdCompte());
+            foreach ($usersId as $userId) {
+                if(in_array($userId,$students) || $userId === $connectedUser->getIdCompte()) {
+                $compteParticipants = $comptesDB->getCompteFromId($userId);
+                array_push($array_comptes_participants, $compteParticipants);
+                }
+            }
+        }
+
+        //Passe les variables à la vue
+        $this->set('comptes', $array_comptes_participants);
+        $this->set('voyage',$voyage);
 
 
     }

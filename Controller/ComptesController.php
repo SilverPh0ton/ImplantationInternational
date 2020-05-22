@@ -125,13 +125,13 @@ class ComptesController extends AppController
         if (isset($_POST['promote'])) {
             if ($_POST['promote'] == "true") {
                 if ($this->comptesDB->promoteUserToProf($id)) {
-                    $this->flashGood("L'utilisateur sélecionné a été promu accompagnateur avec succès!");
+                    $this->flashGood("L'utilisateur sélectionné a été promu accompagnateur avec succès!");
                     return $this->redirectParam1('Comptes', 'index', $id);
                 }
-                $this->flashBad("Une erreur est survenu lors de la promotion");
+                $this->flashBad("Une erreur est survenus lors de la promotion");
                 return $this->redirectParam1('Comptes', 'index', $id);
             }
-            $this->flashBad("Une erreur est survenu lors de la promotion");
+            $this->flashBad("Une erreur est survenus lors de la promotion");
             return $this->redirectParam1('Comptes', 'index', $id);
         }
 
@@ -151,7 +151,7 @@ class ComptesController extends AppController
                     //Redirige à la page approprié
                     return $this->redirectParam1('Comptes', 'view', $id);
                 }
-                $this->flashBad('Les modifications de mot de passe n\'ont pas pu être enregistrées. Veuillez réessayer');
+                $this->flashBad('Les modifications de mot de passe n\'ont pas pu être enregistrées. Veuillez réessayer.');
                 return $this->redirectParam1("Comptes", "Edit", $id);
 
             }
@@ -192,7 +192,7 @@ class ComptesController extends AppController
                 $age = date_diff(date_create($date_naissance), new DateTime());
 
                 if ($age->y < AGE_MIN) {
-                    $this->flashBad('La compte n\'a pas pu être modifié. La personne doit être agée d\'au moins 15 ans.');
+                    $this->flashBad('Le compte n\'a pas pu être modifié. La personne doit être âgée d\'au moins 15 ans.');
                     return $this->redirectParam1('Comptes', 'Edit', $id);
                 }
                 elseif ($age->y >= AGE_MAX) {
@@ -204,6 +204,12 @@ class ComptesController extends AppController
                 $compte->setTelephone($_POST['telephone']);
                 $compte->setType($_POST['type']);
                 $compte->setActif(isset($_POST['actif']) ? 1 : 0);
+                if(isset($_POST['anonyme'])){
+                $compte->setAnonyme($_POST['anonyme']);
+                }
+                else{
+                    $compte->setAnonyme(true);
+                }
 
 
                 $programme = $this->programmeDB->getProgrammeFromNom($_POST['id_programme']);
@@ -231,7 +237,7 @@ class ComptesController extends AppController
                     return $this->redirectParam1("Comptes", "Edit", $id);
                 }
 
-                $this->flashBad('Les modifications du compte n\'ont pas pu être enregistrées. Veuillez réessayer');
+                $this->flashBad('Les modifications du compte n\'ont pas pu être enregistrées. Veuillez réessayer.');
                 return $this->redirectParam1("Comptes", "Edit", $id);
             }
         }
@@ -251,7 +257,7 @@ class ComptesController extends AppController
                     $this->redirect('voyages', 'index');
 
                 } else {
-                    $this->flashBad('Votre compte est desactivé');
+                    $this->flashBad('Votre compte est désactivé.');
                     $this->redirect('Comptes', 'Login');
                 }
             } else {
@@ -341,7 +347,8 @@ class ComptesController extends AppController
                 $_POST['prenom'],
                 $date_naissance,
                 $_POST['telephone'],
-                $programme
+                $programme,
+                true
             );
 
             //Enregistre l’entité

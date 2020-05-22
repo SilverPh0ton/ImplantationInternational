@@ -131,7 +131,7 @@ class VoyagesQuestionsController extends AppController
                 //Redirige à la page appropriée
                 return $this->redirectParam1('Voyages', 'Index', $id_voyage);
             }
-            $this->flashBad('Le formulaire n\'a pas pu être enregistré. Veuillez réessayer');
+            $this->flashBad('Le formulaire n\'a pas pu être enregistré. Veuillez réessayer.');
             return $this->redirectParam1('VoyagesQuestions', 'Index', $id_voyage);
         }
     }

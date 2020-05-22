@@ -16,7 +16,7 @@ protected  $conn;
     public function __construct()
     {
 
-        $this->DB_SERVER = 'localhost:3308';
+        $this->DB_SERVER = 'localhost';
         $this->DB_USERNAME = 'root';
         $this->DB_PASSWORD = '';
         $this->DB_NAME = 'implantation';

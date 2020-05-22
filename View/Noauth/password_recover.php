@@ -26,8 +26,8 @@ $noAuthController->passwordRecover();
             <?= $pseudo_err ?>
         </div>
         <div class="input text">
-            <label for="courriel">Courriel</label>0
-            <input type="email" name="courriel" id="mot-courriel-passe required">
+            <label for="courriel">Courriel</label>
+            <input type="email" name="courriel" id="mot-courriel-passe" required>
             <?= $courriel_err ?>
         </div>
         <button type="submit">Soumettre</button>

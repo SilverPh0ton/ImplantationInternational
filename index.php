@@ -98,7 +98,7 @@ use App\Controller\ComptesController; ?>
                     echo nav('<li class="navbutton">Configurations</li>', 'configuration', 'index')
                 ?>
 
-                <?php if(isOfType([ADMIN])&& 0==1 /*Disable Temporairement*/)
+                <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Statistiques</li>', 'statistiques', 'index')
                 ?>
 
@@ -285,6 +285,8 @@ $_SESSION["flashList"] = new ArrayObject();
                 include('View/Voyages/add.php');
             } else if ($switch_action === 'Edit') {
                 include('View/Voyages/edit.php');
+            } else if ($switch_action === 'Viewparticipants') {
+                include('View/Voyages/viewparticipants.php');
             }
             break;
 

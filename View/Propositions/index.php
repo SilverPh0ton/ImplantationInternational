@@ -13,7 +13,7 @@ $propositions = get('propositions');
 ?>
 <div class="voyages index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left columns content">
 
-    <h3>Propositions de séjour</h3>
+    <h3>Propositions de projet</h3>
 
     <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
         echo nav('<button class="add-btn">Ajouter une proposition </button>', 'Propositions', 'add');
@@ -46,6 +46,8 @@ $propositions = get('propositions');
                 $color = 'style="color: #D91515"';
             } else if ($proposition->getApprouvee() == 3) {
                 $color = 'style="color: #dea41d"';
+            } else if ($proposition->getApprouvee() == 4) {
+                $color = 'style="color: #4287f5"';
             }
             ?>
 
@@ -69,6 +71,9 @@ $propositions = get('propositions');
                 }
                 else if($proposition->getApprouvee() === '3'){
                     echo "Brouillon";
+                }
+                else if($proposition->getApprouvee() === '4'){
+                    echo "Nouveauté";
                 }
                 ?>
             </td>
@@ -95,12 +100,12 @@ $propositions = get('propositions');
                         echo('<img data-toggle="modal" data-target="#myModal_refuse_'.$proposition->getIdProposition().'" alt="refuser icon" src="Ressource/img/ban-solid.png" class="images" data-placement = "top" title = "Refuser">');
                     }
                 }
-                if($proposition->getApprouvee() === '2'){
+
 
                 echo nav1('<img alt="Recycler le projet icon" src="Ressource/img/btRecycle.png" class="images" data-placement = "top" title = "Réutilisation du projet">',
                 'Propositions',
                  'Add',
-                    $proposition->getIdProposition());}
+                    $proposition->getIdProposition());
                 ?>
                 <div class="modal" id="<?= 'myModal_accept_'.$proposition->getIdProposition() ?>">
                     <div class="modal-dialog">

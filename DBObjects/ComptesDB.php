@@ -54,7 +54,8 @@ class ComptesDB extends ConfigDB
                                 $row['prenom'],
                                 $row['date_naissance'],
                                 $row['telephone'],
-                                $programme
+                                $programme,
+                                $row['anonyme']
                             );
 
                             return $compte;
@@ -112,7 +113,8 @@ class ComptesDB extends ConfigDB
                                 $row['prenom'],
                                 $row['date_naissance'],
                                 $row['telephone'],
-                                $programme
+                                $programme,
+                                $row['anonyme']
                             );
 
                             return $compte;
@@ -168,7 +170,8 @@ class ComptesDB extends ConfigDB
                                 $row['prenom'],
                                 $row['date_naissance'],
                                 $row['telephone'],
-                                $programme
+                                $programme,
+                                $row['anonyme']
                             );
 
                             // Close statement
@@ -220,7 +223,8 @@ class ComptesDB extends ConfigDB
                 $compteInfo['prenom'],
                 $compteInfo['date_naissance'],
                 $compteInfo['telephone'],
-                $programme
+                $programme,
+                $compteInfo['anonyme']
             );
 
             array_push($comptes, $compte);
@@ -296,16 +300,17 @@ class ComptesDB extends ConfigDB
     function updateCompte(Compte $newCompte)
     {
         if (isset($newCompte)) {
-                $sql = "UPDATE comptes SET 
+                $sql = "UPDATE comptes SET
                 pseudo = :pseudo,
-                type = :type, 
+                type = :type,
                 actif = :actif,
                 courriel = :courriel,
                 nom = :nom,
                 prenom = :prenom,
                 date_naissance = :date_naissance,
                 telephone = :telephone,
-                id_programme = :id_programme
+                id_programme = :id_programme,
+                anonyme = :anonyme
                 WHERE id_compte = :idCompte ";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute(array(':pseudo' => $newCompte->getPseudo(),
@@ -317,7 +322,8 @@ class ComptesDB extends ConfigDB
                     ':date_naissance' => $newCompte->getDateNaissance(),
                     ':telephone' => $newCompte->getTelephone(),
                     ':id_programme' => $newCompte->getProgramme()->getIdProgramme(),
-                    ':idCompte' => $newCompte->getIdCompte()
+                    ':idCompte' => $newCompte->getIdCompte(),
+                    ':anonyme' =>$newCompte->getAnonyme()
                 ));
 
                 return true;
@@ -334,7 +340,7 @@ class ComptesDB extends ConfigDB
             $compteCtr = $stmtExist->fetchColumn();
 
             if ($compteCtr == 1) {
-                $sql = "UPDATE comptes SET 
+                $sql = "UPDATE comptes SET
                 mot_de_passe = :mot_de_passe
                 WHERE id_compte = :idCompte ";
                 $stmt = $this->conn->prepare($sql);
@@ -487,5 +493,72 @@ class ComptesDB extends ConfigDB
         }
     }
 
+    public function getAllUsers()
+    {
+        $sql=  " SELECT EXTRACT(year FROM v.date_retour) AS ANNEE, COUNT(v.date_retour) as NB
+                 FROM voyages v
+                 WHERE v.date_retour <= sysdate()
+                 GROUP BY ANNEE
+                 ORDER BY ANNEE DESC
+                 LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
+        return $stats;
+    }
+
+    public function getProgrammes()
+    {
+        $sql = "SELECT COUNT(DISTINCT(p.id_programme)) AS NB, EXTRACT(year FROM v.date_retour) AS ANNEE
+                FROM comptes c
+                INNER JOIN comptes_voyages cv ON cv.id_compte = c.id_compte
+                INNER JOIN voyages v ON v.id_voyage = cv.id_voyage
+                INNER JOIN programmes p ON p.id_programme = c.id_programme
+                WHERE v.date_retour <= sysdate()
+                GROUP BY ANNEE
+                ORDER BY ANNEE DESC
+                LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getAccompagnateurDestination()
+    {
+        $sql = "SELECT DISTINCT(v.nom_projet), d.nom_pays, v.ville, EXTRACT(YEAR FROM v.date_retour) AS Annee, COUNT(*) AS NB
+        FROM voyages v
+        INNER JOIN comptes_voyages cv ON cv.id_voyage = v.id_voyage
+        INNER JOIN comptes c ON c.id_compte = cv.id_compte
+        INNER JOIN destinations d ON d.id_destination = v.id_destination
+        WHERE c.type = 'prof' AND v.date_retour <= sysdate()
+        GROUP BY ANNEE
+        ORDER BY ANNEE DESC
+        LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getEtudiantDestination()
+    {
+        $sql= "SELECT DISTINCT(v.nom_projet), d.nom_pays, v.ville, EXTRACT(YEAR FROM v.date_retour) AS Annee, COUNT(*) AS NB
+               FROM voyages v
+               INNER JOIN comptes_voyages cv ON cv.id_voyage = v.id_voyage
+               INNER JOIN comptes c ON c.id_compte = cv.id_compte
+               INNER JOIN destinations d ON d.id_destination = v.id_destination
+               WHERE c.type = 'etudiant' AND v.date_retour <= sysdate()
+               GROUP BY ANNEE
+        		   ORDER BY ANNEE DESC
+		           LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
 }

@@ -6,7 +6,7 @@
                 <a class="nav-link" href="#section5">Propositions</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="#section1">Les séjours</a>
+                <a class="nav-link active" href="#section1">Les projets</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#section2">Participants</a>
@@ -18,7 +18,10 @@
                 <a class="nav-link" href="#section4">Configurations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#section6">Profil</a>
+                <a class="nav-link" href="#section6">Statistiques</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#section7">Profil</a>
             </li>
 
 
@@ -29,9 +32,13 @@
             <h1>Propositions de séjour</h1>
             <ul>
                 <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de voyage. </li>
-
+                <li>Si la proposition est en bleu, c'est qu'il s'agit d'une nouvelle proposition que vous devez consulter.</li>
+                <li><b>À noter: </b> Vous recevrez un courriel pour toutes les propositions de projet qui seront créées.</li>
                 <li>Pour accepter une proposition, cliquez sur <img data-toggle="modal" data-target="#myModal_accept" alt="accepter icon" src="Ressource/img/check-solid.png" class="images" data-placement = "top" title = "Accepter"></li>
                 <li>Pour refuser une proposition, cliquez sur <img data-toggle="modal" data-target="#myModal_refuse" alt="refuser icon" src="Ressource/img/ban-solid.png" class="images" data-placement = "top" title = "Refuser"></li>
+                <li><b>À noter: </b>Lorsque vous accepterez ou refuserez une proposition, un courriel de notification sera envoyé à la personne qui a fait la proposition.</li>
+                <br>
+
                 <br>
                 <li>
                     Pour voir la liste des propositions, cliquez sur « Propositions de séjour » de la barre de navigation.
@@ -60,9 +67,9 @@
                             Pour modifier une proposition de voyage, cliquez sur <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
                             <ul>
                                 <li>Sur cette page, vous pouvez modifier les informations de cette proposition. </li>
-                                <li><b>À noter: </b>Seul un admnistrateur peut modifier une proposition de séjour en tout temps.</li>
+                                <li><b>À noter: </b>Seul un administrateur peut modifier une proposition de séjour en tout temps.</li>
 
-                                <li>Une terminé, cliquez sur « Enregistrer »</li>
+                                <li>Une fois terminé, cliquez sur « Enregistrer »</li>
                                 <li>Pour revenir à la liste de proposition, cliquez sur « Retour aux propositions »</li>
                             </ul>
                         </li>
@@ -72,7 +79,7 @@
         </div>
 
         <div id="section1" class="section">
-            <h1>Séjours de mobilité</h1>
+            <h1>Les projets de mobilité</h1>
             <ul>
                 <li>
                     Pour voir la liste des voyages, cliquez sur « Séjours de mobilité » de la barre de navigation.
@@ -87,8 +94,15 @@
                 </li>
                 <br>
                 <li>
-                    Pour voir les détails d’un voyage, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
+                    Pour voir les détails d’un projet, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
                     <ul>
+                        <li>Vous pouvez générer un fichier PDF des détails du projet, cliquez sur le bouton  « Générer un PDF »</li>
+                        <li>Pour voir les participants du projet, cliquez sur l'onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher"> de la ligne <b>Participant(s)</b></li>
+                        <ul>
+                            <li>Une fois sur cette page, vous pouvez aussi générer un fichier PDF incluant les détails de tous les participants de ce projet.</li>
+                            <li>Pour revenir à la liste, cliquez sur « Revenir aux détails du projet »</li>
+                        </ul>
+                        <li>Dans la page de détail, pour voir la proposition d'origine du projet, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">de la ligne <b>Proposition d'origine</b></li>
                         <li>Pour revenir à la liste, cliquez sur « Revenir à la liste des voyages »</li>
                     </ul>
                 </li>
@@ -246,7 +260,7 @@
                                 <li>Liste déroulante : L’utilisateur devra choisir une option dans une liste déroulante. Pour entrer les options, allez dans la section « Options d’affichage » plus bas, entrez les options séparées de point-virgule (Ex. : Option 1; Option 2; Option 3)</li>
                                 <li>Déposer un document numérique : l’utilisateur pourra déposer un document numérique de son choix. Les types de fichiers acceptés: .jpeg, .png, .pdf, .txt, .docx, .zip, .rar, .xlsx, .pptx</li>
 
-                                <li>Curseur de défilement : L’utilisateur devra entrer un nombre grâce à un curseur de défilement. Dans la section « Options d’affichage » plus bas, entrez la valeur minimum autorisée, la valeur maximum autorisée et l’intervalle entre deux valeurs.</li>
+                                <li>Curseur de défilement : L’utilisateur devra entrer un nombre à l'aide d'un curseur de défilement. Dans la section « Options d’affichage » plus bas, entrez la valeur minimum autorisée, la valeur maximum autorisée et l’intervalle entre deux valeurs.</li>
                                 <li>Zone de texte : L’utilisateur pourra inscrire un texte.</li>
                             </ul>
                         </li>
@@ -258,9 +272,15 @@
                             <b>À noter:</b> Seules les catégories contenant au moins une question valide pour ce type de formulaire seront visibles. (Ex.: Les questions pour les étudiants ne seront pas visibles dans les questions pour accompagnateurs et vice-versa).<br>
                             Si aucune question n'est valide pour une certaine catégorie, alors cette catégorie ne sera pas visible dans la liste des catégories
 
+
                         </li>
                     </ul>
                     <br>
+
+                    <li><b>À noter:</b> Si vous souhaitez ajouter une question qui sera rattachée automatiquement à tous les formulaires, vous devez d'abord vous assurer que la catégorie dans laquelle la question se trouve a bien la case « Par défaut» cochée.
+                    Une fois la question créée, cliquez sur l'onglet « Projets de mobilité » de la barre de navigation. Ensuite, cliquez sur l'onglet <img alt="formulaire icon" src="Ressource/img/design.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Editeur de formulaire"> afin de modifier les formulaires et assurez-vous que les catégories et les questions par défaut sont bien cochées.
+                    </li>
+                <br>
                     <li>Une fois terminé, cliquez sur « Enregistrer »</li>
                     <li>Pour revenir à l’éditeur de formulaire, cliquez sur « Retour »</li>
                     </ul>
@@ -302,10 +322,19 @@
                             <ul>
                                 <li>Pour ajouter une catégorie de question, cliquez sur « Ajouter une catégorie » au bas de la page, à gauche.</li>
                                 <li>Inscrivez le nom de la catégorie et cliquez sur « Ajouter »</li>
+                                <li>Pour que la catégorie s'affiche par défaut dans les formulaires, cocher la case « Par défaut »</li>
+
                                 <li>Pour revenir à la liste des configurations, cliquez sur « Retour aux configurations »</li>
                                 <li>Pour modifier une catégorie de question, cliquez sur <img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier"></li>
                                 <li>Sur cette page, vous pouvez modifier le nom de la catégorie ainsi que la rendre active ou inactive en cochant dans la case « Actif »</li>
+                                <li>Pour que la catégorie s'affiche par défaut dans les formulaires, cocher la case « Par défaut »</li>
                                 <li>Une fois terminé, cliquez sur « Enregistrer »</li>
+                                <ul>
+                                    <li><b>À noter: </b>Les catégories par défaut <b>ne sont pas rétroactives.</b> Si vous activez ou désactivez cette option, vous devrez cliquer sur l'onglet « Projets de mobilité » de la barre de navigation.
+                                                        Ensuite, cliquez sur l'onglet <img alt="formulaire icon" src="Ressource/img/design.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Editeur de formulaire"> afin de modifier les formulaires et assurez-vous que les catégories et les questions par défaut ont été bien cochées/décochées.
+                                                        Une fois terminé, cliquez sur « Enregistrer »</li>
+                                </ul>
+
                                 <li>Pour revenir à la liste des configurations, cliquez sur « Retour aux configurations »</li>
                             </ul>
                         </li>
@@ -346,8 +375,31 @@
                 </li>
             </ul>
         </div>
-
         <div id="section6" class="section">
+            <h1>Statistiques</h1>
+            <ul>
+                <li>Pour voir les statistiques concernant les différents séjours effectués, cliquez sur « Statistiques » dans la barre de navigation.</li>
+                <ul>
+                    <li>
+                        Sur cette page, vous pourrez voir les statistiques selon le nombre d'étudiants par séjour, le nombre d'accompagnateurs par séjour, le nombre de séjours ainsi que les projets à venir.
+                    </li>
+                    <li>Pour afficher plus de questions par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
+                    <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau.</li>
+                    <li>Pour rechercher une question spécifique, entrez ce que vous voulez trouver sous « Recherche » en haut à droite du tableau.</li>
+                  
+                    <li>Vous pouvez générer un fichier PDF des détails du projet, cliquez sur le bouton  « Générer un PDF » au bas de chacun des tableaux</li>
+                </ul>
+
+
+
+            </ul>
+
+
+        </div>
+
+
+
+        <div id="section7" class="section">
             <h1>Profil</h1>
             <ul>
                 <li>
