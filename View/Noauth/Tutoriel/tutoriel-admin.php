@@ -18,7 +18,10 @@
                 <a class="nav-link" href="#section4">Configurations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#section6">Profil</a>
+                <a class="nav-link" href="#section6">Statistiques</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#section7">Profil</a>
             </li>
 
 
@@ -372,8 +375,31 @@
                 </li>
             </ul>
         </div>
-
         <div id="section6" class="section">
+            <h1>Statistiques</h1>
+            <ul>
+                <li>Pour voir les statistiques concernant les différents séjours effectués, cliquez sur « Statistiques » dans la barre de navigation.</li>
+                <ul>
+                    <li>
+                        Sur cette page, vous pourrez voir les statistiques selon le nombre d'étudiants par séjour, le nombre d'accompagnateurs par séjour, le nombre de séjours ainsi que les projets à venir.
+                    </li>
+                    <li>Pour afficher plus de questions par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
+                    <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau.</li>
+                    <li>Pour rechercher une question spécifique, entrez ce que vous voulez trouver sous « Recherche » en haut à droite du tableau.</li>
+                  
+                    <li>Vous pouvez générer un fichier PDF des détails du projet, cliquez sur le bouton  « Générer un PDF » au bas de chacun des tableaux</li>
+                </ul>
+
+
+
+            </ul>
+
+
+        </div>
+
+
+
+        <div id="section7" class="section">
             <h1>Profil</h1>
             <ul>
                 <li>
