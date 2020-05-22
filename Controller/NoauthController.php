@@ -108,7 +108,8 @@ class NoauthController extends AppController
                 $_POST['prenom'],
                 $date_naissance,
                 $_POST['telephone'],
-                $programme
+                $programme,
+                true
             );
 
             //Enregistre l’entité
