@@ -711,7 +711,7 @@ class PropositionsController extends AppController
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Réponse à la proposition de séjours ';
+            $mail->Subject = 'Réponse à la proposition de séjour ';
             $mail->Body = 'Veuillez la consulter :  <b>' . $url . '</b>';
 
             $mail->send();
