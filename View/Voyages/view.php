@@ -64,7 +64,7 @@ $userCount = get('userCount');
     </table>
 
 
-    <?= nav('<button>Revenir à la liste des séjours</button>', 'Voyages', 'index') ?>
+    <?= nav('<button>Revenir à la liste des projets</button>', 'Voyages', 'index') ?>
     <script type="text/javascript">
     $( document ).ready(function() {
 

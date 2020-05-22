@@ -201,6 +201,7 @@ class ComptesController extends AppController
                 $compte->setTelephone($_POST['telephone']);
                 $compte->setType($_POST['type']);
                 $compte->setActif(isset($_POST['actif']) ? 1 : 0);
+                $compte->setAnonyme($_POST['anonyme']);
 
 
                 $programme = $this->programmeDB->getProgrammeFromNom($_POST['id_programme']);
@@ -338,7 +339,8 @@ class ComptesController extends AppController
                 $_POST['prenom'],
                 $date_naissance,
                 $_POST['telephone'],
-                $programme
+                $programme,
+                true
             );
 
             //Enregistre l’entité

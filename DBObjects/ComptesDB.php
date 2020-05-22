@@ -54,7 +54,8 @@ class ComptesDB extends ConfigDB
                                 $row['prenom'],
                                 $row['date_naissance'],
                                 $row['telephone'],
-                                $programme
+                                $programme,
+                                $row['anonyme']
                             );
 
                             return $compte;
@@ -112,7 +113,8 @@ class ComptesDB extends ConfigDB
                                 $row['prenom'],
                                 $row['date_naissance'],
                                 $row['telephone'],
-                                $programme
+                                $programme,
+                                $row['anonyme']
                             );
 
                             return $compte;
@@ -168,7 +170,8 @@ class ComptesDB extends ConfigDB
                                 $row['prenom'],
                                 $row['date_naissance'],
                                 $row['telephone'],
-                                $programme
+                                $programme,
+                                $row['anonyme']
                             );
 
                             // Close statement
@@ -220,7 +223,8 @@ class ComptesDB extends ConfigDB
                 $compteInfo['prenom'],
                 $compteInfo['date_naissance'],
                 $compteInfo['telephone'],
-                $programme
+                $programme,
+                $compteInfo['anonyme']
             );
 
             array_push($comptes, $compte);
@@ -305,7 +309,8 @@ class ComptesDB extends ConfigDB
                 prenom = :prenom,
                 date_naissance = :date_naissance,
                 telephone = :telephone,
-                id_programme = :id_programme
+                id_programme = :id_programme,
+                anonyme = :anonyme
                 WHERE id_compte = :idCompte ";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute(array(':pseudo' => $newCompte->getPseudo(),
@@ -317,7 +322,8 @@ class ComptesDB extends ConfigDB
                     ':date_naissance' => $newCompte->getDateNaissance(),
                     ':telephone' => $newCompte->getTelephone(),
                     ':id_programme' => $newCompte->getProgramme()->getIdProgramme(),
-                    ':idCompte' => $newCompte->getIdCompte()
+                    ':idCompte' => $newCompte->getIdCompte(),
+                    ':anonyme' =>$newCompte->getAnonyme()
                 ));
 
                 return true;

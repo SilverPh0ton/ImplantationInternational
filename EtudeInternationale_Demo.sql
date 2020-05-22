@@ -32,7 +32,7 @@ CREATE TABLE `activations` (
   `id_activation` int(11) NOT NULL,
   `code_activation` varchar(30) NOT NULL,
   `id_voyage` int(11) NOT NULL,
-  `actif` tinyint(1) NOT NULL DEFAULT ''1''
+  `actif` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
