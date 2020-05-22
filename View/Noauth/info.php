@@ -10,7 +10,7 @@
 
     <p>Cette plateforme est gérée par le Bureau international.<p>
 
-    <p>Pour toute question en lien avec l’utilisation de la plateforme, veuillez en premier lieu vous référez à l’onglet “Tutoriel”.</p>
+    <p>Pour toute question en lien avec l’utilisation de la plateforme, veuillez en premier lieu vous référer à l’onglet “Tutoriel”.</p>
 
     <p>Pour toute question ou demande d’informations supplémentaire en lien avec une demande de projet de mobilité (mobilité du personnel et mobilité étudiante), veuillez contacter le Bureau international par courriel : mobilite.etudiante@cegeptr.qc.ca</p>
 
