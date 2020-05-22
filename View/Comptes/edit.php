@@ -137,7 +137,7 @@ $programmes = get('array_prog');
                 <input type="hidden" name="type" value="<?= $compte->getType() ?>">
             <?php endif; ?>
 
-            <?php if (isOfType([ADMIN])||isOfType([PROF])): ?>
+            <?php if (isOfType([ADMIN])): ?>
                 <div class="input">
                     <label for="actif">Actif</label>
                     <input type="checkbox" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
