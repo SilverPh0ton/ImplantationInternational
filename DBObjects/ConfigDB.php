@@ -19,7 +19,7 @@ protected  $conn;
         $this->DB_SERVER = 'localhost:3308';
         $this->DB_USERNAME = 'root';
         $this->DB_PASSWORD = '';
-        $this->DB_NAME = 'criss';
+        $this->DB_NAME = 'implantation';
 
         try{
 
