@@ -24,6 +24,14 @@ $etuStats = get('etuStats');
 <?= load_css('ControlOption') ?>
 <?= load_css('tab')?>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js" crossorigin="anonymous"></script>
 
 <div class="statistiques index columns large-12 medium-12 small-12 large-text-left medium-text-left small-text-left content">
 
@@ -172,7 +180,7 @@ $etuStats = get('etuStats');
 
 <!-- TAB ÉTUDIANT STATS -->
   <div id="etudiantsTab" class="tabcontent">
-    <table class="table_to_paginate">
+    <table class="table_to_paginate_stats">
         <thead>
         <tr>
             <th scope="col">Année</th>
@@ -198,7 +206,7 @@ $etuStats = get('etuStats');
   </div>
 <!-- TAB ACCOMPAGNATEUR STATS -->
   <div id="accompagnateursTab" class="tabcontent">
-    <table class="table_to_paginate">
+    <table class="table_to_paginate_stats">
         <thead>
         <tr>
             <th scope="col">Année</th>
@@ -224,7 +232,7 @@ $etuStats = get('etuStats');
   </div>
 <!-- TAB DESTINATIONS STATS -->
   <div id="destinationsTab" class="tabcontent">
-    <table class="table_to_paginate">
+    <table class="table_to_paginate_stats2">
         <thead>
         <tr>
             <th scope="col">Année</th>
@@ -249,7 +257,7 @@ $etuStats = get('etuStats');
 
   <!-- TAB PROJETS À VENIR STATS -->
     <div id="futurProjetTab" class="tabcontent">
-      <table class="table_to_paginate">
+      <table class="table_to_paginate_stats2">
           <thead>
           <tr>
               <th scope="col">Année</th>
@@ -278,7 +286,7 @@ $etuStats = get('etuStats');
 <script>
     var order = [[ 7, 'desc' ],[ 5, 'asc' ],[ 0, 'asc' ]];
 </script>
-<?= load_script('paginator') ?>
+<?= load_script('paginatorStats') ?>
 <?= load_script('tab') ?>
 <script>
     $(document).ready( function () {
