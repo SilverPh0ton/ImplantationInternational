@@ -126,7 +126,7 @@ $destinations = get('destinations');
         <button type="submit">Ajouter</button>
 
     </form>
-    <?= nav('<button type="button">Retour aux voyages </button>', 'Voyages', 'index'); ?>
+    <?= nav('<button type="button">Retour aux projets</button>', 'Voyages', 'index'); ?>
     </fieldset>
 </div>
 

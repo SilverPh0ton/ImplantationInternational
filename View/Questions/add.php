@@ -45,6 +45,7 @@ $categories = get('categories');
                 <label for="affichage">Mode d'affichage (Comment l'utilisateur doit répondre)</label>
 
                 <div class="grid-container">
+           
                     <div class="ControlOption">
                         <input type="radio" name="affichage" value="Mention" checked="checked" class="displayOption">
                         <label>Mention <br> (aucune réponse requise)</label>
@@ -58,7 +59,7 @@ $categories = get('categories');
 
                     <div class="ControlOption">
                         <input type="radio" name="affichage" value="Case" class="displayOption">
-                        <label for="affichage">Case à cocher</label> <br>
+                        <label for="affichage">Choix multiple</label> <br>
                         <input type="checkbox">
                     </div>
 
@@ -104,6 +105,14 @@ $categories = get('categories');
                         <label for="affichage">Zone de texte</label> <br>
                         <textarea></textarea>
                     </div>
+
+                    <div class="ControlOption">
+                        <input type="radio" name="affichage" value="Radio" class="displayOption">
+                        <label for="affichage">Choix unique</label> <br>
+                        <input type="radio">
+                    </div>
+                    
+                 
 
                 </div>
             </div>

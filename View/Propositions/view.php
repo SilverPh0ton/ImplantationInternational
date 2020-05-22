@@ -13,7 +13,7 @@ if (isset($_GET['param2'])) {
 }
 
 $propositionController->view($id_proposition, $source);
-
+$idCase = 0;
 $compteDemande = get('compteDemande');
 $proposition = get('proposition');
 $proposition_reponses = get('proposition_reponses');
@@ -64,6 +64,8 @@ $activites = get('activites');
                     echo "Refusé";
                 }else if($proposition->getApprouvee() === '3'){
                     echo "Brouillon";
+                }else if($proposition->getApprouvee() === '4'){
+                    echo "Nouveauté";
                 }
                 ?>
             </td>
@@ -157,6 +159,27 @@ $activites = get('activites');
                                                             </input>
                                                         <?php endforeach ?>
                                                         <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
+
+
+                                                <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                <br> <br>
+                                                <?php
+                                                $listeReponse = explode(";", $vraiValeurs);
+
+                                                $options = explode(";", $question->getInputOption());
+                                                 $idCase = 0; ?>
+
+                                                        <?php foreach ($options as $option): $idCase++; ?>
+
+                                                        <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                            checked="checked"
+                                                          <?php endif; ?>
+                                                        name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
+                                                                <?= $option ?>
+                                                            </input>
+                                                        <?php endforeach ?>
+                                                        <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
+
 
                                                     <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
@@ -278,7 +301,7 @@ $activites = get('activites');
         echo nav('<button>Retour aux propositions </button>', 'Propositions', 'index');
     }
     else{
-        echo nav1('<button>Retour aux voyage </button>', 'Voyages', 'view', $source);
+        echo nav1('<button>Retour aux propositions </button>', 'Voyages', 'view', $source);
     }
     ?>
 </div>

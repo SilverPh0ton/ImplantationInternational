@@ -63,10 +63,13 @@ $compteType = $connectedUser->getType();
                 <td class="actions">
 
                     <?php
-                    echo nav2('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','View',$compte->getIdCompte(),$voyage->getIdVoyage());
+                    if($compte->getAnonyme()||$compteType=='admin'){
+                        echo nav2('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','View',$compte->getIdCompte(),$voyage->getIdVoyage());
+                    }
+                
                     if ($connectedUser->getType() === 'admin') {
                       echo nav1('<img alt="afficher icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','Edit',$compte->getIdCompte());
-                    }
+                    }}
                     ?>
                 </td>
                 <td><?= $compte->getCourriel() ?></td>
@@ -78,7 +81,9 @@ $compteType = $connectedUser->getType();
     </table>
 
 </div>
-<?= nav1('<button>Retour aux informations du projet</button>', 'Voyages', 'view',$voyage->getIdVoyage()) ?>
+
+<?= nav1('<button>Revenir aux détails du projet</button>', 'Voyages', 'view',$voyage->getIdVoyage()) ?>
+
 
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];
