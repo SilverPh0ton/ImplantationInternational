@@ -44,12 +44,12 @@ $etuStats = get('etuStats');
     <!-- CARD PARTICIPANTS FIRST ROW -->
     <div id="card" class="row">
       <div class="col-sm">
-          <div class="card text-white bg-primary mb-3" id="cardID" style="max-width: 24rem;">
+          <div class="card text-white bg-primary mb-3" id="cardID" style="max-width: 30rem;">
             <div class="card-header"><i class="fas fa-users"></i><strong> Total des participants</strong></div>
               <div class="card-body">
                 <h5 class="card-title" style="text-align:center"></h5>
                 <p class="card-text" style="text-align: center; font-size: 20px">
-                  <div class="card bg-primary" id="cardID" style="width: 18rem;">
+                  <div class="card bg-primary" id="cardID" style="width: 22rem;">
                     <table class="card-table table" id="cardColor">
                       <thead>
                         <tr id="cardColor">
@@ -74,12 +74,12 @@ $etuStats = get('etuStats');
           </div>
 <!-- CARD PROJECTS -->
       <div class="col-sm">
-          <div class="card text-white bg-info mb-3" id="cardID" style="max-width: 24rem;">
+          <div class="card text-white bg-info mb-3" id="cardID" style="max-width: 30rem;">
           <div class="card-header"><i class="fas fa-map"></i><strong> Total des projets</strong></div>
             <div class="card-body">
               <h5 class="card-title" style="text-align:center"></h5>
               <p class="card-text" style="text-align:center; font-size: 20px">
-                <div class="card bg-info" id="cardID" style="width: 18rem;">
+                <div class="card bg-info" id="cardID" style="width: 22rem;">
                   <table class="card-table table" id="cardColor">
                     <thead>
                       <tr id="cardColor">
@@ -108,12 +108,12 @@ $etuStats = get('etuStats');
       <!-- CARD COUNTRY SECOND ROW-->
     <div id="card" class="row">
       <div class="col-sm">
-          <div class="card text-white bg-success mb-3" id="cardID" style="max-width: 24rem;">
+          <div class="card text-white bg-success mb-3" id="cardID" style="max-width: 30rem;">
           <div class="card-header text-white"><i class="fas fa-globe-americas"></i><strong> Nombres de pays visités</strong></div>
             <div class="card-body text-white">
               <h5 class="card-title" style="text-align:center"></h5>
               <p class="card-text" style="text-align: center; font-size: 20px">
-                <div class="card bg-success" id="cardID" style="width: 18rem;">
+                <div class="card bg-success" id="cardID" style="width: 22rem;">
                   <table class="card-table table" id="cardColor">
                     <thead>
                       <tr id="cardColor">
@@ -138,12 +138,12 @@ $etuStats = get('etuStats');
       </div>
       <!-- CARD PROGRAM PARTICIPANTS -->
       <div class="col-sm">
-          <div class="card text-white bg-danger mb-3" id="cardID" style="max-width: 24rem;">
+          <div class="card text-white bg-danger mb-3" id="cardID" style="max-width: 30rem;">
           <div class="card-header"><i class="fas fa-plane"></i><strong> Nombres de programmes participants</strong></div>
             <div class="card-body">
               <h5 class="card-title" style="text-align:center"></h5>
               <p class="card-text" style="text-align:center; font-size: 20px">
-                <div class="card text-white bg-danger" id="cardID" style="width: 18rem;">
+                <div class="card text-white bg-danger" id="cardID" style="width: 22rem;">
                   <table class="card-table table" id="cardColor">
                     <thead>
                       <tr id="cardColor">
