@@ -31,7 +31,7 @@
         <div id="section5" class="section">
             <h1>Propositions de séjour</h1>
             <ul>
-                <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de voyage. </li>
+                <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de projet. </li>
                 <li>Si la proposition est en bleu, c'est qu'il s'agit d'une nouvelle proposition que vous devez consulter.</li>
                 <li><b>À noter: </b> Vous recevrez un courriel pour toutes les propositions de projet qui seront créées.</li>
                 <li>Pour accepter une proposition, cliquez sur <img data-toggle="modal" data-target="#myModal_accept" alt="accepter icon" src="Ressource/img/check-solid.png" class="images" data-placement = "top" title = "Accepter"></li>
@@ -48,7 +48,7 @@
                         <li>Pour rechercher une proposition spécifique, entrez soit le nom du projet, le pays, la ville, le coût, ou l’une des dates (limite d’inscription, de départ ou de retour) sous « Recherche » en haut à droite du tableau.</li>
                         <br>
                         <li>
-                            Pour faire une proposition de voyage, cliquez sur « Ajouter une proposition » au bas de la page
+                            Pour faire une proposition de projet, cliquez sur « Ajouter une proposition » au bas de la page
                             <ul>
                                 <li>Sur cette page, inscrivez les informations nécessaires, telles que le nom du projet, la destination, la date de départ, celle de retour ainsi que le coût. </li>
                                 <li>Dans la section « Ajout des activités », vous pourrez ajouter différentes activités prévues pour ce voyage. Inscrivez l’endroit de l’activité, une courte description, la date de départ et la date de fin. Une fois terminé, cliquez sur <img alt="afficher icon" src="Ressource/img/btPlus.png" class="images" data-toggle="tooltip" data-placement = "top"></li>
@@ -64,7 +64,7 @@
                             </ul>
                         </li>
                         <li>
-                            Pour modifier une proposition de voyage, cliquez sur <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
+                            Pour modifier une proposition de projet, cliquez sur <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">
                             <ul>
                                 <li>Sur cette page, vous pouvez modifier les informations de cette proposition. </li>
                                 <li><b>À noter: </b>Seul un administrateur peut modifier une proposition de séjour en tout temps.</li>
@@ -227,7 +227,7 @@
             <h1>Banque de questions</h1>
 
             <ul>
-                <li>Sur cette page, vous trouverez toutes les questions qui ont été créées pour les étudiants, les accompagnateurs et pour les propositions de voyages.</li>
+                <li>Sur cette page, vous trouverez toutes les questions qui ont été créées pour les étudiants, les accompagnateurs et pour les propositions de projet.</li>
                 <br>
                 <li>
                     Pour voir la liste des questions par catégories, cliquez sur l’un des onglets (pour étudiant, pour enseignant, pour enseignant et étudiant, pour les propositions de voyage).
@@ -309,9 +309,9 @@
         <div id="section4" class="section">
             <h1>Configurations</h1>
             <ul>
-                <li>Sur cette page, vous pourrez configurer les catégories de question, les programmes d’études, les destinations ainsi que le formulaire qui se retrouvera dans les propositions de voyage</li>
+                <li>Sur cette page, vous pourrez configurer les catégories de question, les programmes d’études, les destinations ainsi que le formulaire qui se retrouvera dans les propositions de projet</li>
                 <li>
-                    Pour voir la liste des configurations, cliquez sur l’un des onglets (Catégories, Programmes, Destination ou Formulaire de proposition de voyage).
+                    Pour voir la liste des configurations, cliquez sur l’un des onglets (Catégories, Programmes, Destination ou Formulaire de proposition de projet).
                     <ul>
                         <li>Pour afficher plus de questions par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
                         <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau.</li>
@@ -366,9 +366,9 @@
                         </li>
                         <br>
                         <li>
-                            Formulaire de propositions de voyage:
+                            Formulaire de propositions de projet:
                             <ul>
-                                <li>Dans cet onglet, vous pourrez modifier le formulaire qui se retrouve dans « Proposition de voyage » (lorsqu’un utilisateur va proposer un voyage)</li>
+                                <li>Dans cet onglet, vous pourrez modifier le formulaire qui se retrouve dans « Proposition de projet » (lorsqu’un utilisateur va proposer un projet)</li>
                             </ul>
                         </li>
                     </ul>
@@ -386,7 +386,7 @@
                     <li>Pour afficher plus de questions par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
                     <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau.</li>
                     <li>Pour rechercher une question spécifique, entrez ce que vous voulez trouver sous « Recherche » en haut à droite du tableau.</li>
-                  
+
                     <li>Vous pouvez générer un fichier PDF des détails du projet, cliquez sur le bouton  « Générer un PDF » au bas de chacun des tableaux</li>
                 </ul>
 
