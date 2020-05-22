@@ -13,11 +13,6 @@ $comptesController->view($id_compte);
 $compte = get('compte');
 $listVoyage = get('listVoyage');
 
-if(isset($_GET['param2'])){
-    $voyage = $_GET['param2'];
-}
-
-
 ?>
 
 <div class="comptes view columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
@@ -83,9 +78,10 @@ if(isset($_GET['param2'])){
     if(isOfType([ADMIN,PROF])){
         
         if(isset($_GET['param2'])){
-            echo nav1('<button> Retour à la liste des participants </button>', 'Voyages', 'viewparticipants',$voyage);
+            echo nav1('<button> Retour à la liste des participants </button>', 'Voyages', 'viewparticipants',$_GET['param2']);
+        } else {
+        echo nav('<button> Retour à la liste des participants </button>', 'Comptes', 'index');
         }
-        else echo nav('<button> Retour à la liste des participants </button>', 'Comptes', 'index');
      }
     else{
         echo nav('<button type="button">Revenir à la liste des séjours</button>', 'Voyages', 'index');
