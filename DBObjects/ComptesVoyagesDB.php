@@ -413,13 +413,4 @@ class ComptesVoyagesDB extends ConfigDB
         return false;
 
     }
-
-    public function getAllTrips()
-    {
-        $sql = "SELECT count(*) FROM voyages";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        $stats = $stmt->fetch();
-        return $stats;
-    }
 }

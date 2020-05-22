@@ -489,10 +489,70 @@ class ComptesDB extends ConfigDB
 
     public function getAllUsers()
     {
-        $sql = "SELECT count(*) FROM comptes WHERE type = 'etudiant' OR type = 'prof' ";
+        $sql=  " SELECT EXTRACT(year FROM v.date_retour) AS ANNEE, COUNT(v.date_retour) as NB
+                 FROM voyages v
+                 WHERE v.date_retour <= sysdate()
+                 GROUP BY ANNEE
+                 ORDER BY ANNEE DESC
+                 LIMIT 5";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        $stats = $stmt->fetch();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getProgrammes()
+    {
+        $sql = "SELECT COUNT(DISTINCT(p.id_programme)) AS NB, EXTRACT(year FROM v.date_retour) AS ANNEE
+                FROM comptes c
+                INNER JOIN comptes_voyages cv ON cv.id_compte = c.id_compte
+                INNER JOIN voyages v ON v.id_voyage = cv.id_voyage
+                INNER JOIN programmes p ON p.id_programme = c.id_programme
+                WHERE v.date_retour <= sysdate()
+                GROUP BY ANNEE
+                ORDER BY ANNEE DESC
+                LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getAccompagnateurDestination()
+    {
+        $sql = "SELECT DISTINCT(v.nom_projet), d.nom_pays, v.ville, EXTRACT(YEAR FROM v.date_retour) AS Annee, COUNT(*) AS NB
+        FROM voyages v
+        INNER JOIN comptes_voyages cv ON cv.id_voyage = v.id_voyage
+        INNER JOIN comptes c ON c.id_compte = cv.id_compte
+        INNER JOIN destinations d ON d.id_destination = v.id_destination
+        WHERE c.type = 'prof' AND v.date_retour <= sysdate()
+        GROUP BY ANNEE
+        ORDER BY ANNEE DESC
+        LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getEtudiantDestination()
+    {
+        $sql= "SELECT DISTINCT(v.nom_projet), d.nom_pays, v.ville, EXTRACT(YEAR FROM v.date_retour) AS Annee, COUNT(*) AS NB
+               FROM voyages v
+               INNER JOIN comptes_voyages cv ON cv.id_voyage = v.id_voyage
+               INNER JOIN comptes c ON c.id_compte = cv.id_compte
+               INNER JOIN destinations d ON d.id_destination = v.id_destination
+               WHERE c.type = 'etudiant' AND v.date_retour <= sysdate()
+               GROUP BY ANNEE
+        		   ORDER BY ANNEE DESC
+		           LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
         return $stats;
     }
 }

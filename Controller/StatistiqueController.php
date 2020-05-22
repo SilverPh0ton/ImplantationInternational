@@ -44,8 +44,33 @@ class StatistiqueController extends AppController
       $this->set('compteStats',$compteStats);
 
       //Number of destination
-      $voyagesStats = $comptesVoyagesDB->getAllTrips();
+      $voyagesStats = $voyagesDB->getAllTrips();
       $this->set('voyagesStats',$voyagesStats);
+
+      //Number of destination in years
+      $destinationStats = $voyagesDB->getDestinationStats();
+      $this->set('destinationStats',$destinationStats);
+
+      //Number of accompagnateur
+      $accStats = $compteDB->getAccompagnateurDestination();
+      $this->set('accStats',$accStats);
+
+      //Number of etudiant
+      $etuStats = $compteDB->getEtudiantDestination();
+      $this->set('etuStats',$etuStats);
+
+      //Number of country
+      $countryStats = $voyagesDB->getAllCountry();
+      $this->set('countryStats',$countryStats);
+
+      //Number of programmes
+      $programmeStats = $compteDB->getProgrammes();
+      $this->set('programmeStats',$programmeStats);
+
+      //Futur projects
+      $futurProjetStats = $voyagesDB->getFuturProjetsStats();
+      $this->set('futurProjetStats',$futurProjetStats);
+
 
     }
 }
