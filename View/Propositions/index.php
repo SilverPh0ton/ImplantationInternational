@@ -14,7 +14,7 @@ $propositions = get('propositions');
 <div class="voyages index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left columns content">
 
     <h3>Propositions de séjour</h3>
-  
+
     <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
         echo nav('<button class="add-btn">Ajouter une proposition </button>', 'Propositions', 'add');
     endif; ?>
@@ -180,8 +180,7 @@ $propositions = get('propositions');
 
 <script>
     var order = [[ 4, 'asc' ]];
+
+    sessionStorage.clear();
 </script>
 <?= load_script('paginator') ?>
-
-
-

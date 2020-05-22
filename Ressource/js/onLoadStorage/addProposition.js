@@ -21,33 +21,41 @@ function savedata() {
     sessionStorage.setItem("activite_date_retour[month]", $('select[name="activite_date_retour[month]"]').val());
     sessionStorage.setItem("activite_date_retour[day]", $('select[name="activite_date_retour[day]"]').val());
 
-    var activity_arr = new Array();
-    var table = document.getElementById("activityTable");
+    sessionStorage.setItem("activiteTable", document.getElementById("activityTable").innerHTML);
 
-    for (var i = 1; i < table.rows.length-1; i++) {
-        var row = table.rows[i];
-        var cell_content = new Array();
-       for (var j = 0, col; col = row.cells[j]; j++) {
-           cell_content[j] = row.cells[j].textContent;
-       }
-       var activity_obj = {
-           endroit:cell_content[0],
-           description:cell_content[1],
-           date_depart:cell_content[2],
-           date_fin:cell_content[3]
-       };
-       activity_arr.push(activity_obj)
-       activity_json = JSON.stringify(activity_arr);
-    }
-    sessionStorage.setItem("activity_json", activity_json);
+    //Renseignements supplémentaires
+    var leArray = new Array();
 
-    $('div .card').each(function(i, obj) {
+    $('div .card-body').each(function(i, obj) {
 
-        console.log(obj);
+        $(this).find('div').each(function(i, obj){
+
+            var input =  $(this).children().eq(1).children().eq(0);
+            var name = input.attr('name');
+            var type = input.attr('type');
+
+            if (type == "checkbox" || type == "radio") {
+                var input2 =  $(this).children().eq(1).children().eq(1);
+                var name = input2.attr('name');
+                var value = input.is(":checked");
+            }
+
+            else var value = input.val();
+
+            var question_reponse = { [name] : value };
+            leArray.push(question_reponse);
+        });
     });
+    qrDyn_json = JSON.stringify(leArray);
+    sessionStorage.setItem("qrDyn_json", qrDyn_json);
 }
 
 window.onload = function() {
+
+  var table = sessionStorage.getItem("activiteTable");
+    if(table !== null){
+        document.getElementById("activityTable").innerHTML = table;
+    }
 
     var brouillon = sessionStorage.getItem("brouillon");
     var isTrueSet = (brouillon == 'true');
@@ -109,19 +117,51 @@ window.onload = function() {
     var adrDay = sessionStorage.getItem("activite_date_retour[day]");
     if (adrDay !== null) $('select[name="activite_date_retour[day]"]').val(adrDay);
 
-    var activity_json = sessionStorage.getItem("activity_json");
-    if (activity_json != null) {
-        var activity_object = JSON.parse(activity_json);
 
-        for (var i = 0; i < activity_object.length;i++){
-
+    //Renseignements supplémentaires
+    var qrDyn_json = sessionStorage.getItem("qrDyn_json");
+    if (qrDyn_json != null) {
+        var qrDyn_object = JSON.parse(qrDyn_json);
+        var keys = new Array();
+        for (var i=0; i<qrDyn_object.length;i++){
+            keys.push(Object.keys(qrDyn_object[i]));
         }
 
+        $('div .card-body').each(function(i, obj) {
+
+            $(this).find('div').each(function(i, obj){
+
+                var input =  $(this).children().eq(1).children().eq(0);
+                var name = input.attr('name');
+                var type = input.attr('type');
+
+                if (type == 'checkbox') {
+                    var input2 =  $(this).children().eq(1).children().eq(1);
+                    var name = input2.attr('name');
+                }
+
+                for (var i = 0; i < qrDyn_object.length; i++) {
+                    if (keys[i] == name) {
+
+                        switch (type) {
+                            case "checkbox" :
+                            case "radio" :
+                                var isTrueSet = (qrDyn_object[i][keys[i]] == true);
+                                input.prop('checked', isTrueSet);
+                                input2.val(isTrueSet)
+
+                                break;
+                            default:
+                                input.val(qrDyn_object[i][keys[i]]);
+                                break;
+                        }
+                    }
+                }
+            });
+        });
     }
 
-
-
-    //clearSessionItems();
+    clearSessionItems();
 }
 
 function clearSessionItems(){
@@ -136,4 +176,6 @@ function clearSessionItems(){
     sessionStorage.removeItem('date_naissance[year]');
     sessionStorage.removeItem('date_naissance[month]');
     sessionStorage.removeItem('date_naissance[day]');
+    sessionStorage.removeItem('activiteTable')
+
 }
