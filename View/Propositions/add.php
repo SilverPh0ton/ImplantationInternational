@@ -54,11 +54,13 @@ $ctr = 1;
 
         <fieldset>
             <legend>Ajouter une proposition</legend>
-            <div class="double">
 
+            <?php if (!isOfType([ADMIN])): ?>
+            <div class="double">
             <input type="checkbox" id="brouillon" name="brouillon" value="oui">
             <label for="brouillon">Il s'agit d'un brouillon</label><br>
             </div>
+            <?php endif; ?>
             <br>
             <div class="input required">
                 <label id="nom_projet" for="nom_projet">Nom du projet</label>
