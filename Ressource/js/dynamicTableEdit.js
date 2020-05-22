@@ -1,10 +1,6 @@
 $(document).ready(function () {
 
-    console.log('holaptate: 1');
-
-
     $(".activityTable").on('click',".addRow", (function() {
-        console.log('holaptate: CLICK');
         var name = $("#endroit_field").val();
         var description = $("#description_field").val();
         var startYear = $("#startYear").val();
@@ -13,14 +9,25 @@ $(document).ready(function () {
         var endYear = $("#endYear").val();
         var endMonth = $("#endMonth").val();
         var endDay = $("#endDay").val();
+
         var markup =
-            "<tr>" +
-            "<td class='tdEndroit'>" + "<input type=\"hidden\" name=\"endroit\"" + " maxlength=\"50\"" + "\" value=" + name + ">" + name + "</td>" +
-            "<td class='tdDescription'>" + "<input type=\"hidden\" name=\"description"+ " maxlength=\"100\"" + "\" value=" + description + ">" + description + "</td>" +
-            "<td>" + "<input type=\"hidden\" name=\"dateDepart" + "\" value=" + startYear + '-' + startMonth + '-' + startDay + ">" + startYear + '-' + startMonth + '-' + startDay + "</td>" +
-            "<td>" + "<input type=\"hidden\" name=\"dateRetour" + "\" value=" + endYear + '-' + endMonth + '-' + endDay + ">" + endYear + '-' + endMonth + '-' + endDay + "</td>" +
-            "<td>  <button type='button' class=\"deleteRow\"><i class=\"fa fa-trash\"></i></button></td>    " +
-            "</tr>";
+            '<tr>' +
+                '<td>' +
+                    '<input class="inputEndroit" type="hidden" name="endroit" maxlength="50" value="' + name + '">' + name +
+                '</td>' +
+                '<td>' +
+                    '<input class="inputDescription" type="hidden" name="description" maxlength="100" value="' + description + '">' + description +
+                '</td>' +
+                '<td>' +
+                    '<input class="inputDateDepart" type="hidden" name="dateDepart" value="' + startYear + '-' + startMonth + '-' + startDay + '">' + startYear + '-' + startMonth + '-' + startDay +
+                '</td>' +
+                '<td>' +
+                    '<input class="inputDateRetour" type="hidden" name="dateRetour" value="' + endYear + '-' + endMonth + '-' + endDay + '">' + endYear + '-' + endMonth + '-' + endDay +
+                '</td>' +
+                '<td>' +
+                    '<button type="button" class="deleteRow"><i class="fa fa-trash"></i></button>' +
+                '</td>' +
+            '</tr>';
         $("table tbody ").prepend(markup);
         adjust_id();
 
@@ -48,26 +55,34 @@ $(document).ready(function () {
     });
 
 
-function adjust_id() {
-    var index = 0;
-    $('.activityTable > tbody  > tr').each(function () {
-        $(this.childNodes[0].firstChild).attr('name', ("endroit" + index.toString()));
-        $(this.childNodes[1].firstChild).attr('name', ("description" + index.toString()));
-        $(this.childNodes[2].firstChild).attr('name', ("dateDepart" + index.toString()));
-        $(this.childNodes[3].firstChild).attr('name', ("dateRetour" + index.toString()));
-        index++;
-    });
-    console.log("Testing");
 
-    $('.activityTable > tbody  > tr').last().each(function () {
-        $(this.childNodes[0].firstChild).attr('name', (""));
-        $(this.childNodes[1].firstChild).attr('name', (""));
-        $(this.childNodes[2].firstChild).attr('name', (""));
-        $(this.childNodes[3].firstChild).attr('name', (""));
-    });
-}
+    function adjust_id() {
+        var index;
 
-$(function() {
-   adjust_id();
-});
+        index = 0;
+        $('.activityTable').find('.inputEndroit').each(function () {
+            $(this).attr('name', ("endroit" + index.toString()));
+            index++;
+        });
+        index = 0;
+        $('.activityTable').find('.inputDescription').each(function () {
+            $(this).attr('name', ("description" + index.toString()));
+            index++;
+        });
+        index = 0;
+        $('.activityTable').find('.inputDateDepart').each(function () {
+            $(this).attr('name', ("dateDepart" + index.toString()));
+            index++;
+        });
+        index = 0;
+        $('.activityTable').find('.inputDateRetour').each(function () {
+            $(this).attr('name', ("dateRetour" + index.toString()));
+            index++;
+        });
+
+    }
+
+    $(function() {
+        adjust_id();
+    });
 });
