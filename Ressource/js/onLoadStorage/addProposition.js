@@ -55,10 +55,17 @@ function savedata() {
                     leArray.push(question_reponse2);
                 }
                 prevNamesR.push(name);
-            case "default" :
+                break;
+            case "date":
                 value = $(this).val();
                 var question_reponse = { [name] : value };
                 leArray.push(question_reponse);
+                break;
+            case "number":
+                value = $(this).val();
+                var question_reponse = { [name] : value };
+                leArray.push(question_reponse);
+             default :
                 break;
         }
     });
@@ -156,6 +163,7 @@ window.onload = function() {
     var prevNames = new Array();
     var prevNamesR = new Array();
     var chaine = "";
+    var chaine2 = "";
 
     var qrDyn_json = sessionStorage.getItem("qrDyn_json");
     if (qrDyn_json != null) {
@@ -189,17 +197,23 @@ window.onload = function() {
                             break;
                         case "radio":
                             if (prevNamesR.includes(name) == false) {
+                                boolArr = qrDyn_object[i][keys[i]];
                                 $("input[name='" +name+ "']").each(function(index,data) {
-                                    if ($(this).val() == qrDyn_object[i][keys[i]]){
-                                        $(this).prop('checked', qrDyn_object[i][keys[i]]);
-                                    }
+                                    var isTrueSet = (boolArr[index] == true);
+                                    $(this).prop('checked', isTrueSet);
+                                    chaine += boolArr[index]+";";
                                 });
+                                var dataId2 = $(this).attr('data-id');
+                                $('input[name='+dataId2+']').val(chaine);
                             }
                             prevNamesR.push(name);
                             break;
-                        case "default" :
-                            console.log($(this).attr('name'));
+                        case "date":
                             $(this).val(qrDyn_object[i][keys[i]]);
+                            break;
+                        case "number":
+                            $(this).val(qrDyn_object[i][keys[i]]);
+                        default :
                             break;
                     }
                 }
