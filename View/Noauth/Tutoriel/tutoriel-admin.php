@@ -37,6 +37,9 @@
                 <li>Pour accepter une proposition, cliquez sur <img data-toggle="modal" data-target="#myModal_accept" alt="accepter icon" src="Ressource/img/check-solid.png" class="images" data-placement = "top" title = "Accepter"></li>
                 <li>Pour refuser une proposition, cliquez sur <img data-toggle="modal" data-target="#myModal_refuse" alt="refuser icon" src="Ressource/img/ban-solid.png" class="images" data-placement = "top" title = "Refuser"></li>
                 <li><b>À noter: </b>Lorsque vous accepterez ou refuserez une proposition, un courriel de notification sera envoyé à la personne qui a fait la proposition.</li>
+               <li>
+                   <b>À noter: </b> Si vous souhaitez réutiliser une ancienne proposition de séjour cliquez sur <img alt="Recycler le projet icon" src="Ressource/img/btRecycle.png" class="images" data-placement = "top" title = "Réutilisation du projet"> du projet désiré.
+               </li>
                 <br>
 
                 <br>

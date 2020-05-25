@@ -27,6 +27,9 @@
                     <li>Il est à noter que si la proposition est en <span style="color: red;">rouge</span>, cette proposition a été <span style="font-weight: bold">refusée</span>. S'il est, comme indiqué dans la colonne <span style="font-weight: bold">État</span> du tableau.</li>
                     <br>
                     <li>
+                        <b>À noter: </b> Si vous souhaitez réutiliser une ancienne proposition de séjour cliquez sur <img alt="Recycler le projet icon" src="Ressource/img/btRecycle.png" class="images" data-placement = "top" title = "Réutilisation du projet"> du projet désiré.
+                    </li>
+                    <li>
                         Pour voir la liste de vos propositions, cliquez sur « Propositions de séjour » de la barre de navigation.
                         <ul>
                             <li>Pour afficher plus d’utilisateurs par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
