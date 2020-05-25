@@ -1,3 +1,4 @@
+
 <?php
 /**
  * @var \App\Controller\QuestionsController $questionsController
@@ -41,9 +42,10 @@ $categories = get('categories');
             </div>
 
             <div class="input required">
-                <label for="affichage">Mode d'affichage (Comment l'étudiant doit répondre)</label>
+                <label for="affichage">Mode d'affichage (Comment l'utilisateur doit répondre)</label>
 
                 <div class="grid-container">
+           
                     <div class="ControlOption">
                         <input type="radio" name="affichage" value="Mention" checked="checked" class="displayOption">
                         <label>Mention <br> (aucune réponse requise)</label>
@@ -57,7 +59,7 @@ $categories = get('categories');
 
                     <div class="ControlOption">
                         <input type="radio" name="affichage" value="Case" class="displayOption">
-                        <label for="affichage">Case à cocher</label> <br>
+                        <label for="affichage">Choix multiple</label> <br>
                         <input type="checkbox">
                     </div>
 
@@ -103,6 +105,14 @@ $categories = get('categories');
                         <label for="affichage">Zone de texte</label> <br>
                         <textarea></textarea>
                     </div>
+
+                    <div class="ControlOption">
+                        <input type="radio" name="affichage" value="Radio" class="displayOption">
+                        <label for="affichage">Choix unique</label> <br>
+                        <input type="radio">
+                    </div>
+                    
+                 
 
                 </div>
             </div>
@@ -159,7 +169,7 @@ $categories = get('categories');
                 <input type="hidden" id="input_option" value="none" maxlength="100">
             </div>
             <button type="submit">Ajouter</button>
-            <?= nav('<button type="button">Retour</button>', 'questions', 'index'); ?>
+            <?= nav('<button type="button">Retourner à la liste de questions</button>', 'questions', 'index'); ?>
         </fieldset>
 
     </form>

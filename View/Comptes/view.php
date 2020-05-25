@@ -12,7 +12,9 @@ $comptesController->view($id_compte);
 
 $compte = get('compte');
 $listVoyage = get('listVoyage');
-
+if(is_null($compte)){
+    echo $comptesController->redirect('comptes', 'index');
+}
 
 ?>
 
@@ -24,11 +26,11 @@ $listVoyage = get('listVoyage');
     <table class="vertical-table">
         <tr>
             <th scope="row">Nom d'utilisateur</th>
-            <td><?= $compte->getPseudo() ?></td>
+            <td id='nomU'><?= $compte->getPseudo() ?></td>
         </tr>
         <tr>
             <th scope="row">Type</th>
-            <td>
+            <td id='type'>
                 <?php
                 if ($compte->getType() === 'etudiant') {
                     echo 'Étudiants';
@@ -42,33 +44,33 @@ $listVoyage = get('listVoyage');
         </tr>
         <tr>
             <th scope="row">Courriel</th>
-            <td><?= $compte->getCourriel() ?></td>
+            <td id='courriel'><?= $compte->getCourriel() ?></td>
         </tr>
         <tr>
             <th scope="row">Prénom</th>
-            <td><?= $compte->getPrenom() ?></td>
+            <td id='prenom'><?= $compte->getPrenom() ?></td>
         </tr>
         <tr>
             <th scope="row">Nom</th>
-            <td><?= $compte->getNom() ?></td>
+            <td id='nom'><?= $compte->getNom() ?></td>
         </tr>
         <tr>
             <th scope="row">Téléphone</th>
-            <td><?= $compte->getTelephone() ?></td>
+            <td id='telephone'><?= $compte->getTelephone() ?></td>
         </tr>
         <tr>
             <th scope="row">Programme</th>
-            <td><?= $compte->getProgramme()->getNomProgramme() ?></td>
+            <td id='programme'><?= $compte->getProgramme()->getNomProgramme() ?></td>
         </tr>
         <tr>
             <th scope="row">Date de naissance</th>
-            <td><?=dateToFrench($compte->getDateNaissance()) ?></td>
+            <td id='dateNaissance'><?=dateToFrench($compte->getDateNaissance()) ?></td>
         </tr>
 
         <?php if($compte->getType() != 'admin'):?>
             <tr>
                 <th scope="row">Voyage(s) associé(s)</th>
-                <td><?=$listVoyage?></td>
+                <td id='voyage'><?=$listVoyage?></td>
             </tr>
         <?php endif; ?>
 
@@ -77,14 +79,61 @@ $listVoyage = get('listVoyage');
     <!--Button de navigation -->
     <?php
     if(isOfType([ADMIN,PROF])){
-        echo nav('<button> Retour à la liste des comptes </button>', 'Comptes', 'index');
-    }
+        
+        if(isset($_GET['param2'])){
+            echo nav1('<button> Retour à la liste des participants </button>', 'Voyages', 'viewparticipants',$_GET['param2']);
+        } else {
+        echo nav('<button> Retour à la liste des participants </button>', 'Comptes', 'index');
+        }
+     }
     else{
-        echo nav('<button type="button">Revenir à la liste des voyages</button>', 'Voyages', 'index');
+        echo nav('<button type="button">Revenir à la liste des séjours</button>', 'Voyages', 'index');
     }
     ?>
 
     <?= nav1('<button type="button"> Modifier ce compte </button>','Comptes','edit',$compte->getIdCompte());?>
+    <script type="text/javascript">
+    $( document ).ready(function() {
+
+  $('#generate').click(function(){
+
+       nomU   = $('#nomU').text();
+       type    = $('#type').text();
+       courriel   = $('#courriel').text();
+       prenom    = $('#prenom').text();
+       nom   = $('#nom').text();
+       telephone   = $('#telephone').text();
+       programme   = $('#programme').text();
+       dateNaissance = $('#dateNaissance').text();
+       voyage = $('#voyage').text();
+
+          $.ajax({
+                  url: "./View/Comptes/generatepdf.php",
+                  type: 'POST',
+                    data:{
+                      nomU:nomU,
+                      type:type,
+                      courriel:courriel,
+                      prenom:prenom,
+                      nom:nom,
+                      telephone:telephone,
+                      programme:programme,
+                      dateNaissance:dateNaissance,
+                      voyage:voyage
+
+                    },
+                  success: function(res) {
+                    window.open("View/Comptes/afficherpdf.php",'_blank');
+                  },
+                  error:function(res){
+                    alert('error');
+                  }
+              });
+
+        });
+  });
+    </script>
+    <button id="generate">Générer un PDF</button>
 
 
 </div>

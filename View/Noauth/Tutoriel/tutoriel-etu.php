@@ -3,7 +3,7 @@
     <nav class="col-sm-3" id="myScrollspy">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="#section1">Voyages</a>
+                <a class="nav-link active" href="#section1">Les séjours</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#section2">Profil</a>
@@ -13,10 +13,10 @@
     </nav>
     <div>
         <div id="section1" class="section">
-            <h1>Voyages</h1>
+            <h1>Séjours de mobilité</h1>
             <ul>
                 <li>
-                    Pour voir la liste des voyages, cliquez sur « Voyages » de la barre de navigation.
+                    Pour voir la liste des voyages, cliquez sur « Séjours de mobilité » de la barre de navigation.
                     <ul>
                         <li>Si le voyage est en gris, c’est qu’il est désactivé.
                             <ul>
@@ -57,7 +57,7 @@
         <h1>Profil</h1>
         <ul>
             <li>
-                Pour voir votre profil, cliquez sur « Liste des étudiants » dans la barre de navigation. Vous pouvez aussi cliquez sur <img alt="modifier icon" src="Ressource/img/user-bleu.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">en haut à droite.
+                Pour voir votre profil, cliquez sur « Profil » dans la barre de navigation. Vous pouvez aussi cliquez sur <img alt="modifier icon" src="Ressource/img/user-bleu.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">en haut à droite.
                 <ul>
                     <li>Sur cette page, vous pouvez consulter vos informations.</li>
                     <li>

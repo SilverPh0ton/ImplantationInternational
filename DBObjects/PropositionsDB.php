@@ -59,9 +59,7 @@ class PropositionsDB extends ConfigDB
                                 $row['nom_projet'],
                                 $row['ville'],
                                 $activites,
-                                $row['cout'],
                                 $row['date_depart'],
-                                $row['date_limite'],
                                 $row['date_retour'],
                                 $row['actif'],
                                 $row['approuve'],
@@ -115,9 +113,7 @@ class PropositionsDB extends ConfigDB
                 $row['nom_projet'],
                 $row['ville'],
                 $activites,
-                $row['cout'],
                 $row['date_depart'],
-                $row['date_limite'],
                 $row['date_retour'],
                 $row['actif'],
                 $row['approuve'],
@@ -152,9 +148,7 @@ class PropositionsDB extends ConfigDB
                 $row['nom_projet'],
                 $row['ville'],
                 $activites,
-                $row['cout'],
                 $row['date_depart'],
-                $row['date_limite'],
                 $row['date_retour'],
                 $row['actif'],
                 $row['approuve'],
@@ -206,9 +200,7 @@ class PropositionsDB extends ConfigDB
             null,
             $proposition->getIdProposition(),
             $proposition->getVille(),
-            $proposition->getCout(),
             $proposition->getDateDepart(),
-            $proposition->getDateLimite(),
             $proposition->getDateRetour(),
             $proposition->getActif(),
             $proposition->getApprouvee(),
@@ -238,15 +230,13 @@ class PropositionsDB extends ConfigDB
     function addProposition(Proposition $proposition)
     {
         if (isset($proposition)) {
-            $sql = "INSERT INTO propositions (id_proposition, id_compte, nom_projet,ville, cout, date_depart, date_limite, date_retour, actif, approuve, id_destination, note) 
+            $sql = "INSERT INTO propositions (id_proposition, id_compte, nom_projet,ville,  date_depart,  date_retour, actif, approuve, id_destination, note) 
                     VALUES(
                       :id_proposition,
                       :id_compte,
                       :nom_projet,
                       :ville,
-                      :cout,
                       :date_depart,
-                      :date_limite,
                       :date_retour,
                       :actif,
                       :approuve,
@@ -256,9 +246,7 @@ class PropositionsDB extends ConfigDB
             $idCompte = $proposition->getIdCompte();
             $nomProjet = $proposition->getNomProjet();
             $ville = $proposition->getVille();
-            $cout = $proposition->getCout();
             $date_depart = $proposition->getDateDepart();
-            $date_limite = $proposition->getDateLimite();
             $date_retour = $proposition->getDateRetour();
             $actif = $proposition->getActif();
             $approuvee = $proposition->getApprouvee();
@@ -269,9 +257,7 @@ class PropositionsDB extends ConfigDB
             $stmt->bindParam(':id_compte', $idCompte);
             $stmt->bindParam(':nom_projet', $nomProjet);
             $stmt->bindParam(':ville', $ville);
-            $stmt->bindParam(':cout', $cout);
             $stmt->bindParam(':date_depart', $date_depart);
-            $stmt->bindParam(':date_limite', $date_limite);
             $stmt->bindParam(':date_retour', $date_retour);
             $stmt->bindParam(':actif', $actif);
             $stmt->bindParam(':approuve', $approuvee);
@@ -307,40 +293,59 @@ class PropositionsDB extends ConfigDB
             $sql = "UPDATE propositions SET 
                     nom_projet = :nom_projet, 
                     ville = :ville,
-                    cout = :cout, 
                     date_depart = :date_depart, 
-                    date_limite = :date_limite,
                     date_retour = :date_retour,
                     actif = :actif,
-                    approuve = 0,
+                    approuve = :code,
                     id_destination = :id_destination,
                     note = :note WHERE id_proposition = :id_proposition";
             $idProposition = $proposition->getIdProposition();
             $nomProjet = $proposition->getNomProjet();
             $ville = $proposition->getVille();
-            $cout = $proposition->getCout();
             $date_depart = $proposition->getDateDepart();
-            $date_limite = $proposition->getDateLimite();
             $date_retour = $proposition->getDateRetour();
             $actif = $proposition->getActif();
             $id_destination = $proposition->getDestination()->getIdDestination();
             $note = $proposition->getNote();
+            $code = $proposition->getApprouvee();
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id_proposition', $idProposition);
             $stmt->bindParam(':nom_projet', $nomProjet);
             $stmt->bindParam(':ville', $ville);
-            $stmt->bindParam(':cout', $cout);
             $stmt->bindParam(':date_depart', $date_depart);
-            $stmt->bindParam(':date_limite', $date_limite);
             $stmt->bindParam(':date_retour', $date_retour);
             $stmt->bindParam(':actif', $actif);
             $stmt->bindParam(':id_destination', $id_destination);
             $stmt->bindParam(':note', $note);
+            $stmt->bindParam(':code', $code);
 
             if ($stmt->execute()) {
                 return true;
             }
             return false;
+        }
+        return false;
+    }
+
+    public function getHighestid(){
+        $sql = "SELECT MAX(id_proposition) as id FROM propositions";
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt->execute()) {
+            if ($row = $stmt->fetch()) {
+                return $row['id'];
+            }
+        }
+        return false;
+
+    }
+
+    public function setPropostionAPto0($id){
+        $sql = "UPDATE propositions SET approuve = 0 WHERE id_proposition = :id_proposition";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_proposition', $id);
+        if ($stmt->execute()) {
+            return true;
         }
         return false;
     }

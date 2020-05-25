@@ -41,11 +41,12 @@ $ctr = 1;
                     <?php $cat_order_ctr++ ?>
 
                     <li class="card-header" id="heading<?= ++$ctr ?>">
-                        <input type="checkbox" class="parentCheckbox" id="categorie_<?= $categorie->getIdCategorie() ?>"
-                               value="1">
+                        <input type="checkbox" class="parentCheckbox" id="categorie_<?= $categorie->getIdCategorie() ?>" value="1"<?php if ($categorie->getDefault()==1) echo 'checked' ?>>
                         <span class="caret" style="display:inline-block; width: 95%;">
                             <?= $categorie->getCategorie() ?>
+
                         </span>
+
                         <ul class="nested sortableQu">
                             <table>
                                 <tr>
@@ -62,17 +63,37 @@ $ctr = 1;
                                         <table>
                                             <tr>
                                                 <td class="row5">
+
                                                     <input type="checkbox" class="childCheckbox"
                                                            name="check_<?= $question->getIdQuestion() ?>_1"
                                                            id="question_<?= $question->getIdQuestion() ?>"
                                                            value="1"
-                                                        <?= (in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>
+                                                        <?= ($categorie->getDefault()==1 || in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>
                                                 </td>
                                                 <td class="row45">
                                                     <div class="ControlOption">
                                                         <label for="affichage"><?php echo($question->getQuestion()); ?>
-                                                            <?php if ($question->getAffichage() === 'Case'): ?>
-                                                                <input type="checkbox">
+
+                                                        <?php if ($question->getAffichage() === 'Case'): ?>
+                                                        <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                        <?php foreach ($options as $option): ?>
+                                                    
+                                                            <input type="checkbox"><?= $option ?></input>
+                                                            <br>
+                                                        <?php endforeach ?>
+
+                                                        
+                                                        <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                            <br><br>
+                                                        <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                        <?php foreach ($options as $option): ?>
+                                                   
+                                                            <input type="radio" name="radio">  <?= $option ?></input>
+                                                            <br>
+                                                        <?php endforeach ?>
+
 
                                                             <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                 $extrmum = explode(";", $question->getInputOption());
@@ -181,8 +202,7 @@ $ctr = 1;
                     <?php $cat_order_ctr++ ?>
 
                     <li class="card-header" id="heading<?= ++$ctr ?>">
-                        <input type="checkbox" class="parentCheckbox"
-                               id="categorie_<?= $categorie->getIdCategorie() ?>" value="1">
+                        <input type="checkbox" class="parentCheckbox" id="categorie_<?= $categorie->getIdCategorie() ?>" value="1"<?php if ($categorie->getDefault()==1) echo 'checked' ?>>
                         <span class="caret" style="display:inline-block; width: 95%;">
                                     <?= $categorie->getCategorie() ?>
                                 </span>
@@ -198,6 +218,7 @@ $ctr = 1;
                             <?php $order_ctr = 0; ?>
                             <?php foreach ($listQuestionEtu as $question): ?>
                                 <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
+
                                     <li>
                                         <table>
                                             <tr>
@@ -205,13 +226,29 @@ $ctr = 1;
                                                                         name="check_<?= $question->getIdQuestion() ?>_0"
                                                                         id="question_<?= $question->getIdQuestion() ?>"
                                                                         value="1"
-                                                        <?= (in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>
+                                                        <?= ($categorie->getDefault()==1 || in_array($question->getIdQuestion(), $id_questions)) ? ' checked="checked"' : '' ?>>
                                                 </td>
                                                 <td class="row45">
                                                     <div class="ControlOption">
                                                         <label for="affichage"><?php echo($question->getQuestion()) ?>
                                                             <?php if ($question->getAffichage() === 'Case'): ?>
-                                                                <input type="checkbox">
+                                                              <br><br>
+                                                              <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                              <?php foreach ($options as $option): ?>
+                                                                  <input type="checkbox"><?= $option ?></input>
+                                                                  <br>
+                                                              <?php endforeach ?>
+ 
+                                                        <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                            <br><br>
+                                                        <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                                        <?php foreach ($options as $option): ?>
+                                                   
+                                                            <input type="radio" name="radio">  <?= $option ?></input>
+                                                            <br>
+                                                        <?php endforeach ?>
 
                                                             <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                                 $extrmum = explode(";", $question->getInputOption());
@@ -313,14 +350,9 @@ $ctr = 1;
         <button type="submit" id="submitBtn">Enregistrer</button>
     </form>
     <!--Button de navigation -->
-    <?= nav('<button>Retour aux voyages </button>', 'Voyages', 'index'); ?>
+    <?= nav('<button>Retour aux séjours </button>', 'Voyages', 'index'); ?>
     <?= nav1('<button>Ajouter une question </button>', 'Questions', 'add', $id_voyage); ?>
 
 </div>
 <?= load_script('treeView') ?>
 
-<script>
-    <?php foreach ($voyagesQuestions as $voyagesQuestion): ?>
-    checkOption(<?= $voyagesQuestion->getQuestion()->getIdQuestion() ?>);
-    <?php endforeach; ?>
-</script>

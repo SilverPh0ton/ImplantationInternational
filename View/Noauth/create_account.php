@@ -17,35 +17,35 @@ $programmes = get('programmes');
 
             <div class="input text required">
                 <label for="pseudo">Nom d'utilisateur</label>
-                <input type="text" name="pseudo" id="pseudo" pattern=".*\S.*"  maxlength="30" title="Le champ de peut pas être vide">
+                <input type="text" required name="pseudo" id="pseudo" pattern=".*\S.*"  maxlength="30" title="Le champ de peut pas être vide">
             </div>
 
             <div class="input password required">
                 <label for="mot_de_passe">Mot de passe</label>
-                <input type="password" name="mot_de_passe" id="mot_de_passe" pattern=".*\S.*" minlength="8" maxlength="30"
+                <input type="password" required name="mot_de_passe" id="mot_de_passe" pattern=".*\S.*" minlength="8" maxlength="30"
                        title="Le champ de peut pas être vide">
             </div>
 
             <div class="input password required">
                 <label for="mot_de_passe_confirme">Confirmer le mot de passe</label>
-                <input type="password" name="mot_de_passe_confirme" id="mot_de_passe_confirme" pattern=".*\S.*" minlength="8" maxlength="30"
+                <input type="password" required name="mot_de_passe_confirme" id="mot_de_passe_confirme" pattern=".*\S.*" minlength="8" maxlength="30"
                        title="Le champ de peut pas être vide">
             </div>
 
             <div class="input text required">
                 <label for="courriel">Courriel</label>
-                <input type="text" name="courriel" id="courriel" pattern=".+[/@].+[/.].+" maxlength="50"
+                <input type="text" required name="courriel" id="courriel" pattern=".+[/@].+[/.].+" maxlength="50"
                        title="Ceci n'est pas un courriel valide">
             </div>
 
             <div class="input text required">
                 <label for="nom">Nom</label>
-                <input type="text" name="nom" id="nom" pattern=".*\S.*" maxlength="30" title="Le champ de peut pas être vide">
+                <input type="text" required name="nom" id="nom" pattern=".*\S.*" maxlength="30" title="Le champ de peut pas être vide">
             </div>
 
             <div class="input text required">
                 <label for="prenom">Prénom</label>
-                <input type="text" name="prenom" id="prenom" pattern=".*\S.*" maxlength="30" title="Le champ de peut pas être vide">
+                <input type="text" required name="prenom" id="prenom" pattern=".*\S.*" maxlength="30" title="Le champ de peut pas être vide">
             </div>
 
             <div class="input date required">
@@ -90,7 +90,7 @@ $programmes = get('programmes');
 
             <div class="input tel required">
                 <label for="telephone">Téléphone (999-999-9999 0000:poste facultatif)</label>
-                <input type="tel" name="telephone" id="telephone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}([ ]{1}[0-9]*)?" maxlength="20"
+                <input required type="tel" name="telephone" id="telephone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}([ ]{1}[0-9]*)?" maxlength="20"
                        title="(999-999-9999 0000:poste facultatif)">
             </div>
 
@@ -112,7 +112,7 @@ $programmes = get('programmes');
 
             <div class="input number required">
                 <label for="code_activation">Code d'activation</label>
-                <input type="text" name="code_activation" id="code_activation" maxlength="30">
+                <input id="code_activation" required type="text" name="code_activation" pattern="[A-Z0-9]{5}-){4}[A-Z0-9]{5}" title="Le champ ne peut pas être vide" maxlength="14">
             </div>
             <button type="submit">Créer le compte</button>
             <!--Button de navigation -->
@@ -123,4 +123,3 @@ $programmes = get('programmes');
 
 
 </div>
-

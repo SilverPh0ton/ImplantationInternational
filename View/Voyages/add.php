@@ -42,50 +42,6 @@ $destinations = get('destinations');
                 <textarea name="note" maxlength="500" rows="4"></textarea>
             </div>
 
-            <div class="input text">
-                <label for="cout">Coût</label>
-                <input type="number" name="cout" pattern=".*\S.*" min="1" max="99999999" value="1" step="0.01">
-
-            </div>
-
-            <div class="input date required">
-                <label for="date_limite">Date limite d'inscription</label>
-                <select name="date_limite[year]" required="required">
-                    <?php for ($i = date('Y'); $i <= (date('Y') +50); $i++): ?>
-                        <option
-                            value=<?= $i ?>
-                            <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
-
-                <select name="date_limite[month]" required="required">
-                    <?php
-                    $i = 0;
-                    foreach ( return_months() as $month):
-                        ?>
-                        <option
-                            value=<?= ++$i ?>
-                            <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
-                            <?= $month ?>
-                        </option>
-                    <?php
-                    endforeach;
-                    ?>
-                </select>
-
-                <select name="date_limite[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
-                        <option
-                            value=<?= $i ?>
-                            <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
-                        >
-                            <?= $i ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
-            </div>
 
             <div class="input date required">
                 <label for="date_depart">Date de départ</label>
@@ -170,7 +126,7 @@ $destinations = get('destinations');
         <button type="submit">Ajouter</button>
 
     </form>
-    <?= nav('<button type="button">Retour aux voyages </button>', 'Voyages', 'index'); ?>
+    <?= nav('<button type="button">Retour aux projets</button>', 'Voyages', 'index'); ?>
     </fieldset>
 </div>
 

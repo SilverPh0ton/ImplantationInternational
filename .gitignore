@@ -37,3 +37,5 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+
+DBObjects/ConfigDB.php

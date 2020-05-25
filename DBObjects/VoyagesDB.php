@@ -2,10 +2,12 @@
 
 
 use App\Model\Entity\Voyage;
+use App\Model\Entity\Compte;
 
 include_once 'DBObjects/ConfigDB.php';
 require_once 'DBObjects/DestinationsDB.php';
 require_once 'Entity/Voyage.php';
+require_once 'Entity/Compte.php';
 
 class VoyagesDB extends ConfigDB
 {
@@ -93,6 +95,146 @@ class VoyagesDB extends ConfigDB
         }
     }
 
+    public function getVoyageFromIdVerifyConnectedUser($id_voyage)
+    {
+        $connectedUser = $_SESSION["connectedUser"];
+        $connectedUserType = $connectedUser->getType();
+        $compte_id = $connectedUser->getIdCompte();
+
+        if(isset($id_voyage) && $connectedUserType !== 'admin')
+        {
+            $sql = "SELECT v.id_voyage,v.id_proposition,v.ville,v.date_depart,v.date_retour,v.actif,
+            v.approuvee,v.id_destination,v.nom_projet,v.note 
+            FROM voyages v, comptes_voyages cv , comptes c 
+            WHERE v.id_voyage = cv.id_voyage and cv.id_compte = c.id_compte and 
+            c.id_compte = :connectedUser and v.id_voyage = :id_voyage";
+
+
+            if ($stmt = $this->conn->prepare($sql)) {
+
+                // Bind variables to the prepared statement as parameters
+                $stmt->bindParam(":id_voyage", $id_voyage , PDO::PARAM_INT);
+                $stmt->bindParam(":connectedUser", $compte_id, PDO::PARAM_INT);
+
+                // Attempt to execute the prepared statement
+                if ($stmt->execute()) {
+                    // Check if username exists, if yes then verify password
+                    if ($stmt->rowCount() == 1) {
+
+                        if ($row = $stmt->fetch()) {
+
+                            $destinationDB = new DestinationsDB();
+                            $destination = $destinationDB->getDestinationFromId($row['id_destination']);
+
+                            $voyage = new Voyage(
+                                $row['id_voyage'],
+                                $row['id_proposition'],
+                                $row['ville'],
+                                $row['date_depart'],
+                                $row['date_retour'],
+                                $row['actif'],
+                                $row['approuvee'],
+                                $destination,
+                                $row['nom_projet'],
+                                $row['note']
+                            );
+
+                            return $voyage;
+
+                        }
+                        else
+                        {
+                            return null;
+                        }
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                else
+                {
+                    return null;
+                }
+
+                // Close statement
+                unset($stmt);
+
+            }
+            else
+            {
+                return null;
+            }
+        } 
+        else if(isset($id_voyage) && $connectedUserType === 'admin')
+        {
+            $sql = "SELECT * FROM voyages WHERE id_voyage = :id_voyage";
+            
+            if ($stmt = $this->conn->prepare($sql)) {
+
+                // Bind variables to the prepared statement as parameters
+                $stmt->bindParam(":id_voyage", $id_voyage , PDO::PARAM_INT);
+
+                // Attempt to execute the prepared statement
+                if ($stmt->execute()) {
+                    // Check if username exists, if yes then verify password
+                    if ($stmt->rowCount() == 1) {
+
+                        if ($row = $stmt->fetch()) {
+
+                            $destinationDB = new DestinationsDB();
+                            $destination = $destinationDB->getDestinationFromId($row['id_destination']);
+
+                            $voyage = new Voyage(
+                                $row['id_voyage'],
+                                $row['id_proposition'],
+                                $row['ville'],
+                                $row['date_depart'],
+                                $row['date_retour'],
+                                $row['actif'],
+                                $row['approuvee'],
+                                $destination,
+                                $row['nom_projet'],
+                                $row['note']
+                            );
+
+                            return $voyage;
+
+                        }
+                        else
+                        {
+                            return null;
+                        }
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                else
+                {
+                    return null;
+                }
+
+                // Close statement
+                unset($stmt);
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else 
+        {
+            return null;
+        }
+    }
+
     public function getAllVoyages()
     {
         $voyages  = array();
@@ -110,9 +252,7 @@ class VoyagesDB extends ConfigDB
                 $voyageInfo['id_voyage'],
                 $voyageInfo['id_proposition'],
                 $voyageInfo['ville'],
-                $voyageInfo['cout'],
                 $voyageInfo['date_depart'],
-                $voyageInfo['date_limite'],
                 $voyageInfo['date_retour'],
                 $voyageInfo['actif'],
                 $voyageInfo['approuvee'],
@@ -130,15 +270,13 @@ class VoyagesDB extends ConfigDB
     {
         if (isset($voyage))
         {
-            $sql = "INSERT INTO voyages (id_proposition,ville,cout,date_depart, date_limite, date_retour, actif, approuvee, id_destination, nom_projet, note) 
-VALUES(:id_proposition,:ville, :cout, :date_depart, :date_limite, :date_retour, :actif, :approuvee, :id_destination, :nom_projet, :note)";
+            $sql = "INSERT INTO voyages (id_proposition,ville,date_depart,  date_retour, actif, approuvee, id_destination, nom_projet, note) 
+VALUES(:id_proposition,:ville,  :date_depart,  :date_retour, :actif, :approuvee, :id_destination, :nom_projet, :note)";
             $stmt = $this->conn->prepare($sql);
            if($stmt->execute(array(
                 ':id_proposition' => $voyage->getIdProposition(),
                 ':ville' => $voyage->getVille(),
-                ':cout' => $voyage->getCout(),
                 ':date_depart' =>$voyage->getDateDepart(),
-                ':date_limite'=>$voyage->getDateLimite(),
                 ':date_retour'=>$voyage->getDateRetour(),
                 ':actif'=>$voyage->getActif(),
                 ':approuvee'=>$voyage->getApprouvee(),
@@ -165,14 +303,12 @@ VALUES(:id_proposition,:ville, :cout, :date_depart, :date_limite, :date_retour, 
     {
         if (isset($voyage))
         {
-            $sql = "UPDATE voyages SET ville = :ville, cout = :cout, date_depart = :date_depart, date_limite = :date_limite, date_retour = :date_retour, actif = :actif, approuvee = :approuvee, id_destination = :id_destination, nom_projet = :nom_projet, note = :note
+            $sql = "UPDATE voyages SET ville = :ville,  date_depart = :date_depart,  date_retour = :date_retour, actif = :actif, approuvee = :approuvee, id_destination = :id_destination, nom_projet = :nom_projet, note = :note
                         WHERE id_voyage = :id_voyage";
             $stmt = $this->conn->prepare($sql);
             if($stmt->execute(array(
                 ':ville' => $voyage->getVille(),
-                ':cout' => $voyage->getCout(),
                 ':date_depart' =>$voyage->getDateDepart(),
-                ':date_limite'=>$voyage->getDateLimite(),
                 ':date_retour'=>$voyage->getDateRetour(),
                 ':actif'=>$voyage->getActif(),
                 ':approuvee'=>$voyage->getApprouvee(),
@@ -213,4 +349,68 @@ VALUES(:id_proposition,:ville, :cout, :date_depart, :date_limite, :date_retour, 
         return $nameList;
     }
 
+    public function getAllTrips()
+    {
+        $sql = "SELECT COUNT(*) AS NB, EXTRACT(year FROM v.date_retour) AS ANNEE
+                FROM voyages v
+                WHERE v.date_retour <= sysdate() AND v.actif = 1
+                GROUP BY ANNEE
+                ORDER BY ANNEE DESC
+                LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getAllCountry()
+    {
+        $sql = "SELECT COUNT( DISTINCT d.nom_pays ) AS NBR_PAYS,  EXTRACT(year FROM v.date_retour) AS ANNEE
+                FROM destinations d
+                INNER JOIN voyages v ON v.id_destination = d.id_destination
+                INNER JOIN propositions p ON p.id_destination = d.id_destination
+                WHERE v.date_retour <= sysdate()
+                GROUP BY ANNEE
+                ORDER BY ANNEE DESC
+                LIMIT 5";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $stats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $stats;
+    }
+
+    public function getDestinationStats()
+    {
+      $destinationStats = array();
+      $sql = "SELECT DISTINCT(v.nom_projet), v.ville, EXTRACT(YEAR FROM v.date_retour) AS ANNEE, d.nom_pays AS nom_pays, count(*) as NB
+              FROM voyages v
+              INNER JOIN destinations d ON d.id_destination = v.id_destination
+              WHERE v.date_retour <= sysdate()
+              GROUP BY ANNEE
+              ORDER BY ANNEE DESC
+              LIMIT 5";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->execute();
+      $destinationStats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+      return $destinationStats;
+    }
+
+    public function getFuturProjetsStats()
+    {
+      $futurProjetStats = array();
+      $sql = "SELECT DISTINCT(v.nom_projet), v.ville, EXTRACT(YEAR FROM v.date_retour) AS ANNEE, d.nom_pays AS nom_pays, count(*) as NB
+              FROM voyages v
+              INNER JOIN destinations d ON d.id_destination = v.id_destination
+              WHERE v.date_retour >= sysdate()
+              GROUP BY ANNEE, v.nom_projet
+              ORDER BY ANNEE DESC";
+      $stmt = $this->conn->prepare($sql);
+      $stmt->execute();
+      $futurProjetStats = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+      return $futurProjetStats;
+    }
 }

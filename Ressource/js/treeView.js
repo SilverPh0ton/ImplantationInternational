@@ -1,26 +1,3 @@
-$(document).ready(function(){
-    $(".caret").click(function() {
-        $(this).next().toggleClass("active");
-        $(this).toggleClass("caret-down");
-    });
-
-    $(".parentCheckbox").change(function() {
-        $(this).parent().find(".childCheckbox").prop('checked', $(this).prop('checked'));
-        $(this).next().next().addClass("active");
-        $(this).next().addClass("caret-down");
-    });
-
-    $(".childCheckbox").change(function() {
-        $(this).closest('.nested').prev().prev().prop("indeterminate", true);
-    });
-
-    recalulatOrder();
-});
-
-function checkOption(id_question){
-    $("#question_"+id_question).prop('checked', true);
-}
-
 $(function () {
     $( ".sortableCat" ).sortable({
         containment: "parent",
@@ -41,6 +18,38 @@ $(function () {
         deactivate: function( event, ui ) {
             recalulatOrder();
         }
+    });
+
+    $(".caret").click(function() {
+        $(this).next().toggleClass("active");
+        $(this).toggleClass("caret-down");
+    });
+
+    $(".parentCheckbox").change(function() {
+        $(this).parent().find(".childCheckbox").prop('checked', $(this).prop('checked'));
+        $(this).next().next().addClass("active");
+        $(this).next().addClass("caret-down");
+    });
+
+    $(".childCheckbox").change(function() {
+        $(this).closest('.nested').prev().prev().prop("indeterminate", true);
+    });
+
+    recalulatOrder();
+
+    $('.parentCheckbox').each(function( index ) {
+        let checked = 0;
+        $(this).parent().find('.childCheckbox').each(function() {
+            if($(this).prop("checked") === true){
+                checked += 1;
+            }
+        });
+        if(checked === $(this).parent().find('.childCheckbox').length){
+            $(this).prop( "checked", true );
+        }else if(checked > 0){
+            $(this).prop("indeterminate", true);
+        }
+        console.log($(this).parent().find('.childCheckbox').length + '   ' + checked);
     });
 });
 

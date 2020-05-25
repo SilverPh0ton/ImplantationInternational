@@ -45,12 +45,14 @@ $comptes = get('comptes');
                         <td><?php echo($compte->getPrenom()); ?></td>
                         <td><?php echo($compte->getNom()); ?></td>
                         <td class="actions">
-                            <?= nav2(
+                            <?php
+                            if($compte->getAnonyme()||$compteType=='admin'){
+                            echo nav2(
                                 '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
                                 'Valeurs',
                                 'Edit',
                                 $id_voyage,
-                                $compte->getIdCompte());
+                                $compte->getIdCompte());}
                             ?>
                         </td>
                     </tr>
@@ -59,7 +61,7 @@ $comptes = get('comptes');
             </table>
 
             <?=
-            nav('<button type="button"> Retour aux voyages</button>', 'voyages', 'index');
+            nav('<button type="button"> Retour aux séjours</button>', 'voyages', 'index');
 
             ?>
             <?php

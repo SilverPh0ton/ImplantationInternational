@@ -20,7 +20,9 @@ $questionsPourProposition = get('questionsPourProposition');
 
 <div class="questions index columns large-12 medium-12 small-12 large-text-left medium-text-left small-text-left content">
 
-    <h3>Questions</h3>
+    <h3>Banque de questions</h3>
+
+    <?= nav('<button class="add-btn">Ajouter une question</button>','questions','add'); ?>
 
     <div class="tab">
         <button id="eleve" class="tablinks active" onclick="openTab(event, 'eleveTab')">Pour étudiant</button>
@@ -56,8 +58,22 @@ $questionsPourProposition = get('questionsPourProposition');
                                     Mention (aucune réponse requise)
 
                                 <?php elseif ($question->getAffichage() === 'Case'): ?>
-                                    Case à cocher
-                                    <input type="checkbox">
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="checkbox"><?= $option ?></input>
+                                        <br>
+                                    <?php endforeach ?>
+
+                                    
+                                    <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                        <br>
+                                    <?php endforeach ?>
+
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
@@ -175,8 +191,21 @@ $questionsPourProposition = get('questionsPourProposition');
                                     Mention (aucune réponse requise)
 
                                 <?php elseif ($question->getAffichage() === 'Case'): ?>
-                                    Case à cocher
-                                    <input type="checkbox">
+                                  <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                  <?php foreach ($options as $option): ?>
+                                      <input type="checkbox"><?= $option ?></input>
+                                      <br>
+                                  <?php endforeach ?>
+
+
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+                                    <br>
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                    <?php endforeach ?>
+
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
@@ -298,8 +327,20 @@ $questionsPourProposition = get('questionsPourProposition');
                                     Mention (aucune réponse requise)
 
                                 <?php elseif ($question->getAffichage() === 'Case'): ?>
-                                    Case à cocher
-                                    <input type="checkbox">
+                                  <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                  <?php foreach ($options as $option): ?>
+                                      <input type="checkbox"><?= $option ?></input>
+                                      <br>
+                                  <?php endforeach ?>
+
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                        <br>
+                                    <?php endforeach ?>
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
@@ -420,8 +461,20 @@ $questionsPourProposition = get('questionsPourProposition');
                                     Mention (aucune réponse requise)
 
                                 <?php elseif ($question->getAffichage() === 'Case'): ?>
-                                    Case à cocher
-                                    <input type="checkbox">
+                                  <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                  <?php foreach ($options as $option): ?>
+                                      <input type="checkbox"><?= $option ?></input>
+                                      <br>
+                                  <?php endforeach ?>
+
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                        <br>
+                                    <?php endforeach ?>
 
                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
@@ -521,11 +574,9 @@ $questionsPourProposition = get('questionsPourProposition');
 
 </div>
 
-<!--Button de navigation -->
-<?= nav('<button>Ajouter une question</button>','questions','add'); ?>
-
 <script>
     var order = [[ 4, 'desc' ],[ 0, 'asc' ]];
+    let scrollY_val = '45vh';
 </script>
 <?= load_script('paginator') ?>
 <?= load_script('tab') ?>

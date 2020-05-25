@@ -5,7 +5,7 @@
  * @var \App\Model\Entity\Activite[] $activites
  * @var string $compteType
  */
-
+$idCase = 0;
 $id_proposition = $_GET['param1'];
 $propositionController->edit($id_proposition);
 
@@ -16,12 +16,12 @@ $categories = get('categories');
 $destinations = get('destinations');
 $activites = get('activites');
 
-$yearLimite = date("Y", strtotime($proposition->getDateLimite()));
 $yearDepart = date("Y", strtotime($proposition->getDateDepart()));
 $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
 ?>
 
 <?= load_script('dynamicTableEdit') ?>
+<?= load_script('fonctionCase') ?>
 <script>
     $(document).ready(function () {
         $('[data-toggle="popover"]').popover({
@@ -30,14 +30,37 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
         });
     });
 </script>
+<style>
+    .double {
+        zoom: 1.2;
+        transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        -o-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+    }
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
 
     <form method="post" id="base_form" enctype="multipart/form-data">
         <fieldset>
             <legend>Modifier une proposition</legend>
+            <div class="double">
+
+                <?php if (!isOfType([ADMIN])): ?>
+                    <input type="checkbox" id="brouillon" name="brouillon"
+                           value="oui" <?php echo ($proposition->getApprouvee() == 3) ? 'checked' : ''; ?>>
+                    <label for="brouillon">Il s'agit d'un brouillon</label><br>
+                <?php endif; ?>
+
+            </div>
             <label for="nom_projet">Nom du projet</label>
             <input type="text" name="nom_projet" pattern=".*\S.*" maxlength="50" title="Le champ de peut pas être vide"
                    value="<?= $proposition->getNomProjet() ?>">
@@ -67,57 +90,13 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                 <textarea name="note" maxlength="500" rows="4"><?= $proposition->getNote() ?></textarea>
             </div>
 
-            <div class="input required">
-                <label for="cout">Coût</label>
-                <input type="number" name="cout" min="0" max="99999999" step="0.01" value="<?= $proposition->getCout() ?>" required>
-            </div>
-
-            <div class="input date required">
-                <label for="date_limite">Date limite d'inscription</label>
-                <select name="date_limite[year]" required="required">
-                    <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
-                        <option
-                                value=<?= $i ?>
-                                <?= ($i == substr($proposition->getDateLimite(), 0, 4)) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
-
-                <select name="date_limite[month]" required="required">
-                    <?php
-                    $i = 0;
-                    foreach (return_months() as $month):
-                        ?>
-                        <option
-                                value=<?= ++$i ?>
-                                <?= ($i == substr($proposition->getDateLimite(), 5, 7)) ? ' selected="selected"' : '' ?>>
-                            <?= $month ?>
-                        </option>
-                    <?php
-                    endforeach;
-                    ?>
-                </select>
-
-                <select name="date_limite[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
-                        <option
-                                value=<?= $i ?>
-                                <?= ($i == substr($proposition->getDateLimite(), 8, 10)) ? ' selected="selected"' : '' ?>
-                        >
-                            <?= $i ?>
-                        </option>
-                    <?php endfor; ?>
-                </select>
-            </div>
-
             <div class="input date required">
                 <label for="date_depart">Date de départ</label>
                 <select name="date_depart[year]" required="required">
                     <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                         <option
                                 value=<?= $i ?>
-                                <?= ($i == substr($proposition->getDateDepart(), 0, 4)) ? ' selected="selected"' : '' ?>>
+                            <?= ($i == substr($proposition->getDateDepart(), 0, 4)) ? ' selected="selected"' : '' ?>>
                             <?= $i ?>
                         </option>
                     <?php endfor; ?>
@@ -130,7 +109,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                         ?>
                         <option
                                 value=<?= ++$i ?>
-                                <?= ($i == substr($proposition->getDateRetour(), 5, 7)) ? ' selected="selected"' : '' ?>>
+                            <?= ($i == substr($proposition->getDateRetour(), 5, 7)) ? ' selected="selected"' : '' ?>>
                             <?= $month ?>
                         </option>
                     <?php
@@ -156,7 +135,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                     <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                         <option
                                 value=<?= $i ?>
-                                <?= ($i == substr($proposition->getDateRetour(), 0, 4)) ? ' selected="selected"' : '' ?>>
+                            <?= ($i == substr($proposition->getDateRetour(), 0, 4)) ? ' selected="selected"' : '' ?>>
                             <?= $i ?>
                         </option>
                     <?php endfor; ?>
@@ -169,7 +148,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                         ?>
                         <option
                                 value=<?= ++$i ?>
-                                <?= ($i == substr($proposition->getDateRetour(), 5, 7)) ? ' selected="selected"' : '' ?>>
+                            <?= ($i == substr($proposition->getDateRetour(), 5, 7)) ? ' selected="selected"' : '' ?>>
                             <?= $month ?>
                         </option>
                     <?php
@@ -190,7 +169,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
             </div>
         </fieldset>
 
-        <div style="text-align: center">Ajout des activités</div>
+        <div style="text-align: center">Ajout d'activité(s)</div>
         <br>
 
         <table class="activityTable" style="white-space: nowrap;">
@@ -219,11 +198,11 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                 <tr>
                     <td class='tdEndroit'>
                         <input class="inputEndroit" type="hidden" name="endroit"
-                                                 value="<?= $activite->getEndroit() ?>"><?= $activite->getEndroit() ?>
+                               value="<?= $activite->getEndroit() ?>"><?= $activite->getEndroit() ?>
                     </td>
                     <td class='tdDescription'>
                         <input class="inputDescription" type="hidden" name="description" maxlength="100"
-                                                     value="<?= $activite->getDescription() ?>"><?= $activite->getDescription() ?>
+                               value="<?= $activite->getDescription() ?>"><?= $activite->getDescription() ?>
                     </td>
                     <td><input class="inputDateDepart" type="hidden" name="dateDepart"
                                value="<?= $yearDepart ?>-<?= $monthDepart ?>-<?= $dayDepart ?>"><?= $yearDepart ?>
@@ -240,8 +219,10 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
             <?php endforeach; ?>
 
             <tr>
-                <td style="padding: 10px 5px 5px;"><input type="text" maxlength="50" id="endroit_field" placeholder="Endroit"></td>
-                <td style="padding: 10px 5px 5px;"><input type="text" id="description_field" maxlength="100" placeholder="Description"></td>
+                <td style="padding: 10px 5px 5px;"><input type="text" maxlength="50" id="endroit_field"
+                                                          placeholder="Endroit"></td>
+                <td style="padding: 10px 5px 5px;"><input type="text" id="description_field" maxlength="100"
+                                                          placeholder="Description"></td>
                 <td style="padding: 10px 5px 5px;">
 
                     <div class="input date required">
@@ -249,7 +230,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                             <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                                 <option
                                         value=<?= $i ?>
-                                        <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
+                                    <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
                                     <?= $i ?>
                                 </option>
                             <?php endfor; ?>
@@ -262,7 +243,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                                 ?>
                                 <option
                                         value=<?= ++$i ?>
-                                        <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
+                                    <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
                                     <?= $month ?>
                                 </option>
                             <?php
@@ -290,7 +271,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                             <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                                 <option
                                         value=<?= $i ?>
-                                        <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
+                                    <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
                                     <?= $i ?>
                                 </option>
                             <?php endfor; ?>
@@ -303,7 +284,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                                 ?>
                                 <option
                                         value=<?= ++$i ?>
-                                        <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
+                                    <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
                                     <?= $month ?>
                                 </option>
                             <?php
@@ -358,25 +339,63 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                                  aria-labelledby="heading<?php echo $ctr ?>" data-parent="#accordionEx23">
                                 <div class="card-body">
 
-                                    <?php foreach ($proposition_reponses as $proposition_reponse): ?>
+                                    <?php foreach ($proposition_reponses as $proposition_reponse): $id = 0; ?>
                                         <?php $question = $proposition_reponse->getQuestion(); ?>
                                         <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                             <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
 
                                                 <span><?= $question->getQuestion() ?></span>
 
-                                                <?php $vraiValeurs = $proposition_reponse->getReponse(); ?>
+
+                                                <?php $vraiValeurs = $proposition_reponse->getReponse();
+                                                ?>
                                                 <!--Loop pour questions-->
                                                 <span>
                                                     <?php if ($question->getAffichage() === 'Case'): ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif; ?> <!-- Default Value-->
+                                                        <br> <br>
+                                                      <?php $listeReponse = explode(";", $vraiValeurs);
 
-                                                        <input type="checkbox"
-                                                               name="<?= $question->getIdQuestion() ?>"
-                                                            <?php if ('on' === $vraiValeurs): {
-                                                                echo ' checked';
-                                                            } endif ?>
-                                                        >
+                                                        $options = explode(";", $question->getInputOption());
+                                                        $idCase = 0;
+                                                        ?>
+
+                                                              <?php foreach ($options as $option): $idCase++; ?>
+
+                                                            <input <?php if ($listeReponse[$idCase - 1] === "true") : ?>
+                                                                checked="checked"
+                                                            <?php endif; ?>  id="<?= $idCase ?>" class="caseClass"
+                                                                             name="case<?= $question->getIdQuestion() ?>"
+                                                                             data-id="<?= $question->getIdQuestion() ?>"
+                                                                             type="checkbox">
+                                                                      <?= $option ?>
+                                                                  </input>
+                                                        <?php endforeach;#?>
+
+                                                              <input value="<?= $vraiValeurs ?>"
+                                                                     name="<?= $question->getIdQuestion() ?>"
+                                                                     type="hidden">
+
+
+                                                    <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                                        <br> <br>
+                                                <?php
+                                                        $listeReponse = explode(";", $vraiValeurs);
+
+                                                        $options = explode(";", $question->getInputOption());
+                                                        $idCase = 0; ?>
+
+                                                        <?php foreach ($options as $option): $idCase++; ?>
+
+                                                            <input <?php if ($listeReponse[$idCase - 1] === "true") : ?>
+                                                                checked="checked"
+                                                            <?php endif; ?>
+                                                        name="radio<?= $question->getIdQuestion() ?>" class="radioClass"
+                                                        data-id="<?= $question->getIdQuestion() ?>" type="radio">
+                                                                <?= $option ?>
+                                                            </input>
+                                                        <?php endforeach ?>
+                                                        <input value="<?= $vraiValeurs ?>"
+                                                               name="<?= $question->getIdQuestion() ?>" type="hidden">
 
                                                     <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
@@ -499,7 +518,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
-            <br>
+
             <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>
             <button type="submit" form="base_form">Enregistrer</button>
         </fieldset>
@@ -507,10 +526,3 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
     </form>
 
 </div>
-
-
-
-
-
-
-

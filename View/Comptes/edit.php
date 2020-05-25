@@ -114,6 +114,17 @@ $programmes = get('array_prog');
                 </select>
             </div>
 
+            <?php if (isOfType([ADMIN,PROF])): ?>
+                <div class="input">
+                <label for="anonyme">Voulez-vous que les autres accompagnateurs voient votre profil?</label>
+
+                <input type="radio" name="anonyme" value="1" <?= ($compte->getAnonyme() ? 'checked' : '') ?>> Oui
+                <input type="radio" name="anonyme" value="0" <?= (!$compte->getAnonyme() ? 'checked' : '')?>> Non
+            </div>
+            <?php
+             else: ?>
+          <input type="radio" name="anonyme" value="1" hidden>
+             <?php endif; ?>
             <?php if (isOfType([ADMIN])): ?>
                 <div class="input">
                     <label for="type">Type de compte</label>
@@ -129,24 +140,24 @@ $programmes = get('array_prog');
                         </option>
                     </select>
                 </div>
-            <?php elseif (isOfType([PROF])): ?>
                 <input type="hidden" name="type" value="<?= $compte->getType() ?>">
                 <button type="button" data-toggle="modal" data-target="#myModal_promote"> Promouvoir en accompagnateur
                 </button>
-            <?php elseif (isOfType([ETUDIANT])): ?>
+            <?php elseif (isOfType([PROF,ETUDIANT])): ?>
                 <input type="hidden" name="type" value="<?= $compte->getType() ?>">
             <?php endif; ?>
 
             <?php if (isOfType([ADMIN])): ?>
                 <div class="input">
                     <label for="actif">Actif</label>
-                    <input type="checkbox" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
+                    <input type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
                 </div>
             <?php elseif (isOfType([PROF,ETUDIANT])): ?>
-                <input hidden type="checkbox" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
+                <input hidden type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
             <?php endif; ?>
+
             <div>
-                <button type="submit">Enregistrer</button>
+                <button type="submit" onclick="savedata()">Enregistrer</button>
                 <!--Button de navigation -->
                 <?php
                 if (isOfType([ADMIN, PROF])) {
@@ -199,7 +210,7 @@ $programmes = get('array_prog');
         $connectedUser = $_SESSION["connectedUser"];
         $compteType = $connectedUser->getType();
         if ($compteType == 'admin' || $compteType == 'prof') {
-            nav('<button> Retour à la liste des comptes </button>', 'Comptes', 'index');
+            nav('<button> Retour à la liste des participants </button>', 'Comptes', 'index');
         }
 
     }
@@ -215,14 +226,16 @@ $programmes = get('array_prog');
             <legend>Modification de mot de passe</legend>
             <div class="input text required">
                 <label for="mot_de_passe">Mot de passe</label>
-                <input name="mot_de_passe" id="mot_de_passe" value="" type="password" minlength="9" maxlength="30"
+                <input name="mot_de_passe" id="mot_de_passe" value="" type="password" minlength="8" maxlength="30"
                        required>
                 <label for="mot_de_passe_confirme">Confirmer votre mot de passe</label>
-                <input name="mot_de_passe_confirme" id="mot_de_passe_confirme" value="" type="password" minlength="9"
+                <input name="mot_de_passe_confirme" id="mot_de_passe_confirme" value="" type="password" minlength="8"
                        maxlength="30" required>
             </div>
-            <button type="submit">Enregistrer</button>
+            <button type="submit">Enregistrer le mot de passe</button>
         </fieldset>
 
     </form>
 </div>
+
+<?= load_script('onLoadStorage/editCompte') ?>

@@ -22,12 +22,12 @@ $noAuthController->passwordRecover();
     <form method="post" action="">
         <div class="input text">
             <label for="pseudo">Nom d'utilisateur</label>
-            <input type="text" name="pseudo" id="pseudo">
+            <input type="text" name="pseudo" id="pseudo" required>
             <?= $pseudo_err ?>
         </div>
         <div class="input text">
             <label for="courriel">Courriel</label>
-            <input type="email" name="courriel" id="mot-courriel-passe">
+            <input type="email" name="courriel" id="mot-courriel-passe" required>
             <?= $courriel_err ?>
         </div>
         <button type="submit">Soumettre</button>

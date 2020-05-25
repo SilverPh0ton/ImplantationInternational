@@ -2,10 +2,6 @@
 
 use App\Model\Entity\Destination;
 
-require_once 'Entity\Destination.php';
-require_once 'Entity\Voyage.php';
-require_once 'Entity\Activation.php';
-
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Activation[]|\Cake\Collection\CollectionInterface $activations
@@ -26,14 +22,14 @@ $activations = get('acti_array');
 
     <h3>Codes d'activation pour: <?= $nom_projet ?></h3>
 
-
+    <?=  nav1('<button class="add-btn">Générer des codes </button>','Activations','add',$id_voyage); ?>
 
     <?php if (is_array($activations) && sizeof($activations) != 0) : ?>
 
         <table class="table_to_paginate">
             <thead>
             <tr>
-                <th scope="col">Code Activation</th>
+                <th scope="col">Code(s) d'activation</th>
                 <th scope="col">Actif</th>
             </tr>
             </thead>
@@ -51,12 +47,11 @@ $activations = get('acti_array');
 
     <?php else: ?>
 
-        <H1>Il n'y a aucun code d'activation pour ce voyage</H1>
+        <H1>Il n'y a aucun code d'activation pour ce séjour</H1>
 
     <?php endif ?>
 
     <!--Button de navigation -->
-    <?=  nav1('<button>Générer des codes </button>','Activations','add',$id_voyage); ?>
     <?=  nav('<button>Revenir à la liste des voyages</button>','Voyages','index'); ?>
 
 </div>

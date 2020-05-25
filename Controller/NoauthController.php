@@ -6,6 +6,7 @@ use ActivationsDB;
 use App\Model\Entity\Compte;
 use App\Model\Entity\ComptesVoyage;
 use App\Model\Entity\Programme;
+use DateTime;
 use ComptesDB;
 use ComptesVoyagesDB;
 use ProgrammesDB;
@@ -18,6 +19,9 @@ require_once 'Controller/AppController.php';
 require_once 'Entity/Programme.php';
 require_once 'Entity/Compte.php';
 require_once 'Entity/ComptesVoyage.php';
+
+define("AGE_MIN", 15);
+define("AGE_MAX", 89);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -67,9 +71,10 @@ class NoauthController extends AppController
             if (!$this->activationsDB->isValidCode($_POST['code_activation'])) {
                 $this->flashBad('Le code d\'activation est invalide');
                 return $this->redirect('Noauth', 'CreateAccount');
+            }else{
+                $activation = $this->activationsDB->getActivationFromCode($_POST['code_activation']);
             }
 
-            $activation = $this->activationsDB->getActivationFromCode($_POST['code_activation']);
 
             $date_naissance_str = $_POST['date_naissance']['year'] . "-" . $_POST['date_naissance']['month'] . "-" . $_POST['date_naissance']['day'];
 
@@ -88,12 +93,22 @@ class NoauthController extends AppController
             }
 
             if (($_POST['date_naissance']['month'] == 2) && (in_array($_POST['date_naissance']['day'], $days))) {
-                $this->flashBad('La compte n\'a pas pu être créé. Mauvaise saisie de date.');
+                $this->flashBad('Le compte n\'a pas pu être créé. Mauvaise saisie de date.');
                 return $this->redirect('Noauth', 'CreateAccount');
             }
 
 
             $date_naissance = date("Y-m-d", strtotime($date_naissance_str));
+            $age = date_diff(date_create($date_naissance), new DateTime());
+
+            if ($age->y < AGE_MIN) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne doit être agée d\'au moins 15 ans.');
+                return $this->redirect('Noauth', 'CreateAccount');
+            }
+            elseif ($age->y >= AGE_MAX) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne ne peut être agée de 90 ans ou plus.');
+                return $this->redirect('Noauth', 'CreateAccount');
+            }
 
             $programme = $this->programmesDB->getProgrammeFromId($_POST['id_programme']);
 
@@ -108,7 +123,8 @@ class NoauthController extends AppController
                 $_POST['prenom'],
                 $date_naissance,
                 $_POST['telephone'],
-                $programme
+                $programme,
+                true
             );
 
             //Enregistre l’entité
@@ -129,7 +145,7 @@ class NoauthController extends AppController
                     return $this->redirect('comptes', 'login');
                 }
             }
-            $this->flashBad('Votre compte n\'a pas pu être créé. Réessayez plus tard.\'');
+            $this->flashBad('Votre compte n\'a pas pu être créé. Réessayez plus tard.');
             return $this->redirect('comptes', 'login');
         }
     }
@@ -155,10 +171,11 @@ class NoauthController extends AppController
                 if (!empty($result)) {
                     if (!empty($pass = $this->compteDB->changePassFromID($result))) {
                         $this->send_email($courriel, $pseudo, $pass);
+                        $this->flashGood('Un courriel contenant votre nouveau mot de passe vous a été envoyé ');
                         $this->redirect('Comptes', 'Login');
                     }
                 } else {
-                    $this->flashBad('Aucun compte existe à cette combinaison');
+                    $this->flashBad('Aucun compte n\'existe avec cette combinaison');
                     return $this->redirect('Noauth', 'PasswordRecover');
                 }
 
@@ -170,20 +187,21 @@ class NoauthController extends AppController
 
     function send_email($courriel, $pseudo, $newpass)
     {
-        /* $mail = new PHPMailer(true);
+    /*    $mail = new PHPMailer(true);
 
          try {
              //Server settings
              $mail->isSMTP();                                            // Send using SMTP
-             $mail->Host = 'localhost';                    // Set the SMTP server to send through
-            // $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-           //  $mail->Username = 'bdf428b30ff002';                     // SMTP username
-           //  $mail->Password = '1b5e75d40dd7e5';                               // SMTP password
+             $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
+             $mail->SMTPDebug = 0;
+             $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+             $mail->Username = 'mobilite@silverph0ton.com';                     // SMTP username
+             $mail->Password = '11qpVR^Ew.2]';                               // SMTP password
              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-             $mail->Port = 2525;                                    // TCP port to connect to
-
+             $mail->Port = 465;                                    // TCP port to connect to
+             $mail->CharSet = 'UTF-8';
              //Recipients
-             $mail->setFrom('agectr@edu.cegeptr.qc.ca', 'Ressources Humaines');
+             $mail->setFrom('mobilite@silverph0ton.com', 'Ressources Humaines');
              $mail->addAddress($courriel, $pseudo);     // Add a recipient
 
              // Content
@@ -195,9 +213,9 @@ class NoauthController extends AppController
 
          } catch (Exception $e) {
              die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-         } */
+         }*/
 
-        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");
+        mail($courriel,"Une demande de modification de mot de passe a été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: mobilite@silverph0ton.com");
     }
 
 

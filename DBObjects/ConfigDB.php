@@ -15,15 +15,16 @@ protected  $conn;
      */
     public function __construct()
     {
-        $this->DB_SERVER = '206.167.140.56';
-        $this->DB_USERNAME = '1750944';
-        $this->DB_PASSWORD = '1750944';
-        $this->DB_NAME = '420626ri_equipe-2';
+
+        $this->DB_SERVER = 'localhost';
+        $this->DB_USERNAME = 'silverph_david';
+        $this->DB_PASSWORD = 'Rwsb0f^&DBN!';
+        $this->DB_NAME = 'silverph_international';
 
         try{
 
             /* Attempt to connect to MySQL database */
-            $this->conn = new PDO("mysql:host=$this->DB_SERVER;dbname=$this->DB_NAME",$this->DB_USERNAME,$this->DB_PASSWORD);
+            $this->conn = new PDO("mysql:host=$this->DB_SERVER;dbname=$this->DB_NAME;charset=utf8",$this->DB_USERNAME,$this->DB_PASSWORD);
             // Set the PDO error mode to exception
 
                        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

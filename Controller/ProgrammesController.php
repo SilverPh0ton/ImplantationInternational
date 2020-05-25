@@ -28,7 +28,7 @@ class ProgrammesController extends AppController
             $nomProgrammeExiste =  $this->programmeDB->programmeExist($_POST['nom_programme']);
 
             if ($nomProgrammeExiste) {
-                $this->flashBad('Ce programme existe déjà');
+                $this->flashBad('Ce programme existe déjà.');
                 return $this->redirect("Programmes", "Add");
             }
 

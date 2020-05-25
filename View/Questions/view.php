@@ -39,8 +39,20 @@ $question = get('question');
 
                             <?php echo download('empty.txt' ,'Télécharger');  ?>
                         <?php elseif ($question->getAffichage() === 'Case'): ?>
-                            Case à cocher
-                            <input type="checkbox">
+                          <?php $options = explode(";", $question->getInputOption()); ?>
+
+                          <?php foreach ($options as $option): ?>
+                              <input type="checkbox"><?= $option ?></input>
+                              <br>
+                          <?php endforeach ?>
+                           
+                          <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
+
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                        <br>
+                                    <?php endforeach ?>
 
                         <?php elseif ($question->getAffichage() === 'Chiffre'):
                             $extrmum = explode(";", $question->getInputOption());
@@ -97,6 +109,8 @@ $question = get('question');
                             <textarea></textarea>
 
                         <?php endif; ?>
+
+                        
                     </label>
                 </div>
             </td>
