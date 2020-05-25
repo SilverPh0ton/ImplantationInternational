@@ -71,6 +71,7 @@ class NoauthController extends AppController
 
             $activation = $this->activationsDB->getActivationFromCode($_POST['code_activation']);
 
+
             $date_naissance_str = $_POST['date_naissance']['year'] . "-" . $_POST['date_naissance']['month'] . "-" . $_POST['date_naissance']['day'];
 
 
@@ -94,6 +95,16 @@ class NoauthController extends AppController
 
 
             $date_naissance = date("Y-m-d", strtotime($date_naissance_str));
+            $age = date_diff(date_create($date_naissance), new DateTime());
+
+            if ($age->y < AGE_MIN) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne doit être agée d\'au moins 15 ans.');
+                return $this->redirect('Comptes', 'Add');
+            }
+            elseif ($age->y >= AGE_MAX) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne ne peut être agée de 90 ans ou plus.');
+                return $this->redirect('Comptes', 'Add');
+            }
 
             $programme = $this->programmesDB->getProgrammeFromId($_POST['id_programme']);
 
@@ -156,6 +167,7 @@ class NoauthController extends AppController
                 if (!empty($result)) {
                     if (!empty($pass = $this->compteDB->changePassFromID($result))) {
                         $this->send_email($courriel, $pseudo, $pass);
+                        $this->flashGood('Un courriel contenant votre nouveau mot de passe vous a été envoyé ');
                         $this->redirect('Comptes', 'Login');
                     }
                 } else {

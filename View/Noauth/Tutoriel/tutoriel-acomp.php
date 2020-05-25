@@ -24,7 +24,7 @@
                 <h1>Propositions de séjour</h1>
                 <ul>
                     <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de voyage.</li>
-                    <li>Il est à noter que si la proposition est en <span style="color: red;">rouge</span>, cette proposition à été <span style="font-weight: bold">refusée</span>. S'il est, comme indiqué dans la colonne <span style="font-weight: bold">État</span> du tableau</li>
+                    <li>Il est à noter que si la proposition est en <span style="color: red;">rouge</span>, cette proposition a été <span style="font-weight: bold">refusée</span>. S'il est, comme indiqué dans la colonne <span style="font-weight: bold">État</span> du tableau.</li>
                     <br>
                     <li>
                         Pour voir la liste de vos propositions, cliquez sur « Propositions de séjour » de la barre de navigation.
@@ -37,6 +37,9 @@
                                 Pour faire une proposition de voyage, cliquez sur « Ajouter une proposition » au bas de la page
                                 <ul>
                                     <li>Sur cette page, inscrivez les informations nécessaires, telles que le nom du projet, la destination, la date de départ, celle de retour ainsi que le coût. </li>
+                                    <li>S'il s'agit d'un brouillon, cochez la case « Il s'agit d'un brouillon ». Vous pourrez alors enregistrer votre proposition sans que l'administrateur ne soit notifié. De plus, la proposition apparaitra en orange dans la liste de vos propositions.</li><ul>
+                                        <li><b>À noter: </b>Lorsque vous voudrez envoyer votre proposition, vous n'avez qu'à revenir dans cette section et décocher la case  « Il s'agit d'un brouillon » et appuyer sur « Ajouter » au bas de la page.</li>
+                                    </ul>
                                     <li>Dans la section « Ajout des activités », vous pourrez ajouter différentes activités prévues pour ce voyage. Inscrivez l’endroit de l’activité, une courte description, la date de départ et la date de fin. Une fois terminé, cliquez sur <img alt="modifier icon" src="Ressource/img/btPlus.png" class="images" data-toggle="tooltip" data-placement = "top"></li>
                                     <ul>
                                         <li>
@@ -45,7 +48,7 @@
                                     </ul>
                                     <li>Pour supprimer une activité, cliquez sur <img alt="modifier icon" src="Ressource/img/btPoubelle.png" class="images" data-toggle="tooltip" data-placement = "top"></li>
                                     <li>Dans la section « Renseignement supplémentaire », vous trouverez des questions à répondre selon la catégorie. Pour voir les questions, cliquez sur les catégories.</li>
-                                    <li>Une fois terminé, cliquez sur « Ajouter »</li>
+                                    <li>Une fois terminé, cliquez sur « Ajouter ». Un courriel de notification sera alors envoyé aux administrateurs.</li>
                                     <li>Pour revenir à la liste des propositions, cliquez sur « Retour aux propositions »</li>
                                 </ul>
                             </li>
@@ -55,13 +58,13 @@
                                 <ul>
                                     <li>Sur cette page, vous pouvez modifier les informations de cette proposition. </li>
                                     <ul>
-                                        <li><b>À noter: </b>Vous pouvez modifier la proposition de séjour tant et aussi longtemps qu'elle n'a PAS été acceptée par un administrateur.</li>
+                                        <li><b>À noter: </b>Vous pouvez modifier la proposition de séjour tant et aussi longtemps qu'elle n'a <b>PAS</b> été acceptée par un administrateur.</li>
                                         Si la proposition de séjour a été acceptée, seul un administrateur pourra modifier les activités.
                                         <br>
 
 
                                     </ul>
-                                    <li>Une terminé, cliquez sur « Enregistrer »</li>
+                                    <li>Une fois terminé, cliquez sur « Enregistrer »</li>
                                     <li>Pour revenir à la liste de proposition, cliquez sur « Retour aux propositions »</li>
                                 </ul>
                             </li>
@@ -94,7 +97,7 @@
                         <ul>
                             <li>Une fois sur cette page, vous pouvez aussi générer un fichier PDF incluant les détails de tous les participants de ce projet.</li>
                             <li>Pour revenir à la liste, cliquez sur « Revenir aux détails du projet »</li>
-                            <li><b>À noter:</b>Pour voir la liste de tous les participants aux projets dont vous êtes accompagnateur, vous pouvez cliquer sur  « Liste des participants » de la barre de navigation. Vous pouvez aussi générer un fichier PDF de tous les participants en cliquant sur le bouton « Générer un PDF »</li>
+                            <li><b>À noter: </b>Pour voir la liste de tous les participants aux projets dont vous êtes accompagnateur, vous pouvez cliquer sur  « Liste des participants » de la barre de navigation. Vous pouvez aussi générer un fichier PDF de tous les participants en cliquant sur le bouton « Générer un PDF »</li>
                         </ul>
                         <li>Dans la page de détail, pour voir la proposition d'origine du projet, cliquez sur l’onglet <img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">de la ligne <b>Proposition d'origine</b></li>
                         <li>Pour revenir à la liste, cliquez sur « Revenir à la liste des voyages »</li>
@@ -129,8 +132,8 @@
                 </li>
                 <br>
                 <li>
-                    Pour voir les formulaires que les étudiants et vous doivent remplir, cliquez sur l’onglet <img alt="modifier icon" src="Ressource/img/clipboard.png" class="images" data-toggle="tooltip" data-placement = "top">
-                    <li><b>À noter: </b> Le seul formulaire que vous pouvez remplir et/ou modifier est le votre. Vous ne pouvez pas modifier les autres formulaires</li>
+                    Pour voir les formulaires que les étudiants et vous devez remplir, cliquez sur l’onglet <img alt="modifier icon" src="Ressource/img/clipboard.png" class="images" data-toggle="tooltip" data-placement = "top">
+                    <li><b>À noter: </b> Le seul formulaire que vous pouvez remplir et/ou modifier est le <b>vôtre.</b> Vous ne pouvez pas modifier les autres formulaires.</li>
                     <ul>
                         <li>Dans cette page, pour afficher plus d’utilisateurs par page, choisissez un nombre sous l’onglet « Afficher » en haut à gauche du tableau.</li>
                         <li>Vous pouvez changer de page en cliquant sur « Précédent » et « Suivant » ainsi que les chiffres, en bas à droite du tableau.</li>

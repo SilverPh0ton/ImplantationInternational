@@ -15,6 +15,7 @@ if(isset($_GET['param1'])){
 }
 
 $ctr = 1;
+$id = 0;
 
 ?>
 <?= load_css('tab') ?>
@@ -22,6 +23,7 @@ $ctr = 1;
 <?= load_css('ControlOption') ?>
 <?= load_script('dynamicTable') ?>
 <?= load_script('fonctionCase') ?>
+
 <script>
     $(document).ready(function () {
         $('[data-toggle="popover"]').popover({
@@ -29,6 +31,8 @@ $ctr = 1;
             placement: 'left'
         });
     });
+
+
 </script>
 
 <style>
@@ -175,7 +179,7 @@ $ctr = 1;
         <div style="text-align: center">Calendrier des activités prévues</div>
         <br>
 
-        <table class="activityTable" style="white-space: nowrap;">
+        <table id="activityTable" class="activityTable" style="white-space: nowrap;">
             <thead>
             <tr>
                 <th>Endroit</th>
@@ -373,6 +377,7 @@ $ctr = 1;
 
                                                     <input type="number"
                                                            name="<?= $question->getIdQuestion() ?>"
+                                                           id="<?= $question->getIdQuestion() ?>"
                                                            value="<?php if(isset($reponse))echo $reponse; else echo $min?>" min="<?= $min ?>"
                                                            max="<?= $max ?>" step="<?= $step ?>">
 
@@ -381,6 +386,7 @@ $ctr = 1;
 
                                                     <input type="date"
                                                            name="<?= $question->getIdQuestion() ?>"
+                                                           id="<?= $question->getIdQuestion() ?>"
                                                            value="<?php if(isset($reponse))echo $reponse; else echo ""?>">
 
                                                 <?php elseif ($question->getAffichage() === 'Liste'):
@@ -421,6 +427,7 @@ $ctr = 1;
 
                                                     <input type="range" class="slider"
                                                            name="<?= $question->getIdQuestion() ?>"
+                                                           id="<?= $question->getIdQuestion() ?>"
                                                            value="<?php if(isset($reponse))echo $reponse; else echo $min?>"
                                                            onchange="$('#rangeValue<?= $question->getIdQuestion() ?>').text(this.value);"
                                                            min="<?= $min ?>" max="<?= $max ?>">
@@ -429,7 +436,7 @@ $ctr = 1;
                                                     <br><br>
 
                                                 <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
-                                                    <textarea name="<?= $question->getIdQuestion() ?>"><?php if(isset($reponse)){echo $reponse;} else{echo "";}?></textarea>
+                                                    <textarea id="<?= $question->getIdQuestion() ?>" name="<?= $question->getIdQuestion() ?>"><?php if(isset($reponse)){echo $reponse;} else{echo "";}?></textarea>
 
                                                 <?php endif; ?>
                                             </span>
@@ -456,9 +463,10 @@ $ctr = 1;
             </div>
             <br>
             <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>
-            <button type="submit" form="base_form45" name="btn_submit" id="test" value="ajouter">Ajouter</button>
+            <button type="submit" form="base_form45" name="btn_submit" id="test" value="ajouter" onclick="savedata()">Ajouter</button>
 
         </fieldset>
         <br>
     </form>
 </div>
+<?= load_script('onLoadStorage/addProposition') ?>

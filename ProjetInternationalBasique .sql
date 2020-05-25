@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: SB0134-WINWEB
--- Generation Time: Mar 10, 2020 at 02:05 PM
--- Server version: 8.0.18
--- PHP Version: 7.3.7
+-- Host: 127.0.0.1:3306
+-- Generation Time: May 22, 2020 at 07:12 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.2.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `420626ri_equipe-2`
+-- Database: `projet`
 --
 
 -- --------------------------------------------------------
@@ -28,12 +28,15 @@ SET time_zone = "+00:00";
 -- Table structure for table `activations`
 --
 
-CREATE TABLE `activations` (
-  `id_activation` int(11) NOT NULL,
+DROP TABLE IF EXISTS `activations`;
+CREATE TABLE IF NOT EXISTS `activations` (
+  `id_activation` int(11) NOT NULL AUTO_INCREMENT,
   `code_activation` varchar(30) NOT NULL,
   `id_voyage` int(11) NOT NULL,
-  `actif` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `actif` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_activation`),
+  KEY `fk_id_voyage_for_activation` (`id_voyage`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -41,14 +44,17 @@ CREATE TABLE `activations` (
 -- Table structure for table `activites`
 --
 
-CREATE TABLE `activites` (
-  `id_activite` int(11) NOT NULL,
+DROP TABLE IF EXISTS `activites`;
+CREATE TABLE IF NOT EXISTS `activites` (
+  `id_activite` int(11) NOT NULL AUTO_INCREMENT,
   `id_proposition` int(11) NOT NULL,
-  `endroit` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `endroit` varchar(100) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `date_depart` date NOT NULL,
-  `date_retour` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `date_retour` date NOT NULL,
+  PRIMARY KEY (`id_activite`),
+  KEY `foreign_key_id_proposition` (`id_proposition`)
+) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -56,29 +62,21 @@ CREATE TABLE `activites` (
 -- Table structure for table `categories`
 --
 
-CREATE TABLE `categories` (
-  `id_categorie` int(11) NOT NULL,
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id_categorie` int(11) NOT NULL AUTO_INCREMENT,
   `categorie` varchar(50) NOT NULL,
-  `actif` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `actif` tinyint(1) NOT NULL DEFAULT '1',
+  `question_default` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id_categorie`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id_categorie`, `categorie`, `actif`) VALUES
-(2, 'Santé', 1),
-(4, 'Langue', 1),
-(5, 'Médications', 0),
-(6, 'Transports', 1),
-(7, 'Engagement', 1),
-(8, 'Coordonnées', 1),
-(9, 'Financement', 1),
-(10, 'Après le voyage', 1),
-(11, 'Vaccin', 1),
-(12, 'Général', 1),
-(13, 'Pendant le voyage', 1),
-(16, 'Appréciation', 1);
+INSERT INTO `categories` (`id_categorie`, `categorie`, `actif`, `question_default`) VALUES
+(23, 'Bilan', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -86,8 +84,9 @@ INSERT INTO `categories` (`id_categorie`, `categorie`, `actif`) VALUES
 -- Table structure for table `comptes`
 --
 
-CREATE TABLE `comptes` (
-  `id_compte` int(11) NOT NULL,
+DROP TABLE IF EXISTS `comptes`;
+CREATE TABLE IF NOT EXISTS `comptes` (
+  `id_compte` int(11) NOT NULL AUTO_INCREMENT,
   `pseudo` varchar(30) NOT NULL,
   `mot_de_passe` varchar(255) NOT NULL,
   `type` varchar(10) NOT NULL DEFAULT 'etudiant',
@@ -97,17 +96,18 @@ CREATE TABLE `comptes` (
   `prenom` varchar(30) NOT NULL,
   `date_naissance` date NOT NULL,
   `telephone` varchar(20) DEFAULT NULL,
-  `id_programme` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id_programme` int(11) NOT NULL,
+  `anonyme` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_compte`),
+  KEY `fk_id_programmes_for_comptes` (`id_programme`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `comptes`
 --
 
-INSERT INTO `comptes` (`id_compte`, `pseudo`, `mot_de_passe`, `type`, `actif`, `courriel`, `nom`, `prenom`, `date_naissance`, `telephone`, `id_programme`) VALUES
-(1, 'admin1', '$2y$10$.R.tHhGC4adNB0rXJT5RCOTuvj9EIbrh.Y4XnHVwTJpjLY6Mpk7pe', 'admin', 1, 'robinsongabriel@gmail.com', 'Robinson', 'Gabriel', '2000-09-05', '418-326-8918', 1),
-(11, 'acc1', '$2y$10$KbrR31ZXroYkDwk88JZa3.lhL9eGPzRAWhvnJXrnJohp8/7J0dfRS', 'prof', 1, 'accompagnateur1@gmail.com', 'Jacob', 'François', '1960-06-13', '418-326-9081', 1),
-(12, 'etu1', '$2y$10$vOtuMFVC4r0BS/3nUim/9ubEJ02bS0sqWRInS/mXOIZZ1QMhTMIDq', 'etudiant', 1, 'marcgerard@hotmail.com', 'Gérard', 'Marc', '1983-04-09', '518-707-9812', 28);
+INSERT INTO `comptes` (`id_compte`, `pseudo`, `mot_de_passe`, `type`, `actif`, `courriel`, `nom`, `prenom`, `date_naissance`, `telephone`, `id_programme`, `anonyme`) VALUES
+(1, 'admin1', '$2y$10$.R.tHhGC4adNB0rXJT5RCOTuvj9EIbrh.Y4XnHVwTJpjLY6Mpk7pe', 'admin', 1, 'robinsongabriel@gmail.com', 'Robinson', 'Gabriel', '2000-09-05', '418-326-8918', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -115,11 +115,14 @@ INSERT INTO `comptes` (`id_compte`, `pseudo`, `mot_de_passe`, `type`, `actif`, `
 -- Table structure for table `comptes_voyages`
 --
 
-CREATE TABLE `comptes_voyages` (
+DROP TABLE IF EXISTS `comptes_voyages`;
+CREATE TABLE IF NOT EXISTS `comptes_voyages` (
   `id_compte` int(11) NOT NULL,
   `id_voyage` int(11) NOT NULL,
-  `date_paiement` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `date_paiement` date DEFAULT NULL,
+  PRIMARY KEY (`id_compte`,`id_voyage`),
+  KEY `fk_id_voyage_for_comptes_voyage` (`id_voyage`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -127,11 +130,13 @@ CREATE TABLE `comptes_voyages` (
 -- Table structure for table `destinations`
 --
 
-CREATE TABLE `destinations` (
-  `id_destination` int(11) NOT NULL,
+DROP TABLE IF EXISTS `destinations`;
+CREATE TABLE IF NOT EXISTS `destinations` (
+  `id_destination` int(11) NOT NULL AUTO_INCREMENT,
   `nom_pays` varchar(50) NOT NULL,
-  `actif` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `actif` tinyint(4) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_destination`)
+) ENGINE=InnoDB AUTO_INCREMENT=249 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `destinations`
@@ -390,12 +395,14 @@ INSERT INTO `destinations` (`id_destination`, `nom_pays`, `actif`) VALUES
 -- Table structure for table `formulaires`
 --
 
-CREATE TABLE `formulaires` (
-  `id_formulaire` int(11) NOT NULL,
+DROP TABLE IF EXISTS `formulaires`;
+CREATE TABLE IF NOT EXISTS `formulaires` (
+  `id_formulaire` int(11) NOT NULL AUTO_INCREMENT,
   `id_question` int(11) NOT NULL,
   `question_order` int(11) NOT NULL,
-  `question_cat_order` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `question_cat_order` int(11) NOT NULL,
+  PRIMARY KEY (`id_formulaire`,`id_question`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -403,11 +410,13 @@ CREATE TABLE `formulaires` (
 -- Table structure for table `programmes`
 --
 
-CREATE TABLE `programmes` (
-  `id_programme` int(11) NOT NULL,
+DROP TABLE IF EXISTS `programmes`;
+CREATE TABLE IF NOT EXISTS `programmes` (
+  `id_programme` int(11) NOT NULL AUTO_INCREMENT,
   `nom_programme` varchar(50) NOT NULL,
-  `actif` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `actif` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_programme`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `programmes`
@@ -464,19 +473,25 @@ INSERT INTO `programmes` (`id_programme`, `nom_programme`, `actif`) VALUES
 -- Table structure for table `propositions`
 --
 
-CREATE TABLE `propositions` (
-  `id_proposition` int(11) NOT NULL,
+DROP TABLE IF EXISTS `propositions`;
+CREATE TABLE IF NOT EXISTS `propositions` (
+  `id_proposition` int(11) NOT NULL AUTO_INCREMENT,
   `id_compte` int(11) NOT NULL,
-  `nom_projet` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `nom_projet` varchar(255) NOT NULL,
   `ville` varchar(255) NOT NULL,
+  `cout` decimal(10,2) NOT NULL,
   `date_depart` date NOT NULL,
+  `date_limite` date NOT NULL,
   `date_retour` date NOT NULL,
   `actif` tinyint(1) NOT NULL DEFAULT '1',
   `approuve` tinyint(1) NOT NULL DEFAULT '0',
-  `msg_refus` text,
+  `msg_refus` mediumtext,
   `id_destination` int(11) NOT NULL,
-  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `note` mediumtext,
+  PRIMARY KEY (`id_proposition`),
+  KEY `fk_id_destination_for_propositon` (`id_destination`),
+  KEY `fk_proposition_id_compte` (`id_compte`)
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -484,11 +499,14 @@ CREATE TABLE `propositions` (
 -- Table structure for table `propositions_reponses`
 --
 
-CREATE TABLE `propositions_reponses` (
+DROP TABLE IF EXISTS `propositions_reponses`;
+CREATE TABLE IF NOT EXISTS `propositions_reponses` (
   `id_proposition` int(11) NOT NULL,
   `id_question` int(11) NOT NULL,
-  `reponse` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `reponse` mediumtext NOT NULL,
+  PRIMARY KEY (`id_proposition`,`id_question`),
+  KEY `fk_propreponse_id_question` (`id_question`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -496,16 +514,64 @@ CREATE TABLE `propositions_reponses` (
 -- Table structure for table `questions`
 --
 
-CREATE TABLE `questions` (
-  `id_question` int(11) NOT NULL,
+DROP TABLE IF EXISTS `questions`;
+CREATE TABLE IF NOT EXISTS `questions` (
+  `id_question` int(11) NOT NULL AUTO_INCREMENT,
   `id_categorie` int(11) NOT NULL,
-  `question` text NOT NULL,
-  `input_option` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
+  `question` mediumtext NOT NULL,
+  `input_option` mediumtext,
   `affichage` varchar(30) NOT NULL,
   `actif` tinyint(1) NOT NULL DEFAULT '1',
-  `info_sup` text,
-  `regroupement` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `info_sup` mediumtext,
+  `regroupement` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_question`),
+  KEY `fk_id_categorie_for_questions` (`id_categorie`)
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`id_question`, `id_categorie`, `question`, `input_option`, `affichage`, `actif`, `info_sup`, `regroupement`) VALUES
+(45, 23, '1a) Avez-vous rencontré des difficultés dans la préparation du séjour? ', 'Oui;Non', 'Radio', 1, '', 2),
+(46, 23, '1b) Si oui, lesquelles? (exemple : recrutement, campagne de financement, participation des étudiants aux rencontres de groupe, contact avec le partenaire local, etc.) Expliquez votre réponse.', '', 'ZoneTexte', 1, '', 2),
+(47, 23, '2a) Avez-vous rencontré des difficultés pendant le séjour ?', 'Oui;Non', 'Radio', 1, '', 2),
+(48, 23, '2b) Si oui, lesquelles ? (ex : retard de vol, problème de logistique, difficultés de communication dans le groupe, etc.) Expliquez votre réponse.', '', 'ZoneTexte', 1, '', 2),
+(49, 23, '3a) Est-ce que des incidents/situations graves se sont produits pendant le séjour ?', 'Oui;Non', 'Radio', 1, '', 2),
+(50, 23, '3b) Si oui, veuillez décrire les situations (exemple : maladie, vol, perte de documents importants, etc.)., le type d’incident (mineur, majeur) et quelles ont été les solutions apportées ?', '', 'ZoneTexte', 1, '', 2),
+(51, 23, '4a) De façon générale, êtes-vous satisfait du soutien apporté par le Bureau international?', 'Oui;Non', 'Radio', 1, '', 2),
+(52, 23, '4b) Quels sont les éléments que vous appréciés et/ou sont à améliorer ?', '', 'ZoneTexte', 1, '', 2),
+(53, 23, '5a) Selon vous, est-ce que les objectifs du projet de mobilité ont été atteints ? ', 'Oui;Non', 'Radio', 1, '', 2),
+(54, 23, '5b) Expliquez votre réponse  ', '', 'ZoneTexte', 1, '', 2),
+(55, 23, '6a) Selon vous, est-il souhaitable que le projet soit reconduit ? ', 'Oui;Non;Ne s\'applique pas', 'Radio', 1, 'Question pour les projets de mobilité étudiante', 2),
+(56, 23, '6b) Selon vous, est-ce que le projet devrait être modifié ?', 'Oui;Non;Ne s\'applique pas', 'Radio', 1, 'Question pour les projets de mobilité étudiante', 2),
+(57, 23, '6c) Expliquez vos réponses', '', 'ZoneTexte', 1, 'Question pour les projets de mobilité étudiante', 2),
+(58, 23, '7) Quelles sont les retombées de votre projet de mobilité pour le collège et la communauté collégiale ? ', '', 'ZoneTexte', 1, '', 2),
+(59, 23, '8) Quels conseils donneriez-vous à un accompagnateur ou un membre du personnel qui souhaiterait organiser le même séjour de mobilité que vous?', '', 'ZoneTexte', 1, '', 2),
+(60, 23, '9) Si vous souhaitez ajouter d’autres informations supplémentaires sur votre projet, veuillez les inscrire ici', '', 'ZoneTexte', 1, '', 2),
+(61, 23, '10) Pour terminer, nous vous demandons d’inclure un descriptif de votre projet d’environ 250 mots et quelques photos (entre 5 et 10 photos) représentant bien le séjour dans son ensemble (photos de groupe, photos dans l’action d’une activité du séjour, etc.). Ce bilan et ces photos seront utilisées à des fins didactiques et promotionnelles seulement si les personnes figurant dans les photos ont donné leur consentement dans leur profil (prospectus, 5 à 7 international, promotion des appels à projets de mobilité, etc).', '', 'Fichier', 1, 'Veuillez regrouper tous vos fichiers en un seul fichier de format ZIP', 2),
+(62, 23, 'En cochant cette case, j’autorise le Cégep de Trois-Rivières à utiliser les photos, enregistrements vidéo, enregistrements sonores où j’apparais et où je suis entendu-e pour la réalisation de documents d’information scolaire et de promotion du Cégep de Trois-Rivières (affiche, site Web, YouTube, prospectus, bande annonce télé, radio, annonce dans les quotidiens, hebdomadaires, revues et autres publications).', 'J\'autorise', 'Case', 1, '', 2),
+(63, 23, '1) En quelques phrases, décris ton séjour à l’étranger en incluant les étapes de la préparation du séjour, les activités prévues et le retour. Mentionne également tes coups de cœur et les éléments qui pourraient être améliorés. ', '', 'ZoneTexte', 1, '', 0),
+(64, 23, '2) Sous forme d’un témoignage d’environ 100 mots, décris ton séjour à l’international en expliquant les retombées personnelles et professionnelles que ce séjour t’apporte.', '', 'ZoneTexte', 1, '', 0),
+(65, 23, '2) Sous forme d’un témoignage d’environ 100 mots, décris ton séjour à l’international en expliquant les retombées personnelles et professionnelles que ce séjour t’apporte.     3) Pour terminer, inclus quelques photos (entre 5 et 10 photos) représentant bien ton séjour (photos de groupe, photos dans l’action d’une activité du séjour, etc.). Ces photos seront utilisées à des fins didactiques et promotionnelles seulement si tu acceptes (voir l’énoncé ci-dessous).', '', 'ZoneTexte', 1, '', 0),
+(66, 23, 'En cochant cette case, j’autorise le Cégep de Trois-Rivières à utiliser les photos, enregistrements vidéo, enregistrements sonores où j’apparais et où je suis entendu-e pour la réalisation de documents d’information scolaire et de promotion du Cégep de Trois-Rivières (affiche, site Web, YouTube, prospectus, bande annonce télé, radio, annonce dans les quotidiens, hebdomadaires, revues et autres publications).', 'J\'autorise', 'Case', 1, '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `utilisateurs`
+--
+
+DROP TABLE IF EXISTS `utilisateurs`;
+CREATE TABLE IF NOT EXISTS `utilisateurs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `type` char(1) NOT NULL,
+  `code_projet` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -513,12 +579,16 @@ CREATE TABLE `questions` (
 -- Table structure for table `valeurs`
 --
 
-CREATE TABLE `valeurs` (
+DROP TABLE IF EXISTS `valeurs`;
+CREATE TABLE IF NOT EXISTS `valeurs` (
   `id_compte` int(11) NOT NULL,
   `id_voyage` int(11) NOT NULL,
   `id_question` int(11) NOT NULL,
-  `reponse` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `reponse` mediumtext NOT NULL,
+  PRIMARY KEY (`id_compte`,`id_voyage`,`id_question`),
+  KEY `fk_id_voyage_for_valeurs` (`id_voyage`),
+  KEY `fk_id_question_for_valeurs` (`id_question`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -526,18 +596,24 @@ CREATE TABLE `valeurs` (
 -- Table structure for table `voyages`
 --
 
-CREATE TABLE `voyages` (
-  `id_voyage` int(11) NOT NULL,
+DROP TABLE IF EXISTS `voyages`;
+CREATE TABLE IF NOT EXISTS `voyages` (
+  `id_voyage` int(11) NOT NULL AUTO_INCREMENT,
   `id_proposition` int(11) NOT NULL,
   `ville` varchar(50) DEFAULT NULL,
+  `cout` decimal(10,2) NOT NULL,
   `date_depart` date NOT NULL,
+  `date_limite` date NOT NULL,
   `date_retour` date NOT NULL,
   `actif` tinyint(1) NOT NULL DEFAULT '1',
   `approuvee` tinyint(1) NOT NULL DEFAULT '0',
   `id_destination` int(11) NOT NULL,
   `nom_projet` varchar(30) NOT NULL,
-  `note` text CHARACTER SET latin1 COLLATE latin1_swedish_ci
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `note` mediumtext,
+  PRIMARY KEY (`id_voyage`),
+  KEY `fk_id_destination_for_voyages` (`id_destination`),
+  KEY `fk_id_proposition_for_proposition` (`id_proposition`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -545,178 +621,16 @@ CREATE TABLE `voyages` (
 -- Table structure for table `voyages_questions`
 --
 
-CREATE TABLE `voyages_questions` (
+DROP TABLE IF EXISTS `voyages_questions`;
+CREATE TABLE IF NOT EXISTS `voyages_questions` (
   `id_voyage` int(11) NOT NULL,
   `id_question` int(11) NOT NULL,
   `regroupement` tinyint(4) NOT NULL,
   `question_order` int(11) NOT NULL,
-  `question_cat_order` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `activations`
---
-ALTER TABLE `activations`
-  ADD PRIMARY KEY (`id_activation`),
-  ADD KEY `fk_id_voyage_for_activation` (`id_voyage`);
-
---
--- Indexes for table `activites`
---
-ALTER TABLE `activites`
-  ADD PRIMARY KEY (`id_activite`),
-  ADD KEY `foreign_key_id_proposition` (`id_proposition`);
-
---
--- Indexes for table `categories`
---
-ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id_categorie`);
-
---
--- Indexes for table `comptes`
---
-ALTER TABLE `comptes`
-  ADD PRIMARY KEY (`id_compte`),
-  ADD KEY `fk_id_programmes_for_comptes` (`id_programme`);
-
---
--- Indexes for table `comptes_voyages`
---
-ALTER TABLE `comptes_voyages`
-  ADD PRIMARY KEY (`id_compte`,`id_voyage`),
-  ADD KEY `fk_id_voyage_for_comptes_voyage` (`id_voyage`);
-
---
--- Indexes for table `destinations`
---
-ALTER TABLE `destinations`
-  ADD PRIMARY KEY (`id_destination`);
-
---
--- Indexes for table `formulaires`
---
-ALTER TABLE `formulaires`
-  ADD PRIMARY KEY (`id_formulaire`,`id_question`);
-
---
--- Indexes for table `programmes`
---
-ALTER TABLE `programmes`
-  ADD PRIMARY KEY (`id_programme`);
-
---
--- Indexes for table `propositions`
---
-ALTER TABLE `propositions`
-  ADD PRIMARY KEY (`id_proposition`),
-  ADD KEY `fk_id_destination_for_propositon` (`id_destination`),
-  ADD KEY `fk_proposition_id_compte` (`id_compte`);
-
---
--- Indexes for table `propositions_reponses`
---
-ALTER TABLE `propositions_reponses`
-  ADD PRIMARY KEY (`id_proposition`,`id_question`),
-  ADD KEY `fk_propreponse_id_question` (`id_question`);
-
---
--- Indexes for table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id_question`),
-  ADD KEY `fk_id_categorie_for_questions` (`id_categorie`);
-
---
--- Indexes for table `valeurs`
---
-ALTER TABLE `valeurs`
-  ADD PRIMARY KEY (`id_compte`,`id_voyage`,`id_question`),
-  ADD KEY `fk_id_voyage_for_valeurs` (`id_voyage`),
-  ADD KEY `fk_id_question_for_valeurs` (`id_question`);
-
---
--- Indexes for table `voyages`
---
-ALTER TABLE `voyages`
-  ADD PRIMARY KEY (`id_voyage`),
-  ADD KEY `fk_id_destination_for_voyages` (`id_destination`),
-  ADD KEY `fk_id_proposition_for_proposition` (`id_proposition`);
-
---
--- Indexes for table `voyages_questions`
---
-ALTER TABLE `voyages_questions`
-  ADD PRIMARY KEY (`id_voyage`,`id_question`,`regroupement`),
-  ADD KEY `fk_id_question_for_voyages_questions` (`id_question`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `activations`
---
-ALTER TABLE `activations`
-  MODIFY `id_activation` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `activites`
---
-ALTER TABLE `activites`
-  MODIFY `id_activite` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `categories`
---
-ALTER TABLE `categories`
-  MODIFY `id_categorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `comptes`
---
-ALTER TABLE `comptes`
-  MODIFY `id_compte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `destinations`
---
-ALTER TABLE `destinations`
-  MODIFY `id_destination` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
-
---
--- AUTO_INCREMENT for table `formulaires`
---
-ALTER TABLE `formulaires`
-  MODIFY `id_formulaire` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `programmes`
---
-ALTER TABLE `programmes`
-  MODIFY `id_programme` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
-
---
--- AUTO_INCREMENT for table `propositions`
---
-ALTER TABLE `propositions`
-  MODIFY `id_proposition` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `id_question` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `voyages`
---
-ALTER TABLE `voyages`
-  MODIFY `id_voyage` int(11) NOT NULL AUTO_INCREMENT;
+  `question_cat_order` int(11) NOT NULL,
+  PRIMARY KEY (`id_voyage`,`id_question`,`regroupement`),
+  KEY `fk_id_question_for_voyages_questions` (`id_question`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Constraints for dumped tables
@@ -726,68 +640,68 @@ ALTER TABLE `voyages`
 -- Constraints for table `activations`
 --
 ALTER TABLE `activations`
-  ADD CONSTRAINT `fk_id_voyage_for_activation` FOREIGN KEY (`id_voyage`) REFERENCES `voyages` (`id_voyage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_id_voyage_for_activation` FOREIGN KEY (`id_voyage`) REFERENCES `voyages` (`id_voyage`);
 
 --
 -- Constraints for table `activites`
 --
 ALTER TABLE `activites`
-  ADD CONSTRAINT `foreign_key_id_proposition` FOREIGN KEY (`id_proposition`) REFERENCES `propositions` (`id_proposition`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `foreign_key_id_proposition` FOREIGN KEY (`id_proposition`) REFERENCES `propositions` (`id_proposition`);
 
 --
 -- Constraints for table `comptes`
 --
 ALTER TABLE `comptes`
-  ADD CONSTRAINT `fk_id_programmes_for_comptes` FOREIGN KEY (`id_programme`) REFERENCES `programmes` (`id_programme`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_id_programmes_for_comptes` FOREIGN KEY (`id_programme`) REFERENCES `programmes` (`id_programme`);
 
 --
 -- Constraints for table `comptes_voyages`
 --
 ALTER TABLE `comptes_voyages`
-  ADD CONSTRAINT `fk_id_compte_for_comptes_voyage` FOREIGN KEY (`id_compte`) REFERENCES `comptes` (`id_compte`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_id_voyage_for_comptes_voyage` FOREIGN KEY (`id_voyage`) REFERENCES `voyages` (`id_voyage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_id_compte_for_comptes_voyage` FOREIGN KEY (`id_compte`) REFERENCES `comptes` (`id_compte`),
+  ADD CONSTRAINT `fk_id_voyage_for_comptes_voyage` FOREIGN KEY (`id_voyage`) REFERENCES `voyages` (`id_voyage`);
 
 --
 -- Constraints for table `propositions`
 --
 ALTER TABLE `propositions`
-  ADD CONSTRAINT `fk_id_destination_for_propositon` FOREIGN KEY (`id_destination`) REFERENCES `destinations` (`id_destination`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_proposition_id_compte` FOREIGN KEY (`id_compte`) REFERENCES `comptes` (`id_compte`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_id_destination_for_propositon` FOREIGN KEY (`id_destination`) REFERENCES `destinations` (`id_destination`),
+  ADD CONSTRAINT `fk_proposition_id_compte` FOREIGN KEY (`id_compte`) REFERENCES `comptes` (`id_compte`);
 
 --
 -- Constraints for table `propositions_reponses`
 --
 ALTER TABLE `propositions_reponses`
-  ADD CONSTRAINT `fk_propreponse_id_proposition` FOREIGN KEY (`id_proposition`) REFERENCES `propositions` (`id_proposition`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_propreponse_id_question` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_propreponse_id_proposition` FOREIGN KEY (`id_proposition`) REFERENCES `propositions` (`id_proposition`),
+  ADD CONSTRAINT `fk_propreponse_id_question` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`);
 
 --
 -- Constraints for table `questions`
 --
 ALTER TABLE `questions`
-  ADD CONSTRAINT `fk_id_categorie_for_questions` FOREIGN KEY (`id_categorie`) REFERENCES `categories` (`id_categorie`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_id_categorie_for_questions` FOREIGN KEY (`id_categorie`) REFERENCES `categories` (`id_categorie`);
 
 --
 -- Constraints for table `valeurs`
 --
 ALTER TABLE `valeurs`
-  ADD CONSTRAINT `fk_id_compte_for_valeurs` FOREIGN KEY (`id_compte`) REFERENCES `comptes` (`id_compte`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_id_question_for_valeurs` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_id_voyage_for_valeurs` FOREIGN KEY (`id_voyage`) REFERENCES `voyages` (`id_voyage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_id_compte_for_valeurs` FOREIGN KEY (`id_compte`) REFERENCES `comptes` (`id_compte`),
+  ADD CONSTRAINT `fk_id_question_for_valeurs` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`),
+  ADD CONSTRAINT `fk_id_voyage_for_valeurs` FOREIGN KEY (`id_voyage`) REFERENCES `voyages` (`id_voyage`);
 
 --
 -- Constraints for table `voyages`
 --
 ALTER TABLE `voyages`
-  ADD CONSTRAINT `fk_id_destination_for_voyages` FOREIGN KEY (`id_destination`) REFERENCES `destinations` (`id_destination`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_id_proposition_for_proposition` FOREIGN KEY (`id_proposition`) REFERENCES `propositions` (`id_proposition`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_id_destination_for_voyages` FOREIGN KEY (`id_destination`) REFERENCES `destinations` (`id_destination`),
+  ADD CONSTRAINT `fk_id_proposition_for_proposition` FOREIGN KEY (`id_proposition`) REFERENCES `propositions` (`id_proposition`);
 
 --
 -- Constraints for table `voyages_questions`
 --
 ALTER TABLE `voyages_questions`
-  ADD CONSTRAINT `fk_id_question_for_voyages_questions` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_id_voyage_for_voyages_questions` FOREIGN KEY (`id_voyage`) REFERENCES `voyages` (`id_voyage`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_id_question_for_voyages_questions` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`),
+  ADD CONSTRAINT `fk_id_voyage_for_voyages_questions` FOREIGN KEY (`id_voyage`) REFERENCES `voyages` (`id_voyage`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

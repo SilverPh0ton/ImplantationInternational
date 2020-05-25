@@ -19,6 +19,9 @@ require_once 'DBObjects/ProgrammesDB.php';
 require_once 'DBObjects/VoyagesDB.php';
 require_once 'Controller/AppController.php';
 
+define("AGE_MIN", 15);
+define("AGE_MAX", 89);
+
 class ComptesController extends AppController
 {
     private $comptesDB;
@@ -188,12 +191,12 @@ class ComptesController extends AppController
                 $date_naissance = date("Y-m-d", strtotime($date_naissance_str));
                 $age = date_diff(date_create($date_naissance), new DateTime());
 
-                if ($age->y < 15) {
+                if ($age->y < AGE_MIN) {
                     $this->flashBad('Le compte n\'a pas pu être modifié. La personne doit être âgée d\'au moins 15 ans.');
                     return $this->redirectParam1('Comptes', 'Edit', $id);
                 }
-                elseif ($age->y >= 90) {
-                    $this->flashBad('Le compte n\'a pas pu être modifié. La personne ne peut être âgée de plus de 90 ans.');
+                elseif ($age->y >= AGE_MAX) {
+                    $this->flashBad('La compte n\'a pas pu être modifié. La personne ne peut être agée de 90 ans ou plus.');
                     return $this->redirectParam1('Comptes', 'Edit', $id);
                 }
 
@@ -201,7 +204,12 @@ class ComptesController extends AppController
                 $compte->setTelephone($_POST['telephone']);
                 $compte->setType($_POST['type']);
                 $compte->setActif(isset($_POST['actif']) ? 1 : 0);
+                if(isset($_POST['anonyme'])){
                 $compte->setAnonyme($_POST['anonyme']);
+                }
+                else{
+                    $compte->setAnonyme(true);
+                }
 
 
                 $programme = $this->programmeDB->getProgrammeFromNom($_POST['id_programme']);
@@ -315,12 +323,12 @@ class ComptesController extends AppController
             $date_naissance = date("Y-m-d", strtotime($date_naissance_str));
             $age = date_diff(date_create($date_naissance), new DateTime());
 
-            if ($age->y < 15) {
-                $this->flashBad('Le compte n\'a pas pu être ajouté. La personne doit être âgée d\'au moins 15 ans.');
+            if ($age->y < AGE_MIN) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne doit être agée d\'au moins 15 ans.');
                 return $this->redirect('Comptes', 'Add');
             }
-            elseif ($age->y >= 90) {
-                $this->flashBad('Le compte n\'a pas pu être ajouté. La personne ne peut être âgée de plus de 90 ans.');
+            elseif ($age->y >= AGE_MAX) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne ne peut être agée de 90 ans ou plus.');
                 return $this->redirect('Comptes', 'Add');
             }
 

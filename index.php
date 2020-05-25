@@ -98,7 +98,7 @@ use App\Controller\ComptesController; ?>
                     echo nav('<li class="navbutton">Configurations</li>', 'configuration', 'index')
                 ?>
 
-                <?php if(isOfType([ADMIN])&& 0==1 /*Disable Temporairement*/)
+                <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Statistiques</li>', 'statistiques', 'index')
                 ?>
 
