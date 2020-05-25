@@ -484,19 +484,28 @@ class PropositionsController extends AppController
                     $date_retour
                 );
 
-                if ($date_retour < $date_now || $date_depart < $date_now/* || $date_limite < $date_now*/) {
+                $error = false;
+                if ($date_retour < $date_now || $date_depart < $date_now) {
                     $this->flashBad('Les dates des activités doivent être dans le futur.');
+                    $error = true;
                 }
                 if ($date_retour < $date_depart) {
                     $this->flashBad('Les dates des activités doivent être dans le futur.');
+                    $error = true;
                 }
 
                 if ($date_depart < $projet_depart || $date_depart > $projet_retour) {
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité.');
+                    $error = true;
                 }
                 if ($date_retour < $projet_depart || $date_retour > $projet_retour) {
                     $this->flashBad('La date d\'une activité doit être entre la date de départ et de fin d\'une activité.');
+                    $error = true;
                 }
+                if($error){
+                    return $this->redirectParam1("Propositions", "Edit", $id_proposition);
+                }
+
 
 
                 if (!$this->activiteDB->addActivite($activite)) {
