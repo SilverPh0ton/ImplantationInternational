@@ -185,5 +185,7 @@ $propositions = get('propositions');
 
 <script>
     var order = [[ 4, 'asc' ]];
+
+    sessionStorage.clear();
 </script>
 <?= load_script('paginator') ?>

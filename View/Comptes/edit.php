@@ -150,14 +150,14 @@ $programmes = get('array_prog');
             <?php if (isOfType([ADMIN])): ?>
                 <div class="input">
                     <label for="actif">Actif</label>
-                    <input type="checkbox" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
+                    <input type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
                 </div>
             <?php elseif (isOfType([PROF,ETUDIANT])): ?>
-                <input hidden type="checkbox" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
+                <input hidden type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
             <?php endif; ?>
 
             <div>
-                <button type="submit">Enregistrer</button>
+                <button type="submit" onclick="savedata()">Enregistrer</button>
                 <!--Button de navigation -->
                 <?php
                 if (isOfType([ADMIN, PROF])) {
@@ -237,3 +237,5 @@ $programmes = get('array_prog');
 
     </form>
 </div>
+
+<?= load_script('onLoadStorage/editCompte') ?>

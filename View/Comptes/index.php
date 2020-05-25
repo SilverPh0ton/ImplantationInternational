@@ -90,5 +90,17 @@ $compteType = $connectedUser->getType();
 
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];
+
+    sessionStorage.removeItem('pseudo');
+    sessionStorage.removeItem('select_type_acc');
+    sessionStorage.removeItem('actif');
+    sessionStorage.removeItem('courriel');
+    sessionStorage.removeItem('prenom');
+    sessionStorage.removeItem('nom');
+    sessionStorage.removeItem('telephone');
+    sessionStorage.removeItem('id_programme');
+    sessionStorage.removeItem('date_naissance[year]');
+    sessionStorage.removeItem('date_naissance[month]');
+    sessionStorage.removeItem('date_naissance[day]');
 </script>
 <?= load_script('paginatorParticipants') ?>

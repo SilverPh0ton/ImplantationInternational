@@ -12,6 +12,9 @@ $comptesController->view($id_compte);
 
 $compte = get('compte');
 $listVoyage = get('listVoyage');
+if(is_null($compte)){
+    echo $comptesController->redirect('comptes', 'index');
+}
 
 ?>
 

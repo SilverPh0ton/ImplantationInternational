@@ -115,6 +115,7 @@ class PropositionsController extends AppController
 
                 if (in_array($_POST[$option]['month'], $pas31) && ($_POST[$option]['day'] == 31)) {
                     $this->flashBad('La proposition n\'a pas pu être ajoutée. Mauvaise saisie de date.');
+                    $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                     return $this->redirect('Propositions', 'Add');
                 }
 
@@ -124,6 +125,7 @@ class PropositionsController extends AppController
 
                 if (($_POST[$option]['month'] == 2) && (in_array($_POST[$option]['day'], $days))) {
                     $this->flashBad('La proposition n\'a pas pu être ajoutée. Mauvaise saisie de date.');
+                    $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                     return $this->redirect('Propositions', 'Add');
                 }
 
@@ -137,11 +139,13 @@ class PropositionsController extends AppController
 
             if ($date_retour < $date_now || $date_depart < $date_now) {
                 $this->flashBad('Les dates doivent être dans le futur.');
+                $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                 return $this->redirect("Propositions", "Add");
             }
 
             if ($date_retour < $date_depart) {
                 $this->flashBad('La date de retour doit être après la date de départ.');
+                $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                 return $this->redirect("Propositions", "Add");
             }
 
@@ -176,9 +180,10 @@ class PropositionsController extends AppController
             );
 
             $id_proposition = $this->propositionDB->addProposition($proposition);
-          
+
             if ($id_proposition == null) {
                 $this->flashBad("Une erreur est survenue lors de l'ajout de la proposition.");
+                $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                 return $this->redirect("Propositions", "Add");
             }
 
@@ -220,6 +225,7 @@ class PropositionsController extends AppController
                 if ($success) {
                     if (!$this->activiteDB->addActivite($activite)) {
                         $this->flashBad("Une erreur est survenue lors de l'ajout d'une activité.");
+                        $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                         return $this->redirect("Propositions", "Add");
                     }
                 }
@@ -265,15 +271,18 @@ class PropositionsController extends AppController
                         //Vérification du ficher téléversé
                         if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
                             $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé');
+                            $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                             return $this->redirect("Propositions", "Add");
                         }
                         if ($fileSize > $maxsize) {
                             $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 MB');
+                            $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                             return $this->redirect("Propositions", "Add");
                         }
                         $uploadFile = $uploadPath . $id_proposition . '-' . $question->getIdQuestion() . '-' . $fileName;
                         if ((file_exists($uploadFile))) {
                             $this->flashBad($fileName . ' existe déjà');
+                            $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                             return $this->redirect("Propositions", "Add");
                         }
 
@@ -286,6 +295,7 @@ class PropositionsController extends AppController
                         //Téléverse le ficher
                         if (!move_uploaded_file($_FILES[$question->getIdQuestion()]['tmp_name'], $uploadFile)) {
                             $this->flashBad($fileName . ' n\'a pas pu être déposé. Veuillez réessayer.');
+                            $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                             return $this->redirect("Propositions", "Add");
                         } else {
                             $proposition_reponse->setReponse($id_proposition . '-' . $question->getIdQuestion() . '-' . $fileName);
@@ -293,6 +303,7 @@ class PropositionsController extends AppController
                             //Enregistre l’entité
                             if (!$this->propositionReponseDB->addPropositionReponse($proposition_reponse)) {
                                 $this->flashBad("Une erreur est survenue lors de l'ajout des réponses aux renseignements supplémentaires.");
+                                $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                                 return $this->redirect("Propositions", "Add");
                             }
                         }
@@ -303,6 +314,7 @@ class PropositionsController extends AppController
                     //Enregistre l’entité
                     if (!$this->propositionReponseDB->addPropositionReponse($proposition_reponse)) {
                         $this->flashBad("Une erreur est survenue lors de l'ajout des réponses aux renseignements supplémentaires.");
+                        $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                         return $this->redirect("Propositions", "Add");
                     }
                 } else {
@@ -311,6 +323,7 @@ class PropositionsController extends AppController
                     //Enregistre l’entité
                     if (!$this->propositionReponseDB->addPropositionReponse($proposition_reponse)) {
                         $this->flashBad("Une erreur est survenue lors de l'ajout des réponses aux renseignements supplémentaires.");
+                        $this->flashBad('Attention, vous devez retéléverser les fichiers.');
                         return $this->redirect("Propositions", "Add");
                     }
                 }

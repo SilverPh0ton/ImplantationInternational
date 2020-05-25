@@ -95,6 +95,16 @@ class NoauthController extends AppController
 
 
             $date_naissance = date("Y-m-d", strtotime($date_naissance_str));
+            $age = date_diff(date_create($date_naissance), new DateTime());
+
+            if ($age->y < AGE_MIN) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne doit être agée d\'au moins 15 ans.');
+                return $this->redirect('Comptes', 'Add');
+            }
+            elseif ($age->y >= AGE_MAX) {
+                $this->flashBad('La compte n\'a pas pu être ajouté. La personne ne peut être agée de 90 ans ou plus.');
+                return $this->redirect('Comptes', 'Add');
+            }
 
             $programme = $this->programmesDB->getProgrammeFromId($_POST['id_programme']);
 
