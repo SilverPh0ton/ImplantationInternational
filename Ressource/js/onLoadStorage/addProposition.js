@@ -24,28 +24,69 @@ function savedata() {
     sessionStorage.setItem("activiteTable", document.getElementById("activityTable").innerHTML);
 
     //Renseignements supplémentaires
+
+    let prevNames = new Array();
+    let prevNamesR = new Array();
     var leArray = new Array();
 
-    $('div .card-body').each(function(i, obj) {
+    $('div .card-body *').filter(':input').each(function(){
+        var type = $(this).attr('type');
+        var name = $(this).attr('name');
 
-        $(this).find('div').each(function(i, obj){
-
-            var input =  $(this).children().eq(1).children().eq(0);
-            var name = input.attr('name');
-            var type = input.attr('type');
-
-            if (type == "checkbox" || type == "radio") {
-                var input2 =  $(this).children().eq(1).children().eq(1);
-                var name = input2.attr('name');
-                var value = input.is(":checked");
-            }
-
-            else var value = input.val();
-
-            var question_reponse = { [name] : value };
-            leArray.push(question_reponse);
-        });
+        switch (type) {
+            case "checkbox":
+                let reponse_choix = new Array()
+                if(prevNames.includes(name) == false){
+                    $("input[name='" +name+ "']").each(function(index,data) {
+                        reponse_choix.push($(this).is(':checked'));
+                    });
+                    var question_reponse = { [name] : reponse_choix };
+                    leArray.push(question_reponse);
+                }
+                prevNames.push(name);
+                break;
+            case "radio":
+                let reponse_choix2 = new Array()
+                if(prevNamesR.includes(name) == false){
+                    $("input[name='" +name+ "']").each(function(index,data) {
+                        reponse_choix2.push($(this).is(':checked'));
+                    });
+                    var question_reponse2 = { [name] : reponse_choix2 };
+                    leArray.push(question_reponse2);
+                }
+                prevNamesR.push(name);
+                break;
+            case "date":
+                value = $(this).val();
+                var question_reponse = { [name] : value };
+                leArray.push(question_reponse);
+                break;
+            case "number":
+                value = $(this).val();
+                var question_reponse = { [name] : value };
+                leArray.push(question_reponse);
+             default :
+                break;
+        }
     });
+
+    $('div .card-body *').filter('textarea').each(function(){
+        var name = $(this).attr('name');
+
+         value = $(this).val();
+         var question_reponse = { [name] : value };
+         leArray.push(question_reponse);
+    });
+
+    $('div .card-body *').filter('select').each(function(){
+        var name = $(this).attr('name');
+
+         value = $(this).val();
+         var question_reponse = { [name] : value };
+         leArray.push(question_reponse);
+    });
+
+
     qrDyn_json = JSON.stringify(leArray);
     sessionStorage.setItem("qrDyn_json", qrDyn_json);
 }
@@ -119,6 +160,11 @@ window.onload = function() {
 
 
     //Renseignements supplémentaires
+    var prevNames = new Array();
+    var prevNamesR = new Array();
+    var chaine = "";
+    var chaine2 = "";
+
     var qrDyn_json = sessionStorage.getItem("qrDyn_json");
     if (qrDyn_json != null) {
         var qrDyn_object = JSON.parse(qrDyn_json);
@@ -127,40 +173,76 @@ window.onload = function() {
             keys.push(Object.keys(qrDyn_object[i]));
         }
 
-        $('div .card-body').each(function(i, obj) {
+        $('div .card-body *').filter(':input').each(function(){
+            var type = $(this).attr('type');
+            var name = $(this).attr('name');
 
-            $(this).find('div').each(function(i, obj){
+             // if (type=="hidden") $(this).val("false;false;true")
 
-                var input =  $(this).children().eq(1).children().eq(0);
-                var name = input.attr('name');
-                var type = input.attr('type');
-
-                if (type == 'checkbox') {
-                    var input2 =  $(this).children().eq(1).children().eq(1);
-                    var name = input2.attr('name');
-                }
-
-                for (var i = 0; i < qrDyn_object.length; i++) {
-                    if (keys[i] == name) {
-
-                        switch (type) {
-                            case "checkbox" :
-                            case "radio" :
-                                var isTrueSet = (qrDyn_object[i][keys[i]] == true);
-                                input.prop('checked', isTrueSet);
-                                input2.val(isTrueSet)
-
-                                break;
-                            default:
-                                input.val(qrDyn_object[i][keys[i]]);
-                                break;
-                        }
+            for (var i = 0; i < qrDyn_object.length; i++) {
+                if (keys[i] == name) {
+                    switch (type) {
+                        case "checkbox":
+                            if (prevNames.includes(name) == false) {
+                                boolArr = qrDyn_object[i][keys[i]];
+                                $("input[name='" +name+ "']").each(function(index,data) {
+                                    var isTrueSet = (boolArr[index] == true);
+                                    $(this).prop('checked', isTrueSet);
+                                    chaine += boolArr[index]+";";
+                                });
+                                var dataId = $(this).attr('data-id');
+                                $('input[name='+dataId+']').val(chaine);
+                            }
+                            prevNames.push(name);
+                            break;
+                        case "radio":
+                            if (prevNamesR.includes(name) == false) {
+                                boolArr = qrDyn_object[i][keys[i]];
+                                $("input[name='" +name+ "']").each(function(index,data) {
+                                    var isTrueSet = (boolArr[index] == true);
+                                    $(this).prop('checked', isTrueSet);
+                                    chaine += boolArr[index]+";";
+                                });
+                                var dataId2 = $(this).attr('data-id');
+                                $('input[name='+dataId2+']').val(chaine);
+                            }
+                            prevNamesR.push(name);
+                            break;
+                        case "date":
+                            $(this).val(qrDyn_object[i][keys[i]]);
+                            break;
+                        case "number":
+                            $(this).val(qrDyn_object[i][keys[i]]);
+                        default :
+                            break;
                     }
                 }
-            });
+            }
         });
+
+        $('div .card-body *').filter('textarea').each(function(){
+            var name = $(this).attr('name');
+
+            for (var i = 0; i < qrDyn_object.length; i++) {
+                if (keys[i] == name) {
+                    $(this).val(qrDyn_object[i][keys[i]]);
+                }
+            }
+        });
+
+        $('div .card-body *').filter('select').each(function(){
+            var name = $(this).attr('name');
+
+            for (var i = 0; i < qrDyn_object.length; i++) {
+                if (keys[i] == name) {
+                    $(this).val(qrDyn_object[i][keys[i]]);
+                }
+            }
+        });
+
     }
 
+    //alert('IMPORTANT : Vous devez retéléverser vos fichiers.');
     clearSessionItems();
 }
 
