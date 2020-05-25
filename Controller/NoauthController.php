@@ -187,12 +187,13 @@ class NoauthController extends AppController
 
     function send_email($courriel, $pseudo, $newpass)
     {
-        $mail = new PHPMailer(true);
+    /*    $mail = new PHPMailer(true);
 
          try {
              //Server settings
              $mail->isSMTP();                                            // Send using SMTP
              $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
+             $mail->SMTPDebug = 0;
              $mail->SMTPAuth = true;                                   // Enable SMTP authentication
              $mail->Username = 'mobilite@silverph0ton.com';                     // SMTP username
              $mail->Password = '11qpVR^Ew.2]';                               // SMTP password
@@ -212,9 +213,9 @@ class NoauthController extends AppController
 
          } catch (Exception $e) {
              die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-         }
+         }*/
 
-        mail($courriel,"Une demande de modification de mot de passe a été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");
+        mail($courriel,"Une demande de modification de mot de passe a été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: mobilite@silverph0ton.com");
     }
 
 
