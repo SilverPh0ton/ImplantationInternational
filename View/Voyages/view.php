@@ -19,36 +19,36 @@ if(is_null($voyage)){
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content" >
 
-    <h3 id="titre">Nom du projet: <?= $voyage->getNomProjet()?></h3>
+    <h3 id="titre">Nom du projet: <?= $voyage->getNomProjet() ?></h3>
 
     <table class="vertical-table">
         <tr>
             <th scope="row">Pays</th>
-            <td id="pays"><?= $voyage->getDestination()->getNomPays()?></td>
+            <td id="pays"><?= $voyage->getDestination()->getNomPays() ?></td>
         </tr>
         <tr>
             <th scope="row">Ville</th>
-            <td id="ville"><?= $voyage->getVille()?></td>
+            <td id="ville"><?= $voyage->getVille() ?></td>
         </tr>
         <tr>
             <th scope="row">Note</th>
-            <td id="note"><?= $voyage->getNote()?></td>
+            <td id="note"><?= $voyage->getNote() ?></td>
         </tr>
         <tr>
             <th scope="row">Date de départ</th>
-            <td id="dateD"><?= dateToFrench($voyage->getDateDepart())?></td>
+            <td id="dateD"><?= dateToFrench($voyage->getDateDepart()) ?></td>
         </tr>
         <tr>
             <th scope="row">Date de retour</th>
-            <td id="dateR"><?= dateToFrench($voyage->getDateRetour())?></td>
+            <td id="dateR"><?= dateToFrench($voyage->getDateRetour()) ?></td>
         </tr>
         <tr>
             <th scope="row">Actif</th>
-            <td id="actif"><?= $voyage->getActif() ? 'Oui' : 'Non';?></td>
+            <td id="actif"><?= $voyage->getActif() ? 'Oui' : 'Non'; ?></td>
         </tr>
         <tr>
             <th scope="row">Participant(s)</th>
-            <td id="nbrpart"><?php
+            <td id="nbrpart"> <?php
                 if($compteConnecter->getType()!='etudiant') {
 
                     echo nav1(
@@ -56,7 +56,7 @@ if(is_null($voyage)){
                         'Voyages',
                         'viewparticipants',
                         $id_voyage);
-                }?> <?= $userCount?> participant(s)</td>
+                }?> <?= $userCount ?> participant(s)</td>
         </tr>
         <tr>
             <th scope="row">Proposition d'origine</th>
@@ -67,13 +67,13 @@ if(is_null($voyage)){
                     'View',
                     $voyage->getIdProposition(),
                     $id_voyage);
-?>
+                ?>
             </td>
         </tr>
     </table>
 
 
-    <?= nav('<button>Revenir à la liste des projets</button>', 'Voyages', 'index')?>
+    <?= nav('<button>Revenir à la liste des projets</button>', 'Voyages', 'index') ?>
     <script type="text/javascript">
     $( document ).ready(function() {
 

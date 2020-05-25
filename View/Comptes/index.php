@@ -20,15 +20,15 @@ $compteType = $connectedUser->getType();
 
 <div class="comptes index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left">
 
-<?php if(isOfType([ADMIN]))
+    <?php if(isOfType([ADMIN]))
         echo '<h3>Utilisateurs</h3>'
-?>
-<?php if(isOfType([PROF]))
+    ?>
+    <?php if(isOfType([PROF]))
         echo '<h3>Participants</h3>'
-?>
-<?php if ($compteType === 'admin'):
+    ?>
+    <?php if ($compteType === 'admin'):
         echo nav('<button class="add-btn">Ajouter un utilisateur </button>','comptes','add');
-    endif;?>
+    endif; ?>
 
     <br>
     <table class="table_to_paginate_part">
@@ -49,13 +49,13 @@ $compteType = $connectedUser->getType();
 
         <tbody>
 
-<?php foreach ($comptes as $compte):
+        <?php foreach ($comptes as $compte):
             $color = $compte->getActif() ? '' : 'style="color: #aaaaaa"'
-?>
+            ?>
             <tr>
-                <td<?php echo $color?> ><?= $compte->getPseudo()?></td>
-                <td<?php echo $color?> class='optionalField'>
-<?php
+                <td <?php echo $color ?> ><?= $compte->getPseudo() ?></td>
+                <td <?php echo $color ?> class='optionalField'>
+                    <?php
                     if ($compte->getType() === 'etudiant') {
                         echo 'Étudiant';
                     } elseif ($compte->getType() === 'prof') {
@@ -63,27 +63,27 @@ $compteType = $connectedUser->getType();
                     } elseif ($compte->getType() === 'admin') {
                         echo 'Administrateur';
                     }
-?>
+                    ?>
                 </td>
-                <td<?php echo $color?> ><?= $compte->getPrenom()?></td>
-                <td<?php echo $color?> ><?= $compte->getNom()?></td>
-                <td<?php echo $color?> class='optionalField'><?= $compte->getProgramme()->getNomProgramme()?></td>
-                <td<?php echo $color?> class='optionalField'><?= $compte->getActif() ? 'Oui' : 'Non';?></td>
+                <td <?php echo $color ?> ><?= $compte->getPrenom() ?></td>
+                <td <?php echo $color ?> ><?= $compte->getNom() ?></td>
+                <td <?php echo $color ?> class='optionalField'><?= $compte->getProgramme()->getNomProgramme() ?></td>
+                <td <?php echo $color ?> class='optionalField'><?= $compte->getActif() ? 'Oui' : 'Non'; ?></td>
                 <td class="actions">
 
-<?php
+                    <?php
                     if($compte->getAnonyme()||$compteType=='admin'){
                     echo nav1('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Voir">','Comptes','View',$compte->getIdCompte());
                     if ($connectedUser->getType() === 'admin') {
                       echo nav1('<img alt="afficher icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','Edit',$compte->getIdCompte());
                     }}
-?>
+                    ?>
                 </td>
-                <td><?= $compte->getCourriel()?></td>
-                <td><?= $compte->getTelephone()?></td>
-                <td><?= $compte->getDateNaissance()?></td>
+                <td><?= $compte->getCourriel() ?></td>
+                <td><?= $compte->getTelephone() ?></td>
+                <td><?= $compte->getDateNaissance() ?></td>
             </tr>
-<?php endforeach;?>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>
@@ -103,4 +103,4 @@ $compteType = $connectedUser->getType();
     sessionStorage.removeItem('date_naissance[month]');
     sessionStorage.removeItem('date_naissance[day]');
 </script>
-<?= load_script('paginatorParticipants')?>
+<?= load_script('paginatorParticipants') ?>

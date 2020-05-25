@@ -21,17 +21,17 @@ if(is_null($compte)){
 <div class="comptes view columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
 
 
-    <h3>Compte de: <?= $compte->getPseudo()?></h3>
+    <h3>Compte de: <?= $compte->getPseudo() ?></h3>
 
     <table class="vertical-table">
         <tr>
             <th scope="row">Nom d'utilisateur</th>
-            <td id='nomU'><?= $compte->getPseudo()?></td>
+            <td id='nomU'><?= $compte->getPseudo() ?></td>
         </tr>
         <tr>
             <th scope="row">Type</th>
             <td id='type'>
-<?php
+                <?php
                 if ($compte->getType() === 'etudiant') {
                     echo 'Étudiants';
                 } elseif ($compte->getType() === 'prof') {
@@ -39,45 +39,45 @@ if(is_null($compte)){
                 } elseif ($compte->getType()  === 'admin') {
                     echo 'Administrateur';
                 }
-?>
+                ?>
             </td>
         </tr>
         <tr>
             <th scope="row">Courriel</th>
-            <td id='courriel'><?= $compte->getCourriel()?></td>
+            <td id='courriel'><?= $compte->getCourriel() ?></td>
         </tr>
         <tr>
             <th scope="row">Prénom</th>
-            <td id='prenom'><?= $compte->getPrenom()?></td>
+            <td id='prenom'><?= $compte->getPrenom() ?></td>
         </tr>
         <tr>
             <th scope="row">Nom</th>
-            <td id='nom'><?= $compte->getNom()?></td>
+            <td id='nom'><?= $compte->getNom() ?></td>
         </tr>
         <tr>
             <th scope="row">Téléphone</th>
-            <td id='telephone'><?= $compte->getTelephone()?></td>
+            <td id='telephone'><?= $compte->getTelephone() ?></td>
         </tr>
         <tr>
             <th scope="row">Programme</th>
-            <td id='programme'><?= $compte->getProgramme()->getNomProgramme()?></td>
+            <td id='programme'><?= $compte->getProgramme()->getNomProgramme() ?></td>
         </tr>
         <tr>
             <th scope="row">Date de naissance</th>
-            <td id='dateNaissance'><?=dateToFrench($compte->getDateNaissance())?></td>
+            <td id='dateNaissance'><?=dateToFrench($compte->getDateNaissance()) ?></td>
         </tr>
 
-<?php if($compte->getType() != 'admin'):?>
+        <?php if($compte->getType() != 'admin'):?>
             <tr>
                 <th scope="row">Voyage(s) associé(s)</th>
                 <td id='voyage'><?=$listVoyage?></td>
             </tr>
-<?php endif;?>
+        <?php endif; ?>
 
     </table>
 
     <!--Button de navigation -->
-<?php
+    <?php
     if(isOfType([ADMIN,PROF])){
         
         if(isset($_GET['param2'])){
@@ -89,7 +89,7 @@ if(is_null($compte)){
     else{
         echo nav('<button type="button">Revenir à la liste des séjours</button>', 'Voyages', 'index');
     }
-?>
+    ?>
 
     <?= nav1('<button type="button"> Modifier ce compte </button>','Comptes','edit',$compte->getIdCompte());?>
     <script type="text/javascript">

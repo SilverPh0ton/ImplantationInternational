@@ -23,17 +23,17 @@ $noAuthController->passwordRecover();
         <div class="input text">
             <label for="pseudo">Nom d'utilisateur</label>
             <input type="text" name="pseudo" id="pseudo" required>
-            <?= $pseudo_err?>
+            <?= $pseudo_err ?>
         </div>
         <div class="input text">
             <label for="courriel">Courriel</label>
             <input type="email" name="courriel" id="mot-courriel-passe" required>
-            <?= $courriel_err?>
+            <?= $courriel_err ?>
         </div>
         <button type="submit">Soumettre</button>
 
     </form>
-<?= nav('<button  style="margin: 0" type="button">Retour </button>', 'Comptes', 'login');?>
+<?= nav('<button  style="margin: 0" type="button">Retour </button>', 'Comptes', 'login'); ?>
  </div>
 
-<?= load_css('login')?>
+<?= load_css('login') ?>

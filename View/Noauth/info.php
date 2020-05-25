@@ -1,6 +1,6 @@
 <html>
 
-<?= load_css('info')?>
+<?= load_css('info') ?>
 <div class="large-12 medium-12 small-12 content large-centered medium-centered small-centered large-text-left medium-text-left small-text-left">
 
     <p class="texte" >

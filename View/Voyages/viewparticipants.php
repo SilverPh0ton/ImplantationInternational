@@ -28,7 +28,7 @@ if(is_null($voyage)){
 
 <div class="comptes index large-12 medium-12 small-12 content large-text-left medium-text-left small-text-left">
 
-    <h3 id="titre">Nom du projet: <?= $voyage->getNomProjet()?></h3>
+    <h3 id="titre">Nom du projet: <?= $voyage->getNomProjet() ?></h3>
 
     <table class="table_to_paginate_part">
         <thead>
@@ -46,27 +46,27 @@ if(is_null($voyage)){
         </tr>
         </thead>
         <tbody>
-<?php foreach ($comptes as $compte):
+        <?php foreach ($comptes as $compte):
             $color = $compte->getActif() ? '' : 'style="color: #aaaaaa"'
-?>
+            ?>
             <tr>
-                <td<?php echo $color?> ><?= $compte->getPseudo()?></td>
-                <td<?php echo $color?> class='optionalField'>
-<?php
+                <td <?php echo $color ?> ><?= $compte->getPseudo() ?></td>
+                <td <?php echo $color ?> class='optionalField'>
+                    <?php
                     if ($compte->getType() === 'etudiant') {
                         echo 'Étudiant';
                     } elseif ($compte->getType() === 'prof') {
                         echo 'Accompagnateur';
                     }
-?>
+                    ?>
                 </td>
-                <td<?php echo $color?> ><?= $compte->getPrenom()?></td>
-                <td<?php echo $color?> ><?= $compte->getNom()?></td>
-                <td<?php echo $color?> class='optionalField'><?= $compte->getProgramme()->getNomProgramme()?></td>
-                <td<?php echo $color?> class='optionalField'><?= $compte->getActif() ? 'Oui' : 'Non';?></td>
+                <td <?php echo $color ?> ><?= $compte->getPrenom() ?></td>
+                <td <?php echo $color ?> ><?= $compte->getNom() ?></td>
+                <td <?php echo $color ?> class='optionalField'><?= $compte->getProgramme()->getNomProgramme() ?></td>
+                <td <?php echo $color ?> class='optionalField'><?= $compte->getActif() ? 'Oui' : 'Non'; ?></td>
                 <td class="actions">
 
-<?php
+                    <?php
                     if($compte->getAnonyme()||$compteType=='admin'){
                         echo nav2('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','View',$compte->getIdCompte(),$voyage->getIdVoyage());
                     }
@@ -74,22 +74,22 @@ if(is_null($voyage)){
                     if ($connectedUser->getType() === 'admin') {
                       echo nav1('<img alt="afficher icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','Edit',$compte->getIdCompte());
                     }
-?>
+                    ?>
                 </td>
-                <td><?= $compte->getCourriel()?></td>
-               <td><?= $compte->getTelephone()?></td>
-               <td><?= $compte->getDateNaissance()?></td>
+                <td><?= $compte->getCourriel() ?></td>
+               <td><?= $compte->getTelephone() ?></td>
+               <td><?= $compte->getDateNaissance() ?></td>
             </tr>
-<?php endforeach;?>
+        <?php endforeach; ?>
         </tbody>
     </table>
 
 </div>
 
-<?= nav1('<button>Revenir aux détails du projet</button>', 'Voyages', 'view',$voyage->getIdVoyage())?>
+<?= nav1('<button>Revenir aux détails du projet</button>', 'Voyages', 'view',$voyage->getIdVoyage()) ?>
 
 
 <script>
     var order = [[ 5, 'desc' ],[ 0, 'asc' ]];
 </script>
-<?= load_script('paginatorParticipants')?>
+<?= load_script('paginatorParticipants') ?>

@@ -1,4 +1,4 @@
-<?= load_css('tutoriel')?>
+<?= load_css('tutoriel') ?>
 
 <body data-spy="scroll" data-target="#myScrollspy" data-offset="84">
 <?php

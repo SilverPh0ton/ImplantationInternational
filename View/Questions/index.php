@@ -15,14 +15,14 @@ $questionsPourProfEleve = get('questionsPourProfEleve');
 $questionsPourProposition = get('questionsPourProposition');
 ?>
 
-<?= load_css('ControlOption')?>
+<?= load_css('ControlOption') ?>
 <?= load_css('tab')?>
 
 <div class="questions index columns large-12 medium-12 small-12 large-text-left medium-text-left small-text-left content">
 
     <h3>Banque de questions</h3>
 
-    <?= nav('<button class="add-btn">Ajouter une question</button>','questions','add');?>
+    <?= nav('<button class="add-btn">Ajouter une question</button>','questions','add'); ?>
 
     <div class="tab">
         <button id="eleve" class="tablinks active" onclick="openTab(event, 'eleveTab')">Pour étudiant</button>
@@ -45,43 +45,43 @@ $questionsPourProposition = get('questionsPourProposition');
             </tr>
             </thead>
             <tbody>
-<?php foreach ($questionsPourEleve as $question):
+            <?php foreach ($questionsPourEleve as $question):
                 $color = $question->getActif() ? '' : 'style="color: #aaaaaa"'
-?>
+                ?>
                 <tr>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getCategorie()->getCategorie()?></td>
-                    <td<?php echo $color?> ><?= $question->getQuestion()?></td>
-                    <td<?php echo $color?> >
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getCategorie()->getCategorie() ?></td>
+                    <td <?php echo $color ?> ><?= $question->getQuestion() ?></td>
+                    <td <?php echo $color ?> >
                         <div class="ControlOption">
                             <label for="affichage">
-<?php if ($question->getAffichage() === 'Mention'):?>
+                                <?php if ($question->getAffichage() === 'Mention'): ?>
                                     Mention (aucune réponse requise)
 
-<?php elseif ($question->getAffichage() === 'Case'):?>
-<?php $options = explode(";", $question->getInputOption());?>
+                                <?php elseif ($question->getAffichage() === 'Case'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
 
-<?php foreach ($options as $option):?>
-                                        <input type="checkbox"><?= $option?></input>
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="checkbox"><?= $option ?></input>
                                         <br>
-<?php endforeach?>
+                                    <?php endforeach ?>
 
                                     
-<?php elseif ($question->getAffichage() === 'Radio'):?>
-<?php $options = explode(";", $question->getInputOption());?>
+                                    <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
 
-<?php foreach ($options as $option):?>
-                                        <input type="radio" name="radio">  <?= $option?></input>
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
                                         <br>
-<?php endforeach?>
+                                    <?php endforeach ?>
 
 
-<?php elseif ($question->getAffichage() === 'Telechargement'):?>
+                                <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
-<?php ;
+                                    <?php ;
                                     echo download($question->getInputOption(),'Télécharger: ' . $question->getInputOption());
-?>
+                                    ?>
 
-<?php elseif ($question->getAffichage() === 'Chiffre'):
+                                <?php elseif ($question->getAffichage() === 'Chiffre'):
                                     $extrmum = explode(";", $question->getInputOption());
                                     if (sizeof($extrmum) >= 3) {
                                         $min = $extrmum[0];
@@ -92,29 +92,29 @@ $questionsPourProposition = get('questionsPourProposition');
                                         $max = 100;
                                         $step = 1;
                                     }
-?>
+                                    ?>
 
                                     Nombre
-                                    <input type="number" min="<?= $min?>" max="<?= $max?>" step="<?= $step?>">
+                                    <input type="number" min="<?= $min ?>" max="<?= $max ?>" step="<?= $step ?>">
 
-<?php elseif ($question->getAffichage() === 'Date'):?>
+                                <?php elseif ($question->getAffichage() === 'Date'): ?>
                                     Date
                                     <input type="date">
 
-<?php elseif ($question->getAffichage() === 'Liste'):
-                                    $options = explode(";", $question->getInputOption());?>
+                                <?php elseif ($question->getAffichage() === 'Liste'):
+                                    $options = explode(";", $question->getInputOption()); ?>
                                     Liste déroulante
                                     <select style="width: 93%">
-<?php foreach ($options as $option):?>
-                                            <option value=<?= $option?>> <?= $option?></option>
-<?php endforeach?>
+                                        <?php foreach ($options as $option): ?>
+                                            <option value=<?= $option ?>> <?= $option ?></option>
+                                        <?php endforeach ?>
                                     </select>
 
-<?php elseif ($question->getAffichage() === 'Fichier'):?>
+                                <?php elseif ($question->getAffichage() === 'Fichier'): ?>
                                     Déposer un document numérique
                                     <input type="file">
 
-<?php elseif ($question->getAffichage() === 'Curseur'):
+                                <?php elseif ($question->getAffichage() === 'Curseur'):
                                     $extrmum = explode(";", $question->getInputOption());
                                     if (sizeof($extrmum) >= 3) {
                                         $min = $extrmum[0];
@@ -126,23 +126,23 @@ $questionsPourProposition = get('questionsPourProposition');
                                         $step = 1;
                                     }
 
-?>
+                                    ?>
                                     Curseur de défilement
                                     <input type="range" class="slider"
-                                           onchange="$('#rangeValue<?= $question->getIdQuestion()?>').text(this.value);"
-                                           min="<?= $min?>" max="<?= $max?>" step="<?= $step?>">
-                                    <span id="rangeValue<?= $question->getIdQuestion()?>"><?= ($min + $max) / 2?></span>
+                                           onchange="$('#rangeValue<?= $question->getIdQuestion() ?>').text(this.value);"
+                                           min="<?= $min ?>" max="<?= $max ?>" step="<?= $step ?>">
+                                    <span id="rangeValue<?= $question->getIdQuestion() ?>"><?= ($min + $max) / 2 ?></span>
 
-<?php elseif ($question->getAffichage() === 'ZoneTexte'):?>
+                                <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
                                     Zone de texte
                                     <textarea></textarea>
 
-<?php endif;?>
+                                <?php endif; ?>
                             </label>
                         </div>
                     </td>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getActif() ? 'Oui' : 'Non';?></td>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getInfoSup()?></td>
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getActif() ? 'Oui' : 'Non'; ?></td>
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getInfoSup() ?></td>
                     <td class="actions">
                         <?= nav1(
                             '<img alt="afficher ico" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
@@ -150,17 +150,17 @@ $questionsPourProposition = get('questionsPourProposition');
                             'view',
                             $question->getIdQuestion()
                         );
-?>
+                        ?>
                         <?= nav1(
                             '<img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">',
                             'Questions',
                             'edit',
                             $question->getIdQuestion());
-?>
+                        ?>
 
                     </td>
                 </tr>
-<?php endforeach;?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
@@ -178,42 +178,42 @@ $questionsPourProposition = get('questionsPourProposition');
             </tr>
             </thead>
             <tbody>
-<?php foreach ($questionsPourProf as $question):
+            <?php foreach ($questionsPourProf as $question):
                 $color = $question->getActif() ? '' : 'style="color: #aaaaaa"'
-?>
+                ?>
                 <tr>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getCategorie()->getCategorie()?></td>
-                    <td<?php echo $color?> ><?= $question->getQuestion()?></td>
-                    <td<?php echo $color?> >
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getCategorie()->getCategorie() ?></td>
+                    <td <?php echo $color ?> ><?= $question->getQuestion() ?></td>
+                    <td <?php echo $color ?> >
                         <div class="ControlOption">
                             <label for="affichage">
-<?php if ($question->getAffichage() === 'Mention'):?>
+                                <?php if ($question->getAffichage() === 'Mention'): ?>
                                     Mention (aucune réponse requise)
 
-<?php elseif ($question->getAffichage() === 'Case'):?>
-<?php $options = explode(";", $question->getInputOption());?>
+                                <?php elseif ($question->getAffichage() === 'Case'): ?>
+                                  <?php $options = explode(";", $question->getInputOption()); ?>
 
-<?php foreach ($options as $option):?>
-                                      <input type="checkbox"><?= $option?></input>
+                                  <?php foreach ($options as $option): ?>
+                                      <input type="checkbox"><?= $option ?></input>
                                       <br>
-<?php endforeach?>
+                                  <?php endforeach ?>
 
 
-<?php elseif ($question->getAffichage() === 'Radio'):?>
-<?php $options = explode(";", $question->getInputOption());?>
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
                                     <br>
-<?php foreach ($options as $option):?>
-                                        <input type="radio" name="radio">  <?= $option?></input>
-<?php endforeach?>
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
+                                    <?php endforeach ?>
 
 
-<?php elseif ($question->getAffichage() === 'Telechargement'):?>
+                                <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
-<?php
+                                    <?php
                                     echo download($question->getInputOption(),'Télécharger: ' . $question->getInputOption());
-?>
+                                    ?>
 
-<?php elseif ($question->getAffichage() === 'Chiffre'):
+                                <?php elseif ($question->getAffichage() === 'Chiffre'):
                                     $extrmum = explode(";", $question->getInputOption());
                                     if (sizeof($extrmum) >= 3) {
                                         $min = $extrmum[0];
@@ -224,29 +224,29 @@ $questionsPourProposition = get('questionsPourProposition');
                                         $max = 100;
                                         $step = 1;
                                     }
-?>
+                                    ?>
 
                                     Nombre
-                                    <input type="number" min="<?= $min?>" max="<?= $max?>" step="<?= $step?>">
+                                    <input type="number" min="<?= $min ?>" max="<?= $max ?>" step="<?= $step ?>">
 
-<?php elseif ($question->getAffichage() === 'Date'):?>
+                                <?php elseif ($question->getAffichage() === 'Date'): ?>
                                     Date
                                     <input type="date">
 
-<?php elseif ($question->getAffichage() === 'Liste'):
-                                    $options = explode(";", $question->getInputOption());?>
+                                <?php elseif ($question->getAffichage() === 'Liste'):
+                                    $options = explode(";", $question->getInputOption()); ?>
                                     Liste déroulante
                                     <select style="width: 93%">
-<?php foreach ($options as $option):?>
-                                            <option value=<?= $option?>> <?= $option?></option>
-<?php endforeach?>
+                                        <?php foreach ($options as $option): ?>
+                                            <option value=<?= $option ?>> <?= $option ?></option>
+                                        <?php endforeach ?>
                                     </select>
 
-<?php elseif ($question->getAffichage() === 'Fichier'):?>
+                                <?php elseif ($question->getAffichage() === 'Fichier'): ?>
                                     Déposer un document numérique
                                     <input type="file">
 
-<?php elseif ($question->getAffichage() === 'Curseur'):
+                                <?php elseif ($question->getAffichage() === 'Curseur'):
                                     $extrmum = explode(";", $question->getInputOption());
                                     if (sizeof($extrmum) >= 3) {
                                         $min = $extrmum[0];
@@ -258,27 +258,27 @@ $questionsPourProposition = get('questionsPourProposition');
                                         $step = 1;
                                     }
 
-?>
+                                    ?>
                                     Curseur de défilement
                                     <input type="range" class="slider"
-                                           onchange="$('#rangeValue<?= $question->getIdQuestion()?>').text(this.value);"
-                                           min="<?= $min?>" max="<?= $max?>" step="<?= $step?>">
-                                    <span id="rangeValue<?= $question->getIdQuestion()?>"><?= ($min + $max) / 2?></span>
+                                           onchange="$('#rangeValue<?= $question->getIdQuestion() ?>').text(this.value);"
+                                           min="<?= $min ?>" max="<?= $max ?>" step="<?= $step ?>">
+                                    <span id="rangeValue<?= $question->getIdQuestion() ?>"><?= ($min + $max) / 2 ?></span>
 
-<?php elseif ($question->getAffichage() === 'ZoneTexte'):?>
+                                <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
                                     Zone de texte
                                     <textarea></textarea>
 
-<?php elseif ($question->getAffichage() === 'Couleur'):?>
+                                <?php elseif ($question->getAffichage() === 'Couleur'): ?>
                                     Couleur
                                     <input type="color">
 
-<?php endif;?>
+                                <?php endif; ?>
                             </label>
                         </div>
                     </td>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getInfoSup()?></td>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getActif() ? 'Oui' : 'Non';?></td>
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getInfoSup() ?></td>
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getActif() ? 'Oui' : 'Non'; ?></td>
                     <td class="actions">
                         <?= nav1(
                             '<img alt="afficher ico" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
@@ -286,17 +286,17 @@ $questionsPourProposition = get('questionsPourProposition');
                             'view',
                             $question->getIdQuestion()
                         );
-?>
+                        ?>
                         <?= nav1(
                             '<img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">',
                             'Questions',
                             'edit',
                             $question->getIdQuestion());
-?>
+                        ?>
 
                     </td>
                 </tr>
-<?php endforeach;?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
@@ -314,40 +314,40 @@ $questionsPourProposition = get('questionsPourProposition');
             </tr>
             </thead>
             <tbody>
-<?php foreach ($questionsPourProfEleve as $question):
+            <?php foreach ($questionsPourProfEleve as $question):
                 $color = $question->getActif() ? '' : 'style="color: #aaaaaa"'
-?>
+                ?>
                 <tr>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getCategorie()->getCategorie()?></td>
-                    <td<?php echo $color?> ><?= $question->getQuestion()?></td>
-                    <td<?php echo $color?> >
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getCategorie()->getCategorie() ?></td>
+                    <td <?php echo $color ?> ><?= $question->getQuestion() ?></td>
+                    <td <?php echo $color ?> >
                         <div class="ControlOption">
                             <label for="affichage">
-<?php if ($question->getAffichage() === 'Mention'):?>
+                                <?php if ($question->getAffichage() === 'Mention'): ?>
                                     Mention (aucune réponse requise)
 
-<?php elseif ($question->getAffichage() === 'Case'):?>
-<?php $options = explode(";", $question->getInputOption());?>
+                                <?php elseif ($question->getAffichage() === 'Case'): ?>
+                                  <?php $options = explode(";", $question->getInputOption()); ?>
 
-<?php foreach ($options as $option):?>
-                                      <input type="checkbox"><?= $option?></input>
+                                  <?php foreach ($options as $option): ?>
+                                      <input type="checkbox"><?= $option ?></input>
                                       <br>
-<?php endforeach?>
+                                  <?php endforeach ?>
 
-<?php elseif ($question->getAffichage() === 'Radio'):?>
-<?php $options = explode(";", $question->getInputOption());?>
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
 
-<?php foreach ($options as $option):?>
-                                        <input type="radio" name="radio">  <?= $option?></input>
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
                                         <br>
-<?php endforeach?>
+                                    <?php endforeach ?>
 
-<?php elseif ($question->getAffichage() === 'Telechargement'):?>
+                                <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
-<?php
+                                    <?php
                                     echo download($question->getInputOption(),'Télécharger: ' . $question->getInputOption());?>
 
-<?php elseif ($question->getAffichage() === 'Chiffre'):
+                                <?php elseif ($question->getAffichage() === 'Chiffre'):
                                     $extrmum = explode(";", $question->getInputOption());
                                     if (sizeof($extrmum) >= 3) {
                                         $min = $extrmum[0];
@@ -358,29 +358,29 @@ $questionsPourProposition = get('questionsPourProposition');
                                         $max = 100;
                                         $step = 1;
                                     }
-?>
+                                    ?>
 
                                     Nombre
-                                    <input type="number" min="<?= $min?>" max="<?= $max?>" step="<?= $step?>">
+                                    <input type="number" min="<?= $min ?>" max="<?= $max ?>" step="<?= $step ?>">
 
-<?php elseif ($question->getAffichage() === 'Date'):?>
+                                <?php elseif ($question->getAffichage() === 'Date'): ?>
                                     Date
                                     <input type="date">
 
-<?php elseif ($question->getAffichage() === 'Liste'):
-                                    $options = explode(";", $question->getInputOption());?>
+                                <?php elseif ($question->getAffichage() === 'Liste'):
+                                    $options = explode(";", $question->getInputOption()); ?>
                                     Liste déroulante
                                     <select style="width: 93%">
-<?php foreach ($options as $option):?>
-                                            <option value=<?= $option?>> <?= $option?></option>
-<?php endforeach?>
+                                        <?php foreach ($options as $option): ?>
+                                            <option value=<?= $option ?>> <?= $option ?></option>
+                                        <?php endforeach ?>
                                     </select>
 
-<?php elseif ($question->getAffichage() === 'Fichier'):?>
+                                <?php elseif ($question->getAffichage() === 'Fichier'): ?>
                                     Déposer un document numérique
                                     <input type="file">
 
-<?php elseif ($question->getAffichage() === 'Curseur'):
+                                <?php elseif ($question->getAffichage() === 'Curseur'):
                                     $extrmum = explode(";", $question->getInputOption());
                                     if (sizeof($extrmum) >= 3) {
                                         $min = $extrmum[0];
@@ -392,27 +392,27 @@ $questionsPourProposition = get('questionsPourProposition');
                                         $step = 1;
                                     }
 
-?>
+                                    ?>
                                     Curseur de défilement
                                     <input type="range" class="slider"
-                                           onchange="$('#rangeValue<?= $question->getIdQuestion()?>').text(this.value);"
-                                           min="<?= $min?>" max="<?= $max?>" step="<?= $step?>">
-                                    <span id="rangeValue<?= $question->getIdQuestion()?>"><?= ($min + $max) / 2?></span>
+                                           onchange="$('#rangeValue<?= $question->getIdQuestion() ?>').text(this.value);"
+                                           min="<?= $min ?>" max="<?= $max ?>" step="<?= $step ?>">
+                                    <span id="rangeValue<?= $question->getIdQuestion() ?>"><?= ($min + $max) / 2 ?></span>
 
-<?php elseif ($question->getAffichage() === 'ZoneTexte'):?>
+                                <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
                                     Zone de texte
                                     <textarea></textarea>
 
-<?php elseif ($question->getAffichage() === 'Couleur'):?>
+                                <?php elseif ($question->getAffichage() === 'Couleur'): ?>
                                     Couleur
                                     <input type="color">
 
-<?php endif;?>
+                                <?php endif; ?>
                             </label>
                         </div>
                     </td>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getInfoSup()?></td>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getActif() ? 'Oui' : 'Non';?></td>
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getInfoSup() ?></td>
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getActif() ? 'Oui' : 'Non'; ?></td>
                     <td class="actions">
                         <?= nav1(
                             '<img alt="afficher ico" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
@@ -420,17 +420,17 @@ $questionsPourProposition = get('questionsPourProposition');
                             'view',
                             $question->getIdQuestion()
                         );
-?>
+                        ?>
                         <?= nav1(
                             '<img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">',
                             'Questions',
                             'edit',
                             $question->getIdQuestion());
-?>
+                        ?>
 
                     </td>
                 </tr>
-<?php endforeach;?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
@@ -448,41 +448,41 @@ $questionsPourProposition = get('questionsPourProposition');
             </tr>
             </thead>
             <tbody>
-<?php foreach ($questionsPourProposition as $question):
+            <?php foreach ($questionsPourProposition as $question):
                 $color = $question->getActif() ? '' : 'style="color: #aaaaaa"'
-?>
+                ?>
                 <tr>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getCategorie()->getCategorie()?></td>
-                    <td<?php echo $color?> ><?= $question->getQuestion()?></td>
-                    <td<?php echo $color?> >
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getCategorie()->getCategorie() ?></td>
+                    <td <?php echo $color ?> ><?= $question->getQuestion() ?></td>
+                    <td <?php echo $color ?> >
                         <div class="ControlOption">
                             <label for="affichage">
-<?php if ($question->getAffichage() === 'Mention'):?>
+                                <?php if ($question->getAffichage() === 'Mention'): ?>
                                     Mention (aucune réponse requise)
 
-<?php elseif ($question->getAffichage() === 'Case'):?>
-<?php $options = explode(";", $question->getInputOption());?>
+                                <?php elseif ($question->getAffichage() === 'Case'): ?>
+                                  <?php $options = explode(";", $question->getInputOption()); ?>
 
-<?php foreach ($options as $option):?>
-                                      <input type="checkbox"><?= $option?></input>
+                                  <?php foreach ($options as $option): ?>
+                                      <input type="checkbox"><?= $option ?></input>
                                       <br>
-<?php endforeach?>
+                                  <?php endforeach ?>
 
-<?php elseif ($question->getAffichage() === 'Radio'):?>
-<?php $options = explode(";", $question->getInputOption());?>
+                                  <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                    <?php $options = explode(";", $question->getInputOption()); ?>
 
-<?php foreach ($options as $option):?>
-                                        <input type="radio" name="radio">  <?= $option?></input>
+                                    <?php foreach ($options as $option): ?>
+                                        <input type="radio" name="radio">  <?= $option ?></input>
                                         <br>
-<?php endforeach?>
+                                    <?php endforeach ?>
 
-<?php elseif ($question->getAffichage() === 'Telechargement'):?>
+                                <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
                                     Document à télécharger (aucune réponse requise) <br>
-<?php
+                                    <?php
                                     echo download($question->getInputOption(), 'Télécharger: ' . $question->getInputOption());
-?>
+                                    ?>
 
-<?php elseif ($question->getAffichage() === 'Chiffre'):
+                                <?php elseif ($question->getAffichage() === 'Chiffre'):
                                     $extrmum = explode(";", $question->getInputOption());
                                     if (sizeof($extrmum) >= 3) {
                                         $min = $extrmum[0];
@@ -493,29 +493,29 @@ $questionsPourProposition = get('questionsPourProposition');
                                         $max = 100;
                                         $step = 1;
                                     }
-?>
+                                    ?>
 
                                     Nombre
-                                    <input type="number" min="<?= $min?>" max="<?= $max?>" step="<?= $step?>">
+                                    <input type="number" min="<?= $min ?>" max="<?= $max ?>" step="<?= $step ?>">
 
-<?php elseif ($question->getAffichage() === 'Date'):?>
+                                <?php elseif ($question->getAffichage() === 'Date'): ?>
                                     Date
                                     <input type="date">
 
-<?php elseif ($question->getAffichage() === 'Liste'):
-                                    $options = explode(";", $question->getInputOption());?>
+                                <?php elseif ($question->getAffichage() === 'Liste'):
+                                    $options = explode(";", $question->getInputOption()); ?>
                                     Liste déroulante
                                     <select style="width: 93%">
-<?php foreach ($options as $option):?>
-                                            <option value=<?= $option?>> <?= $option?></option>
-<?php endforeach?>
+                                        <?php foreach ($options as $option): ?>
+                                            <option value=<?= $option ?>> <?= $option ?></option>
+                                        <?php endforeach ?>
                                     </select>
 
-<?php elseif ($question->getAffichage() === 'Fichier'):?>
+                                <?php elseif ($question->getAffichage() === 'Fichier'): ?>
                                     Déposer un document numérique
                                     <input type="file">
 
-<?php elseif ($question->getAffichage() === 'Curseur'):
+                                <?php elseif ($question->getAffichage() === 'Curseur'):
                                     $extrmum = explode(";", $question->getInputOption());
                                     if (sizeof($extrmum) >= 3) {
                                         $min = $extrmum[0];
@@ -527,27 +527,27 @@ $questionsPourProposition = get('questionsPourProposition');
                                         $step = 1;
                                     }
 
-?>
+                                    ?>
                                     Curseur de défilement
                                     <input type="range" class="slider"
-                                           onchange="$('#rangeValue<?= $question->getIdQuestion()?>').text(this.value);"
-                                           min="<?= $min?>" max="<?= $max?>" step="<?= $step?>">
-                                    <span id="rangeValue<?= $question->getIdQuestion()?>"><?= ($min + $max) / 2?></span>
+                                           onchange="$('#rangeValue<?= $question->getIdQuestion() ?>').text(this.value);"
+                                           min="<?= $min ?>" max="<?= $max ?>" step="<?= $step ?>">
+                                    <span id="rangeValue<?= $question->getIdQuestion() ?>"><?= ($min + $max) / 2 ?></span>
 
-<?php elseif ($question->getAffichage() === 'ZoneTexte'):?>
+                                <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
                                     Zone de texte
                                     <textarea></textarea>
 
-<?php elseif ($question->getAffichage() === 'Couleur'):?>
+                                <?php elseif ($question->getAffichage() === 'Couleur'): ?>
                                     Couleur
                                     <input type="color">
 
-<?php endif;?>
+                                <?php endif; ?>
                             </label>
                         </div>
                     </td>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getInfoSup()?></td>
-                    <td<?php echo $color?> class='optionalField'><?= $question->getActif() ? 'Oui' : 'Non';?></td>
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getInfoSup() ?></td>
+                    <td <?php echo $color ?> class='optionalField'><?= $question->getActif() ? 'Oui' : 'Non'; ?></td>
                     <td class="actions">
                         <?= nav1(
                             '<img alt="afficher ico" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
@@ -555,17 +555,17 @@ $questionsPourProposition = get('questionsPourProposition');
                             'view',
                             $question->getIdQuestion()
                         );
-?>
+                        ?>
                         <?= nav1(
                             '<img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">',
                             'Questions',
                             'edit',
                             $question->getIdQuestion());
-?>
+                        ?>
 
                     </td>
                 </tr>
-<?php endforeach;?>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
@@ -578,8 +578,8 @@ $questionsPourProposition = get('questionsPourProposition');
     var order = [[ 4, 'desc' ],[ 0, 'asc' ]];
     let scrollY_val = '45vh';
 </script>
-<?= load_script('paginator')?>
-<?= load_script('tab')?>
+<?= load_script('paginator') ?>
+<?= load_script('tab') ?>
 <script>
     $(document).ready( function () {
         openTab(null, 'eleveTab');

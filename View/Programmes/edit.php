@@ -21,12 +21,12 @@ $programme = get('programme');
             </div>
             <div class="input text required">
                 <label for="actif">Actif</label>
-                <input type="checkbox" name="actif" id="actif" <?= ($programme->getActif() ? 'checked' : '')?>>
+                <input type="checkbox" name="actif" id="actif" <?= ($programme->getActif() ? 'checked' : '') ?>>
             </div>
         </fieldset>
         <button type="submit">Enregistrer</button>
     </form>
 
     <!--Button de navigation -->
-    <?= nav('<button>Retour aux configurations</button>','Configuration','index');?>
+    <?= nav('<button>Retour aux configurations</button>','Configuration','index'); ?>
 </div>

@@ -15,9 +15,9 @@ $propositions = get('propositions');
 
     <h3>Propositions de projet</h3>
 
-<?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
+    <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
         echo nav('<button class="add-btn">Ajouter une proposition </button>', 'Propositions', 'add');
-    endif;?>
+    endif; ?>
 
 
 
@@ -34,10 +34,10 @@ $propositions = get('propositions');
         </tr>
         </thead>
         <tbody>
-<?php foreach ($propositions as $proposition):?>
-<?php    if (!(isOfType([ADMIN]) and ($proposition->getApprouvee() == '3'))):?>
+        <?php foreach ($propositions as $proposition):?>
+            <?php    if (!(isOfType([ADMIN]) and ($proposition->getApprouvee() == '3'))): ?>
         <tr>
-<?php
+            <?php
             if ($proposition->getApprouvee() == 0) {
                 $color = 'style="color: #000000"';
             } else if ($proposition->getApprouvee() == 2) {
@@ -49,17 +49,17 @@ $propositions = get('propositions');
             } else if ($proposition->getApprouvee() == 4) {
                 $color = 'style="color: #4287f5"';
             }
-?>
+            ?>
 
-            <td<?php echo $color?> > <?= $proposition->getNomProjet()?></td>
-            <td<?php echo $color?> > <?= $proposition->getDestination()->getNomPays()?></td>
-            <td<?php echo $color?> class='optionalField' data-sort="<?=$proposition->getDateDepart()?>">
-                <?= dateToFrench($proposition->getDateDepart())?></td>
-            <td<?php echo $color?> class='optionalField' data-sort="<?=$proposition->getDateRetour()?>>">
-                <?= dateToFrench($proposition->getDateRetour())?></td>
-            <td<?php echo $color?>
+            <td <?php echo $color ?> > <?= $proposition->getNomProjet() ?></td>
+            <td <?php echo $color ?> > <?= $proposition->getDestination()->getNomPays() ?></td>
+            <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateDepart()?>">
+                <?= dateToFrench($proposition->getDateDepart()) ?></td>
+            <td <?php echo $color ?> class='optionalField' data-sort="<?=$proposition->getDateRetour()?>>">
+                <?= dateToFrench($proposition->getDateRetour()) ?></td>
+            <td <?php echo $color ?>
                     class='optionalField'>
-<?php
+                <?php
                 if($proposition->getApprouvee() === '0'){
                     echo "En attente";
                 }
@@ -75,11 +75,11 @@ $propositions = get('propositions');
                 else if($proposition->getApprouvee() === '4'){
                     echo "Nouveauté";
                 }
-?>
+                ?>
             </td>
-            <td class="actions"<?php echo $color?> >
+            <td class="actions" <?php echo $color ?> >
 
-<?php
+                <?php
                 echo nav1(
                     '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
                     'Propositions',
@@ -106,8 +106,8 @@ $propositions = get('propositions');
                 'Propositions',
                  'Add',
                     $proposition->getIdProposition());
-?>
-                <div class="modal" id="<?= 'myModal_accept_'.$proposition->getIdProposition()?>">
+                ?>
+                <div class="modal" id="<?= 'myModal_accept_'.$proposition->getIdProposition() ?>">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -120,18 +120,18 @@ $propositions = get('propositions');
                             <!-- Modal body -->
                             <div class="modal-body">
                                 Êtes-vous certain de vouloir accepter cette proposition ?
-                                <form method="post" id="<?= 'form_accept_'.$proposition->getIdProposition()?>">
-                                    <input type="hidden" value="<?= $proposition->getIdProposition()?>"
+                                <form method="post" id="<?= 'form_accept_'.$proposition->getIdProposition() ?>">
+                                    <input type="hidden" value="<?= $proposition->getIdProposition() ?>"
                                            name="idProp_transform">
                                 </form>
                             </div>
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-<?php
+                                <?php
                                 echo('<button  type="submit" form="form_accept_'.$proposition->getIdProposition().'" class="btn btn-primary" value="bt_confirm" >Confirmer</button>');
                                 echo('<button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>');
-?>
+                                ?>
 
                             </div>
 
@@ -141,7 +141,7 @@ $propositions = get('propositions');
 
 
                 <!-- Modal refuser -->
-                <div class="modal" id="<?= 'myModal_refuse_'.$proposition->getIdProposition()?>">
+                <div class="modal" id="<?= 'myModal_refuse_'.$proposition->getIdProposition() ?>">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -153,9 +153,9 @@ $propositions = get('propositions');
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <form method="post" id="<?= 'form_refuse_'.$proposition->getIdProposition()?>">
+                                <form method="post" id="<?= 'form_refuse_'.$proposition->getIdProposition() ?>">
                                     <label for="declineReason"> Veuillez indiquer une raison de refus
-                                        <input type="hidden" value="<?= $proposition->getIdProposition()?>"
+                                        <input type="hidden" value="<?= $proposition->getIdProposition() ?>"
                                                name="idProp">
                                         <textarea name="declineReason" id="declineReason" cols="30" rows="10" title="Raison de refus" maxlength="255"></textarea>
                                     </label>
@@ -164,10 +164,10 @@ $propositions = get('propositions');
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-<?php
+                                <?php
                                 echo('<button form="form_refuse_'.$proposition->getIdProposition().'" type="submit" class="btn btn-primary" value="bt_refuse">Confirmer</button>');
                                 echo('<button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>');
-?>
+                                ?>
 
                             </div>
 
@@ -176,8 +176,8 @@ $propositions = get('propositions');
                 </div>
 
         </tr>
-<?php endif?>
-<?php endforeach;?>
+            <?php endif ?>
+        <?php endforeach; ?>
         </tbody>
     </table>
 
@@ -188,4 +188,4 @@ $propositions = get('propositions');
 
     sessionStorage.clear();
 </script>
-<?= load_script('paginator')?>
+<?= load_script('paginator') ?>

@@ -16,7 +16,7 @@ if (!isset($_SESSION["flashList"])) {
     $_SESSION["flashList"] = new ArrayObject();
 }
 
-use App\Controller\ComptesController;?>
+use App\Controller\ComptesController; ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,10 +33,10 @@ use App\Controller\ComptesController;?>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-    <?= load_css('base')?>
-    <?= load_css('style')?>
-    <?= load_css('custom')?>
-    <?= load_css('header')?>
+    <?= load_css('base') ?>
+    <?= load_css('style') ?>
+    <?= load_css('custom') ?>
+    <?= load_css('header') ?>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -58,62 +58,62 @@ use App\Controller\ComptesController;?>
 
 <header>
     <div id="ligne1">
-        <?= nav('<img src="Ressource/img/Logo-Cegep.png" alt="logo cegep" id="logo"> Bureau international', 'voyages', 'index')?>
+        <?= nav('<img src="Ressource/img/Logo-Cegep.png" alt="logo cegep" id="logo"> Bureau international', 'voyages', 'index') ?>
 
-<?php if (isset($_SESSION["connectedUser"])):?>
-            <?= nav('<img src="Ressource/img/log-out.png" alt="logout icon" id="logout">', 'comptes', 'logout')?>
-            <?= nav1('<img src="Ressource/img/user.png" alt="user icon" id="user">', 'comptes', 'view', $_SESSION["connectedUser"]->getIdCompte());?>
-<?php endif;?>
+        <?php if (isset($_SESSION["connectedUser"])): ?>
+            <?= nav('<img src="Ressource/img/log-out.png" alt="logout icon" id="logout">', 'comptes', 'logout') ?>
+            <?= nav1('<img src="Ressource/img/user.png" alt="user icon" id="user">', 'comptes', 'view', $_SESSION["connectedUser"]->getIdCompte()); ?>
+        <?php endif; ?>
 
-        <span id="bienvenue"> Bienvenue <?= !empty($_SESSION["connectedUser"]) ? ',' . $_SESSION["connectedUser"]->getPseudo() : ""?> </span>
+        <span id="bienvenue"> Bienvenue <?= !empty($_SESSION["connectedUser"]) ? ',' . $_SESSION["connectedUser"]->getPseudo() : "" ?> </span>
 
     </div>
 
     <nav>
         <ul class="nav-links">
-<?php if (isset($compteType)):?>
+            <?php if (isset($compteType)): ?>
 
-<?php if(isOfType([ADMIN,PROF]))
+                <?php if(isOfType([ADMIN,PROF]))
                 echo nav('<li class="navbutton">Propositions de projet</li>', 'propositions', 'index')
-?>
+                ?>
 
-<?php if(isOfType([ADMIN,PROF,ETUDIANT]))
+                <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
                     echo nav('<li class="navbutton">Projets de mobilité</li>', 'voyages', 'index')
-?>
+                ?>
 
 
-<?php if(isOfType([ADMIN]))
+                <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Utilisateurs</li>', 'comptes', 'index')
-?>
+                ?>
 
-<?php if(isOfType([PROF]))
+                <?php if(isOfType([PROF]))
                     echo nav('<li class="navbutton">Liste des participants</li>', 'comptes', 'index')
-?>
+                ?>
 
-<?php if(isOfType([ADMIN]))
+                <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Banque de questions</li>', 'questions', 'index')
-?>
+                ?>
 
-<?php if(isOfType([ADMIN]))
+                <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Configurations</li>', 'configuration', 'index')
-?>
+                ?>
 
-<?php if(isOfType([ADMIN]))
+                <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Statistiques</li>', 'statistiques', 'index')
-?>
+                ?>
 
-<?php if(isOfType([ADMIN,PROF,ETUDIANT]))
+                <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
                     echo nav('<li class="navbutton">Tutoriel</li>', 'noauth', 'tutoriel')
-?>
+                ?>
 
-<?php if(isOfType([ADMIN,PROF,ETUDIANT]))
+                <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
                     echo nav1('<li class="navbutton">Profil</li>', 'comptes', 'view', $_SESSION["connectedUser"]->getIdCompte())
-?>
+                ?>
 
-<?php if(isOfType([ADMIN,PROF,ETUDIANT]))
+                <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
                     echo nav('<li class="navbutton">Informations supplémentaires</li>', 'noauth', 'info')
-?>
-<?php endif?>
+                ?>
+            <?php endif ?>
 
         </ul>
 
@@ -128,35 +128,35 @@ use App\Controller\ComptesController;?>
 <?php
 $flaslist = $_SESSION["flashList"];
 foreach ($flaslist as $flash):
-?>
-<?php if ($flash[0] === '1'):?>
+    ?>
+    <?php if ($flash[0] === '1'): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <?= $flash[1]?>
+        <?= $flash[1] ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-<?php elseif ($flash[0] === '0'):?>
+<?php elseif ($flash[0] === '0'): ?>
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <?= $flash[1]?>
+        <?= $flash[1] ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-<?php elseif ($flash[0] === '-1'):?>
+<?php elseif ($flash[0] === '-1'): ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <?= $flash[1]?>
+        <?= $flash[1] ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-<?php endif?>
+<?php endif ?>
 <?php endforeach;
 $_SESSION["flashList"] = new ArrayObject();
 ?>
 
 <div class="container clearfix text-center" >
-<?php
+    <?php
     $switch_controller = 'Comptes';
     $switch_action = 'Login';
 
@@ -351,7 +351,7 @@ $_SESSION["flashList"] = new ArrayObject();
     if (isset($_SESSION["globalData"])) {
         $_SESSION["globalData"] = [];
     }
-?>
+    ?>
 </div>
 
 <footer>
@@ -364,7 +364,7 @@ $_SESSION["flashList"] = new ArrayObject();
     });
 </script>
 
-<?= load_script('navigation')?>
+<?= load_script('navigation') ?>
 
 
 </body>

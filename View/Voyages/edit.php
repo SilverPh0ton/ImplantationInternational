@@ -14,7 +14,7 @@ $destinations = get('destinations');
 
 ?>
 
-<?php if ($compteType === 'admin' || $compteType === 'prof' && !$voyage->getApprouvee()):?>
+<?php if ($compteType === 'admin' || $compteType === 'prof' && !$voyage->getApprouvee()): ?>
 
     <div class="voyages large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content">
 
@@ -27,32 +27,32 @@ $destinations = get('destinations');
                     <br>
                     <label for="nom_projet">Nom du projet</label>
                     <input type="text" name="nom_projet" pattern=".*\S.*" title="Le champ de peut pas être vide"
-                           value="<?= $voyage->getNomProjet()?>" maxlength="30" required>
+                           value="<?= $voyage->getNomProjet() ?>" maxlength="30" required>
 
 
                     <label for="id_destination">Destination</label>
                     <select name="id_destination" required="required">
-<?php foreach ($destinations as $destination):?>
+                        <?php foreach ($destinations as $destination): ?>
                             <option value=<?= $destination->getIdDestination();
                             if ($voyage->getDestination()->getIdDestination() == $destination->getIdDestination()): {
                                 echo ' selected="selected""';
-                            } endif?>
+                            } endif ?>
                             >
-                                <?= $destination->getNomPays()?>
+                                <?= $destination->getNomPays() ?>
                             </option>
-<?php endforeach?>
+                        <?php endforeach ?>
                     </select>
                 </div>
 
                 <div class="input text">
                     <label for="ville">Ville</label>
                     <input type="text" name="ville" pattern=".*\S.*" title="Le champ de peut pas être vide"
-                           value="<?= $voyage->getVille()?>" maxlength="50">
+                           value="<?= $voyage->getVille() ?>" maxlength="50">
                 </div>
 
                 <div class="input text">
                     <label for="note">Note</label>
-                    <textarea name="note" maxlength="500" rows="4"><?= $voyage->getNote()?></textarea>
+                    <textarea name="note" maxlength="500" rows="4"><?= $voyage->getNote() ?></textarea>
                 </div>
 
 
@@ -62,106 +62,106 @@ $destinations = get('destinations');
                 <div class="input date required">
                     <label for="date_depart">Date de départ</label>
                     <select name="date_depart[year]" required="required">
-<?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++):?>
+                        <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                             <option
-                                    value=<?= $i?>
-                                <?= ($i == substr($voyage->getDateDepart(), 0, 4)) ? ' selected="selected"' : ''?>>
-                                <?= $i?>
+                                    value=<?= $i ?>
+                                <?= ($i == substr($voyage->getDateDepart(), 0, 4)) ? ' selected="selected"' : '' ?>>
+                                <?= $i ?>
                             </option>
-<?php endfor;?>
+                        <?php endfor; ?>
                     </select>
 
                     <select name="date_depart[month]" required="required">
-<?php
+                        <?php
                         $i = 0;
                         foreach (return_months() as $month):
-?>
+                            ?>
                             <option
-                                    value=<?= ++$i?>
-                                <?= ($i == substr($voyage->getDateDepart(), 5, 7)) ? ' selected="selected"' : ''?>>
-                                <?= $month?>
+                                    value=<?= ++$i ?>
+                                <?= ($i == substr($voyage->getDateDepart(), 5, 7)) ? ' selected="selected"' : '' ?>>
+                                <?= $month ?>
                             </option>
-<?php
+                        <?php
                         endforeach;
-?>
+                        ?>
                     </select>
 
                     <select name="date_depart[day]" required="required">
-<?php for ($i = 1; $i <= 31; $i++):?>
+                        <?php for ($i = 1; $i <= 31; $i++): ?>
                             <option
-                                    value=<?= $i?>
-                                    <?= ($i == substr($voyage->getDateDepart(), 8, 10)) ? ' selected="selected"' : ''?>
+                                    value=<?= $i ?>
+                                    <?= ($i == substr($voyage->getDateDepart(), 8, 10)) ? ' selected="selected"' : '' ?>
                             >
-                                <?= $i?>
+                                <?= $i ?>
                             </option>
-<?php endfor;?>
+                        <?php endfor; ?>
                     </select>
                 </div>
 
                 <div class="input date required">
                     <label for="date_retour">Date de retour</label>
                     <select name="date_retour[year]" required="required">
-<?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++):?>
+                        <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                             <option
-                                    value=<?= $i?>
-                                <?= ($i == substr($voyage->getDateRetour(), 0, 4)) ? ' selected="selected"' : ''?>>
-                                <?= $i?>
+                                    value=<?= $i ?>
+                                <?= ($i == substr($voyage->getDateRetour(), 0, 4)) ? ' selected="selected"' : '' ?>>
+                                <?= $i ?>
                             </option>
-<?php endfor;?>
+                        <?php endfor; ?>
                     </select>
 
                     <select name="date_retour[month]" required="required">
-<?php
+                        <?php
                         $i = 0;
                         foreach (return_months() as $month):
-?>
+                            ?>
                             <option
-                                    value=<?= ++$i?>
-                                <?= ($i == substr($voyage->getDateRetour(), 5, 7)) ? ' selected="selected"' : ''?>>
-                                <?= $month?>
+                                    value=<?= ++$i ?>
+                                <?= ($i == substr($voyage->getDateRetour(), 5, 7)) ? ' selected="selected"' : '' ?>>
+                                <?= $month ?>
                             </option>
-<?php
+                        <?php
                         endforeach;
-?>
+                        ?>
                     </select>
 
                     <select name="date_retour[day]" required="required">
-<?php for ($i = 1; $i <= 31; $i++):?>
+                        <?php for ($i = 1; $i <= 31; $i++): ?>
                             <option
-                                    value=<?= $i?>
-                                    <?= ($i == substr($voyage->getDateRetour(), 8, 10)) ? ' selected="selected"' : ''?>
+                                    value=<?= $i ?>
+                                    <?= ($i == substr($voyage->getDateRetour(), 8, 10)) ? ' selected="selected"' : '' ?>
                             >
-                                <?= $i?>
+                                <?= $i ?>
                             </option>
-<?php endfor;?>
+                        <?php endfor; ?>
                     </select>
                 </div>
 
-<?php if (isOfType([ADMIN])):?>
+                <?php if (isOfType([ADMIN])): ?>
                     <div class="input">
                         <label for="actif">Actif</label>
-                        <input type="checkbox" name="actif" <?= ($voyage->getActif() ? 'checked' : '')?>>
+                        <input type="checkbox" name="actif" <?= ($voyage->getActif() ? 'checked' : '') ?>>
                     </div>
-<?php endif;?>
+                <?php endif; ?>
 
                 <button type="submit">Enregistrer</button>
 
                 <!--Button de navigation -->
-<?php if (isOfType([PROF]))
+                <?php if (isOfType([PROF]))
                     echo nav('<button type="button">Liste des étudiants</button>', 'comptes', 'index')
-?>
-                <?= nav('<button type="button">Revenir à la liste des séjours</button>', 'Voyages', 'index');?>
+                ?>
+                <?= nav('<button type="button">Revenir à la liste des séjours</button>', 'Voyages', 'index'); ?>
             </fieldset>
         </form>
     </div>
 
-<?php else:?>
+<?php else: ?>
 
     <H1>Ce voyage a été approuvé et ne peut plus être modifié.</H1>
 
     <!--Button de navigation -->
-    <?= nav('<button>Revenir à la liste des projets</button>', 'Voyages', 'index');?>
-<?php endif;?>
+    <?= nav('<button>Revenir à la liste des projets</button>', 'Voyages', 'index'); ?>
+<?php endif; ?>
 
 </form>
 
