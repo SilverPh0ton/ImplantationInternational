@@ -674,12 +674,14 @@ class PropositionsController extends AppController
 
     public function send_email($controller, $action, $param1)
     {
-        $mail = new PHPMailer(true);
+
+        $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action . '&param1=' . $param1;
+      /*  $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
 
         try {
-            $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action . '&param1=' . $param1;
+
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
@@ -702,20 +704,22 @@ class PropositionsController extends AppController
 
         } catch (Exception $e) {
             die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-        }
+        }*/
 
-        /*        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");*/
+           mail('mobilite@silverph0ton.com',"Une nouvelle proposition est disponible", "Veuillez la consulter :" . $url , "From: mobilite@silverph0ton.com");
 
     }
 
     public function send_emailResponse($controller, $action,$id,$to)
     {
-        $mail = new PHPMailer(true);
+
+        $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action. '&param1='. $id;
+      /*  $mail = new PHPMailer(true);
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
 
         try {
-            $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action. '&param1='. $id;
+
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
@@ -738,9 +742,9 @@ class PropositionsController extends AppController
 
         } catch (Exception $e) {
             die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-        }
+        }*/
 
-        /*        mail($courriel,"Une demande de modification de mot de passe à été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");*/
+        mail($to,"Réponse à la proposition de séjour", "Veuillez la consulter :" . $url , "From: mobilite@silverph0ton.com");
 
     }
 
