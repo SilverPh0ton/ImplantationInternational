@@ -191,13 +191,16 @@ class ValeursController extends AppController
                         $maxsize = 5 * 1024 * 1024;
 
                         //Vérification du ficher téléversé
+
+                        if(!isset($_FILES)){
                         if (!array_key_exists($ext, $allowed) || !in_array($fileType, $allowed)) {
                             $this->flashBad('Le type de fichier de ' . $fileName . ' n\'est pas autorisé.');
-                            return $this->redirectParam2($id_voyage, $id_compte);
+                            return $this->redirectParam2('Valeurs', 'Edit',$id_voyage, $id_compte);
                         }
                         if ($fileSize > $maxsize) {
                             $this->flashBad('La taille de ' . $fileName . ' dépasse la limite de 5 MB.');
-                            return $this->redirectParam2($id_voyage, $id_compte);
+                            return $this->redirectParam2('Valeurs', 'Edit',$id_voyage, $id_compte);
+                        }
                         }
                         $uploadFile = $uploadPath . $id_voyage . '-' . $question->getIdQuestion() . '-' . $id_compte . '-' . $fileName;
 

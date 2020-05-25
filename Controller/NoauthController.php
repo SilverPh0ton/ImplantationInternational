@@ -6,6 +6,7 @@ use ActivationsDB;
 use App\Model\Entity\Compte;
 use App\Model\Entity\ComptesVoyage;
 use App\Model\Entity\Programme;
+use DateTime;
 use ComptesDB;
 use ComptesVoyagesDB;
 use ProgrammesDB;
@@ -18,6 +19,9 @@ require_once 'Controller/AppController.php';
 require_once 'Entity/Programme.php';
 require_once 'Entity/Compte.php';
 require_once 'Entity/ComptesVoyage.php';
+
+define("AGE_MIN", 15);
+define("AGE_MAX", 89);
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -67,9 +71,9 @@ class NoauthController extends AppController
             if (!$this->activationsDB->isValidCode($_POST['code_activation'])) {
                 $this->flashBad('Le code d\'activation est invalide');
                 return $this->redirect('Noauth', 'CreateAccount');
+            }else{
+                $activation = $this->activationsDB->getActivationFromCode($_POST['code_activation']);
             }
-
-            $activation = $this->activationsDB->getActivationFromCode($_POST['code_activation']);
 
 
             $date_naissance_str = $_POST['date_naissance']['year'] . "-" . $_POST['date_naissance']['month'] . "-" . $_POST['date_naissance']['day'];
@@ -99,11 +103,11 @@ class NoauthController extends AppController
 
             if ($age->y < AGE_MIN) {
                 $this->flashBad('La compte n\'a pas pu être ajouté. La personne doit être agée d\'au moins 15 ans.');
-                return $this->redirect('Comptes', 'Add');
+                return $this->redirect('Noauth', 'CreateAccount');
             }
             elseif ($age->y >= AGE_MAX) {
                 $this->flashBad('La compte n\'a pas pu être ajouté. La personne ne peut être agée de 90 ans ou plus.');
-                return $this->redirect('Comptes', 'Add');
+                return $this->redirect('Noauth', 'CreateAccount');
             }
 
             $programme = $this->programmesDB->getProgrammeFromId($_POST['id_programme']);

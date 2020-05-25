@@ -112,7 +112,7 @@ $programmes = get('programmes');
 
             <div class="input number required">
                 <label for="code_activation">Code d'activation</label>
-                <input required type="text" name="code_activation" id="code_activation" maxlength="30">
+                <input id="code_activation" required type="text" name="code_activation" pattern="[A-Z0-9]{5}-){4}[A-Z0-9]{5}" title="Le champ ne peut pas être vide" maxlength="14">
             </div>
             <button type="submit">Créer le compte</button>
             <!--Button de navigation -->
