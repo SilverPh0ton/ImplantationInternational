@@ -336,7 +336,7 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                                  aria-labelledby="heading<?php echo $ctr ?>" data-parent="#accordionEx23">
                                 <div class="card-body">
 
-                                    <?php foreach ($proposition_reponses as $proposition_reponse): ?>
+                                    <?php foreach ($proposition_reponses as $proposition_reponse): $id = 0; ?>
                                         <?php $question = $proposition_reponse->getQuestion(); ?>
                                         <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                             <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
@@ -353,11 +353,12 @@ $yearReturn = date("Y", strtotime($proposition->getDateRetour()));
                                                       <?php   $listeReponse = explode(";", $vraiValeurs);
 
                                                       $options = explode(";", $question->getInputOption());
+                                                       $idCase = 0;
                                                        ?>
 
                                                               <?php foreach ($options as $option): $idCase++; ?>
 
-                                                              <input <?php if($listeReponse[$idCase-1] === "true") : ?>
+                                                              <input <?php if($listeReponse[$idCase - 1] === "true") : ?>
                                                                   checked="checked"
                                                                 <?php endif; ?>  id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
                                                                       <?= $option ?>

@@ -226,10 +226,10 @@ $programmes = get('array_prog');
             <legend>Modification de mot de passe</legend>
             <div class="input text required">
                 <label for="mot_de_passe">Mot de passe</label>
-                <input name="mot_de_passe" id="mot_de_passe" value="" type="password" minlength="9" maxlength="30"
+                <input name="mot_de_passe" id="mot_de_passe" value="" type="password" minlength="8" maxlength="30"
                        required>
                 <label for="mot_de_passe_confirme">Confirmer votre mot de passe</label>
-                <input name="mot_de_passe_confirme" id="mot_de_passe_confirme" value="" type="password" minlength="9"
+                <input name="mot_de_passe_confirme" id="mot_de_passe_confirme" value="" type="password" minlength="8"
                        maxlength="30" required>
             </div>
             <button type="submit">Enregistrer le mot de passe</button>

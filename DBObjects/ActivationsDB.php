@@ -153,7 +153,7 @@ class ActivationsDB extends ConfigDB
 
                 // Attempt to execute the prepared statement
                 if ($stmt->execute()) {
-                        $row = $stmt->fetch();
+                        $row = $stmt->fetchColumn();
                         if($row > 0 )
                         {
                             return true;

@@ -68,7 +68,7 @@ class NoauthController extends AppController
                 return $this->redirect('Noauth', 'CreateAccount');
             }
 
-            if ($this->activationsDB->isValidCode($_POST['code_activation'])) {
+            if (!$this->activationsDB->isValidCode($_POST['code_activation'])) {
                 $this->flashBad('Le code d\'activation est invalide');
                 return $this->redirect('Noauth', 'CreateAccount');
             }else{
