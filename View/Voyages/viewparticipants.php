@@ -46,19 +46,19 @@ if(is_null($voyage)){
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($comptes as $compte):
+<?php foreach ($comptes as $compte):
             $color = $compte->getActif() ? '' : 'style="color: #aaaaaa"'
-            ?>
+ ?>
             <tr>
                 <td <?php echo $color ?> ><?= $compte->getPseudo() ?></td>
                 <td <?php echo $color ?> class='optionalField'>
-                    <?php
+     <?php
                     if ($compte->getType() === 'etudiant') {
                         echo 'Étudiant';
                     } elseif ($compte->getType() === 'prof') {
                         echo 'Accompagnateur';
                     }
-                    ?>
+      ?>
                 </td>
                 <td <?php echo $color ?> ><?= $compte->getPrenom() ?></td>
                 <td <?php echo $color ?> ><?= $compte->getNom() ?></td>
@@ -66,7 +66,7 @@ if(is_null($voyage)){
                 <td <?php echo $color ?> class='optionalField'><?= $compte->getActif() ? 'Oui' : 'Non'; ?></td>
                 <td class="actions">
 
-                    <?php
+     <?php
                     if($compte->getAnonyme()||$compteType=='admin'){
                         echo nav2('<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','View',$compte->getIdCompte(),$voyage->getIdVoyage());
                     }
@@ -74,13 +74,13 @@ if(is_null($voyage)){
                     if ($connectedUser->getType() === 'admin') {
                       echo nav1('<img alt="afficher icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','Edit',$compte->getIdCompte());
                     }
-                    ?>
+      ?>
                 </td>
                 <td><?= $compte->getCourriel() ?></td>
                <td><?= $compte->getTelephone() ?></td>
                <td><?= $compte->getDateNaissance() ?></td>
             </tr>
-        <?php endforeach; ?>
+<?php endforeach; ?>
         </tbody>
     </table>
 

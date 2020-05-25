@@ -15,7 +15,7 @@ $propositions = get('propositions');
 
     <h3>Propositions de projet</h3>
 
-    <?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
+<?php if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof'):
         echo nav('<button class="add-btn">Ajouter une proposition </button>', 'Propositions', 'add');
     endif; ?>
 
@@ -34,10 +34,10 @@ $propositions = get('propositions');
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($propositions as $proposition):?>
-            <?php    if (!(isOfType([ADMIN]) and ($proposition->getApprouvee() == '3'))): ?>
+<?php foreach ($propositions as $proposition):?>
+<?php    if (!(isOfType([ADMIN]) and ($proposition->getApprouvee() == '3'))): ?>
         <tr>
-            <?php
+<?php
             if ($proposition->getApprouvee() == 0) {
                 $color = 'style="color: #000000"';
             } else if ($proposition->getApprouvee() == 2) {
@@ -49,7 +49,7 @@ $propositions = get('propositions');
             } else if ($proposition->getApprouvee() == 4) {
                 $color = 'style="color: #4287f5"';
             }
-            ?>
+ ?>
 
             <td <?php echo $color ?> > <?= $proposition->getNomProjet() ?></td>
             <td <?php echo $color ?> > <?= $proposition->getDestination()->getNomPays() ?></td>
@@ -59,7 +59,7 @@ $propositions = get('propositions');
                 <?= dateToFrench($proposition->getDateRetour()) ?></td>
             <td <?php echo $color ?>
                     class='optionalField'>
-                <?php
+ <?php
                 if($proposition->getApprouvee() === '0'){
                     echo "En attente";
                 }
@@ -75,11 +75,11 @@ $propositions = get('propositions');
                 else if($proposition->getApprouvee() === '4'){
                     echo "Nouveauté";
                 }
-                ?>
+  ?>
             </td>
             <td class="actions" <?php echo $color ?> >
 
-                <?php
+ <?php
                 echo nav1(
                     '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
                     'Propositions',
@@ -106,7 +106,7 @@ $propositions = get('propositions');
                 'Propositions',
                  'Add',
                     $proposition->getIdProposition());
-                ?>
+  ?>
                 <div class="modal" id="<?= 'myModal_accept_'.$proposition->getIdProposition() ?>">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -128,10 +128,10 @@ $propositions = get('propositions');
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <?php
+                 <?php
                                 echo('<button  type="submit" form="form_accept_'.$proposition->getIdProposition().'" class="btn btn-primary" value="bt_confirm" >Confirmer</button>');
                                 echo('<button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>');
-                                ?>
+                  ?>
 
                             </div>
 
@@ -164,10 +164,10 @@ $propositions = get('propositions');
 
                             <!-- Modal footer -->
                             <div class="modal-footer">
-                                <?php
+                 <?php
                                 echo('<button form="form_refuse_'.$proposition->getIdProposition().'" type="submit" class="btn btn-primary" value="bt_refuse">Confirmer</button>');
                                 echo('<button type="button" class="btn btn-primary" data-dismiss="modal">Annuler</button>');
-                                ?>
+                  ?>
 
                             </div>
 
@@ -176,8 +176,8 @@ $propositions = get('propositions');
                 </div>
 
         </tr>
-            <?php endif ?>
-        <?php endforeach; ?>
+<?php endif ?>
+<?php endforeach; ?>
         </tbody>
     </table>
 

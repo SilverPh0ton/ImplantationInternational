@@ -60,10 +60,10 @@ use App\Controller\ComptesController; ?>
     <div id="ligne1">
         <?= nav('<img src="Ressource/img/Logo-Cegep.png" alt="logo cegep" id="logo"> Bureau international', 'voyages', 'index') ?>
 
-        <?php if (isset($_SESSION["connectedUser"])): ?>
+<?php if (isset($_SESSION["connectedUser"])): ?>
             <?= nav('<img src="Ressource/img/log-out.png" alt="logout icon" id="logout">', 'comptes', 'logout') ?>
             <?= nav1('<img src="Ressource/img/user.png" alt="user icon" id="user">', 'comptes', 'view', $_SESSION["connectedUser"]->getIdCompte()); ?>
-        <?php endif; ?>
+<?php endif; ?>
 
         <span id="bienvenue"> Bienvenue <?= !empty($_SESSION["connectedUser"]) ? ',' . $_SESSION["connectedUser"]->getPseudo() : "" ?> </span>
 
@@ -71,49 +71,49 @@ use App\Controller\ComptesController; ?>
 
     <nav>
         <ul class="nav-links">
-            <?php if (isset($compteType)): ?>
+<?php if (isset($compteType)): ?>
 
-                <?php if(isOfType([ADMIN,PROF]))
+ <?php if(isOfType([ADMIN,PROF]))
                 echo nav('<li class="navbutton">Propositions de projet</li>', 'propositions', 'index')
-                ?>
+  ?>
 
-                <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
+ <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
                     echo nav('<li class="navbutton">Projets de mobilité</li>', 'voyages', 'index')
-                ?>
+  ?>
 
 
-                <?php if(isOfType([ADMIN]))
+ <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Utilisateurs</li>', 'comptes', 'index')
-                ?>
+  ?>
 
-                <?php if(isOfType([PROF]))
+ <?php if(isOfType([PROF]))
                     echo nav('<li class="navbutton">Liste des participants</li>', 'comptes', 'index')
-                ?>
+  ?>
 
-                <?php if(isOfType([ADMIN]))
+ <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Banque de questions</li>', 'questions', 'index')
-                ?>
+  ?>
 
-                <?php if(isOfType([ADMIN]))
+ <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Configurations</li>', 'configuration', 'index')
-                ?>
+  ?>
 
-                <?php if(isOfType([ADMIN]))
+ <?php if(isOfType([ADMIN]))
                     echo nav('<li class="navbutton">Statistiques</li>', 'statistiques', 'index')
-                ?>
+  ?>
 
-                <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
+ <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
                     echo nav('<li class="navbutton">Tutoriel</li>', 'noauth', 'tutoriel')
-                ?>
+  ?>
 
-                <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
+ <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
                     echo nav1('<li class="navbutton">Profil</li>', 'comptes', 'view', $_SESSION["connectedUser"]->getIdCompte())
-                ?>
+  ?>
 
-                <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
+ <?php if(isOfType([ADMIN,PROF,ETUDIANT]))
                     echo nav('<li class="navbutton">Informations supplémentaires</li>', 'noauth', 'info')
-                ?>
-            <?php endif ?>
+  ?>
+<?php endif ?>
 
         </ul>
 
@@ -128,8 +128,8 @@ use App\Controller\ComptesController; ?>
 <?php
 $flaslist = $_SESSION["flashList"];
 foreach ($flaslist as $flash):
-    ?>
-    <?php if ($flash[0] === '1'): ?>
+ ?>
+<?php if ($flash[0] === '1'): ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <?= $flash[1] ?>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -156,7 +156,7 @@ $_SESSION["flashList"] = new ArrayObject();
 ?>
 
 <div class="container clearfix text-center" >
-    <?php
+<?php
     $switch_controller = 'Comptes';
     $switch_action = 'Login';
 
@@ -351,7 +351,7 @@ $_SESSION["flashList"] = new ArrayObject();
     if (isset($_SESSION["globalData"])) {
         $_SESSION["globalData"] = [];
     }
-    ?>
+ ?>
 </div>
 
 <footer>

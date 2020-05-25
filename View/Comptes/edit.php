@@ -54,39 +54,39 @@ $programmes = get('array_prog');
 
                 <label>Date de naissance</label>
                 <select name="date_naissance[year]" required="required">
-                    <?php for ($i = date('Y'); $i >= (date('Y') - 100); $i--): ?>
+     <?php for ($i = date('Y'); $i >= (date('Y') - 100); $i--): ?>
                         <option
                                 value=<?= $i ?>
                             <?= ($i == substr($compte->getDateNaissance(), 0, 4)) ? ' selected="selected"' : '' ?>>
                             <?= $i ?>
                         </option>
-                    <?php endfor; ?>
+     <?php endfor; ?>
                 </select>
 
                 <select name="date_naissance[month]" required="required">
-                    <?php
+     <?php
                     $i = 0;
                     foreach (return_months() as $month):
-                        ?>
+          ?>
                         <option
                                 value=<?= ++$i ?>
                             <?= ($i == substr($compte->getDateNaissance(), 5, 7)) ? ' selected="selected"' : '' ?>>
                             <?= $month ?>
                         </option>
-                    <?php
+     <?php
                     endforeach;
-                    ?>
+      ?>
                 </select>
 
 
                 <select name="date_naissance[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
+     <?php for ($i = 1; $i <= 31; $i++): ?>
                         <option
                                 value="<?= $i ?>"
                             <?= ($i == substr($compte->getDateNaissance(), 8, 9)) ? ' selected="selected"' : '' ?>>
                             <?= $i ?>
                         </option>
-                    <?php endfor; ?>
+     <?php endfor; ?>
                 </select>
             </div>
 
@@ -101,31 +101,31 @@ $programmes = get('array_prog');
             <div class="input required">
                 <label for="id_programme">Programme</label>
                 <select name="id_programme" required="required" id="id_programme">
-                    <?php
+     <?php
                     foreach ($programmes as $programme):
                         $programme = unserialize($programme)
-                        ?>
+          ?>
                         <option value="<?= $programme->getNomProgramme(); ?>" <?= ($compte->getProgramme()->getNomProgramme() === $programme->getNomProgramme()) ? ' selected="selected"' : ''; ?>>
                             <?= $programme->getNomProgramme() ?>
                         </option>
-                    <?php
+     <?php
                     endforeach
-                    ?>
+      ?>
                 </select>
             </div>
 
-            <?php if (isOfType([ADMIN,PROF])): ?>
+<?php if (isOfType([ADMIN,PROF])): ?>
                 <div class="input">
                 <label for="anonyme">Voulez-vous que les autres accompagnateurs voient votre profil?</label>
 
                 <input type="radio" name="anonyme" value="1" <?= ($compte->getAnonyme() ? 'checked' : '') ?>> Oui
                 <input type="radio" name="anonyme" value="0" <?= (!$compte->getAnonyme() ? 'checked' : '')?>> Non
             </div>
-            <?php
+<?php
              else: ?>
           <input type="radio" name="anonyme" value="1" hidden>
-             <?php endif; ?>
-            <?php if (isOfType([ADMIN])): ?>
+<?php endif; ?>
+<?php if (isOfType([ADMIN])): ?>
                 <div class="input">
                     <label for="type">Type de compte</label>
                     <select name="type" id="type">
@@ -143,29 +143,29 @@ $programmes = get('array_prog');
                 <input type="hidden" name="type" value="<?= $compte->getType() ?>">
                 <button type="button" data-toggle="modal" data-target="#myModal_promote"> Promouvoir en accompagnateur
                 </button>
-            <?php elseif (isOfType([PROF,ETUDIANT])): ?>
+<?php elseif (isOfType([PROF,ETUDIANT])): ?>
                 <input type="hidden" name="type" value="<?= $compte->getType() ?>">
-            <?php endif; ?>
+<?php endif; ?>
 
-            <?php if (isOfType([ADMIN])): ?>
+<?php if (isOfType([ADMIN])): ?>
                 <div class="input">
                     <label for="actif">Actif</label>
                     <input type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
                 </div>
-            <?php elseif (isOfType([PROF,ETUDIANT])): ?>
+<?php elseif (isOfType([PROF,ETUDIANT])): ?>
                 <input hidden type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
-            <?php endif; ?>
+<?php endif; ?>
 
             <div>
                 <button type="submit" onclick="savedata()">Enregistrer</button>
                 <!--Button de navigation -->
-                <?php
+ <?php
                 if (isOfType([ADMIN, PROF])) {
                     echo nav('<button type="button"> Retour à la liste des comptes </button>', 'Comptes', 'index');
                 } else {
                     echo nav1('<button type="button">Revenir à mon comptes</button>', 'Comptes', 'view', $id_compte);
                 }
-                ?>
+  ?>
             </div>
 
         </fieldset>
@@ -205,7 +205,7 @@ $programmes = get('array_prog');
         </div>
     </div>
 
-    <?php
+<?php
     if (isset($_SESSION["connectedUser"])) {
         $connectedUser = $_SESSION["connectedUser"];
         $compteType = $connectedUser->getType();
@@ -214,7 +214,7 @@ $programmes = get('array_prog');
         }
 
     }
-    ?>
+ ?>
 
 
 </div>

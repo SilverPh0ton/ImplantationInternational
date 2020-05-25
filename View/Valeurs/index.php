@@ -28,11 +28,11 @@ $comptes = get('comptes');
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($comptes as $compte): ?>
+ <?php foreach ($comptes as $compte): ?>
                     <tr>
                         <td><?php echo($compte->getPseudo()) ?></td>
                         <td class='optionalField'>
-                            <?php
+             <?php
                             if ($compte->getType() === 'etudiant') {
                                 echo 'Étudiants';
                             } elseif ($compte->getType() === 'prof') {
@@ -40,12 +40,12 @@ $comptes = get('comptes');
                             } elseif ($compte->getType() === 'admin') {
                                 echo 'Administrateur';
                             }
-                            ?>
+              ?>
                         </td>
                         <td><?php echo($compte->getPrenom()); ?></td>
                         <td><?php echo($compte->getNom()); ?></td>
                         <td class="actions">
-                            <?php
+             <?php
                             if($compte->getAnonyme()||$compteType=='admin'){
                             echo nav2(
                                 '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
@@ -53,18 +53,18 @@ $comptes = get('comptes');
                                 'Edit',
                                 $id_voyage,
                                 $compte->getIdCompte());}
-                            ?>
+              ?>
                         </td>
                     </tr>
-                <?php endforeach; ?>
+ <?php endforeach; ?>
                 </tbody>
             </table>
 
             <?=
             nav('<button type="button"> Retour aux séjours</button>', 'voyages', 'index');
 
-            ?>
-            <?php
+ ?>
+<?php
             if (isset($_SESSION["connectedUser"])) {
                 $connectedUser = $_SESSION["connectedUser"];
                 $compteType = $connectedUser->getType();

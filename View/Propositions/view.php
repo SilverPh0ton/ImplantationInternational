@@ -53,7 +53,7 @@ $activites = get('activites');
         <tr>
             <th scope="row">État</th>
             <td>
-                <?php
+ <?php
                 if($proposition->getApprouvee() === '0'){
                     echo "En attente";
                 }
@@ -67,15 +67,15 @@ $activites = get('activites');
                 }else if($proposition->getApprouvee() === '4'){
                     echo "Nouveauté";
                 }
-                ?>
+  ?>
             </td>
         </tr>
-        <?php if($proposition->getApprouvee() === '1'):?>
+<?php if($proposition->getApprouvee() === '1'):?>
             <tr>
                 <th scope="row">Raison de refus</th>
                 <td><?= $proposition->getMsgRefus() ?></td>
             </tr>
-        <?php endif;?>
+<?php endif;?>
 
         <table class="activityTable">
             <thead>
@@ -89,7 +89,7 @@ $activites = get('activites');
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($activites as $activite): ?>
+<?php foreach ($activites as $activite): ?>
                 <tr>
                     <td><?= $compteDemande->getNom().', '.$compteDemande->getPrenom() ?></td>
                     <td><?php echo $activite->getEndroit(); ?></td>
@@ -99,23 +99,23 @@ $activites = get('activites');
                     <td><?php echo dateToFrench($activite->getDateDepart()); ?></td>
                     <td><?php echo dateToFrench($activite->getDateRetour()); ?></td>
                 </tr>
-            <?php endforeach; ?>
+<?php endforeach; ?>
             </tbody>
         </table>
-        <?php if (empty($activites)): ?>
+<?php if (empty($activites)): ?>
             <h2>Aucune question pour ce voyage</h2>
-        <?php endif; ?>
+<?php endif; ?>
     </table>
 
     <fieldset>
         <legend>Renseignements supplémentaires</legend>
-        <?php if (empty($categories)): ?>
+<?php if (empty($categories)): ?>
             <h2>Aucune question pour ce voyage</h2>
-        <?php else: ?>
+<?php else: ?>
 
             <div class="accordion md-accordion accordion-1" id="accordionEx23" role="tablist">
-                <?php $ctr = 0; ?>
-                <?php foreach ($categories as $categorie): ?>
+ <?php $ctr = 0; ?>
+ <?php foreach ($categories as $categorie): ?>
                     <div class="card">
                         <div class="card-header blue lighten-3 z-depth-1" role="tab" id="heading<?php $ctr++;
                         echo $ctr ?>">
@@ -131,62 +131,62 @@ $activites = get('activites');
                              aria-labelledby="heading<?php echo $ctr ?>" data-parent="#accordionEx23">
                             <div class="card-body">
 
-                                <?php foreach ($proposition_reponses as $proposition_reponse): ?>
-                                    <?php $question = $proposition_reponse->getQuestion(); ?>
-                                    <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
+                 <?php foreach ($proposition_reponses as $proposition_reponse): ?>
+                     <?php $question = $proposition_reponse->getQuestion(); ?>
+                     <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                         <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
 
                                           <span><?= $question->getQuestion() ?></span>
 
-                                          <?php $vraiValeurs = $proposition_reponse->getReponse();
-                                          ?>
+                           <?php $vraiValeurs = $proposition_reponse->getReponse();
+                            ?>
                                           <!--Loop pour questions-->
                                           <span>
-                                              <?php if ($question->getAffichage() === 'Case'): ?>
+                               <?php if ($question->getAffichage() === 'Case'): ?>
                                                 <br> <br>
-                                                <?php
+                                 <?php
                                                 $listeReponse = explode(";", $vraiValeurs);
 
                                                 $options = explode(";", $question->getInputOption());
                                                  $idCase = 0; ?>
 
-                                                        <?php foreach ($options as $option): $idCase++; ?>
+                                         <?php foreach ($options as $option): $idCase++; ?>
 
                                                         <input <?php if($listeReponse[$idCase-1] === "true") : ?>
                                                             checked="checked"
-                                                          <?php endif; ?>  id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
+                                           <?php endif; ?>  id="<?= $idCase?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>"  type="checkbox">
                                                                 <?= $option ?>
                                                             </input>
-                                                        <?php endforeach ?>
+                                         <?php endforeach ?>
                                                         <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
 
-                                                <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                 <?php elseif ($question->getAffichage() === 'Radio'): ?>
                                                 <br> <br>
-                                                <?php
+                                 <?php
                                                 $listeReponse = explode(";", $vraiValeurs);
 
                                                 $options = explode(";", $question->getInputOption());
                                                  $idCase = 0; ?>
 
-                                                        <?php foreach ($options as $option): $idCase++; ?>
+                                         <?php foreach ($options as $option): $idCase++; ?>
 
                                                         <input <?php if($listeReponse[$idCase-1] === "true") : ?>
                                                             checked="checked"
-                                                          <?php endif; ?>
+                                           <?php endif; ?>
                                                         name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
                                                                 <?= $option ?>
                                                             </input>
-                                                        <?php endforeach ?>
+                                         <?php endforeach ?>
                                                         <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
 
-                                                    <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
+                                     <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
-                                                        <?php
+                                         <?php
                                                         echo download($question->getInputOption(),'Télécharger: ' . $question->getInputOption());?>
 
-                                                    <?php elseif ($question->getAffichage() === 'Chiffre'):
+                                     <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                         $extrmum = explode(";", $question->getInputOption());
                                                         if (sizeof($extrmum) >= 3) {
                                                             $min = $extrmum[0];
@@ -197,46 +197,46 @@ $activites = get('activites');
                                                             $max = 100;
                                                             $step = 1;
                                                         }
-                                                        ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = '0'; endif; ?> <!-- Default Value-->
+                                          ?>
+                                         <?php if (!isset($vraiValeurs)) : $vraiValeurs = '0'; endif; ?> <!-- Default Value-->
 
                                                         <input type="number"
                                                                name="<?= $question->getIdQuestion() ?>"
                                                                value="<?= $vraiValeurs ?>" min="<?= $min ?>"
                                                                max="<?= $max ?>" step="<?= $step ?>">
 
-                                                    <?php elseif ($question->getAffichage() === 'Date'): ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = '2019-01-01'; endif; ?> <!-- Default Value-->
+                                     <?php elseif ($question->getAffichage() === 'Date'): ?>
+                                         <?php if (!isset($vraiValeurs)) : $vraiValeurs = '2019-01-01'; endif; ?> <!-- Default Value-->
 
                                                         <input type="date"
                                                                name="<?= $question->getIdQuestion() ?>"
                                                                value="<?= $vraiValeurs ?>">
 
-                                                    <?php elseif ($question->getAffichage() === 'Liste'):
+                                     <?php elseif ($question->getAffichage() === 'Liste'):
                                                         $options = explode(";", $question->getInputOption()); ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = $options[0]; endif; ?> <!-- Default Value-->
+                                         <?php if (!isset($vraiValeurs)) : $vraiValeurs = $options[0]; endif; ?> <!-- Default Value-->
 
                                                         <select name=<?= $question->getIdQuestion() ?>>
-                                        <?php foreach ($options as $option): ?>
+                         <?php foreach ($options as $option): ?>
                                             <option value=<?= $option ?>
-                                                    <?php if ($option === $vraiValeurs): {
+                                     <?php if ($option === $vraiValeurs): {
                                                         echo ' selected="selected"';
                                                     } endif ?>
                                             >
                                                 <?= $option ?>
                                             </option>
-                                        <?php endforeach ?>
+                         <?php endforeach ?>
                                     </select>
 
-                                                    <?php elseif ($question->getAffichage() === 'Fichier'): ?>
-                                                        <?php
+                                     <?php elseif ($question->getAffichage() === 'Fichier'): ?>
+                                         <?php
                                                         if (!isset($vraiValeurs)) {
                                                             $vraiValeurs = 'empty.txt';
                                                         }//Default Value
                                                         echo download(  $vraiValeurs,'Télécharger: ' . $vraiValeurs);
-                                                        ?>
+                                          ?>
 
-                                                    <?php elseif ($question->getAffichage() === 'Curseur'):
+                                     <?php elseif ($question->getAffichage() === 'Curseur'):
                                                         $extrmum = explode(";", $question->getInputOption());
                                                         if (sizeof($extrmum) >= 3) {
                                                             $min = $extrmum[0];
@@ -247,8 +247,8 @@ $activites = get('activites');
                                                             $max = 100;
                                                             $step = 1;
                                                         }
-                                                        ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = ($min + $max) / 2; endif; ?> <!-- Default Value-->
+                                          ?>
+                                         <?php if (!isset($vraiValeurs)) : $vraiValeurs = ($min + $max) / 2; endif; ?> <!-- Default Value-->
 
                                                         <input type="range" class="slider"
                                                                name="<?= $question->getIdQuestion() ?>"
@@ -259,20 +259,20 @@ $activites = get('activites');
                                                                 id="rangeValue<?= $question->getIdQuestion() ?>"><?= $vraiValeurs ?></span>
                                                         <br><br>
 
-                                                    <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = ''; endif; ?> <!-- Default Value-->
+                                     <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
+                                         <?php if (!isset($vraiValeurs)) : $vraiValeurs = ''; endif; ?> <!-- Default Value-->
 
                                                         <textarea
                                                                 name="<?= $question->getIdQuestion() ?>"><?= $vraiValeurs ?></textarea>
 
-                                                    <?php elseif ($question->getAffichage() === 'Couleur'): ?>
-                                                        <?php if (!isset($vraiValeurs)) : $vraiValeurs = '#ffffff'; endif; ?> <!-- Default Value-->
+                                     <?php elseif ($question->getAffichage() === 'Couleur'): ?>
+                                         <?php if (!isset($vraiValeurs)) : $vraiValeurs = '#ffffff'; endif; ?> <!-- Default Value-->
 
                                                         <input type="color"
                                                                name="<?= $question->getIdQuestion() ?>"
                                                                value="<?= $vraiValeurs ?>">
 
-                                                    <?php endif; ?></span>
+                                     <?php endif; ?></span>
                                                 <span style="float: right">
 
                                       <a href="#" title="Informations supplémentaires" data-toggle="popover"
@@ -283,25 +283,25 @@ $activites = get('activites');
 
                                         </div><br>
                                         <hr>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
+                     <?php endif; ?>
+                 <?php endforeach; ?>
 
                             </div>
                         </div>
                     </div>
 
-                <?php endforeach; ?>
+ <?php endforeach; ?>
             </div>
-        <?php endif; ?>
+<?php endif; ?>
 
     </fieldset>
 
-    <?php
+<?php
     if ($source == null) {//Redirige à la page appropriée
         echo nav('<button>Retour aux propositions </button>', 'Propositions', 'index');
     }
     else{
         echo nav1('<button>Retour aux propositions </button>', 'Voyages', 'view', $source);
     }
-    ?>
+ ?>
 </div>

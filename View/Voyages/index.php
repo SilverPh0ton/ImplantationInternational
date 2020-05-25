@@ -28,9 +28,9 @@ $voyages = get('voyages');
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($voyages as $voyage):
+<?php foreach ($voyages as $voyage):
             $color = $voyage->getActif() ? '' : 'style="color: #aaaaaa"';
-            ?>
+ ?>
             <tr>
                 <td <?php echo $color ?> > <?= $voyage->getNomProjet() ?></td>
                 <td <?php echo $color ?> > <?= $voyage->getDestination()->getNomPays() ?></td>
@@ -47,8 +47,8 @@ $voyages = get('voyages');
                         'Voyages',
                         'View',
                         $voyage->getIdVoyage());
-                    ?>
-                    <?php
+      ?>
+     <?php
                     if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof') {
                         if ($connectedUser->getType() == 'admin'){
                         echo nav1(
@@ -86,10 +86,10 @@ $voyages = get('voyages');
                             $voyage->getIdVoyage(),
                             $connectedUser->getIdCompte());
                     }
-                    ?>
+      ?>
                 </td>
             </tr>
-        <?php endforeach; ?>
+<?php endforeach; ?>
         </tbody>
     </table>
 </div>

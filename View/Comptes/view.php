@@ -31,7 +31,7 @@ if(is_null($compte)){
         <tr>
             <th scope="row">Type</th>
             <td id='type'>
-                <?php
+ <?php
                 if ($compte->getType() === 'etudiant') {
                     echo 'Étudiants';
                 } elseif ($compte->getType() === 'prof') {
@@ -39,7 +39,7 @@ if(is_null($compte)){
                 } elseif ($compte->getType()  === 'admin') {
                     echo 'Administrateur';
                 }
-                ?>
+  ?>
             </td>
         </tr>
         <tr>
@@ -67,17 +67,17 @@ if(is_null($compte)){
             <td id='dateNaissance'><?=dateToFrench($compte->getDateNaissance()) ?></td>
         </tr>
 
-        <?php if($compte->getType() != 'admin'):?>
+<?php if($compte->getType() != 'admin'):?>
             <tr>
                 <th scope="row">Voyage(s) associé(s)</th>
                 <td id='voyage'><?=$listVoyage?></td>
             </tr>
-        <?php endif; ?>
+<?php endif; ?>
 
     </table>
 
     <!--Button de navigation -->
-    <?php
+<?php
     if(isOfType([ADMIN,PROF])){
         
         if(isset($_GET['param2'])){
@@ -89,7 +89,7 @@ if(is_null($compte)){
     else{
         echo nav('<button type="button">Revenir à la liste des séjours</button>', 'Voyages', 'index');
     }
-    ?>
+ ?>
 
     <?= nav1('<button type="button"> Modifier ce compte </button>','Comptes','edit',$compte->getIdCompte());?>
     <script type="text/javascript">

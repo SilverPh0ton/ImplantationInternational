@@ -59,12 +59,12 @@ $id = 0;
             <fieldset>
                 <legend>Ajouter une proposition</legend>
 
-                <?php if (!isOfType([ADMIN])): ?>
+ <?php if (!isOfType([ADMIN])): ?>
                     <div class="double">
                         <input type="checkbox" id="brouillon" name="brouillon" value="oui">
                         <label for="brouillon">Il s'agit d'un brouillon</label><br>
                     </div>
-                <?php endif; ?>
+ <?php endif; ?>
                 <br>
                 <div class="input required">
                     <label id="nom_projet" for="nom_projet">Nom du projet</label>
@@ -74,14 +74,14 @@ $id = 0;
                 <div class="input required">
                     <label for="id_destination">Destination</label>
                     <select name="id_destination" required="required">
-                        <?php
+         <?php
                         foreach ($destinations as $destination):
-                            ?>
+              ?>
                             <option value=<?= $destination->getIdDestination() ?> <?php if(isset($proposition)){if($proposition->getDestination()->getIdDestination() == $destination->getIdDestination()){echo 'selected';}} ?>>
                                 <?= $destination->getNomPays() ?></option>
-                        <?php
+         <?php
                         endforeach
-                        ?>
+          ?>
                     </select>
                 </div>
 
@@ -99,78 +99,78 @@ $id = 0;
                 <div class="input date required">
                     <label for="date_depart">Date de départ</label>
                     <select name="date_depart[year]" required="required">
-                        <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
+         <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                             <option
                                     value=<?= $i ?>
                                     <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
                                 <?= $i ?>
                             </option>
-                        <?php endfor; ?>
+         <?php endfor; ?>
                     </select>
 
                     <select name="date_depart[month]" required="required">
-                        <?php
+         <?php
                         $i = 0;
                         foreach (return_months() as $month):
-                            ?>
+              ?>
                             <option
                                     value=<?= ++$i ?>
                                     <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
                                 <?= $month ?>
                             </option>
-                        <?php
+         <?php
                         endforeach;
-                        ?>
+          ?>
                     </select>
 
                     <select name="date_depart[day]" required="required">
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+         <?php for ($i = 1; $i <= 31; $i++): ?>
                             <option
                                     value=<?= $i ?>
                                     <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
                             >
                                 <?= $i ?>
                             </option>
-                        <?php endfor; ?>
+         <?php endfor; ?>
                     </select>
                 </div>
 
                 <div class="input date required">
                     <label for="date_retour">Date de retour</label>
                     <select name="date_retour[year]" required="required">
-                        <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
+         <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                             <option
                                     value=<?= $i ?>
                                     <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
                                 <?= $i ?>
                             </option>
-                        <?php endfor; ?>
+         <?php endfor; ?>
                     </select>
 
                     <select name="date_retour[month]" required="required">
-                        <?php
+         <?php
                         $i = 0;
                         foreach (return_months() as $month):
-                            ?>
+              ?>
                             <option
                                     value=<?= ++$i ?>
                                     <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
                                 <?= $month ?>
                             </option>
-                        <?php
+         <?php
                         endforeach;
-                        ?>
+          ?>
                     </select>
 
                     <select name="date_retour[day]" required="required">
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+         <?php for ($i = 1; $i <= 31; $i++): ?>
                             <option
                                     value=<?= $i ?>
                                     <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
                             >
                                 <?= $i ?>
                             </option>
-                        <?php endfor; ?>
+         <?php endfor; ?>
                     </select>
                 </div>
 
@@ -197,39 +197,39 @@ $id = 0;
 
                         <div class="input date required">
                             <select name="activite_date_depart[year]" required="required" id="startYear">
-                                <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
+                 <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                                     <option
                                             value=<?= $i ?>
                                             <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
                                         <?= $i ?>
                                     </option>
-                                <?php endfor; ?>
+                 <?php endfor; ?>
                             </select>
 
                             <select name="activite_date_depart[month]" required="required" id="startMonth">
-                                <?php
+                 <?php
                                 $i = 0;
                                 foreach (return_months() as $month):
-                                    ?>
+                      ?>
                                     <option
                                             value=<?= ++$i ?>
                                             <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
                                         <?= $month ?>
                                     </option>
-                                <?php
+                 <?php
                                 endforeach;
-                                ?>
+                  ?>
                             </select>
 
                             <select name="activite_date_depart[day]" required="required" id="startDay">
-                                <?php for ($i = 1; $i <= 31; $i++): ?>
+                 <?php for ($i = 1; $i <= 31; $i++): ?>
                                     <option
                                             value=<?= $i ?>
                                             <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
                                     >
                                         <?= $i ?>
                                     </option>
-                                <?php endfor; ?>
+                 <?php endfor; ?>
                             </select>
                         </div>
                     </td>
@@ -238,39 +238,39 @@ $id = 0;
 
                         <div class="input date required">
                             <select name="activite_date_retour[year]" required="required" id="endYear">
-                                <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
+                 <?php for ($i = date('Y'); $i <= (date('Y') + 50); $i++): ?>
                                     <option
                                             value=<?= $i ?>
                                             <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
                                         <?= $i ?>
                                     </option>
-                                <?php endfor; ?>
+                 <?php endfor; ?>
                             </select>
 
                             <select name="activite_date_retour[month]" required="required" id="endMonth">
-                                <?php
+                 <?php
                                 $i = 0;
                                 foreach (return_months() as $month):
-                                    ?>
+                      ?>
                                     <option
                                             value=<?= ++$i ?>
                                             <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
                                         <?= $month ?>
                                     </option>
-                                <?php
+                 <?php
                                 endforeach;
-                                ?>
+                  ?>
                             </select>
 
                             <select name="activite_date_retour[day]" required="required" id="endDay">
-                                <?php for ($i = 1; $i <= 31; $i++): ?>
+                 <?php for ($i = 1; $i <= 31; $i++): ?>
                                     <option
                                             value=<?= $i ?>
                                             <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
                                     >
                                         <?= $i ?>
                                     </option>
-                                <?php endfor; ?>
+                 <?php endfor; ?>
                             </select>
                         </div>
                     </td>
@@ -286,7 +286,7 @@ $id = 0;
             <fieldset>
                 <legend>Renseignements supplémentaires</legend>
                 <div class="accordion md-accordion accordion-1" id="accordionEx23" role="tablist">
-                    <?php foreach ($categoriesProposition as $categorie): ?>
+     <?php foreach ($categoriesProposition as $categorie): ?>
                         <div class="card">
                             <div class="card-header blue lighten-3 z-depth-1" role="tab" id="heading<?php $ctr++;
                             echo $ctr ?>">
@@ -302,7 +302,7 @@ $id = 0;
                                  aria-labelledby="heading<?php echo $ctr ?>" data-parent="#accordionEx23">
                                 <div class="card-body">
 
-                                    <?php foreach ($questionsProposition as $question):
+                     <?php foreach ($questionsProposition as $question):
                                         if(isset($_GET['param1'])){
                                             $propoquestion = $propositionReponseDB->getPropositionReponseFromPropositionIdAndQuestionId($_GET['param1'],$question->getIdQuestion());
                                             if(isset($propoquestion)){
@@ -311,58 +311,58 @@ $id = 0;
 
                                         }?>
 
-                                        <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
+                         <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                         <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
 
                                             <span><?= $question->getQuestion() . "<br />" . "<br />" ?></span>
 
                                             <!--Loop pour questions-->
                                             <span>
-                                                <?php if ($question->getAffichage() === 'Case'): ?>
-                                                    <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif;
+                                 <?php if ($question->getAffichage() === 'Case'): ?>
+                                     <?php if (!isset($vraiValeurs)) : $vraiValeurs = 'off'; endif;
                                                     $options = explode(";", $question->getInputOption());
                                                     if(isset($reponse)){
                                                         $caseacocher = explode(";",$reponse);
                                                     }
 
-                                                    $idCase  = 0;  ?>
+                                                    $idCase  = 0; ?>
 
-                                                    <?php foreach ($options as $option): $idCase++; ?>
+                                     <?php foreach ($options as $option): $idCase++; ?>
 
                                                         <input id="<?= $id?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase-1] == 'true'){echo 'checked';}}?>  type="checkbox">
                                                                     <?= $option ?>
                                                                 </input>
-                                                    <?php endforeach ?>
+                                     <?php endforeach ?>
                                                             <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
 
 
-                                                <?php elseif ($question->getAffichage() === 'Radio'):
+                                 <?php elseif ($question->getAffichage() === 'Radio'):
                                                     $options = explode(";", $question->getInputOption());
                                                     if(isset($reponse)){
                                                         $caseacocher = explode(";",$reponse);
                                                     }
 
-                                                    ?>
+                                      ?>
 
-                                                    <?php
+                                     <?php
                                                     $idCase  = 0;
                                                     foreach ($options as $option): $idCase++;
-                                                        ?>
+                                          ?>
 
                                                         <input name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>" <?php if(isset($caseacocher)){if($caseacocher[$idCase-1] == 'true'){echo 'checked';}}?>  type="radio">
                                                                     <?= $option ?>
                                                                 </input>
-                                                    <?php endforeach ?>
+                                     <?php endforeach ?>
                                                             <input value="false" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
-                                                <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
+                                 <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
-                                                    <?php
+                                     <?php
                                                     echo download($question->getInputOption(), 'Télécharger : '. $question->getInputOption());
-                                                    ?>
+                                      ?>
 
-                                                <?php elseif ($question->getAffichage() === 'Chiffre'):
+                                 <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                     $extrmum = explode(";", $question->getInputOption());
                                                     if (sizeof($extrmum) >= 3) {
                                                         $min = $extrmum[0];
@@ -373,7 +373,7 @@ $id = 0;
                                                         $max = 100;
                                                         $step = 1;
                                                     }
-                                                    ?>
+                                      ?>
 
                                                     <input type="number"
                                                            name="<?= $question->getIdQuestion() ?>"
@@ -381,38 +381,38 @@ $id = 0;
                                                            value="<?php if(isset($reponse))echo $reponse; else echo $min?>" min="<?= $min ?>"
                                                            max="<?= $max ?>" step="<?= $step ?>">
 
-                                                <?php elseif ($question->getAffichage() === 'Date'): ?>
-                                                    <?php if (!isset($vraiValeurs)) : $vraiValeurs = '2019-01-01'; endif; ?> <!-- Default Value-->
+                                 <?php elseif ($question->getAffichage() === 'Date'): ?>
+                                     <?php if (!isset($vraiValeurs)) : $vraiValeurs = '2019-01-01'; endif; ?> <!-- Default Value-->
 
                                                     <input type="date"
                                                            name="<?= $question->getIdQuestion() ?>"
                                                            id="<?= $question->getIdQuestion() ?>"
                                                            value="<?php if(isset($reponse))echo $reponse; else echo ""?>">
 
-                                                <?php elseif ($question->getAffichage() === 'Liste'):
+                                 <?php elseif ($question->getAffichage() === 'Liste'):
                                                     $options = explode(";", $question->getInputOption());?>
-                                                    <?php if (!isset($vraiValeurs)) : $vraiValeurs = $options[0]; endif; ?> <!-- Default Value-->
+                                     <?php if (!isset($vraiValeurs)) : $vraiValeurs = $options[0]; endif; ?> <!-- Default Value-->
 
                                                     <select name=<?= $question->getIdQuestion() ?>>
-                                                            <?php foreach ($options as $option): ?>
+                                             <?php foreach ($options as $option): ?>
                                                                 <option value=<?= $option ?> <?php if(isset($reponse)){if($reponse==$option) echo "selected";} ?>>
                                                                     <?= $option ?>
                                                                 </option>
-                                                            <?php endforeach ?>
+                                             <?php endforeach ?>
                                                         </select>
 
-                                                <?php elseif ($question->getAffichage() === 'Fichier'): ?>
+                                 <?php elseif ($question->getAffichage() === 'Fichier'): ?>
 
                                                     <input type="file"
                                                            name="<?= $question->getIdQuestion() ?>">
-                                                    <?php
+                                     <?php
                                                     if(!empty($question->getInputOption()))
                                                     {
                                                         echo download($question->getInputOption(), 'Télécharger : '.$question->getInputOption());
                                                     }
-                                                    ?>
+                                      ?>
 
-                                                <?php elseif ($question->getAffichage() === 'Curseur'):
+                                 <?php elseif ($question->getAffichage() === 'Curseur'):
                                                     $extrmum = explode(";", $question->getInputOption());
                                                     if (sizeof($extrmum) >= 3) {
                                                         $min = $extrmum[0];
@@ -423,7 +423,7 @@ $id = 0;
                                                         $max = 100;
                                                         $step = 1;
                                                     }
-                                                    ?>
+                                      ?>
 
                                                     <input type="range" class="slider"
                                                            name="<?= $question->getIdQuestion() ?>"
@@ -435,10 +435,10 @@ $id = 0;
                                                             id="rangeValue<?= $question->getIdQuestion() ?>"><?php if(isset($reponse))echo $reponse; else echo $min ?></span>
                                                     <br><br>
 
-                                                <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
+                                 <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
                                                     <textarea id="<?= $question->getIdQuestion() ?>" name="<?= $question->getIdQuestion() ?>"><?php if(isset($reponse)){echo $reponse;} else{echo "";}?></textarea>
 
-                                                <?php endif; ?>
+                                 <?php endif; ?>
                                             </span>
 
                                             <a
@@ -453,13 +453,13 @@ $id = 0;
                                         </div>
                                         <br>
                                         <hr>
-                                    <?php endif; ?>
-                                    <?php endforeach;  ?>
+                     <?php endif; ?>
+                     <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
 
-                    <?php endforeach; ?>
+     <?php endforeach; ?>
                 </div>
                 <br>
                 <?= nav('<button type="button">Retour aux propositions </button>', 'Propositions', 'index'); ?>

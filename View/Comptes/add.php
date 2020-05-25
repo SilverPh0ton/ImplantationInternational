@@ -52,39 +52,39 @@ $programmes = get('array_prog');
                 <div class="input date required">
                     <label>Date de naissance</label>
                     <select name="date_naissance[year]" required="required">
-                        <?php for ($i = date('Y')-1; $i >= (date('Y') -100); $i--): ?>
+         <?php for ($i = date('Y')-1; $i >= (date('Y') -100); $i--): ?>
                             <option
                                     value=<?= $i ?>
                                 <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
                                 <?= $i ?>
                             </option>
-                        <?php endfor; ?>
+         <?php endfor; ?>
                     </select>
 
                     <select name="date_naissance[month]" required="required">
-                        <?php
+         <?php
                         $i = 0;
                         foreach ( return_months() as $month):
-                            ?>
+              ?>
                             <option
                                     value=<?= ++$i ?>
                                 <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
                                 <?= $month ?>
                             </option>
-                        <?php
+         <?php
                         endforeach;
-                        ?>
+          ?>
                     </select>
 
                     <select name="date_naissance[day]" required="required">
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
+         <?php for ($i = 1; $i <= 31; $i++): ?>
                             <option
                                     value=<?= $i ?>
                                     <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
                             >
                                 <?= $i ?>
                             </option>
-                        <?php endfor; ?>
+         <?php endfor; ?>
                     </select></div>
 
             </div>
@@ -96,17 +96,17 @@ $programmes = get('array_prog');
                 <div class="input required">
                     <label for="id_programme">Programme</label>
                     <select name="id_programme" required="required" id="id_programme">
-                        <?php
+         <?php
                         foreach ($programmes as $programme):
                             $programme=unserialize($programme)
-                            ?>
+              ?>
                             <option value=<?= $programme->getIdProgramme(); ?> >
 
                                 <?= $programme->getNomProgramme() ?>
                             </option>
-                        <?php
+         <?php
                         endforeach
-                        ?>
+          ?>
                     </select>
                 </div>
 
@@ -114,7 +114,7 @@ $programmes = get('array_prog');
         <button type="submit" onclick="savedata()">Créer</button>
     </form>
 
-    <?php echo nav('<button>Revenir à la liste des utilisateurs</button>', 'Comptes', 'index'); ?>
+<?php echo nav('<button>Revenir à la liste des utilisateurs</button>', 'Comptes', 'index'); ?>
 
 </div>
 

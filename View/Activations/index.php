@@ -28,7 +28,7 @@ $activations = get('acti_array');
 
     <?=  nav1('<button class="add-btn">Générer des codes </button>','Activations','add',$id_voyage); ?>
 
-    <?php if (is_array($activations) && sizeof($activations) != 0) : ?>
+<?php if (is_array($activations) && sizeof($activations) != 0) : ?>
 
         <table class="table_to_paginate">
             <thead>
@@ -38,22 +38,22 @@ $activations = get('acti_array');
             </tr>
             </thead>
             <tbody>
-            <?php foreach ($activations as $activation):
+<?php foreach ($activations as $activation):
                 $color = $activation->getActif() ? '' : 'style="color: #aaaaaa"'
-                ?>
+  ?>
                 <tr>
                     <td <?php echo $color ?> ><?= $activation->getCodeActivation() ?></td>
                     <td <?php echo $color ?> ><?= $activation->getActif() ? 'Oui' : 'Non'; ?></td>
                 </tr>
-            <?php endforeach; ?>
+<?php endforeach; ?>
             </tbody>
         </table>
 
-    <?php else: ?>
+<?php else: ?>
 
         <H1>Il n'y a aucun code d'activation pour ce séjour</H1>
 
-    <?php endif ?>
+<?php endif ?>
 
     <!--Button de navigation -->
     <?=  nav('<button>Revenir à la liste des voyages</button>','Voyages','index'); ?>

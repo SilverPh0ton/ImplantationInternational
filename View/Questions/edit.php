@@ -30,17 +30,17 @@ $question = get('question');
             <div class="input required">
                 <label for="id_categorie">Catégorie</label>
                 <select id="categorie">
-                    <?php
+     <?php
                     foreach ($categories as $categorie):
-                        ?>
+          ?>
                         <option value=<?= $categorie->getIdCategorie();
                         if ($categorie->getIdCategorie() == $question->getCategorie()->getIdCategorie()): {
                             echo ' selected="selected"';
                         } endif ?>
                         ><?= $categorie->getCategorie() ?></option>
-                    <?php
+     <?php
                     endforeach
-                    ?>
+      ?>
                 </select>
                 <input type="hidden" id="id_categorie" name="id_categorie" value="<?= $categorie->getIdCategorie()?>">
             </div>
@@ -55,22 +55,22 @@ $question = get('question');
                 <label for="affichage">Mode d'affichage (Comment l'étudiant doit repondre)</label>
 
                 <div class="ControlOption">
-                    <?php if ("Mention" == $question->getAffichage()): ?>
+     <?php if ("Mention" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Mention"
                                class="displayOption" <?php if ("Mention" == $question->getAffichage()): {
                             echo 'checked="checked"';
                         } endif; ?> >
                         <label>Mention <br> (aucune réponse requise)</label>
 
-                    <?php elseif ("Telechargement" == $question->getAffichage()): ?>
+     <?php elseif ("Telechargement" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Telechargement"
                                class="displayOption" <?php if ("Telechargement" == $question->getAffichage()): {
                             echo 'checked="checked"';
                         } endif ?> >
                         <label>Document à télécharger <br> (aucune réponse requise)</label>
-                        <?php echo download('empty.txt', 'Télécharger') ?>
+         <?php echo download('empty.txt', 'Télécharger') ?>
 
-                    <?php elseif ("Case" == $question->getAffichage()): ?>
+     <?php elseif ("Case" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Case"
                                class="displayOption" <?php if ("Case" == $question->getAffichage()): {
                             echo 'checked="checked"';
@@ -78,7 +78,7 @@ $question = get('question');
                         <label for="affichage">Choix multiple</label> <br>
                         <input type="checkbox">
 
-                        <?php elseif ("Radio" == $question->getAffichage()): ?>
+         <?php elseif ("Radio" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Radio"
                                class="displayOption" <?php if ("Radio" == $question->getAffichage()): {
                             echo 'checked="checked"';
@@ -87,7 +87,7 @@ $question = get('question');
                         <input type="radio">
 
 
-                    <?php elseif ("Chiffre" == $question->getAffichage()): ?>
+     <?php elseif ("Chiffre" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Chiffre"
                                class="displayOption" <?php if ("Chiffre" == $question->getAffichage()): {
                             echo 'checked="checked"';
@@ -96,7 +96,7 @@ $question = get('question');
                         <input type="number">
 
 
-                    <?php elseif ("Date" == $question->getAffichage()): ?>
+     <?php elseif ("Date" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Date"
                                class="displayOption" <?php if ("Date" == $question->getAffichage()): {
                             echo 'checked="checked"';
@@ -104,7 +104,7 @@ $question = get('question');
                         <label for="affichage">Date</label> <br>
                         <input type="date">
 
-                    <?php elseif ("Liste" == $question->getAffichage()): ?>
+     <?php elseif ("Liste" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Liste"
                                class="displayOption" <?php if ("Liste" == $question->getAffichage()): {
                             echo 'checked="checked"';
@@ -117,7 +117,7 @@ $question = get('question');
                             <option>Option 4</option>
                         </select>
 
-                    <?php elseif ("Fichier" == $question->getAffichage()): ?>
+     <?php elseif ("Fichier" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Fichier"
                                class="displayOption" <?php if ("Fichier" == $question->getAffichage()): {
                             echo 'checked="checked"';
@@ -125,7 +125,7 @@ $question = get('question');
                         <label for="affichage">Déposer un document numérique</label> <br>
                         <input type="file">
 
-                    <?php elseif ("Curseur" == $question->getAffichage()): ?>
+     <?php elseif ("Curseur" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="Curseur"
                                class="displayOption" <?php if ("Curseur" == $question->getAffichage()): {
                             echo 'checked="checked"';
@@ -135,7 +135,7 @@ $question = get('question');
                                onchange="$('#rangeValue').text(this.value);">
                         <span id="rangeValue">0</span>
 
-                    <?php elseif ("ZoneTexte" == $question->getAffichage()): ?>
+     <?php elseif ("ZoneTexte" == $question->getAffichage()): ?>
                         <input hidden type="radio" name="affichage" value="ZoneTexte"
                                class="displayOption" <?php if ("ZoneTexte" == $question->getAffichage()): {
                             echo 'checked="checked"';
@@ -143,7 +143,7 @@ $question = get('question');
                         <label for="affichage">Zone de texte</label> <br>
                         <textarea></textarea>
 
-                    <?php endif; ?>
+     <?php endif; ?>
                 </div>
             </div>
 
@@ -151,7 +151,7 @@ $question = get('question');
                 <label id="options">Options d'affichage</label>
                 <div id="optionBorder" disabled="none">
 
-                    <?php
+     <?php
                     $min = 0;
                     $max = 100;
                     $step = 1;
@@ -169,7 +169,7 @@ $question = get('question');
                     } else if ($question->getAffichage() === 'Telechargement') {
                         $file = $question->getInputOption();
                     }
-                    ?>
+      ?>
 
                     <div id="list_option">
                         <label for="list_option">Entrez les options séparées de point-virgule. Ex.: Option 1;Option
@@ -206,7 +206,7 @@ $question = get('question');
 
             <div>
                 <label for="regroupement">Regroupement</label>
-                <?php $typeRegroupement = ""; ?>
+ <?php $typeRegroupement = ""; ?>
                 <select id="regroupementChange">
                     <option value="etudiant" <?php if (0 == $question->getRegroupement()): {
                     $typeRegroupement = "etudiant";

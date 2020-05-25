@@ -67,7 +67,7 @@ if(is_null($voyage)){
                     'View',
                     $voyage->getIdProposition(),
                     $id_voyage);
-                ?>
+  ?>
             </td>
         </tr>
     </table>

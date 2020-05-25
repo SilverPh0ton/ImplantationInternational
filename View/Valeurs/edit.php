@@ -43,13 +43,13 @@ $connectedUser = $_SESSION["connectedUser"];
     <form method="post" enctype="multipart/form-data">
         <fieldset>
             <legend><?= 'Formulaire de ' . $compte->getPrenom() . ' ' . $compte->getNom() . ' pour le projet ' . $nom_projet ?></legend>
-            <?php if (empty($categories)): ?>
+<?php if (empty($categories)): ?>
                 <h2>Aucune question pour ce voyage</h2>
-            <?php else: ?>
+<?php else: ?>
 
                 <div class="accordion md-accordion accordion-1" id="accordionEx23" role="tablist">
 
-                    <?php foreach ($categories as $categorie): ?>
+     <?php foreach ($categories as $categorie): ?>
 
                         <div class="card">
                             <div class="card-header blue lighten-3 z-depth-1" role="tab" id="heading<?php $ctr++;
@@ -66,27 +66,27 @@ $connectedUser = $_SESSION["connectedUser"];
                                  aria-labelledby="heading<?php echo $ctr ?>" data-parent="#accordionEx23">
                                 <div class="card-body">
 
-                                    <?php foreach ($questions as $question): ?>
+                     <?php foreach ($questions as $question): ?>
 
-                                        <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
+                         <?php if ($question->getCategorie()->getIdCategorie() === $categorie->getIdCategorie() && $question->getActif()): ?>
                                             <div style="width:100%; margin:0 auto; border-top: #1a1a1a;">
 
                                                 <span><?= $question->getQuestion() ?></span>
 
-                                                <?php
+                                 <?php
                                                 $vraiValeurs = null;
                                                 foreach ($valeurs as $valeur) {
                                                     if ($valeur->getIdQuestion() === $question->getIdQuestion())
                                                         $vraiValeurs = $valeur->getReponse();
                                                 }
-                                                ?>
+                                  ?>
 
                                                 <label for="affichage">
                                                     <!--Loop pour questions-->
                                                     <span>
-                                                        <?php if ($question->getAffichage() === 'Case'): ?>
+                                         <?php if ($question->getAffichage() === 'Case'): ?>
                                                           <br> <br>
-                                                        <?php   $listeReponse = explode(";", $vraiValeurs);
+                                         <?php   $listeReponse = explode(";", $vraiValeurs);
 
                                                         $idCase = 0;
                                                         $options = explode(";", $question->getInputOption());
@@ -97,24 +97,24 @@ $connectedUser = $_SESSION["connectedUser"];
                                                     }
                                                  
 
-                                                         ?>
+                                           ?>
 
-                                                                <?php foreach ($options as $option): $idCase++; $id++;?>
+                                                 <?php foreach ($options as $option): $idCase++; $id++;?>
                                                                    
                                                                 <input <?php if($listeReponse[$idCase-1] === "true") : ?>
                                                                     checked="checked"
-                                                                  <?php endif; ?>  id="<?= $id?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" type="checkbox">
+                                                   <?php endif; ?>  id="<?= $id?>" name="case<?= $question->getIdQuestion()?>" class="caseClass" data-id="<?= $question->getIdQuestion()?>" type="checkbox">
                                                                         <?= $option ?>
                                                                     </input>
                                                                     <br>
-                                                                <?php endforeach ?>
+                                                 <?php endforeach ?>
                                                                 <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
 
 
-                                                <?php elseif ($question->getAffichage() === 'Radio'): ?>
+                                 <?php elseif ($question->getAffichage() === 'Radio'): ?>
                                                           <br> <br>
-                                                        <?php   $listeReponse = explode(";", $vraiValeurs);
+                                         <?php   $listeReponse = explode(";", $vraiValeurs);
                                                         $idRadio = 0;
 
                                                         $options = explode(";", $question->getInputOption());
@@ -123,26 +123,26 @@ $connectedUser = $_SESSION["connectedUser"];
                                                         array_push($listeReponse,"false");
                                                       endforeach;
                                                     }
-                                                         ?>                                                       
-                                                                <?php foreach ($options as $option): $idRadio++;
-                                                               ?>
+                                           ?>                                                       
+                                                 <?php foreach ($options as $option): $idRadio++;
+                                                 ?>
 
                                                                 <input <?php if($listeReponse[$idRadio - 1] === "true") : ?>
                                                                     checked="checked"
-                                                                  <?php endif; ?>  name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
+                                                   <?php endif; ?>  name="radio<?= $question->getIdQuestion()?>" class="radioClass" data-id="<?= $question->getIdQuestion()?>"  type="radio">
                                                                         <?= $option ?>
                                                                     </input>
                                                                     <br>
-                                                                <?php endforeach ?>
+                                                 <?php endforeach ?>
                                                                 <input value="<?=$vraiValeurs?>" name="<?= $question->getIdQuestion()?>"  type="hidden">
 
-                                                        <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
+                                         <?php elseif ($question->getAffichage() === 'Telechargement'): ?>
 
-                                                            <?php
+                                             <?php
                                                             echo download(  $question->getInputOption(),'Télécharger: ' . $question->getInputOption());
-                                                            ?>
+                                              ?>
 
-                                                        <?php elseif ($question->getAffichage() === 'Chiffre'):
+                                         <?php elseif ($question->getAffichage() === 'Chiffre'):
                                                             $extrmum = explode(";", $question->getInputOption());
                                                             if (sizeof($extrmum) >= 3) {
                                                                 $min = $extrmum[0];
@@ -153,47 +153,47 @@ $connectedUser = $_SESSION["connectedUser"];
                                                                 $max = 100;
                                                                 $step = 1;
                                                             }
-                                                            ?>
-                                                            <?php if (!isset($vraiValeurs)) : $vraiValeurs = '0'; endif; ?> <!-- Default Value-->
+                                              ?>
+                                             <?php if (!isset($vraiValeurs)) : $vraiValeurs = '0'; endif; ?> <!-- Default Value-->
 
                                                             <input type="number"
                                                                    name="<?= $question->getIdQuestion() ?>"
                                                                    value="<?= $vraiValeurs ?>" min="<?= $min ?>"
                                                                    max="<?= $max ?>" step="<?= $step ?>">
 
-                                                        <?php elseif ($question->getAffichage() === 'Date'): ?>
-                                                            <?php if (!isset($vraiValeurs)) : $vraiValeurs = '2019-01-01'; endif; ?> <!-- Default Value-->
+                                         <?php elseif ($question->getAffichage() === 'Date'): ?>
+                                             <?php if (!isset($vraiValeurs)) : $vraiValeurs = '2019-01-01'; endif; ?> <!-- Default Value-->
 
                                                             <input type="date"
                                                                    name="<?= $question->getIdQuestion() ?>"
                                                                    value="<?= $vraiValeurs ?>">
 
-                                                        <?php elseif ($question->getAffichage() === 'Liste'):
+                                         <?php elseif ($question->getAffichage() === 'Liste'):
                                                             $options = explode(";", $question->getInputOption()); ?>
-                                                            <?php if (!isset($vraiValeurs)) : $vraiValeurs = $options[0]; endif; ?> <!-- Default Value-->
+                                             <?php if (!isset($vraiValeurs)) : $vraiValeurs = $options[0]; endif; ?> <!-- Default Value-->
 
                                                             <select name=<?= $question->getIdQuestion() ?>>
-                                                                <?php foreach ($options as $option): ?>
+                                                 <?php foreach ($options as $option): ?>
                                                                     <option value=<?= $option ?>
                                                                             <?= ($option === $vraiValeurs) ? ' selected="selected"' : '' ?>
                                                                     >
                                                                         <?= $option ?>
                                                                     </option>
-                                                                <?php endforeach ?>
+                                                 <?php endforeach ?>
                                                             </select>
 
-                                                        <?php elseif ($question->getAffichage() === 'Fichier'): ?>
+                                         <?php elseif ($question->getAffichage() === 'Fichier'): ?>
 
                                                             <input type="file"
                                                                    name="<?= $question->getIdQuestion() ?>">
-                                                            <?php
+                                             <?php
                                                             if (!isset($vraiValeurs)) {
                                                                 $vraiValeurs = 'empty.txt';
                                                             }//Default Value
                                                             echo download($vraiValeurs, 'Télécharger: ' . $vraiValeurs);
-                                                            ?>
+                                              ?>
 
-                                                        <?php elseif ($question->getAffichage() === 'Curseur'):
+                                         <?php elseif ($question->getAffichage() === 'Curseur'):
                                                             $extrmum = explode(";", $question->getInputOption());
                                                             if (sizeof($extrmum) >= 3) {
                                                                 $min = $extrmum[0];
@@ -204,8 +204,8 @@ $connectedUser = $_SESSION["connectedUser"];
                                                                 $max = 100;
                                                                 $step = 1;
                                                             }
-                                                            ?>
-                                                            <?php if (!isset($vraiValeurs)) : $vraiValeurs = ($min + $max) / 2; endif; ?> <!-- Default Value-->
+                                              ?>
+                                             <?php if (!isset($vraiValeurs)) : $vraiValeurs = ($min + $max) / 2; endif; ?> <!-- Default Value-->
 
                                                             <input type="range" class="slider"
                                                                    name="<?= $question->getIdQuestion() ?>"
@@ -216,15 +216,15 @@ $connectedUser = $_SESSION["connectedUser"];
                                                                     id="rangeValue<?= $question->getIdQuestion() ?>"><?= $vraiValeurs ?></span>
                                                             <br><br>
 
-                                                        <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
-                                                            <?php if (!isset($vraiValeurs)) : $vraiValeurs = ''; endif; ?> <!-- Default Value-->
+                                         <?php elseif ($question->getAffichage() === 'ZoneTexte'): ?>
+                                             <?php if (!isset($vraiValeurs)) : $vraiValeurs = ''; endif; ?> <!-- Default Value-->
 
                                                             <textarea
                                                                     name="<?= $question->getIdQuestion() ?>"><?= $vraiValeurs ?>
                                                             </textarea>
-                                                        <?php endif; ?>
+                                         <?php endif; ?>
                                                     </span>
-                                                    <?php if(!empty($question->getInfoSup())): ?>
+                                     <?php if(!empty($question->getInfoSup())): ?>
                                                       <a
                                                               style="float: right"
                                                               href="javascript:void(0)"
@@ -234,32 +234,32 @@ $connectedUser = $_SESSION["connectedUser"];
                                                       >
                                                           <i class="fa fa-info" aria-hidden="true" style="font-size:28px;"></i>
                                                       </a>
-                                                    <?php endif;?>
+                                     <?php endif;?>
                                             </div><br>
                                             <hr>
-                                        <?php endif; ?>
-                                    <?php endforeach; ?>
+                         <?php endif; ?>
+                     <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
 
-                    <?php endforeach; ?>
+     <?php endforeach; ?>
                 </div>
-                <?php
+ <?php
                 if ($connectedUser->getIdCompte() == $id_compte) {
                     echo '<button type="submit">Enregistrer</button>';
                 }
-                ?>
-            <?php endif; ?>
+  ?>
+<?php endif; ?>
             <!--Button de navigation -->
-            <?php
+<?php
             if (isOfType([ADMIN, PROF])) {
                 echo nav1('<button type="button"> Retour aux formulaires</button>', 'valeurs', 'index', $id_voyage);
 
             } else {
                 echo nav('<button type="button"> Retour aux voyages</button>', 'Voyages', 'index');
             }
-            ?>
+ ?>
 
         </fieldset>
     </form>

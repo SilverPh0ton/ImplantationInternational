@@ -25,14 +25,14 @@ $categories = get('categories');
             <div class="input required">
                 <label for="id_categorie">Catégorie</label>
                 <select name="id_categorie" required="required">
-                    <?php
+     <?php
                     foreach ($categories as $categorie):
-                        ?>
+          ?>
                         <option value=<?= $categorie->getIdCategorie() ?>>
                             <?= $categorie->getCategorie() ?></option>
-                    <?php
+     <?php
                     endforeach
-                    ?>
+      ?>
                 </select>
             </div>
 
