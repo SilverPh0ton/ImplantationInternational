@@ -26,6 +26,77 @@ class VoyagesDB extends ConfigDB
 
     public function getVoyageFromId($id_voyage)
     {
+        if(isset($id_voyage))
+        {
+            $sql = "SELECT * FROM voyages WHERE id_voyage = :id_voyage";
+
+            if ($stmt = $this->conn->prepare($sql)) {
+
+                // Bind variables to the prepared statement as parameters
+                $stmt->bindParam(":id_voyage", $id_voyage , PDO::PARAM_INT);
+
+                // Attempt to execute the prepared statement
+                if ($stmt->execute()) {
+                    // Check if username exists, if yes then verify password
+                    if ($stmt->rowCount() == 1) {
+
+                        if ($row = $stmt->fetch()) {
+
+                            $destinationDB = new DestinationsDB();
+                            $destination = $destinationDB->getDestinationFromId($row['id_destination']);
+
+                            $voyage = new Voyage(
+                                $row['id_voyage'],
+                                $row['id_proposition'],
+                                $row['ville'],
+                                $row['cout'],
+                                $row['date_depart'],
+                                $row['date_limite'],
+                                $row['date_retour'],
+                                $row['actif'],
+                                $row['approuvee'],
+                                $destination,
+                                $row['nom_projet'],
+                                $row['note']
+                            );
+
+                            return $voyage;
+
+                        }
+                        else
+                        {
+                            return null;
+                        }
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                else
+                {
+                    return null;
+                }
+
+                // Close statement
+                unset($stmt);
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public function getVoyageFromIdVerifyConnectedUser($id_voyage)
+    {
         $connectedUser = $_SESSION["connectedUser"];
         $connectedUserType = $connectedUser->getType();
         $compte_id = $connectedUser->getIdCompte();
