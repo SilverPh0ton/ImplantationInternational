@@ -2,10 +2,6 @@
 
 use App\Model\Entity\Destination;
 
-require_once 'Entity\Destination.php';
-require_once 'Entity\Voyage.php';
-require_once 'Entity\Activation.php';
-
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Activation[]|\Cake\Collection\CollectionInterface $activations
