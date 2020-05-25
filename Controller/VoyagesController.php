@@ -98,7 +98,7 @@ class VoyagesController extends AppController
         $comptesVoyagesDB = new ComptesVoyagesDB();
 
         $userCount = $comptesVoyagesDB->getUserCountByVoyageId($id);
-        $voyage = $voyageDB->getVoyageFromId($id);
+        $voyage = $voyageDB->getVoyageFromIdVerifyConnectedUser($id);
 
         $this->set('voyage',$voyage);
         $this->set('userCount',$userCount);

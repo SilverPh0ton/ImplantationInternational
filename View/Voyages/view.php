@@ -10,7 +10,7 @@ $voyagesController->view($id_voyage);
 
 $voyage = get('voyage');
 $userCount = get('userCount');
-$compteConnecter=$_SESSION["connectedUser"]
+$compteConnecter=$_SESSION["connectedUser"];
   
 if(is_null($voyage)){
     return $voyagesController->redirect('voyages', 'index');
