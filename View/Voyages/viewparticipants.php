@@ -10,6 +10,10 @@ $voyagesController->Viewparticipants($id_voyage);
 $voyage = get('voyage');
 $comptes = get('comptes');
 $compteType = $connectedUser->getType();
+
+if(is_null($voyage)){
+    return $voyagesController->redirect('voyages', 'index');
+}
 ?>
 
 
@@ -69,7 +73,7 @@ $compteType = $connectedUser->getType();
                 
                     if ($connectedUser->getType() === 'admin') {
                       echo nav1('<img alt="afficher icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','Edit',$compte->getIdCompte());
-                    }}
+                    }
                     ?>
                 </td>
                 <td><?= $compte->getCourriel() ?></td>

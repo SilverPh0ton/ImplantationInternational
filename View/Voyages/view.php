@@ -4,11 +4,16 @@
  * @var \App\Model\Entity\Voyage $voyage
  */
 
+
 $id_voyage = $_GET['param1'];
 $voyagesController->view($id_voyage);
 
 $voyage = get('voyage');
 $userCount = get('userCount');
+if(is_null($voyage)){
+    return $voyagesController->redirect('voyages', 'index');
+}
+
 ?>
 
 <div class="columns large-8 medium-10 small-12 large-centered medium-centered small-centered large-text-left medium-text-left small-text-left content" >
