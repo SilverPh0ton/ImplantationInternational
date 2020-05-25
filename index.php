@@ -87,7 +87,7 @@ use App\Controller\ComptesController; ?>
                 ?>
 
                 <?php if(isOfType([PROF]))
-                    echo nav('<li class="navbutton">Liste des participants</li>', 'comptes', 'index')
+                    echo nav('<li class="navbutton">Liste des étudiants</li>', 'comptes', 'index')
                 ?>
 
                 <?php if(isOfType([ADMIN]))
