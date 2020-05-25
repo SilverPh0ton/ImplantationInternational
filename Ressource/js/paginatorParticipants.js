@@ -17,12 +17,23 @@ $(document).ready( function () {
                   extend: 'pdfHtml5',
                   text: 'Générer un PDF',
                   className: 'btnPDF',
-                  filename: 'Dossiers_Participants',
-                  title: 'Dossiers des participants au voyage',
+                  filename: 'Liste_Comptes',
+                  title: 'Liste des comptes',
                   orientation: 'landscape',
                   exportOptions:{
                       columns: [0,1,2,3,4,7,8,9]
-                  }
+                  },
+                  customize: function ( doc ) {
+                    let margin = 20;
+                    let width = 735-(2*margin);
+                    doc.pageSize= 'LETTER';
+                    doc.defaultStyle.fontSize = 12;
+                    doc.pageMargins = [margin, margin, margin, margin];
+                    doc.content[1].table.widths = [
+                        width*0.125, width*0.125, width*0.1, width*0.1,
+                        width*0.125, width*0.175, width*0.125, width*0.125
+                    ];
+                }
             }
           ],
           columnDefs: [
