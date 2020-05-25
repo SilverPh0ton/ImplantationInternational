@@ -682,17 +682,16 @@ class PropositionsController extends AppController
             $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action . '&param1=' . $param1;
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host = 'smtp.mailtrap.io';                    // Set the SMTP server to send through
+            $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
             $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-            $mail->Username = '0c6889d4c7b7a1';                     // SMTP username
-            $mail->Password = '57468b537bbb17';                               // SMTP password
+            $mail->Username = 'mobilite';                     // SMTP username
+            $mail->Password = '11qpVR^Ew.2]';                               // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-            $mail->Port = 2525;                                    // TCP port to connect to
-
-
+            $mail->Port = 465;                                    // TCP port to connect to
+            $mail->CharSet = 'UTF-8';
             //Recipients
-            $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
-            $mail->addAddress('mobilite.etudiante@cegeptr.qc.ca', 'PLACEHOLDER');     // Add a recipient
+            $mail->setFrom('mobilite@silverph0ton.com', 'Ressources Humaines');
+            $mail->addAddress('mobilite@silverph0ton.com', 'Ressources Humaines');     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
@@ -719,17 +718,16 @@ class PropositionsController extends AppController
             $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action. '&param1='. $id;
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host = 'smtp.mailtrap.io';                    // Set the SMTP server to send through
+            $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
             $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-            $mail->Username = '0c6889d4c7b7a1';                     // SMTP username
-            $mail->Password = '57468b537bbb17';                               // SMTP password
+            $mail->Username = 'mobilite';                     // SMTP username
+            $mail->Password = '11qpVR^Ew.2]';                               // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-            $mail->Port = 2525;                                    // TCP port to connect to
-
-
+            $mail->Port = 465;                                    // TCP port to connect to
+            $mail->CharSet = 'UTF-8';
             //Recipients
-            $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
-            $mail->addAddress($to, 'PLACEHOLDER');     // Add a recipient
+            $mail->setFrom('mobilite@silverph0ton.com', 'Ressources Humaines');
+            $mail->addAddress($to, '');     // Add a recipient
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
