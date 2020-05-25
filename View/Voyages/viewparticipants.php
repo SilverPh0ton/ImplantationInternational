@@ -10,6 +10,10 @@ $voyagesController->Viewparticipants($id_voyage);
 $voyage = get('voyage');
 $comptes = get('comptes');
 $compteType = $connectedUser->getType();
+
+if(is_null($voyage)){
+    return $voyagesController->redirect('voyages', 'index');
+}
 ?>
 
 

@@ -2,10 +2,12 @@
 
 
 use App\Model\Entity\Voyage;
+use App\Model\Entity\Compte;
 
 include_once 'DBObjects/ConfigDB.php';
 require_once 'DBObjects/DestinationsDB.php';
 require_once 'Entity/Voyage.php';
+require_once 'Entity/Compte.php';
 
 class VoyagesDB extends ConfigDB
 {
@@ -24,10 +26,81 @@ class VoyagesDB extends ConfigDB
 
     public function getVoyageFromId($id_voyage)
     {
-        if(isset($id_voyage))
+        $connectedUser = $_SESSION["connectedUser"];
+        $connectedUserType = $connectedUser->getType();
+        $compte_id = $connectedUser->getIdCompte();
+
+        if(isset($id_voyage) && $connectedUserType !== 'admin')
+        {
+            $sql = "SELECT v.id_voyage,v.id_proposition,v.ville,v.date_depart,v.date_retour,v.actif,
+            v.approuvee,v.id_destination,v.nom_projet,v.note 
+            FROM voyages v, comptes_voyages cv , comptes c 
+            WHERE v.id_voyage = cv.id_voyage and cv.id_compte = c.id_compte and 
+            c.id_compte = :connectedUser and v.id_voyage = :id_voyage";
+
+
+            if ($stmt = $this->conn->prepare($sql)) {
+
+                // Bind variables to the prepared statement as parameters
+                $stmt->bindParam(":id_voyage", $id_voyage , PDO::PARAM_INT);
+                $stmt->bindParam(":connectedUser", $compte_id, PDO::PARAM_INT);
+
+                // Attempt to execute the prepared statement
+                if ($stmt->execute()) {
+                    // Check if username exists, if yes then verify password
+                    if ($stmt->rowCount() == 1) {
+
+                        if ($row = $stmt->fetch()) {
+
+                            $destinationDB = new DestinationsDB();
+                            $destination = $destinationDB->getDestinationFromId($row['id_destination']);
+
+                            $voyage = new Voyage(
+                                $row['id_voyage'],
+                                $row['id_proposition'],
+                                $row['ville'],
+                                $row['date_depart'],
+                                $row['date_retour'],
+                                $row['actif'],
+                                $row['approuvee'],
+                                $destination,
+                                $row['nom_projet'],
+                                $row['note']
+                            );
+
+                            return $voyage;
+
+                        }
+                        else
+                        {
+                            return null;
+                        }
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                }
+                else
+                {
+                    return null;
+                }
+
+                // Close statement
+                unset($stmt);
+
+            }
+            else
+            {
+                return null;
+            }
+        } 
+        else if(isset($id_voyage) && $connectedUserType === 'admin')
         {
             $sql = "SELECT * FROM voyages WHERE id_voyage = :id_voyage";
-
+            
             if ($stmt = $this->conn->prepare($sql)) {
 
                 // Bind variables to the prepared statement as parameters
@@ -85,7 +158,7 @@ class VoyagesDB extends ConfigDB
                 return null;
             }
         }
-        else
+        else 
         {
             return null;
         }

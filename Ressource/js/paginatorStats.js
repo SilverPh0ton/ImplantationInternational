@@ -24,7 +24,18 @@ $(document).ready( function () {
                   orientation: 'portrait',
                   exportOptions:{
                       columns: [0,1,2,3,4]
-                  }
+                  },
+                  customize: function ( doc ) {
+                    let margin = 20;
+                    let width = 580-(2*margin);
+                    doc.pageSize= 'LETTER';
+                    doc.defaultStyle.fontSize = 12;
+                    doc.pageMargins = [margin, margin, margin, margin];
+                    doc.content[1].table.widths = [
+                        width*0.2, width*0.2, width*0.2,
+                        width*0.2, width*0.2
+                    ];
+                }
             }
           ],
         language: {
@@ -71,7 +82,18 @@ $(document).ready( function () {
                   orientation: 'portrait',
                   exportOptions:{
                       columns: [0,1,2,3]
-                  }
+                  },
+                  customize: function ( doc ) {
+                    let margin = 20;
+                    let width = 585-(2*margin);
+                    doc.pageSize= 'LETTER';
+                    doc.defaultStyle.fontSize = 12;
+                    doc.pageMargins = [margin, margin, margin, margin];
+                    doc.content[1].table.widths = [
+                        width*0.25, width*0.25, width*0.25,
+                        width*0.25
+                    ];
+                }
             }
           ],
         language: {

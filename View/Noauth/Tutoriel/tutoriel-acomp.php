@@ -23,9 +23,12 @@
             <div id="section5" class="section">
                 <h1>Propositions de séjour</h1>
                 <ul>
-                    <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de voyage.</li>
+                    <li>Sur cette page, vous pourrez ajouter, voir et modifier les propositions de projet.</li>
                     <li>Il est à noter que si la proposition est en <span style="color: red;">rouge</span>, cette proposition a été <span style="font-weight: bold">refusée</span>. S'il est, comme indiqué dans la colonne <span style="font-weight: bold">État</span> du tableau.</li>
                     <br>
+                    <li>
+                        <b>À noter: </b> Si vous souhaitez réutiliser une ancienne proposition de séjour cliquez sur <img alt="Recycler le projet icon" src="Ressource/img/btRecycle.png" class="images" data-placement = "top" title = "Réutilisation du projet"> du projet désiré.
+                    </li>
                     <li>
                         Pour voir la liste de vos propositions, cliquez sur « Propositions de séjour » de la barre de navigation.
                         <ul>
@@ -34,7 +37,7 @@
                             <li>Pour rechercher une proposition spécifique, entrez soit le nom du projet, le pays, la ville, le coût, ou l’une des dates (limite d’inscription, de départ ou de retour) sous « Recherche » en haut à droite du tableau.</li>
                             <br>
                             <li>
-                                Pour faire une proposition de voyage, cliquez sur « Ajouter une proposition » au bas de la page
+                                Pour faire une proposition de projet, cliquez sur « Ajouter une proposition » au bas de la page
                                 <ul>
                                     <li>Sur cette page, inscrivez les informations nécessaires, telles que le nom du projet, la destination, la date de départ, celle de retour ainsi que le coût. </li>
                                     <li>S'il s'agit d'un brouillon, cochez la case « Il s'agit d'un brouillon ». Vous pourrez alors enregistrer votre proposition sans que l'administrateur ne soit notifié. De plus, la proposition apparaitra en orange dans la liste de vos propositions.</li><ul>
@@ -54,7 +57,7 @@
                             </li>
                             <br>
                             <li>
-                                Pour modifier une proposition de voyage, cliquez sur <img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top">
+                                Pour modifier une proposition de projet, cliquez sur <img alt="modifier icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top">
                                 <ul>
                                     <li>Sur cette page, vous pouvez modifier les informations de cette proposition. </li>
                                     <ul>
