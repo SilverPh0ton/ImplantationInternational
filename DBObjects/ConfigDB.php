@@ -17,9 +17,9 @@ protected  $conn;
     {
 
         $this->DB_SERVER = 'localhost';
-        $this->DB_USERNAME = 'root';
-        $this->DB_PASSWORD = '';
-        $this->DB_NAME = 'implantation';
+        $this->DB_USERNAME = 'silverph_david';
+        $this->DB_PASSWORD = 'Rwsb0f^&DBN!';
+        $this->DB_NAME = 'silverph_international';
 
         try{
 
