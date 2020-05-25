@@ -21,7 +21,7 @@ $accStats = get('accStats');
 $etuStats = get('etuStats');
 
 ?>
-<?= load_css('ControlOption') ?>
+<?= load_css('ControlOption')?>
 <?= load_css('tab')?>
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
@@ -67,13 +67,13 @@ $etuStats = get('etuStats');
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach ($compteStats as $compteStat):
-                            ?>
+<?php foreach ($compteStats as $compteStat):
+?>
                             <tr>
                                 <td id="cardColor"><?= $compteStat['ANNEE']?></td>
                                 <td id="cardColor"><?= $compteStat['NB']?></td>
                             </tr>
-                        <?php endforeach; ?>
+<?php endforeach;?>
                       </tbody>
                     </table>
                   </div>
@@ -97,13 +97,13 @@ $etuStats = get('etuStats');
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($voyagesStats as $voyagesStat):
-                          ?>
+<?php foreach ($voyagesStats as $voyagesStat):
+?>
                           <tr>
                               <td id="cardColor"><?= $voyagesStat['ANNEE']?></td>
                               <td id="cardColor"><?= $voyagesStat['NB']?></td>
                           </tr>
-                      <?php endforeach; ?>
+<?php endforeach;?>
                     </tbody>
                   </table>
                 </div>
@@ -131,13 +131,13 @@ $etuStats = get('etuStats');
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($countryStats as $countryStat):
-                          ?>
+<?php foreach ($countryStats as $countryStat):
+?>
                           <tr>
                               <td id="cardColor"><?= $countryStat['ANNEE']?></td>
                               <td id="cardColor"><?= $countryStat['NBR_PAYS']?></td>
                           </tr>
-                      <?php endforeach; ?>
+<?php endforeach;?>
                     </tbody>
                   </table>
                 </div>
@@ -161,13 +161,13 @@ $etuStats = get('etuStats');
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($programmeStats as $programmeStat):
-                          ?>
+<?php foreach ($programmeStats as $programmeStat):
+?>
                           <tr>
                               <td id="cardColor"><?= $programmeStat['ANNEE']?></td>
                               <td id="cardColor"><?= $programmeStat['NB']?></td>
                           </tr>
-                      <?php endforeach; ?>
+<?php endforeach;?>
                     </tbody>
                   </table>
               </p>
@@ -192,8 +192,8 @@ $etuStats = get('etuStats');
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($etuStats as $etuStat):
-            ?>
+<?php foreach ($etuStats as $etuStat):
+?>
             <tr>
                 <td><?= $etuStat['Annee']?></td>
                 <td><?= $etuStat['nom_projet']?></td>
@@ -201,7 +201,7 @@ $etuStats = get('etuStats');
                 <td><?= $etuStat['ville']?></td>
                 <td><?= $etuStat['NB']?></td>
             </tr>
-        <?php endforeach; ?>
+<?php endforeach;?>
         </tbody>
     </table>
   </div>
@@ -218,8 +218,8 @@ $etuStats = get('etuStats');
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($accStats as $accStat):
-            ?>
+<?php foreach ($accStats as $accStat):
+?>
             <tr>
                 <td><?= $accStat['Annee']?></td>
                 <td><?= $accStat['nom_projet']?></td>
@@ -227,7 +227,7 @@ $etuStats = get('etuStats');
                 <td><?= $accStat['ville']?></td>
                 <td><?= $accStat['NB']?></td>
             </tr>
-        <?php endforeach; ?>
+<?php endforeach;?>
         </tbody>
     </table>
   </div>
@@ -243,15 +243,15 @@ $etuStats = get('etuStats');
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($destinationStats as $destinationStat):
-            ?>
+<?php foreach ($destinationStats as $destinationStat):
+?>
             <tr>
-                <td> <?= $destinationStat['ANNEE'] ?></td>
-                <td> <?= $destinationStat['nom_pays'] ?></td>
-                <td> <?= $destinationStat['ville'] ?></td>
-                <td> <?= $destinationStat['NB'] ?></td>
+                <td> <?= $destinationStat['ANNEE']?></td>
+                <td> <?= $destinationStat['nom_pays']?></td>
+                <td> <?= $destinationStat['ville']?></td>
+                <td> <?= $destinationStat['NB']?></td>
             </tr>
-        <?php endforeach; ?>
+<?php endforeach;?>
         </tbody>
     </table>
   </div>
@@ -268,27 +268,27 @@ $etuStats = get('etuStats');
           </tr>
           </thead>
           <tbody>
-          <?php foreach ($futurProjetStats as $futurProjetStat):
-              ?>
+<?php foreach ($futurProjetStats as $futurProjetStat):
+?>
               <tr>
-                  <td> <?= $futurProjetStat['ANNEE'] ?></td>
-                  <td> <?= $futurProjetStat['nom_pays'] ?></td>
-                  <td> <?= $futurProjetStat['ville'] ?></td>
-                  <td> <?= $futurProjetStat['NB'] ?></td>
+                  <td> <?= $futurProjetStat['ANNEE']?></td>
+                  <td> <?= $futurProjetStat['nom_pays']?></td>
+                  <td> <?= $futurProjetStat['ville']?></td>
+                  <td> <?= $futurProjetStat['NB']?></td>
               </tr>
-          <?php endforeach; ?>
+<?php endforeach;?>
           </tbody>
       </table>
     </div>
 </div>
 </div>
 
-<?= load_script('codeMask') ?>
+<?= load_script('codeMask')?>
 <script>
     var order = [[ 7, 'desc' ],[ 5, 'asc' ],[ 0, 'asc' ]];
 </script>
-<?= load_script('paginatorStats') ?>
-<?= load_script('tab') ?>
+<?= load_script('paginatorStats')?>
+<?= load_script('tab')?>
 <script>
     $(document).ready( function () {
         openTab(null, 'generalTab');

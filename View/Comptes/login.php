@@ -27,13 +27,13 @@ $comptesController->login();
     </form>
 
     <div>
-        <?= nav('Première utilisation? Créer un compte','noauth','createAccount'); ?>
+        <?= nav('Première utilisation? Créer un compte','noauth','createAccount');?>
     </div>
 
     <div>
-        <?= nav('Mot de passe oublié ?','noauth','passwordRecover'); ?>
+        <?= nav('Mot de passe oublié ?','noauth','passwordRecover');?>
     </div>
 
 </div>
 
-<?= load_css('login') ?>
+<?= load_css('login')?>

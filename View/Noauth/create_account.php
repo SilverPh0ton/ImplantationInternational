@@ -51,40 +51,40 @@ $programmes = get('programmes');
             <div class="input date required">
                 <label>Date de naissance</label>
                 <select name="date_naissance[year]" required="required">
-                    <?php for ($i = (date('Y')-1); $i >= (date('Y') -100); $i--): ?>
+<?php for ($i = (date('Y')-1); $i >= (date('Y') -100); $i--):?>
                         <option
-                                value=<?= $i ?>
-                            <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
+                                value=<?= $i?>
+                            <?= ($i == date('Y')) ? ' selected="selected"' : ''?>>
+                            <?= $i?>
                         </option>
-                    <?php endfor; ?>
+<?php endfor;?>
                 </select>
 
                 <select name="date_naissance[month]" required="required">
-                    <?php
+<?php
                     $i = 0;
                     foreach ( return_months() as $month):
-                        ?>
+?>
                         <option
-                                value=<?= ++$i ?>
-                            <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
-                            <?= $month ?>
+                                value=<?= ++$i?>
+                            <?= ($i == date('m')) ? ' selected="selected"' : ''?>>
+                            <?= $month?>
                         </option>
-                    <?php
+<?php
                     endforeach;
-                    ?>
+?>
                 </select>
 
 
                 <select name="date_naissance[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
+<?php for ($i = 1; $i <= 31; $i++):?>
                         <option
-                                value=<?= $i ?>
-                                <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
+                                value=<?= $i?>
+                                <?= ($i == date('d')) ? ' selected="selected"' : ''?>
                         >
-                            <?= $i ?>
+                            <?= $i?>
                         </option>
-                    <?php endfor; ?>
+<?php endfor;?>
                 </select>
             </div>
 
@@ -97,16 +97,16 @@ $programmes = get('programmes');
             <div class="input required">
                 <label for="id_programme">Programme</label>
                 <select name="id_programme" required="required">
-                    <?php
+<?php
                     foreach ($programmes as $programme):
                         $programme = unserialize($programme);
-                        ?>
-                        <option value=<?= $programme->getIdProgramme(); ?> >
-                            <?= $programme->getNomProgramme() ?>
+?>
+                        <option value=<?= $programme->getIdProgramme();?> >
+                            <?= $programme->getNomProgramme()?>
                         </option>
-                    <?php
+<?php
                     endforeach
-                    ?>
+?>
                 </select>
             </div>
 
@@ -116,7 +116,7 @@ $programmes = get('programmes');
             </div>
             <button type="submit">Créer le compte</button>
             <!--Button de navigation -->
-            <?= nav('<button type="button"> Retour à la connexion </button>', 'Comptes', 'login'); ?>
+            <?= nav('<button type="button"> Retour à la connexion </button>', 'Comptes', 'login');?>
         </fieldset>
 
     </form>

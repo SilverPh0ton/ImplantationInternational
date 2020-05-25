@@ -20,6 +20,6 @@ $programmesController->add();
     </form>
 
     <!--Button de navigation -->
-    <?= nav('<button>Retour aux configurations</button>','Configuration','index'); ?>
+    <?= nav('<button>Retour aux configurations</button>','Configuration','index');?>
 </div>
 

@@ -21,14 +21,14 @@ $destinations = get('destinations');
             <div class="input required">
                 <label for="id_destination">Destination</label>
                 <select name="id_destination" required="required">
-                    <?php
+<?php
                     foreach ($destinations as $destination):
-                        ?>
-                        <option value=<?= $destination->getIdDestination() ?>>
-                            <?= $destination->getNomPays() ?></option>
-                    <?php
+?>
+                        <option value=<?= $destination->getIdDestination()?>>
+                            <?= $destination->getNomPays()?></option>
+<?php
                     endforeach
-                    ?>
+?>
                 </select>
             </div>
 
@@ -46,78 +46,78 @@ $destinations = get('destinations');
             <div class="input date required">
                 <label for="date_depart">Date de départ</label>
                 <select name="date_depart[year]" required="required">
-                    <?php for ($i = date('Y'); $i <= (date('Y') +50); $i++): ?>
+<?php for ($i = date('Y'); $i <= (date('Y') +50); $i++):?>
                         <option
-                            value=<?= $i ?>
-                            <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
+                            value=<?= $i?>
+                            <?= ($i == date('Y')) ? ' selected="selected"' : ''?>>
+                            <?= $i?>
                         </option>
-                    <?php endfor; ?>
+<?php endfor;?>
                 </select>
 
                 <select name="date_depart[month]" required="required">
-                    <?php
+<?php
                     $i = 0;
                     foreach ( return_months() as $month):
-                        ?>
+?>
                         <option
-                            value=<?= ++$i ?>
-                            <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
-                            <?= $month ?>
+                            value=<?= ++$i?>
+                            <?= ($i == date('m')) ? ' selected="selected"' : ''?>>
+                            <?= $month?>
                         </option>
-                    <?php
+<?php
                     endforeach;
-                    ?>
+?>
                 </select>
 
                 <select name="date_depart[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
+<?php for ($i = 1; $i <= 31; $i++):?>
                         <option
-                            value=<?= $i ?>
-                            <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
+                            value=<?= $i?>
+                            <?= ($i == date('d')) ? ' selected="selected"' : ''?>
                         >
-                            <?= $i ?>
+                            <?= $i?>
                         </option>
-                    <?php endfor; ?>
+<?php endfor;?>
                 </select>
             </div>
 
             <div class="input date required">
                 <label for="date_retour">Date de retour</label>
                 <select name="date_retour[year]" required="required">
-                    <?php for ($i = date('Y'); $i <= (date('Y') +50); $i++): ?>
+<?php for ($i = date('Y'); $i <= (date('Y') +50); $i++):?>
                         <option
-                            value=<?= $i ?>
-                            <?= ($i == date('Y')) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
+                            value=<?= $i?>
+                            <?= ($i == date('Y')) ? ' selected="selected"' : ''?>>
+                            <?= $i?>
                         </option>
-                    <?php endfor; ?>
+<?php endfor;?>
                 </select>
 
                 <select name="date_retour[month]" required="required">
-                    <?php
+<?php
                     $i = 0;
                     foreach ( return_months() as $month):
-                        ?>
+?>
                         <option
-                            value=<?= ++$i ?>
-                            <?= ($i == date('m')) ? ' selected="selected"' : '' ?>>
-                            <?= $month ?>
+                            value=<?= ++$i?>
+                            <?= ($i == date('m')) ? ' selected="selected"' : ''?>>
+                            <?= $month?>
                         </option>
-                    <?php
+<?php
                     endforeach;
-                    ?>
+?>
                 </select>
 
                 <select name="date_retour[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
+<?php for ($i = 1; $i <= 31; $i++):?>
                         <option
-                            value=<?= $i ?>
-                            <?= ($i == date('d')) ? ' selected="selected"' : '' ?>
+                            value=<?= $i?>
+                            <?= ($i == date('d')) ? ' selected="selected"' : ''?>
                         >
-                            <?= $i ?>
+                            <?= $i?>
                         </option>
-                    <?php endfor; ?>
+<?php endfor;?>
                 </select>
             </div>
 
@@ -126,7 +126,7 @@ $destinations = get('destinations');
         <button type="submit">Ajouter</button>
 
     </form>
-    <?= nav('<button type="button">Retour aux projets</button>', 'Voyages', 'index'); ?>
+    <?= nav('<button type="button">Retour aux projets</button>', 'Voyages', 'index');?>
     </fieldset>
 </div>
 

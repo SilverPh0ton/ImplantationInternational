@@ -20,7 +20,7 @@ $destination = get('destination');
         </div>
         <div class="input checkbox">
             <label for="actif">Actif</label>
-            <input type="checkbox" name="actif" id="actif" <?= ($destination->getActif() ? 'checked' : '') ?> >
+            <input type="checkbox" name="actif" id="actif" <?= ($destination->getActif() ? 'checked' : '')?> >
         </div>
     </fieldset>
 
@@ -28,6 +28,6 @@ $destination = get('destination');
     </form>
 
     <!--Button de navigation -->
-    <?= nav('<button>Retour aux configurations </button>', 'Configuration', 'index'); ?>
+    <?= nav('<button>Retour aux configurations </button>', 'Configuration', 'index');?>
 </div>
 

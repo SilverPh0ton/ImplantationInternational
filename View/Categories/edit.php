@@ -18,15 +18,15 @@ $categorie = get('categorie');
             <div class="input text required">
                 <label for="categorie">Catégorie</label>
                 <input name="categorie" id="categorie" pattern=".*\S.*" title="Le champ ne peut pas être vide"
-                       type="text" maxlength="50" value="<?= $categorie->getCategorie() ?>" required>
+                       type="text" maxlength="50" value="<?= $categorie->getCategorie()?>" required>
             </div>
             <div class=" input text required">
                 <label for="actif">Actif</label>
-                <input type="checkbox" name="actif" id="actif" <?= ($categorie->getActif() ? 'checked' : '') ?>>
+                <input type="checkbox" name="actif" id="actif" <?= ($categorie->getActif() ? 'checked' : '')?>>
             </div>
             <div class=" input text required">
                 <label for="default">Par défaut</label>
-                <input type="checkbox" name="question_default" id="default" <?= ($categorie->getDefault() ? 'checked' : '') ?>>
+                <input type="checkbox" name="question_default" id="default" <?= ($categorie->getDefault() ? 'checked' : '')?>>
             </div>
 
         </fieldset>
@@ -35,5 +35,5 @@ $categorie = get('categorie');
     </form>
     <!--Button de navigation -->
 
-    <?= nav('<button>Retour aux configurations </button>', 'Configuration', 'index'); ?>
+    <?= nav('<button>Retour aux configurations </button>', 'Configuration', 'index');?>
 </div>

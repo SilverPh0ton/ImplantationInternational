@@ -28,27 +28,27 @@ $voyages = get('voyages');
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($voyages as $voyage):
+<?php foreach ($voyages as $voyage):
             $color = $voyage->getActif() ? '' : 'style="color: #aaaaaa"';
-            ?>
+?>
             <tr>
-                <td <?php echo $color ?> > <?= $voyage->getNomProjet() ?></td>
-                <td <?php echo $color ?> > <?= $voyage->getDestination()->getNomPays() ?></td>
-                <td <?php echo $color ?> > <?= $voyage->getVille() ?></td>
-                <td <?php echo $color ?> class='optionalField' data-sort="<?=$voyage->getDateDepart()?>">
-                    <?= dateToFrench($voyage->getDateDepart()) ?></td>
-                <td <?php echo $color ?> class='optionalField' data-sort="<?=$voyage->getDateRetour()?>">
-                    <?= dateToFrench($voyage->getDateRetour()) ?></td>
-                <td <?php echo $color ?> class='optionalField'><?= $voyage->getActif() ? 'Oui' : 'Non'; ?></td>
+                <td<?php echo $color?> > <?= $voyage->getNomProjet()?></td>
+                <td<?php echo $color?> > <?= $voyage->getDestination()->getNomPays()?></td>
+                <td<?php echo $color?> > <?= $voyage->getVille()?></td>
+                <td<?php echo $color?> class='optionalField' data-sort="<?=$voyage->getDateDepart()?>">
+                    <?= dateToFrench($voyage->getDateDepart())?></td>
+                <td<?php echo $color?> class='optionalField' data-sort="<?=$voyage->getDateRetour()?>">
+                    <?= dateToFrench($voyage->getDateRetour())?></td>
+                <td<?php echo $color?> class='optionalField'><?= $voyage->getActif() ? 'Oui' : 'Non';?></td>
 
-                <td class="actions" <?php echo $color ?> >
+                <td class="actions"<?php echo $color?> >
                     <?= nav1(
                         '<img alt="afficher icon" src="Ressource/img/eye.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Afficher">',
                         'Voyages',
                         'View',
                         $voyage->getIdVoyage());
-                    ?>
-                    <?php
+?>
+<?php
                     if ($connectedUser->getType() == 'admin' || $connectedUser->getType() == 'prof') {
                         if ($connectedUser->getType() == 'admin'){
                         echo nav1(
@@ -86,17 +86,17 @@ $voyages = get('voyages');
                             $voyage->getIdVoyage(),
                             $connectedUser->getIdCompte());
                     }
-                    ?>
+?>
                 </td>
             </tr>
-        <?php endforeach; ?>
+<?php endforeach;?>
         </tbody>
     </table>
 </div>
 
 
 
-<?php if ($connectedUser->getType() != 'admin'): ?>
+<?php if ($connectedUser->getType() != 'admin'):?>
 
     <div class="activations form large-12 medium-12 columns content">
 
@@ -114,10 +114,10 @@ $voyages = get('voyages');
 
     </div>
 
-<?php endif; ?>
+<?php endif;?>
 
-<?= load_script('codeMask') ?>
+<?= load_script('codeMask')?>
 <script>
     var order = [[ 7, 'desc' ],[ 5, 'asc' ],[ 0, 'asc' ]];
 </script>
-<?= load_script('paginator') ?>
+<?= load_script('paginator')?>

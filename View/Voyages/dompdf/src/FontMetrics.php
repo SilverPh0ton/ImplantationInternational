@@ -103,7 +103,7 @@ class FontMetrics
             }
             $cacheData .= sprintf("  ),%s", PHP_EOL);
         }
-        $cacheData .= ") ?>";
+        $cacheData .= ")?>";
         file_put_contents($this->getCacheFile(), $cacheData);
     }
 

@@ -16,7 +16,7 @@ $categories = get('categories');
 
 ?>
 
-<?= load_css('ControlOption') ?>
+<?= load_css('ControlOption')?>
 
 <div class="questions form columns large-8 medium-10 small-12 content large-centered medium-centered small-centered large-text-left medium-text-left small-text-left">
     <form method="post" enctype="multipart/form-data">
@@ -25,14 +25,14 @@ $categories = get('categories');
             <div class="input required">
                 <label for="id_categorie">Catégorie</label>
                 <select name="id_categorie" required="required">
-                    <?php
+<?php
                     foreach ($categories as $categorie):
-                        ?>
-                        <option value=<?= $categorie->getIdCategorie() ?>>
-                            <?= $categorie->getCategorie() ?></option>
-                    <?php
+?>
+                        <option value=<?= $categorie->getIdCategorie()?>>
+                            <?= $categorie->getCategorie()?></option>
+<?php
                     endforeach
-                    ?>
+?>
                 </select>
             </div>
 
@@ -54,7 +54,7 @@ $categories = get('categories');
                     <div class="ControlOption">
                         <input type="radio" name="affichage" value="Telechargement" class="displayOption">
                         <label>Document à télécharger <br> (aucune réponse requise)</label>
-                        <?= download('empty.txt', 'Télécharger') ?>
+                        <?= download('empty.txt', 'Télécharger')?>
                     </div>
 
                     <div class="ControlOption">
@@ -169,7 +169,7 @@ $categories = get('categories');
                 <input type="hidden" id="input_option" value="none" maxlength="100">
             </div>
             <button type="submit">Ajouter</button>
-            <?= nav('<button type="button">Retourner à la liste de questions</button>', 'questions', 'index'); ?>
+            <?= nav('<button type="button">Retourner à la liste de questions</button>', 'questions', 'index');?>
         </fieldset>
 
     </form>
@@ -177,4 +177,4 @@ $categories = get('categories');
 
 </div>
 
-<?= load_script('optionsDisplayer') ?>
+<?= load_script('optionsDisplayer')?>

@@ -22,7 +22,7 @@ $categoriesController->add();
         </div>
         <button type="submit">Ajouter</button>
         <!--Button de navigation -->
-        <?= nav('<button type="button">Retour aux configurations </button>','Configuration','index'); ?>
+        <?= nav('<button type="button">Retour aux configurations </button>','Configuration','index');?>
     </fieldset>
 
   </form>

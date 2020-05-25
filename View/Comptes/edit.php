@@ -27,66 +27,66 @@ $programmes = get('array_prog');
                 <label for="pseudo">Nom d'utilisateur</label>
                 <input name="pseudo" id="pseudo" pattern=".*\S.*" maxlength="30"
                        title="Le champ de peut pas être vide" type="text"
-                       value="<?= $compte->getPseudo() ?>" required>
+                       value="<?= $compte->getPseudo()?>" required>
             </div>
 
             <div class="input required">
                 <label for="courriel">Courriel</label>
                 <input name="courriel" id="courriel" type="email" pattern=".+[/@].+[/.].+" maxlength="50"
-                       title="Ceci n\'est pas un courriel valide" value="<?= $compte->getCourriel() ?>" required>
+                       title="Ceci n\'est pas un courriel valide" value="<?= $compte->getCourriel()?>" required>
             </div>
 
             <div class="input required">
                 <label for="nom">Nom</label>
                 <input name="nom" id="nom" pattern=".*\S.*" maxlength="30" title="Le champ de peut pas être vide"
                        type="text"
-                       value="<?= $compte->getNom() ?>" required>
+                       value="<?= $compte->getNom()?>" required>
             </div>
 
             <div class="input required">
                 <label for="prenom">Prénom</label>
                 <input name="prenom" id="prenom" pattern=".*\S.*" maxlength="30"
                        title="Le champ de peut pas être vide" type="text"
-                       value="<?= $compte->getPrenom() ?>" required>
+                       value="<?= $compte->getPrenom()?>" required>
             </div>
 
             <div class="input date required">
 
                 <label>Date de naissance</label>
                 <select name="date_naissance[year]" required="required">
-                    <?php for ($i = date('Y'); $i >= (date('Y') - 100); $i--): ?>
+<?php for ($i = date('Y'); $i >= (date('Y') - 100); $i--):?>
                         <option
-                                value=<?= $i ?>
-                            <?= ($i == substr($compte->getDateNaissance(), 0, 4)) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
+                                value=<?= $i?>
+                            <?= ($i == substr($compte->getDateNaissance(), 0, 4)) ? ' selected="selected"' : ''?>>
+                            <?= $i?>
                         </option>
-                    <?php endfor; ?>
+<?php endfor;?>
                 </select>
 
                 <select name="date_naissance[month]" required="required">
-                    <?php
+<?php
                     $i = 0;
                     foreach (return_months() as $month):
-                        ?>
+?>
                         <option
-                                value=<?= ++$i ?>
-                            <?= ($i == substr($compte->getDateNaissance(), 5, 7)) ? ' selected="selected"' : '' ?>>
-                            <?= $month ?>
+                                value=<?= ++$i?>
+                            <?= ($i == substr($compte->getDateNaissance(), 5, 7)) ? ' selected="selected"' : ''?>>
+                            <?= $month?>
                         </option>
-                    <?php
+<?php
                     endforeach;
-                    ?>
+?>
                 </select>
 
 
                 <select name="date_naissance[day]" required="required">
-                    <?php for ($i = 1; $i <= 31; $i++): ?>
+<?php for ($i = 1; $i <= 31; $i++):?>
                         <option
-                                value="<?= $i ?>"
-                            <?= ($i == substr($compte->getDateNaissance(), 8, 9)) ? ' selected="selected"' : '' ?>>
-                            <?= $i ?>
+                                value="<?= $i?>"
+                            <?= ($i == substr($compte->getDateNaissance(), 8, 9)) ? ' selected="selected"' : ''?>>
+                            <?= $i?>
                         </option>
-                    <?php endfor; ?>
+<?php endfor;?>
                 </select>
             </div>
 
@@ -95,84 +95,84 @@ $programmes = get('array_prog');
                 <input name="telephone" id="telephone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}([ ]{1}[0-9]*)?"
                        maxlength="20"
                        title="(999-999-9999 0000:poste facultatif)" type="tel"
-                       value="<?= $compte->getTelephone() ? $compte->getTelephone() : ''; ?>">
+                       value="<?= $compte->getTelephone() ? $compte->getTelephone() : '';?>">
             </div>
 
             <div class="input required">
                 <label for="id_programme">Programme</label>
                 <select name="id_programme" required="required" id="id_programme">
-                    <?php
+<?php
                     foreach ($programmes as $programme):
                         $programme = unserialize($programme)
-                        ?>
-                        <option value="<?= $programme->getNomProgramme(); ?>" <?= ($compte->getProgramme()->getNomProgramme() === $programme->getNomProgramme()) ? ' selected="selected"' : ''; ?>>
-                            <?= $programme->getNomProgramme() ?>
+?>
+                        <option value="<?= $programme->getNomProgramme();?>" <?= ($compte->getProgramme()->getNomProgramme() === $programme->getNomProgramme()) ? ' selected="selected"' : '';?>>
+                            <?= $programme->getNomProgramme()?>
                         </option>
-                    <?php
+<?php
                     endforeach
-                    ?>
+?>
                 </select>
             </div>
 
-            <?php if (isOfType([ADMIN,PROF])): ?>
+<?php if (isOfType([ADMIN,PROF])):?>
                 <div class="input">
                 <label for="anonyme">Voulez-vous que les autres accompagnateurs voient votre profil?</label>
 
-                <input type="radio" name="anonyme" value="1" <?= ($compte->getAnonyme() ? 'checked' : '') ?>> Oui
+                <input type="radio" name="anonyme" value="1" <?= ($compte->getAnonyme() ? 'checked' : '')?>> Oui
                 <input type="radio" name="anonyme" value="0" <?= (!$compte->getAnonyme() ? 'checked' : '')?>> Non
             </div>
-            <?php
-             else: ?>
+<?php
+             else:?>
           <input type="radio" name="anonyme" value="1" hidden>
-             <?php endif; ?>
-            <?php if (isOfType([ADMIN])): ?>
+<?php endif;?>
+<?php if (isOfType([ADMIN])):?>
                 <div class="input">
                     <label for="type">Type de compte</label>
                     <select name="type" id="type">
-                        <option value="etudiant" <?= ($compte->getType() === ETUDIANT) ? ' selected="selected"' : ''; ?>>
+                        <option value="etudiant" <?= ($compte->getType() === ETUDIANT) ? ' selected="selected"' : '';?>>
                             Étudiants
                         </option>
-                        <option value="prof" <?= ($compte->getType() === PROF) ? ' selected="selected"' : ''; ?>>
+                        <option value="prof" <?= ($compte->getType() === PROF) ? ' selected="selected"' : '';?>>
                             Accompagnateur
                         </option>
-                        <option value="admin" <?= ($compte->getType() === ADMIN) ? ' selected="selected"' : ''; ?>>
+                        <option value="admin" <?= ($compte->getType() === ADMIN) ? ' selected="selected"' : '';?>>
                             Administrateur
                         </option>
                     </select>
                 </div>
-                <input type="hidden" name="type" value="<?= $compte->getType() ?>">
+                <input type="hidden" name="type" value="<?= $compte->getType()?>">
                 <button type="button" data-toggle="modal" data-target="#myModal_promote"> Promouvoir en accompagnateur
                 </button>
-            <?php elseif (isOfType([PROF,ETUDIANT])): ?>
-                <input type="hidden" name="type" value="<?= $compte->getType() ?>">
-            <?php endif; ?>
+<?php elseif (isOfType([PROF,ETUDIANT])):?>
+                <input type="hidden" name="type" value="<?= $compte->getType()?>">
+<?php endif;?>
 
-            <?php if (isOfType([ADMIN])): ?>
+<?php if (isOfType([ADMIN])):?>
                 <div class="input">
                     <label for="actif">Actif</label>
-                    <input type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
+                    <input type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '')?>>
                 </div>
-            <?php elseif (isOfType([PROF,ETUDIANT])): ?>
-                <input hidden type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '') ?>>
-            <?php endif; ?>
+<?php elseif (isOfType([PROF,ETUDIANT])):?>
+                <input hidden type="checkbox" id="actif" name="actif" <?= ($compte->getActif() ? 'checked' : '')?>>
+<?php endif;?>
 
             <div>
                 <button type="submit" onclick="savedata()">Enregistrer</button>
                 <!--Button de navigation -->
-                <?php
+<?php
                 if (isOfType([ADMIN, PROF])) {
                     echo nav('<button type="button"> Retour à la liste des comptes </button>', 'Comptes', 'index');
                 } else {
                     echo nav1('<button type="button">Revenir à mon comptes</button>', 'Comptes', 'view', $id_compte);
                 }
-                ?>
+?>
             </div>
 
         </fieldset>
 
     </form>
 
-    <div class="modal" id="<?= 'myModal_promote' ?>">
+    <div class="modal" id="<?= 'myModal_promote'?>">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -205,7 +205,7 @@ $programmes = get('array_prog');
         </div>
     </div>
 
-    <?php
+<?php
     if (isset($_SESSION["connectedUser"])) {
         $connectedUser = $_SESSION["connectedUser"];
         $compteType = $connectedUser->getType();
@@ -214,7 +214,7 @@ $programmes = get('array_prog');
         }
 
     }
-    ?>
+?>
 
 
 </div>
@@ -238,4 +238,4 @@ $programmes = get('array_prog');
     </form>
 </div>
 
-<?= load_script('onLoadStorage/editCompte') ?>
+<?= load_script('onLoadStorage/editCompte')?>
