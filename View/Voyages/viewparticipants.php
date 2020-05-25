@@ -69,7 +69,7 @@ $compteType = $connectedUser->getType();
                 
                     if ($connectedUser->getType() === 'admin') {
                       echo nav1('<img alt="afficher icon" src="Ressource/img/writing.png" class="images" data-toggle="tooltip" data-placement = "top" title = "Modifier">','Comptes','Edit',$compte->getIdCompte());
-                    }}
+                    }
                     ?>
                 </td>
                 <td><?= $compte->getCourriel() ?></td>
