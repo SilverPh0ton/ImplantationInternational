@@ -184,6 +184,7 @@ class NoauthController extends AppController
              $mail->Password = '57468b537bbb17';                               // SMTP password
              $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
              $mail->Port = 2525;                                    // TCP port to connect to
+             $mail->Encoding = 'base64';
              $mail->CharSet = 'UTF-8';
              //Recipients
              $mail->setFrom('mobilite.etudiante@cegeptr.qc.ca', 'Ressources Humaines');
@@ -191,7 +192,7 @@ class NoauthController extends AppController
 
              // Content
              $mail->isHTML(true);                                  // Set email format to HTML
-             $mail->Subject = 'Une demande de modification de mot de passe à été effectuée ';
+             $mail->Subject = 'Modification de mot de passe';
              $mail->Body = 'Voici votre nouveau mot de passe :  <b>' . $newpass . '</b>';
 
              $mail->send();
@@ -200,7 +201,7 @@ class NoauthController extends AppController
              die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
          }
 
-        mail($courriel,"Une demande de modification de mot de passe a été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: agectr@edu.cegeptr.qc.ca");
+        mail($courriel,"Modification de mot de passe", "Voici votre nouveau mot de passe :" . $newpass , "From: mobilite.etudiante@cegeptr.qc.ca");
     }
 
 
