@@ -676,19 +676,17 @@ class PropositionsController extends AppController
     {
 
         $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action . '&param1=' . $param1;
-      /*  $mail = new PHPMailer(true);
-        $mail->CharSet = 'UTF-8';
-        $mail->Encoding = 'base64';
 
+        $mail = new PHPMailer(true);
         try {
-
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
-            $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';// Enable SMTP authentication
             $mail->Username = 'mobilite@silverph0ton.com';                     // SMTP username
             $mail->Password = '11qpVR^Ew.2]';                               // SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+            // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
             $mail->Port = 465;                                    // TCP port to connect to
             $mail->CharSet = 'UTF-8';
             //Recipients
@@ -700,13 +698,17 @@ class PropositionsController extends AppController
             $mail->Subject = 'Une nouvelle proposition est disponible ';
             $mail->Body = 'Veuillez la consulter :  <b>' . $url . '</b>';
 
-            $mail->send();
+            if($mail->send()){
+                return true;
+            }else{
+                return false;
+            }
 
         } catch (Exception $e) {
             die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-        }*/
+        }
 
-           mail('mobilite@silverph0ton.com',"Une nouvelle proposition est disponible", "Veuillez la consulter :" . $url , "From: mobilite@silverph0ton.com");
+         /*  mail('mobilite@silverph0ton.com',"Une nouvelle proposition est disponible", "Veuillez la consulter :" . $url , "From: mobilite@silverph0ton.com");*/
 
     }
 
@@ -714,19 +716,17 @@ class PropositionsController extends AppController
     {
 
         $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action. '&param1='. $id;
-      /*  $mail = new PHPMailer(true);
-        $mail->CharSet = 'UTF-8';
-        $mail->Encoding = 'base64';
 
+        $mail = new PHPMailer(true);
         try {
-
             //Server settings
             $mail->isSMTP();                                            // Send using SMTP
             $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
-            $mail->SMTPAuth = true;                                   // Enable SMTP authentication
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';// Enable SMTP authentication
             $mail->Username = 'mobilite@silverph0ton.com';                     // SMTP username
             $mail->Password = '11qpVR^Ew.2]';                               // SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+            // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
             $mail->Port = 465;                                    // TCP port to connect to
             $mail->CharSet = 'UTF-8';
             //Recipients
@@ -738,13 +738,16 @@ class PropositionsController extends AppController
             $mail->Subject = 'Réponse à la proposition de séjour ';
             $mail->Body = 'Veuillez la consulter :  <b>' . $url . '</b>';
 
-            $mail->send();
+            if($mail->send()){
+                return true;
+            }else{
+                return false;
+            }
 
         } catch (Exception $e) {
             die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-        }*/
+        }
 
-        mail($to,"Réponse à la proposition de séjour", "Veuillez la consulter :" . $url , "From: mobilite@silverph0ton.com");
 
     }
 

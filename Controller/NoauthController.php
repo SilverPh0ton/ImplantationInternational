@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use ActivationsDB;
@@ -170,8 +169,13 @@ class NoauthController extends AppController
                 $result = $this->compteDB->checkifAcountEqualEmail($pseudo, $courriel);
                 if (!empty($result)) {
                     if (!empty($pass = $this->compteDB->changePassFromID($result))) {
-                        $this->send_email($courriel, $pseudo, $pass);
-                        $this->flashGood('Un courriel contenant votre nouveau mot de passe vous a été envoyé ');
+
+                        if($this->send_email($courriel, $pseudo, $pass)){
+                            $this->flashGood('Un courriel contenant votre nouveau mot de passe vous a été envoyé ');
+                        }else{
+                            $this->flashBad('Une érreur est survenue, veuillez réessayer plus tard.');
+                        }
+
                         $this->redirect('Comptes', 'Login');
                     }
                 } else {
@@ -187,35 +191,39 @@ class NoauthController extends AppController
 
     function send_email($courriel, $pseudo, $newpass)
     {
-    /*    $mail = new PHPMailer(true);
 
-         try {
-             //Server settings
-             $mail->isSMTP();                                            // Send using SMTP
-             $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
-             $mail->SMTPDebug = 0;
-             $mail->SMTPAuth = true;                                   // Enable SMTP authentication
-             $mail->Username = 'mobilite@silverph0ton.com';                     // SMTP username
-             $mail->Password = '11qpVR^Ew.2]';                               // SMTP password
-             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-             $mail->Port = 465;                                    // TCP port to connect to
-             $mail->CharSet = 'UTF-8';
-             //Recipients
-             $mail->setFrom('mobilite@silverph0ton.com', 'Ressources Humaines');
-             $mail->addAddress($courriel, $pseudo);     // Add a recipient
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host = 'topro1.fcomet.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = 'ssl';// Enable SMTP authentication
+            $mail->Username = 'mobilite@silverph0ton.com';                     // SMTP username
+            $mail->Password = '11qpVR^Ew.2]';                               // SMTP password
+            // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+            $mail->Port = 465;                                    // TCP port to connect to
+            $mail->CharSet = 'UTF-8';
+            //Recipients
+            $mail->setFrom('mobilite@silverph0ton.com', 'Ressources Humaines');
+            $mail->addAddress($courriel, $pseudo);     // Add a recipient
 
-             // Content
-             $mail->isHTML(true);                                  // Set email format to HTML
-             $mail->Subject = 'Une demande de modification de mot de passe à été effectuée ';
-             $mail->Body = 'Voici votre nouveau mot de passe :  <b>' . $newpass . '</b>';
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Une demande de modification de mot de passe à été effectuée ';
+            $mail->Body = 'Voici votre nouveau mot de passe :  <b>' . $newpass . '</b>';
 
-             $mail->send();
+            if($mail->send()){
+                return true;
+            }else{
+                return false;
+            }
 
-         } catch (Exception $e) {
-             die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-         }*/
+        } catch (Exception $e) {
+            die("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+        }
 
-        mail($courriel,"Une demande de modification de mot de passe a été effectuée", "Voici votre nouveau mot de passe :" . $newpass , "From: mobilite@silverph0ton.com");
+
     }
 
 
