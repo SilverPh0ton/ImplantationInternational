@@ -675,7 +675,7 @@ class PropositionsController extends AppController
     public function send_email($controller, $action, $param1)
     {
 
-        $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action . '&param1=' . $param1;
+        $url = 'https://international.silverph0ton.com/index.php?controller='. $controller . '&action=' . $action . '&param1=' . $param1;
 
         $mail = new PHPMailer(true);
         try {
@@ -715,7 +715,7 @@ class PropositionsController extends AppController
     public function send_emailResponse($controller, $action,$id,$to)
     {
 
-        $url = 'http://internaltionalmich/index.php?controller=' . $controller . '&action=' . $action. '&param1='. $id;
+        $url = 'https://international.silverph0ton.com/index.php?controller=' . $controller . '&action=' . $action. '&param1='. $id;
 
         $mail = new PHPMailer(true);
         try {
