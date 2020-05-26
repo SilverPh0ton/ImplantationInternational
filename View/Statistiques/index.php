@@ -39,9 +39,9 @@ $etuStats = get('etuStats');
 <h3>Statistiques</h3>
 <div class="tab">
     <button id="general" class="tablinks active" onclick="openTab(event, 'generalTab')">Général</button>
-    <button id="etudiants_sejour" class="tablinks" onclick="openTab(event, 'etudiantsTab')">Nombres d'étudiants par séjour</button>
-    <button id="accompagnateurs_sejour" class="tablinks" onclick="openTab(event, 'accompagnateursTab')">Nombres d'accompagnateurs par séjour</button>
-    <button id="destinations_sejour" class="tablinks" onclick="openTab(event, 'destinationsTab')">Nombres de séjours par destination</button>
+    <button id="etudiants_sejour" class="tablinks" onclick="openTab(event, 'etudiantsTab')">Nombre d'étudiants par séjour</button>
+    <button id="accompagnateurs_sejour" class="tablinks" onclick="openTab(event, 'accompagnateursTab')">Nombre d'accompagnateurs par séjour</button>
+    <button id="destinations_sejour" class="tablinks" onclick="openTab(event, 'destinationsTab')">Nombre de séjours par destination</button>
     <button id="futurProjet_sejour" class="tablinks" onclick="openTab(event, 'futurProjetTab')">Projets à venir</button>
 </div>
 
@@ -118,7 +118,7 @@ $etuStats = get('etuStats');
     <div id="card" class="row">
       <div class="col-sm">
           <div class="card text-white bg-success mb-3" id="cardID" style="max-width: 24rem;">
-          <div class="card-header text-white"><i class="fas fa-globe-americas"></i><strong> Nombres de pays visités</strong></div>
+          <div class="card-header text-white"><i class="fas fa-globe-americas"></i><strong> Nombre de pays visités</strong></div>
             <div class="card-body text-white">
               <h5 class="card-title" style="text-align:center"></h5>
               <p class="card-text" style="text-align: center; font-size: 20px">
@@ -148,7 +148,7 @@ $etuStats = get('etuStats');
       <!-- CARD PROGRAM PARTICIPANTS -->
       <div class="col-sm">
           <div class="card text-white bg-danger mb-3" id="cardID" style="max-width: 24rem;">
-          <div class="card-header"><i class="fas fa-plane"></i><strong> Nombres de programmes participants</strong></div>
+          <div class="card-header"><i class="fas fa-plane"></i><strong> Nombre de programmes participants</strong></div>
             <div class="card-body">
               <h5 class="card-title" style="text-align:center"></h5>
               <p class="card-text" style="text-align:center; font-size: 20px">
@@ -239,7 +239,7 @@ $etuStats = get('etuStats');
             <th scope="col">Année</th>
             <th scope="col">Pays</th>
             <th scope="col">Ville</th>
-            <th scope="col">Nombres de visite</th>
+            <th scope="col">Nombre de visite</th>
         </tr>
         </thead>
         <tbody>
@@ -264,7 +264,7 @@ $etuStats = get('etuStats');
               <th scope="col">Année</th>
               <th scope="col">Pays</th>
               <th scope="col">Ville</th>
-              <th scope="col">Nombres de projets</th>
+              <th scope="col">Nombre de projets</th>
           </tr>
           </thead>
           <tbody>
